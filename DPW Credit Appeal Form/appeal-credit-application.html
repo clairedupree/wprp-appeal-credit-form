@@ -5,7 +5,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS -->
+	<!-- REMOTE Bootstrap CSS -
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -74,7 +74,7 @@
 	<div id="formContainer" class="bootstrap-iso">
 		<form name="creditAppealForm" id="creditAppealForm" class="form">
 
-			<div class ="row">
+			<div class ="row" id="initialOptions">
 
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
           <div class="form-group">
@@ -120,13 +120,18 @@
             </div>
           </div>
         </div>
+      </div>
 
         
-                
+        <!-- TODO: Cancel button at the end / beginning to reset form -->
+        <!-- TODO: Hide appeal and credit buttons when a form is selected -->
+        
+        
         <!-- Common-to-all beginning -->
         <!-- TODO: Add recieved date & application ID num-->
         <!-- TODO: Ask about Bootstrap form input functionality -->
         <!-- How does AAC want this form validated, etc? -->
+        <div class="row commonOptions" style="display: none">
 
         <!-- Owner Information -->
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -164,7 +169,7 @@
             <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
             <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
 
-            <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx)">Look up tax account number</a>
+            <div id="taxAccountHelpBlock" class="fom-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
           </div>
         </div>	
 
@@ -208,86 +213,123 @@
           </div>
         </div>
 
-
-
-
-
-
-  <!-- Appeal Type 1 Options-->
-  <!-- TODO: Correct naming conventions -->
-  <!-- TODO: Add bootstrap styles -->
-  <div id="appealType1Form" style="display: none">
-
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-      <h5>Appeal Information</h5>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-      <!-- Residental Property Tier Info -->
-      <div style="background-color: #f0f0f0; padding: 10px">
-        <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
-        <ul style="margin-left: 20px">
-          <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
-            Residential Low Density (RLD) zoning</li>
-          <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
-            zoning</li>
-          <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
-            RLD, R1, R2, or R5 zoning
-          </li>
-        </ul>
       </div>
-    </div>
-    
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-      <div class="form-group">
-        <label for="a1TierCurrent">On the property tax bill, the property is currently classified as:</label>
-        <select class="form-select" id="a1TierCurrent" aria-label="a1TierCurrent">
-          <option selected>Please select</option>
-          <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-          <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-          <option value="WPRF03">WPRF03: Tier 3 Residential</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			<label for="a1TierProposed">The property should be classified as:</label>
-			<select class="form-select" id="a1TierProposed" aria-label="a1TierProposed">
-        <option selected>Please select</option>
-				<option value="WPRF01">WPRF01: Tier 1 Residential</option>
-				<option value="WPRF02">WPRF02: Tier 2 Residential</option>
-				<option value="WPRF03">WPRF03: Tier 3 Residential</option>
-			</select>
-		</div>
-
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-			Reason:<br>
-			<input type="radio" id="Reason_1" name="A1_Reason" value="Reason_1">
-			<label for="Reason_1">The property's tier is incorrect based on its zoning</label><br>
-			<input type="radio" id="Reason_3" name="A1_Reason" value="Reason_2">
-			<label for="Reason_1">The property is an attached dwelling in residential zoning but is not categorized as Tier
-				3</label><br>
-			<input type="radio" id="Reason_2" name="A1_Reason" value="Reason_3">
-			<label for="Reason_1">The property should be classified as the next lower tier due to the amount of impervious
-				surface on site
-				(Less than 2,900 sq ft for a Tier 1 property; Less than 1,200 sq ft for a Tier 2 property)</label>
-
-			<p>Use the My Anne Arundel application to look up information on the stormwater fee,
-				impervious amounts, and property zoning <a href="www.aacounty.org/myannearundel">aacounty.org/myannearundel</a>
-			</p>
-		</div>
-  </div>
-
-
-
-
-
-        <!-- Submit -->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <p>Fields marked with <span class="requiredField">*</span> are required.</p>
-          <button class="btn btn-primary" type="submit" id="submitButton">Submit Form</button>
+        <!--
+        <!-- change variable to either credit or appeal depending on selection? --
+        <div class="col-12">
+          <h5>Variable Information</h5>
         </div>
+         -->
+
+
+
+
+      <!-- Appeal Type 1 Options-->
+      <!-- TODO: Correct naming conventions -->
+      <!-- TODO: Add bootstrap styles -->
+      <!-- create a universal header for credit/appeal types -->
+      <div class="row" id="a1Form" style="display: none">
+
+        <div class="col-12">
+          <h5>Appeal Information</h5>
+        </div>
+
+        <div class="col-12">
+          <!-- Residental Property Tier Info -->
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
+            <ul style="margin-left: 20px">
+              <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
+                Residential Low Density (RLD) zoning</li>
+              <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
+                zoning</li>
+              <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
+                RLD, R1, R2, or R5 zoning
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-12">
+          On the property tax bill, <br>
+          <div class="form-select">
+            <label for="a1TierCurrent">The property is currently classified as: 
+              <span class="requiredField">*</span></label>
+            <select class="form-select" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+              <option selected>Please select</option>
+              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-select">
+            <label for="a1TierProposed">The property should be classified as: 
+              <span class="requiredField">*</span></label></label>
+            <select class="form-select" id="a1TierProposed" aria-label="a1TierProposed" required>
+              <option selected>Please select</option>
+              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          Reason: <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
+              value="The property's tier is incorrect based on its zoning">
+            <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
+              value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3">
+            <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
+                categorized as Tier 3</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
+              value="The property should be classified as the next lower tier due to the amount of impervious surface on site">
+            <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
+                amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
+                Less than 1,200 sq ft for a Tier 2 property)</label>
+          </div>
+
+            <div id="a1ReasonHelpBlock" class="form-text">Use the <a href="www.aacounty.org/myannearundel" target="_blank">
+              My Anne Arundel application</a> to look up information on the stormwater fee, impervious amounts, and property zoning. 
+            </div>
+          </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label for="a1Comments">Comments: </label>
+            <textarea class="form-control" id="a1Comments" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- Submit -->
+      <div class="row commonOptions" style="display: none">
+      <div class="col-12">
+        <div id="requiredHelpBlock" class="form-text">
+          <p>Fields marked with <span class="requiredField">*</span> are required</p>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" id="submitButton">Submit Form</button>
+      </div>
+
 			</div>
+    </div>
 		</form>
 	</div>
 	
@@ -339,7 +381,7 @@
 (function($) {
     $(document).ready(function() {
       $("#appealType1").click(function() {
-        $("#appealType1Form").toggle();
+        $("#a1Form, .commonOptions").toggle();
       });
 
       $("#appeal").click(function() {
