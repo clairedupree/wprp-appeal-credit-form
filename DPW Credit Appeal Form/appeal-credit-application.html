@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-	<!-- Required meta tags -->
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS -
+	<!-- REMOTE Bootstrap CSS --
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -32,6 +31,16 @@
     i {
       margin-right: 5px;
     }
+
+    .commonOptions {
+      display: none;
+    }
+    
+    .uncommonOptions {
+      display: none;
+    }
+
+
 	</style>
 
 </head>
@@ -66,275 +75,385 @@
 		<button class="btn btn-light btn-block" onclick="showAppealTypes('appealType5')">
 			Exempt or incorrect property owner</button>
 	</div>
--->
+  -->
 
+  <!-- Credit & Appeal Buttons -->
+  <!-- TODO: container class in bootstrap 4 adds additional padding, remove? -->
+  <div id="initialOptions" class="bootstrap-iso container">
 
-	<!-- Form -->
-  <!-- Move buttons outside of form and toggle form w/buttons, but how to track user selctions? -->
-	<div id="formContainer" class="bootstrap-iso">
-		<form name="creditAppealForm" id="creditAppealForm" class="form">
+    <!-- Appeal Dropdown -->
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="appealTypes" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class='far fa-comment'></i>Appeal</button>
 
-			<div class ="row" id="initialOptions">
+        <div class="col-12 dropdown-menu" aria-labelledby="appealTypes" 
+          style="text-align: center">
 
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <div class="form-group">
-
-            <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="appealTypes" 
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class='far fa-comment'></i>Appeal</button>
-
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 dropdown-menu" aria-labelledby="appealTypes" 
-              style="text-align: center">
-
-              <a class="dropdown-item" href="#" id="appealType1" value="Property placed in wrong residential tier">
-                Property placed in wrong residential tier</a>
-                
-              <a class="dropdown-item" href="#" id="appealType2" value="Incorrect classification of	property">
-                Incorrect classification of	property</a>
-
-              <a class="dropdown-item" href="#" id="appealType3" value="Homeowner's Association property where the fee cap 
-                is applicable but was not applied">Homeowner's Association property where the fee cap is 
-                applicable but was not applied</a>
-
-              <a class="dropdown-item" href="#" id="appealType4" value="Mathematical error or incorrect impervious surface 
-                calculation">Mathematical error or incorrect	impervious surface calculation</a>
-
-              <a class="dropdown-item" href="#" id="appealType5" value="Exempt or incorrect property owner">
-                Exempt or incorrect property owner</a>
-            </div>
-          </div>
+          <a class="dropdown-item" href="#" id="appealType1" value="Property placed in wrong residential tier">
+            Property placed in wrong residential tier</a>
             
-          <div class="form-group">
-            <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="creditTypes" 
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class='far fa-edit'></i>Credit</button>
+          <a class="dropdown-item" href="#" id="appealType2" value="Incorrect classification of	property">
+            Incorrect classification of	property</a>
 
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 dropdown-menu" aria-labelledby="creditTypes" 
-              style="text-align: center">
-              
-              <a class="dropdown-item" href="#" id="creditType1" value="Property not under an NPDES	permit">
-                Property not under an NPDES	permit</a>
-                
-              <a class="dropdown-item" href="#" id="creditType2" value="Property with an NPDES permit that includes	
-              stormwater management controls">Property with an NPDES permit that includes	stormwater management controls</a>
-            </div>
-          </div>
+          <a class="dropdown-item" href="#" id="appealType3" value="Homeowner's Association property where the fee cap 
+            is applicable but was not applied">Homeowner's Association property where the fee cap is 
+            applicable but was not applied</a>
+
+          <a class="dropdown-item" href="#" id="appealType4" value="Mathematical error or incorrect impervious surface 
+            calculation">Mathematical error or incorrect	impervious surface calculation</a>
+
+          <a class="dropdown-item" href="#" id="appealType5" value="Exempt or incorrect property owner">
+            Exempt or incorrect property owner</a>
         </div>
       </div>
+    </div>
 
-        
-        <!-- TODO: Cancel button at the end / beginning to reset form -->
-        <!-- TODO: Hide appeal and credit buttons when a form is selected -->
-        
-        
-        <!-- Common-to-all beginning -->
-        <!-- TODO: Add recieved date & application ID num-->
-        <!-- TODO: Ask about Bootstrap form input functionality -->
-        <!-- How does AAC want this form validated, etc? -->
-        <div class="row commonOptions" style="display: none">
+    <!-- Credit Dropdown -->
+    <div class="row">    
+      <div class="col-12">
+        <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="creditTypes" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: 10px">
+        <i class='far fa-edit'></i>Credit</button>
+
+        <div class="col-12 dropdown-menu" aria-labelledby="creditTypes" 
+          style="text-align: center">
+          
+          <a class="dropdown-item" href="#" id="creditType1" value="Property not under an NPDES	permit">
+            Property not under an NPDES	permit</a>
+            
+          <a class="dropdown-item" href="#" id="creditType2" value="Property with an NPDES permit that includes	
+          stormwater management controls">Property with an NPDES permit that includes	stormwater management controls</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- TODO: add rows to grid system -->
+
+  <!-- Form Container -->
+	<div id="formContainer" class="bootstrap-iso container">
+
+    <!-- Close Form button -->
+    <div class="commonOptions">
+      <div class="row justify-content-end">
+        <div class="col-4">
+          <button class="btn btn-light btn-block" id="closeButton">Go Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO: Add titles for different application types, classes for each type, show/hide classes -->
+    <!-- TODO: Add recieved date & application ID num-->
+    <!-- TODO: Ask about Bootstrap form input functionality -->
+    <!-- How does AAC want this form validated, etc? -->
+    <!-- TODO: consistent naming conventions between common/uncommon options (for easier toggle) -->
+
+	  <!-- FORM -->
+		<form name="creditAppealForm" id="creditAppealForm" class="form">
+
+      <!-- COMMON BEGINNING -->
+      <div id="commonBeginning" class="commonOptions">
 
         <!-- Owner Information -->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <h5>Owner Information</h5>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-          <div class="form-group">
-            <label for="ownerFirstName">First Name: <span class="requiredField">*</span></label>
-            <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
+        <div class="row">
+          <div class="col-12">
+            <h5>Owner Information</h5>
           </div>
         </div>
 
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-          <div class="form-group">
-            <label for="ownerLastName">Last Name: <span class="requiredField">*</span></label>
-            <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="ownerFirstName">First Name: <span class="requiredField">*</span></label>
+              <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="ownerLastName">Last Name: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
+            </div>
           </div>
         </div>
-        
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <div class="form-group">
-            <label for="ownerOrganization">Company / Organization (if applicable):</label>
-            <input type="text" name="ownerOrganization" id="ownerOrganization" class="form-control">
+
+        <div class="row">  
+          <div class="col-12">
+            <div class="form-group">
+              <label for="ownerOrganization">Company / Organization (if applicable):</label>
+              <input type="text" name="ownerOrganization" id="ownerOrganization" class="form-control">
+            </div>
           </div>
         </div>
 
         <!-- Tax Account(s) -->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <h5>Tax Accounts</h5> <!-- Header necessary?-->
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <div class="form-group">
-            <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
-            <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
-
-            <div id="taxAccountHelpBlock" class="fom-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
+        <div class="row">
+          <div class="col-12">
+            <h5>Tax Accounts</h5> <!-- TODO: header necessary?-->
           </div>
-        </div>	
+
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="form-group">
+              <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
+              <!-- TODO: form-text block necessary? -->
+              <div class="form-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
+            </div>
+          </div>	
+        </div>
 
         <!-- Property Address -->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <h5>Property Address</h5>
-        </div>
-
-        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-          <div class="form-group">
-            <label for="ownerAddress1">Street Address: <span class="requiredField">*</span></label>
-            <input type="text" name="ownerAddress1" id="ownerAddress1" class="form-control" required>
+        <div class="row">
+          <div class="col-12">
+            <h5>Property Address</h5>
           </div>
         </div>
 
-        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-          <div class="form-group">
-            <label for="ownerAddress2">Address Line 2:</label>
-            <input type="text" name="ownerAddress2" id="ownerAddress2" class="form-control" >
-          </div>
-        </div>
-
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <div class="form-group">
-            <label for="ownerCity">City: <span class="requiredField">*</span></label>
-            <input type="text" name="ownerCity" id="ownerCity" class="form-control" required>
-          </div>
-        </div>   
-        
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <div class="form-group">
-            <label for="ownerState">State: <span class="requiredField">*</span></label>
-            <input type="text" name="ownerState" id="ownerState" class="form-control" required>
-          </div>
-        </div>   
-
-        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <div class="form-group">
-            <label for="ownerZip">Zip Code: <span class="requiredField">*</span></label>
-            <input type="text" name="ownerZip" id="ownerZip" class="form-control" required>
-          </div>
-        </div>
-
-      </div>
-        <!--
-        <!-- change variable to either credit or appeal depending on selection? --
-        <div class="col-12">
-          <h5>Variable Information</h5>
-        </div>
-         -->
-
-
-
-
-      <!-- Appeal Type 1 Options-->
-      <!-- TODO: Correct naming conventions -->
-      <!-- TODO: Add bootstrap styles -->
-      <!-- create a universal header for credit/appeal types -->
-      <div class="row" id="a1Form" style="display: none">
-
-        <div class="col-12">
-          <h5>Appeal Information</h5>
-        </div>
-
-        <div class="col-12">
-          <!-- Residental Property Tier Info -->
-          <div style="background-color: #f0f0f0; padding: 10px">
-            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
-            <ul style="margin-left: 20px">
-              <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
-                Residential Low Density (RLD) zoning</li>
-              <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
-                zoning</li>
-              <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
-                RLD, R1, R2, or R5 zoning
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="col-12">
-          On the property tax bill, <br>
-          <div class="form-select">
-            <label for="a1TierCurrent">The property is currently classified as: 
-              <span class="requiredField">*</span></label>
-            <select class="form-select" id="a1TierCurrent" aria-label="a1TierCurrent" required>
-              <option selected>Please select</option>
-              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="form-select">
-            <label for="a1TierProposed">The property should be classified as: 
-              <span class="requiredField">*</span></label></label>
-            <select class="form-select" id="a1TierProposed" aria-label="a1TierProposed" required>
-              <option selected>Please select</option>
-              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="col-12">
-          Reason: <span class="requiredField">*</span><br>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
-              value="The property's tier is incorrect based on its zoning">
-            <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
-              value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3">
-            <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
-                categorized as Tier 3</label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
-              value="The property should be classified as the next lower tier due to the amount of impervious surface on site">
-            <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
-                amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
-                Less than 1,200 sq ft for a Tier 2 property)</label>
-          </div>
-
-            <div id="a1ReasonHelpBlock" class="form-text">Use the <a href="www.aacounty.org/myannearundel" target="_blank">
-              My Anne Arundel application</a> to look up information on the stormwater fee, impervious amounts, and property zoning. 
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="ownerAddress1">Street Address: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerAddress1" id="ownerAddress1" class="form-control" required>
             </div>
           </div>
 
-        <div class="col-12">
-          <div class="form-group">
-            <label for="a1Comments">Comments: </label>
-            <textarea class="form-control" id="a1Comments" rows="3"></textarea>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="ownerAddress2">Address Line 2:</label>
+              <input type="text" name="ownerAddress2" id="ownerAddress2" class="form-control" >
+            </div>
           </div>
         </div>
-      </div>
 
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="ownerCity">City: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerCity" id="ownerCity" class="form-control" required>
+            </div>
+          </div>   
+          
+          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="ownerState">State: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerState" id="ownerState" class="form-control" required>
+            </div>
+          </div>   
 
-
-
-      <!-- Submit -->
-      <div class="row commonOptions" style="display: none">
-      <div class="col-12">
-        <div id="requiredHelpBlock" class="form-text">
-          <p>Fields marked with <span class="requiredField">*</span> are required</p>
+          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="ownerZip">Zip Code: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerZip" id="ownerZip" class="form-control" required>
+            </div>
+          </div>
         </div>
-      </div>
+      </div> <!-- end common beginning -->
 
+
+
+
+      <!--
+      <!-- change variable to either credit or appeal depending on selection? --
       <div class="col-12">
-        <button class="btn btn-primary" type="submit" id="submitButton">Submit Form</button>
+        <h5>Variable Information</h5>
       </div>
+      -->
 
-			</div>
-    </div>
-		</form>
-	</div>
-	
-	
+      <!-- TODO: Correct naming conventions -->
+      <!-- create a universal header for credit/appeal types -->
 
+
+
+
+
+      <!-- APPEAL OPTIONS-->
+      <div id="appealOptions" class="commonOptions">
+
+        <!-- APPEAL TYPE 1: Property placed in wrong residential tier -->
+        <div id="a1Options" class="uncommonOptions">
+
+          <div class="row">
+            <div class="col-12">
+              <!-- TODO: change title later -->
+              <h5>Appeal 1 Information</h5>
+            </div>
+          </div>
+
+          <!-- Residental Property Tier info -->
+          <div class="row">
+            <div class="col-12">
+              <div style="background-color: #f0f0f0; padding: 10px">
+                <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
+                <ul style="margin-left: 20px">
+                  <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
+                    Residential Low Density (RLD) zoning</li>
+                  <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
+                    zoning</li>
+                  <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
+                    RLD, R1, R2, or R5 zoning
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row form-group">
+            <div class="col-12">
+              <!-- TODO: change formatting? -->
+              On the property tax bill, <br>
+              <div class="form-select">
+                <label for="a1TierCurrent">The property is currently classified as: 
+                  <span class="requiredField">*</span></label>
+                <select class="form-select" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+                  <option selected>Please select</option>
+                  <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+                  <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+                  <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-select">
+                <label for="a1TierProposed">The property should be classified as: 
+                  <span class="requiredField">*</span></label></label>
+                <select class="form-select" id="a1TierProposed" aria-label="a1TierProposed" required>
+                  <option selected>Please select</option>
+                  <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+                  <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+                  <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group">
+
+            <div class="col-12">
+              Reason: <span class="requiredField">*</span><br>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
+                  value="The property's tier is incorrect based on its zoning" required>
+                <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
+                  value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3" required>
+                <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
+                    categorized as Tier 3</label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
+                  value="The property should be classified as the next lower tier due to the amount of impervious surface on site" required>
+                <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
+                    amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
+                    Less than 1,200 sq ft for a Tier 2 property)</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- TODO: include this in the radio button form-group row? -->
+          <div class="row form-group">
+            <div class="col-12">
+              <div id="a1ReasonHelpBlock" class="form-text">Use the <a href="www.aacounty.org/myannearundel" target="_blank">
+                My Anne Arundel application</a> to look up information on the stormwater fee, impervious amounts, and property zoning. 
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-12">
+                <label for="a1Comments">Comments: </label>
+                <textarea class="form-control" id="a1Comments" rows="3"></textarea>
+            </div>
+          </div>
+        </div> <!--end appeal 1 options-->
+
+
+
+        <!-- APPEAL TYPE 2: Incorrect classification of	property -->
+        <div id="a2Options" class="uncommonOptions">
+
+          <div class="row">
+            <div class="col-12">
+              <h5>Appeal 2 Information</h5>
+            </div>
+          </div>
+        </div> <!--end appeal 2 options-->
+
+
+
+        <!-- APPEAL TYPE 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
+        <div id="a3Options" class="uncommonOptions">
+        </div>
+
+
+
+        <!-- APPEAL TYPE 4: Mathematical error or incorrect	impervious surface calculation -->
+        <div id="a4Options" class="uncommonOptions">
+        </div>
+
+
+
+        <!-- APPEAL TYPE 5: Exempt or incorrect property owner -->  
+        <div id="a5Options" class="uncommonOptions">
+        </div>
+
+      </div> <!-- END APPEAL OPTIONS -->
+
+
+
+
+
+
+      <!-- CREDIT OPTIONS-->
+      <div id="appealOptions" class="commonOptions">
+
+        <!-- CREDIT TYPE 1:  -->
+        <div id="c1Options" class="uncommonOptions">
+        </div>
+
+
+
+        <!-- CREDIT TYPE 2:  -->
+        <div id="c2Options" class="uncommonOptions">
+        </div>
+
+      </div> <!-- END CREDIT OPTIONS-->
+
+     
+      
+
+
+      <!-- COMMON ENDING -->
+      <div id="commonEnding" class="commonOptions">
+
+        <!-- Submit -->
+        <div class="row">
+          <div class="col-12">
+            <div id="requiredHelpBlock" class="form-text">
+              <p>Fields marked with <span class="requiredField">*</span> are required</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" id="submitButton">Submit Form</button>
+          </div>
+        </div>
+      </div> <!-- END COMMON ENDING -->
+
+		</form> <!-- END FORM -->
+  </div><!--END FORM CONTAINER-->
+	
 	
   
   <!-- Script imports -->
@@ -380,14 +499,26 @@
 
 (function($) {
     $(document).ready(function() {
+      //TODO: make this into a function with the type as parameter
+      //on click, show appeal 1 form
       $("#appealType1").click(function() {
-        $("#a1Form, .commonOptions").toggle();
+        $(".commonOptions, #a1Options").show();
+        $("#initialOptions").hide();
       });
 
-      $("#appeal").click(function() {
-        $("#creditTypes").hide();
-        $("#appealTypes").toggle();
+      //on click, show appeal 2 form
+      $("#appealType2").click(function() {
+        $(".commonOptions, #a2Options").show();
+        $("#initialOptions").hide();
       });
+
+
+      //on click, hide form, go back to main menu
+      $("#closeButton").click(function() {
+        $(".commonOptions, .uncommonOptions").hide();
+        $("#initialOptions").show();
+      });
+
     });
   })(jQuery);
 </script>
