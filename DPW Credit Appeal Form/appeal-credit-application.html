@@ -4,12 +4,12 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS -->
+	<!-- REMOTE Bootstrap CSS --
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
   
-  <!-- LOCAL Bootstrap CSS --
+  <!-- LOCAL Bootstrap CSS -->
   <link rel="stylesheet" href="https://www.aacounty.org/_template-assets/css/bootstrap4-iso.min.css" />
   <!---->
 
@@ -40,15 +40,16 @@
       display: none;
     }
 
-    /*
     .row {
         padding: 10px !important;
         background: none !important;
         border-top: 0px !important;
         margin: auto !important;
     }
-    */
 
+    .dropdown-menu {
+      text-align: center !important;
+    }
 	</style>
 
 </head>
@@ -85,9 +86,50 @@
 	</div>
   -->
 
+
+<!-- 
+
+PRIORITY
+----------------------------------------------------------------------------------------------
+By Wednesday, 5/4:
+  TODO: function to populate JSON file to send
+    for now, create a function to send JSON to console
+
+  TODO: consoilidate listeners into a single function
+
+  TODO: get functionality working FIRST
+    before continuing to create more form entries / styles
+
+    TODO: change dropdowns to radio button and select lists
+      CREDIT: single-select
+        go back button
+      APPEAL: multi-select
+        Continue button, go back button
+
+  TODO: rows causing issues with local bootstrap styles address ;later
+    Only a single row class, conflicts with local aacounty styles
+    THREE OPTIONS:
+    1) SINGLE ROW DIV, AROUND EVERYTHING
+    2) INCLUDE BOOTSTRAOP ISO AROUND EVERYTHING OR IN EACH "SUBSET", DEPENDING ON HOW RO ACTS
+    3) FIND THE SOURSE OF THE PROIBLEMS, OVERRIDE STYLES (BEST OPTION, MORE DIFFICULT, LESS TIME)
+      (replace form-group padding with "row" padding?)
+
+    inspect these styles in the browser, figure out what needs to be overridden
+    something about rows clipping things, not allowing overflow, position absolute?
+    https://stackoverflow.com/questions/31829312/bootstrap-dropdown-clipped-by-overflowhidden-container-how-to-change-the-conta
+-------------------------------------------------------------------------------------------------
+
+TODO: container class in bootstrap 4 adds additional padding, remove?
+
+TODO: dont worry about creating a unique ID and whatnot, thats for backend to handle
+
+TODO: Add titles for different application types, classes for each type, show/hide classes
+ 
+-->
+
   <!-- CREDIT & APPEAL BUTTONS -->
-  <!-- TODO: container class in bootstrap 4 adds additional padding, remove? -->
   <div id="initialOptions" class="bootstrap-iso container">
+    
 
     <!-- Appeal Dropdown -->
     <div class="row">
@@ -96,8 +138,7 @@
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class='far fa-comment'></i>Appeal</button>
 
-        <div class="col-12 dropdown-menu" aria-labelledby="appealTypes" 
-          style="text-align: center">
+        <div class="col-12 dropdown-menu" aria-labelledby="appealTypes">
 
           <a class="dropdown-item" href="#" id="appealType1" value="Property placed in wrong residential tier">
             Property placed in wrong residential tier</a>
@@ -125,8 +166,7 @@
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class='far fa-edit'></i>Credit</button>
 
-        <div class="col-12 dropdown-menu" aria-labelledby="creditTypes" 
-          style="text-align: center">
+        <div class="col-12 dropdown-menu" aria-labelledby="creditTypes">
           
           <a class="dropdown-item" href="#" id="creditType1" value="Property not under an NPDES	permit">
             Property not under an NPDES	permit</a>
@@ -139,7 +179,6 @@
   </div>
 
 
-  <!-- TODO: rows causing issues with local bootstrap styles address ;later -->
 
   <!-- FORM CONTAINER -->
 	<div id="formContainer" class="bootstrap-iso container">
@@ -154,16 +193,16 @@
     </div>
 
     
+    <!-- TODO: Add titles for different application types, classes for each type, show/hide classes
 
-    <!--
-    <!-- change variable to either credit or appeal depending on selection? --
+    change variable to either credit or appeal depending on selection?
     <div class="col-12">
       <h5>Variable Information</h5>
     </div>
-    -->
-    <!-- TODO: Add titles for different application types, classes for each type, show/hide classes -->
+
+    $("#divId").html("<h1>heading</h1>); -->
+
     <!-- Appeal Type Headers -->
-    <!-- $("#divId").html("<h1>heading</h1>); -->
     <div class="a1Options uncommonOptions">
       <div class="row">
         <div class="col-12">
@@ -221,10 +260,8 @@
       </div>
     </div>
 
-    <!-- TODO: Add recieved date & application ID num-->
-    <!-- TODO: Ask about Bootstrap form input functionality -->
-    <!-- How does AAC want this form validated, etc? -->
-    <!-- TODO: consistent naming conventions between common/uncommon options (for easier toggle) -->
+
+
 
 	  <!-- Form -->
 		<form name="creditAppealForm" id="creditAppealForm" class="form">
@@ -326,10 +363,6 @@
           </div>
         </div>
       </div> <!-- end common beginning -->
-
-
-      <!-- TODO: Correct naming conventions -->
-      <!-- create a universal header for credit/appeal types -->
 
 
 
@@ -561,9 +594,11 @@
   })(jQuery);
 */
 
+//TODO: make this into a function with the type as parameter
+// something about .html actions with jquery that idk about
 (function($) {
     $(document).ready(function() {
-      //TODO: make this into a function with the type as parameter
+      
       //on click, show appeal 1 form
       $("#appealType1").click(function() {
         $(".commonOptions, .a1Options").show();
@@ -606,6 +641,14 @@
       $("#closeButton").click(function() {
         $(".commonOptions, .uncommonOptions").hide();
         $("#initialOptions").show();
+      });
+
+      $('.dropdown').on('show.bs.dropdown', function() {
+        $('body').append($('.dropdown').css({
+          position: 'absolute',
+          left: $('.dropdown').offset().left,
+          top: $('.dropdown').offset().top
+        }).detach());
       });
 
     });
