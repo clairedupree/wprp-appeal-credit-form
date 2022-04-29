@@ -4,12 +4,12 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
   
-  <!-- LOCAL Bootstrap CSS -->
+  <!-- LOCAL Bootstrap CSS --
   <link rel="stylesheet" href="https://www.aacounty.org/_template-assets/css/bootstrap4-iso.min.css" />
   <!---->
 
@@ -40,6 +40,14 @@
       display: none;
     }
 
+    /*
+    .row {
+        padding: 10px !important;
+        background: none !important;
+        border-top: 0px !important;
+        margin: auto !important;
+    }
+    */
 
 	</style>
 
@@ -77,7 +85,7 @@
 	</div>
   -->
 
-  <!-- Credit & Appeal Buttons -->
+  <!-- CREDIT & APPEAL BUTTONS -->
   <!-- TODO: container class in bootstrap 4 adds additional padding, remove? -->
   <div id="initialOptions" class="bootstrap-iso container">
 
@@ -114,7 +122,7 @@
     <div class="row">    
       <div class="col-12">
         <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="creditTypes" 
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-top: 10px">
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class='far fa-edit'></i>Credit</button>
 
         <div class="col-12 dropdown-menu" aria-labelledby="creditTypes" 
@@ -131,11 +139,9 @@
   </div>
 
 
+  <!-- TODO: rows causing issues with local bootstrap styles address ;later -->
 
-
-  <!-- TODO: add rows to grid system -->
-
-  <!-- Form Container -->
+  <!-- FORM CONTAINER -->
 	<div id="formContainer" class="bootstrap-iso container">
 
     <!-- Close Form button -->
@@ -147,13 +153,80 @@
       </div>
     </div>
 
+    
+
+    <!--
+    <!-- change variable to either credit or appeal depending on selection? --
+    <div class="col-12">
+      <h5>Variable Information</h5>
+    </div>
+    -->
     <!-- TODO: Add titles for different application types, classes for each type, show/hide classes -->
+    <!-- Appeal Type Headers -->
+    <!-- $("#divId").html("<h1>heading</h1>); -->
+    <div class="a1Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Appeal 1 Header</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="a2Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Appeal 2 Header</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="a3Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Appeal 3 Header</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="a4Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Appeal 4 Header</h4>
+        </div>
+      </div>
+    </div>
+   
+    <div class="a5Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Appeal 5 Header</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credit Type Headers -->
+    <div class="c1Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Credit 1 Header</h4>
+        </div>
+      </div>
+    </div>
+   
+    <div class="c2Options uncommonOptions">
+      <div class="row">
+        <div class="col-12">
+          <h4>Credit 2 Header</h4>
+        </div>
+      </div>
+    </div>
+
     <!-- TODO: Add recieved date & application ID num-->
     <!-- TODO: Ask about Bootstrap form input functionality -->
     <!-- How does AAC want this form validated, etc? -->
     <!-- TODO: consistent naming conventions between common/uncommon options (for easier toggle) -->
 
-	  <!-- FORM -->
+	  <!-- Form -->
 		<form name="creditAppealForm" id="creditAppealForm" class="form">
 
       <!-- COMMON BEGINNING -->
@@ -255,15 +328,6 @@
       </div> <!-- end common beginning -->
 
 
-
-
-      <!--
-      <!-- change variable to either credit or appeal depending on selection? --
-      <div class="col-12">
-        <h5>Variable Information</h5>
-      </div>
-      -->
-
       <!-- TODO: Correct naming conventions -->
       <!-- create a universal header for credit/appeal types -->
 
@@ -275,7 +339,7 @@
       <div id="appealOptions" class="commonOptions">
 
         <!-- APPEAL TYPE 1: Property placed in wrong residential tier -->
-        <div id="a1Options" class="uncommonOptions">
+        <div class="a1Options uncommonOptions">
 
           <div class="row">
             <div class="col-12">
@@ -285,7 +349,7 @@
           </div>
 
           <!-- Residental Property Tier info -->
-          <div class="row">
+          <div class="row form-group">
             <div class="col-12">
               <div style="background-color: #f0f0f0; padding: 10px">
                 <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
@@ -304,13 +368,13 @@
           
           <div class="row form-group">
             <div class="col-12">
-              <!-- TODO: change formatting? -->
+              <!-- TODO: change formatting? of "property bill"-->
               On the property tax bill, <br>
               <div class="form-select">
                 <label for="a1TierCurrent">The property is currently classified as: 
                   <span class="requiredField">*</span></label>
-                <select class="form-select" id="a1TierCurrent" aria-label="a1TierCurrent" required>
-                  <option selected>Please select</option>
+                <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+                  <option selected value="">Please select</option>
                   <option value="WPRF01">WPRF01: Tier 1 Residential</option>
                   <option value="WPRF02">WPRF02: Tier 2 Residential</option>
                   <option value="WPRF03">WPRF03: Tier 3 Residential</option>
@@ -321,9 +385,9 @@
             <div class="col-12">
               <div class="form-select">
                 <label for="a1TierProposed">The property should be classified as: 
-                  <span class="requiredField">*</span></label></label>
-                <select class="form-select" id="a1TierProposed" aria-label="a1TierProposed" required>
-                  <option selected>Please select</option>
+                  <span class="requiredField">*</span></label>
+                <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+                  <option selected value="">Please select</option>
                   <option value="WPRF01">WPRF01: Tier 1 Residential</option>
                   <option value="WPRF02">WPRF02: Tier 2 Residential</option>
                   <option value="WPRF03">WPRF03: Tier 3 Residential</option>
@@ -379,7 +443,7 @@
 
 
         <!-- APPEAL TYPE 2: Incorrect classification of	property -->
-        <div id="a2Options" class="uncommonOptions">
+        <div class="a2Options uncommonOptions">
 
           <div class="row">
             <div class="col-12">
@@ -391,19 +455,19 @@
 
 
         <!-- APPEAL TYPE 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
-        <div id="a3Options" class="uncommonOptions">
+        <div class="a3Options uncommonOptions">
         </div>
 
 
 
         <!-- APPEAL TYPE 4: Mathematical error or incorrect	impervious surface calculation -->
-        <div id="a4Options" class="uncommonOptions">
+        <div class="a4Options uncommonOptions">
         </div>
 
 
 
         <!-- APPEAL TYPE 5: Exempt or incorrect property owner -->  
-        <div id="a5Options" class="uncommonOptions">
+        <div class="a5Options uncommonOptions">
         </div>
 
       </div> <!-- END APPEAL OPTIONS -->
@@ -417,13 +481,13 @@
       <div id="appealOptions" class="commonOptions">
 
         <!-- CREDIT TYPE 1:  -->
-        <div id="c1Options" class="uncommonOptions">
+        <div class="c1Options uncommonOptions">
         </div>
 
 
 
         <!-- CREDIT TYPE 2:  -->
-        <div id="c2Options" class="uncommonOptions">
+        <div class="c2Options uncommonOptions">
         </div>
 
       </div> <!-- END CREDIT OPTIONS-->
@@ -502,17 +566,42 @@
       //TODO: make this into a function with the type as parameter
       //on click, show appeal 1 form
       $("#appealType1").click(function() {
-        $(".commonOptions, #a1Options").show();
+        $(".commonOptions, .a1Options").show();
         $("#initialOptions").hide();
       });
 
       //on click, show appeal 2 form
       $("#appealType2").click(function() {
-        $(".commonOptions, #a2Options").show();
+        $(".commonOptions, .a2Options").show();
+        $("#initialOptions").hide();
+      });
+      //on click, show appeal 3 form
+      $("#appealType3").click(function() {
+        $(".commonOptions, .a3Options").show();
+        $("#initialOptions").hide();
+      });
+      //on click, show appeal 4 form
+      $("#appealType4").click(function() {
+        $(".commonOptions, .a4Options").show();
+        $("#initialOptions").hide();
+      });
+      //on click, show appeal 5 form
+      $("#appealType5").click(function() {
+        $(".commonOptions, .a5Options").show();
         $("#initialOptions").hide();
       });
 
-
+      //on click, show credit 1 form
+      $("#creditType1").click(function() {
+        $(".commonOptions, .c1Options").show();
+        $("#initialOptions").hide();
+      });
+      //on click, show credit 2 form
+      $("#creditType2").click(function() {
+        $(".commonOptions, .c1Options").show();
+        $("#initialOptions").hide();
+      });
+            
       //on click, hide form, go back to main menu
       $("#closeButton").click(function() {
         $(".commonOptions, .uncommonOptions").hide();
