@@ -39,14 +39,14 @@
     .uncommonOptions {
       display: none;
     }
-
+/*
     .row {
         padding: 10px !important;
         background: none !important;
         border-top: 0px !important;
         margin: auto !important;
     }
-
+*/
     .dropdown-menu {
       text-align: center !important;
     }
@@ -369,7 +369,7 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
 
       <!-- APPEAL OPTIONS-->
-      <div id="appealOptions" class="commonOptions">
+      <div id="appealOptions" class="uncommonOptions">
 
         <!-- APPEAL TYPE 1: Property placed in wrong residential tier -->
         <div class="a1Options uncommonOptions">
@@ -511,7 +511,7 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
 
       <!-- CREDIT OPTIONS-->
-      <div id="appealOptions" class="commonOptions">
+      <div id="appealOptions" class="uncommonOptions">
 
         <!-- CREDIT TYPE 1:  -->
         <div class="c1Options uncommonOptions">
@@ -633,7 +633,7 @@ TODO: Add titles for different application types, classes for each type, show/hi
       });
       //on click, show credit 2 form
       $("#creditType2").click(function() {
-        $(".commonOptions, .c1Options").show();
+        $(".commonOptions, .c2Options").show();
         $("#initialOptions").hide();
       });
             
