@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
+  <title>Appeal / Credit Application</title>
 
   <!-- Embedded styles -->
 	<style>
@@ -56,6 +57,7 @@
 
 
 <body>
+ 
 	<!-- Credit or Appeal buttons --
 	<div class="bootstrap-iso" id="initialOptions">
 		<button class="btn btn-dark btn-block" id="appeal" onclick="showTypes('appeal')"><i class='far fa-comment'></i>Appeal</button>
@@ -71,7 +73,6 @@
 	</div>
 
 	<!-- Appeal type buttons --
-	<!-- TODO: Change to dropdown menu? --
 	<div class="bootstrap-iso" id="-appealTypes" style="display: none">
 		<button class="btn btn-light btn-block" onclick="showAppealTypes('appealType1')">
 			Property placed in wrong residential tier</button>
@@ -83,8 +84,7 @@
 			Mathematical error or incorrect	impervious surface calculation</button>
 		<button class="btn btn-light btn-block" onclick="showAppealTypes('appealType5')">
 			Exempt or incorrect property owner</button>
-	</div>
-  -->
+	</div> -->
 
 
 <!-- 
@@ -92,19 +92,22 @@
 PRIORITY
 ----------------------------------------------------------------------------------------------
 By Wednesday, 5/4:
-  TODO: function to populate JSON file to send
+
+TUES: TODO: function to populate JSON file to send
     for now, create a function to send JSON to console
 
-  TODO: consoilidate listeners into a single function
-
-  TODO: get functionality working FIRST
-    before continuing to create more form entries / styles
-
-    TODO: change dropdowns to radio button and select lists
+TUES: TODO: change dropdowns to radio button and select lists
       CREDIT: single-select
         go back button
       APPEAL: multi-select
         Continue button, go back button
+
+X TODO: consoilidate listeners into a single function
+
+X TODO: get functionality working FIRST
+    before continuing to create more form entries / styles
+
+
 
   TODO: rows causing issues with local bootstrap styles address ;later
     Only a single row class, conflicts with local aacounty styles
@@ -129,9 +132,19 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
   <!-- CREDIT & APPEAL BUTTONS -->
   <div id="initialOptions" class="bootstrap-iso container">
+
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-dark btn-block" id="appealButton" onclick="showOptions('appeal')"><i class='far fa-comment'></i>Appeal</button>
+      </div>
+      
+      <div class="col-6">
+        <button class="btn btn-dark btn-block" id="creditButton" onclick="showOptions('credit')"><i class='fas fa-edit'></i>Credit</button>
+      </div>
+    </div>
     
 
-    <!-- Appeal Dropdown -->
+    <!-- Appeal Dropdown
     <div class="row">
       <div class="col-12">
         <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="appealTypes" 
@@ -140,26 +153,25 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
         <div class="col-12 dropdown-menu" aria-labelledby="appealTypes">
 
-          <a class="dropdown-item" href="#" id="appealType1" value="Property placed in wrong residential tier">
+          <a class="dropdown-item" href="#" id="appealType1" onclick="show('appealHeader', '.a1Options')">
             Property placed in wrong residential tier</a>
             
-          <a class="dropdown-item" href="#" id="appealType2" value="Incorrect classification of	property">
+          <a class="dropdown-item" href="#" id="appealType2" onclick="show('appealHeader', '.a2Options')">
             Incorrect classification of	property</a>
 
-          <a class="dropdown-item" href="#" id="appealType3" value="Homeowner's Association property where the fee cap 
-            is applicable but was not applied">Homeowner's Association property where the fee cap is 
-            applicable but was not applied</a>
+          <a class="dropdown-item" href="#" id="appealType3" onclick="show('appealHeader', '.a3Options')">
+            Homeowner's Association property where the fee cap is applicable but was not applied</a>
 
-          <a class="dropdown-item" href="#" id="appealType4" value="Mathematical error or incorrect impervious surface 
-            calculation">Mathematical error or incorrect	impervious surface calculation</a>
+          <a class="dropdown-item" href="#" id="appealType4" onclick="show('appealHeader', '.a4Options')">
+            Mathematical error or incorrect	impervious surface calculation</a>
 
-          <a class="dropdown-item" href="#" id="appealType5" value="Exempt or incorrect property owner">
+          <a class="dropdown-item" href="#" id="appealType5" onclick="show('appealHeader', '.a5Options')">
             Exempt or incorrect property owner</a>
         </div>
       </div>
     </div>
 
-    <!-- Credit Dropdown -->
+    <!-- Credit Dropdown --
     <div class="row">    
       <div class="col-12">
         <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="creditTypes" 
@@ -168,98 +180,74 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
         <div class="col-12 dropdown-menu" aria-labelledby="creditTypes">
           
-          <a class="dropdown-item" href="#" id="creditType1" value="Property not under an NPDES	permit">
+          <a class="dropdown-item" href="#" id="creditType1" onclick="show('creditHeader', '.c1Options')">
             Property not under an NPDES	permit</a>
             
-          <a class="dropdown-item" href="#" id="creditType2" value="Property with an NPDES permit that includes	
-          stormwater management controls">Property with an NPDES permit that includes	stormwater management controls</a>
+          <a class="dropdown-item" href="#" id="creditType2" onclick="show('creditHeader', '.c2Options')">
+            Property with an NPDES permit that includes	stormwater management controls</a>
         </div>
       </div>
     </div>
-  </div>
+  -->
 
+  </div>
 
 
   <!-- FORM CONTAINER -->
 	<div id="formContainer" class="bootstrap-iso container">
 
     <!-- Close Form button -->
-    <div class="commonOptions">
+    <div class="commonOptions" id="backButton">
       <div class="row justify-content-end">
         <div class="col-4">
-          <button class="btn btn-light btn-block" id="closeButton">Go Back</button>
+          <button class="btn btn-light btn-block">Go Back</button>
         </div>
       </div>
     </div>
 
+    <div id="appealTypeSelect" class="uncommonOptions">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-check">
+
+            <input class="form-check-input" type="checkbox" id="appealType1" name="appealTypes" 
+              value="The property's tier is incorrect based on its zoning" multiple>
+            <label class="form-check-label" for="appealType1">Appeal2</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="appealType2" name="appealTypes" 
+              value="The property's tier is incorrect based on its zoning" multiple>
+            <label class="form-check-label" for="appealType2">Appeal2</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="appealType3" name="appealTypes" 
+              value="The property's tier is incorrect based on its zoning" multiple>
+            <label class="form-check-label" for="appealType3">Appeal3</label>
+          </div>
+          
+        </div> 
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn btn-block btn-primary" id="appealContinue">Continue</button>
+        </div>
+      </div>
+    </div>
     
     <!-- TODO: Add titles for different application types, classes for each type, show/hide classes
 
     change variable to either credit or appeal depending on selection?
-    <div class="col-12">
-      <h5>Variable Information</h5>
-    </div>
-
-    $("#divId").html("<h1>heading</h1>); -->
-
-    <!-- Appeal Type Headers -->
-    <div class="a1Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Appeal 1 Header</h4>
+    $("#divId").html("<h1>heading</h1>); --> 
+    <div class="row">
+      <div class="col-12">
+        <div id="formHeader" class="commonOptions">
         </div>
       </div>
     </div>
-
-    <div class="a2Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Appeal 2 Header</h4>
-        </div>
-      </div>
-    </div>
-
-    <div class="a3Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Appeal 3 Header</h4>
-        </div>
-      </div>
-    </div>
-
-    <div class="a4Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Appeal 4 Header</h4>
-        </div>
-      </div>
-    </div>
-   
-    <div class="a5Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Appeal 5 Header</h4>
-        </div>
-      </div>
-    </div>
-
-    <!-- Credit Type Headers -->
-    <div class="c1Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Credit 1 Header</h4>
-        </div>
-      </div>
-    </div>
-   
-    <div class="c2Options uncommonOptions">
-      <div class="row">
-        <div class="col-12">
-          <h4>Credit 2 Header</h4>
-        </div>
-      </div>
-    </div>
-
 
 
 
@@ -277,14 +265,14 @@ TODO: Add titles for different application types, classes for each type, show/hi
         </div>
 
         <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="ownerFirstName">First Name: <span class="requiredField">*</span></label>
               <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
             </div>
           </div>
 
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="ownerLastName">Last Name: <span class="requiredField">*</span></label>
               <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
@@ -369,15 +357,14 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
 
       <!-- APPEAL OPTIONS-->
-      <div id="appealOptions" class="uncommonOptions">
+      <div id="appealOptions">
 
         <!-- APPEAL TYPE 1: Property placed in wrong residential tier -->
         <div class="a1Options uncommonOptions">
 
           <div class="row">
             <div class="col-12">
-              <!-- TODO: change title later -->
-              <h5>Appeal 1 Information</h5>
+              <h5>Appeal Reason: Property placed in wrong residental tier</h5>
             </div>
           </div>
 
@@ -480,7 +467,7 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
           <div class="row">
             <div class="col-12">
-              <h5>Appeal 2 Information</h5>
+              <h5>Appeal Reason: Incorrect classification of	property</h5>
             </div>
           </div>
         </div> <!--end appeal 2 options-->
@@ -489,18 +476,34 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
         <!-- APPEAL TYPE 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
         <div class="a3Options uncommonOptions">
+          <div class="row">
+            <div class="col-12">
+              <h5>Appeal Reason: Homeowner's Association property where the fee cap is 
+                applicable but was not applied</h5>
+            </div>
+          </div>
         </div>
 
 
 
         <!-- APPEAL TYPE 4: Mathematical error or incorrect	impervious surface calculation -->
         <div class="a4Options uncommonOptions">
+          <div class="row">
+            <div class="col-12">
+              <h5>Appeal Reason: Mathematical error or incorrect	impervious surface calculation</h5>
+            </div>
+          </div>
         </div>
 
 
 
         <!-- APPEAL TYPE 5: Exempt or incorrect property owner -->  
         <div class="a5Options uncommonOptions">
+          <div class="row">
+            <div class="col-12">
+              <h5>Appeal Reason: Exempt or incorrect property owner</h5>
+            </div>
+          </div>
         </div>
 
       </div> <!-- END APPEAL OPTIONS -->
@@ -511,16 +514,27 @@ TODO: Add titles for different application types, classes for each type, show/hi
 
 
       <!-- CREDIT OPTIONS-->
-      <div id="appealOptions" class="uncommonOptions">
+      <div id="creditOptions">
 
         <!-- CREDIT TYPE 1:  -->
         <div class="c1Options uncommonOptions">
+          <div class="row">
+            <div class="col-12">
+              <h5>Credit Type: Property not under an NPDES permit</h5>
+            </div>
+          </div>
         </div>
 
 
 
         <!-- CREDIT TYPE 2:  -->
         <div class="c2Options uncommonOptions">
+          <div class="row">
+            <div class="col-12">
+              <h5>Credit Type: Property with an NPDES permit that includes stormwater management controls</h5>
+            </div>
+          </div>
+         
         </div>
 
       </div> <!-- END CREDIT OPTIONS-->
@@ -578,7 +592,7 @@ TODO: Add titles for different application types, classes for each type, show/hi
 <!-- JavaScript -->
 
 <script type="text/javascript">
-/*
+  /*
   (function($) {
     $(document).ready(function() {
       $("#credit").click(function() {
@@ -594,14 +608,16 @@ TODO: Add titles for different application types, classes for each type, show/hi
   })(jQuery);
 */
 
-//TODO: make this into a function with the type as parameter
-// something about .html actions with jquery that idk about
 (function($) {
     $(document).ready(function() {
-      
+
+      /*
+
       //on click, show appeal 1 form
       $("#appealType1").click(function() {
-        $(".commonOptions, .a1Options").show();
+        $(".commonOptions").show();
+        $(".a1Options").show();
+        //$(".uncommonOptions").show();
         $("#initialOptions").hide();
       });
 
@@ -636,12 +652,14 @@ TODO: Add titles for different application types, classes for each type, show/hi
         $(".commonOptions, .c2Options").show();
         $("#initialOptions").hide();
       });
-            
+      */   
+
       //on click, hide form, go back to main menu
-      $("#closeButton").click(function() {
+      $("#backButton").click(function() {
         $(".commonOptions, .uncommonOptions").hide();
         $("#initialOptions").show();
       });
+      
 
       $('.dropdown').on('show.bs.dropdown', function() {
         $('body').append($('.dropdown').css({
@@ -650,9 +668,45 @@ TODO: Add titles for different application types, classes for each type, show/hi
           top: $('.dropdown').offset().top
         }).detach());
       });
-
     });
   })(jQuery);
-</script>
 
+   /*
+   var appealHeader = "Stormwater Fee Appeal Application";
+   var creditHeader = "Stormwater Credit Application"
+   */
+
+  function show(headerType, form) {
+    console.log("header variable recieved: " + headerType);
+
+    if (headerType == "appealHeader") 
+      $("#formHeader").html("<h4>Stormwater Fee Appeal Application</h4>");
+
+    else if (headerType == "creditHeader") 
+      $("#formHeader").html("<h4>Stormwater Credit Application</h4>");
+
+    $(".commonOptions").show();
+    console.log("variable recieved: " + form);
+    $(form).show();
+    $("#initialOptions").hide();    
+
+    //$("#formHeader").html("<h4>" + header + "</h4>");
+    //$("#formHeader").html("<h4>Appeal Application</h4>");
+    //$("#formHeader").append("<h4>" + header + "</h4>");
+  }
+
+
+  function showOptions(optionType) {
+    if (optionType == "appeal") {
+      $("#appealTypeSelect, #backButton").show();
+      $("#initialOptions").hide();
+    }
+    else {
+      $("#creditTypeSelect, #backButton").show();
+      $("#initialOptions").hide();
+    }
+  }
+
+
+</script>
 </html>
