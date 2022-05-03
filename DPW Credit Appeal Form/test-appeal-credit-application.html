@@ -295,6 +295,19 @@
   <!-- JavaScript -->
   <script type="text/javascript">
 
+
+  
+    //on click, hide form, go back to main menu
+    $("#backButton").click(function() {
+      $(".common, .uncommon, .appealOptions").hide();
+      $("#applicationTypes").show();
+    });
+  
+
+
+
+
+
     //(function($) {
     $(document).ready(function() {
     });
@@ -306,6 +319,43 @@
 
       /*$("#formHeader").html("<h4>" + "New Header" + "</h4>");*/
     //})(jQuery);
+
+
+
+
+
+
+
+
+  function showAppealOptions(){
+    //https://html.form.guide/html-form/html-checkbox-events/
+    //https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp
+
+  }
+
+  
+
+
+
+
+
+
+  function show(headerType, form) {
+    console.log("header variable recieved: " + headerType);
+
+    /* if using this function: replace current headers w/ this <div id="formHeader"></div> */
+
+    if (headerType == "appealHeader") 
+      $("#formHeader").html("<h4>Stormwater Fee Appeal Application</h4>");
+
+    else if (headerType == "creditHeader") 
+      $("#formHeader").html("<h4>Stormwater Credit Application</h4>");
+
+    $(".commonOptions").show();
+    console.log("variable recieved: " + form);
+    $(form).show();
+    $("#initialOptions").hide();    
+  }
 
 
 
@@ -389,6 +439,15 @@
           top: $('.dropdown').offset().top
         }).detach());
       });
+
+            /*
+      $('.dropdown').on('show.bs.dropdown', function() {
+        $('body').append($('.dropdown').css({
+          position: 'absolute',
+          left: $('.dropdown').offset().left,
+          top: $('.dropdown').offset().top
+        }).detach());
+      });*/
     });
   })(jQuery);
 
