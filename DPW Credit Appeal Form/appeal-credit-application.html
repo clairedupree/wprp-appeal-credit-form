@@ -56,6 +56,7 @@
   TO DO:
 
   - write json console.log function
+    - help w/ multi-select json translation
   - checkbox validation (require at least one checked)
   - write remaining forms
   
@@ -127,31 +128,37 @@ form name: dpwAppealCreditApplication
       <div class="row">
         <div id="appealChecks" class="col-12 form-group">
           <h5>Select the reason(s) for the appeal:</h5>
+
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType1" name="appealCheckbox" 
               value="Property placed in wrong residential tier" onchange="toggleAppealOptions('#a1Options')">
             <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
           </div>
+
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType2" name="appealCheckbox" 
               value="Incorrect classification of property" onchange="toggleAppealOptions('#a2Options')">
             <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
           </div>
+
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType3" name="appealCheckbox" 
               value="Homeowner's Association property where the fee cap is applicable but was not applied" onchange="toggleAppealOptions('#a3Options')">
             <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
           </div>
+
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType4" name="appealCheckbox" 
               value="Mathematical error or incorrect impervious surface calculation" onchange="toggleAppealOptions('#a4Options')">
             <label class="form-check-label" for="appealType3">Mathematical error or incorrect impervious surface calculation</label>
           </div>
+
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType5" name="appealCheckbox" 
               value="Exempt or incorrect property owner" onchange="toggleAppealOptions('#a5Options')">
             <label class="form-check-label" for="appealType3">Exempt or incorrect property owner</label>
           </div>
+
         </div> 
       </div>
 
@@ -204,15 +211,15 @@ form name: dpwAppealCreditApplication
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="ownerFirstName">First Name: <span class="requiredField">*</span></label>
-              <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
+              <label for="constituentFirstName">First Name: <span class="requiredField">*</span></label>
+              <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="ownerLastName">Last Name: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
+              <label for="constituentLastName">Last Name: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentLastName" id="constituentLastName" class="form-control" required>
             </div>
           </div>
         </div>
@@ -220,8 +227,8 @@ form name: dpwAppealCreditApplication
         <div class="row">  
           <div class="col-12">
             <div class="form-group">
-              <label for="ownerOrganization">Company / Organization (if applicable):</label>
-              <input type="text" name="ownerOrganization" id="ownerOrganization" class="form-control">
+              <label for="constituentOrganization">Company / Organization (if applicable):</label>
+              <input type="text" name="constituentOrganization" id="constituentOrganization" class="form-control">
             </div>
           </div>
         </div>
@@ -234,8 +241,8 @@ form name: dpwAppealCreditApplication
 
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="form-group">
-              <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
-              <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
+              <label for="constituentTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="constituentTaxAccounts" id="constituentTaxAccounts" class="form-control" required>
               <!-- TODO: form-text block necessary? -->
               <div class="form-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
             </div>
@@ -252,15 +259,15 @@ form name: dpwAppealCreditApplication
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="ownerAddress1">Street Address: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerAddress1" id="ownerAddress1" class="form-control" required>
+              <label for="constituentAddress1">Street Address: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="ownerAddress2">Address Line 2:</label>
-              <input type="text" name="ownerAddress2" id="ownerAddress2" class="form-control" >
+              <label for="constituentAddress2">Address Line 2:</label>
+              <input type="text" name="constituentAddress2" id="constituentAddress2" class="form-control" >
             </div>
           </div>
         </div>
@@ -554,7 +561,102 @@ form name: dpwAppealCreditApplication
     $("#applicationTypes").hide();
   }
 
-(function($) {
+
+
+ /*
+
+  const form = document.getElementById('dpwAppealCreditApplication');
+    const jsonData = {};
+    const cmObject = {
+      caseTypeUUID: '80b411c6-ebe8-4edd-a23b-0ed118c67b4c',
+      jsonData: jsonData,
+    };
+
+  // @Desc: Handle Form Submit
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    /*
+    grecaptcha.ready(() => {
+      grecaptcha
+        .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
+          action: 'submit',
+        })
+        .then((token) => {
+          jsonData.token = token;
+          jsonData.requestType = selectedItem._title.VALUE === 'Other' ? $('#inputGroupSelect01 option:selected').val() : selectedItem.Request_Type_Abbreviation_.VALUE;
+          jsonData.requestTypeFullDesc = selectedItem._title.VALUE;
+    
+          jsonData.constituentFirstName = $('#constituentFirstName').val();
+          jsonData.constituentLastName = $('#constituentLastName').val();
+          jsonData.ownerAddress1 = $('#ownerAddress1').val();
+          jsonData.ownerAddress2 = $('#ownerAddress2').val();
+          jsonData.ownerCity = $('#ownerCity').val();
+          jsonData.ownerState = $('#ownerState').val();
+          jsonData.ownerZip = $('#ownerZip').val();
+          /*
+          jsonData.a1Reason =
+            $('#a1Reason1').is(':checked') == true
+              ? $('#a1Reason1').val()
+              : $('#a1Reason2').is(':checked') == true
+              ? $('#a1Reason2').val()
+              : $('#a1Reason3').is(':checked') == true
+              ? $('#a1Reason3').val()
+              : false;
+
+          jsonData.maximumFee = $('#maximumFee').val();
+          jsonData.feeWaiver = $('#feeWaiver').val();
+          jsonData.personInInterest = $('#personInInterestYes').is(':checked') == true ? true : false;
+          jsonData.resolution = $('#resolution').val();
+          jsonData.attachments = attachment;
+          
+          console.log(jsonData);
+        });
+
+
+ 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log(jsonData);
+  }
+
+  form.addEventListener('submit', handleSubmit);
+
+
+  let jsonData = {};
+  const form = document.getElementById('');
+
+  form.addEventListener('submit', (e) => {
+    /*jsonData['caseTypeUUID'] = '3c1eb0ad-f923-4b31-8aae-4d9591462d7f';
+    field = {};
+    /*field['token'] = token;
+    field['criticalArea'] = $('input[name="criticalArea"]:checked').val() === 'yes' ? true : false;
+    field['constituentFirstName'] = $('#constituentFirstName').val();
+    field['constituentLastName'] = $('#constituentLastName').val();
+    field['email'] = $('#emailAddress').val();
+    field['locationHouseNumber'] = $('#locationHouseNumber').val();
+    field['locationStreetName'] = $('#locationStreetName').val();
+    field['locationStreetType'] = $('#locationStreetType').val();
+    field['locationCity'] = $('#locationCity').val();
+    field['locationState'] = $('#locationState').val();
+    field['locationZip'] = $('#locationZip').val();
+    field['constituentPhone'] = $('#constituentPhone').val();
+    field['ownerHouseNumber'] = $('#ownerHouseNumber').val();
+    field['ownerStreetName'] = $('#ownerStreetName').val();
+    field['ownerStreetType'] = $('#ownerStreetType').val();
+    field['ownerCity'] = $('#ownerCity').val();
+    field['ownerState'] = $('#ownerState').val();
+    field['ownerZip'] = $('#ownerZip').val();
+    field['summary'] = topics;
+    field['subject'] = $('#subject').val();
+    field['description'] = $('#comment').val();
+    jsonData['jsonData'] = field;
+
+    console.log(jsonData);
+    });
+    */
+
+  (function($) {
     $(document).ready(function() {
 
       //on click, refresh page
