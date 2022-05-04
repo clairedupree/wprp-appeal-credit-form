@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -57,9 +57,39 @@
 
   - write json console.log function
     - help w/ multi-select json translation
+
+
   - checkbox validation (require at least one checked)
+    - fixed with intermediate continue button
+    - span div necxt to contine display error
+
+
   - write remaining forms
+
+
+  - evaluate checks on continue
+    - make continue step intermediate 
+    - how to valute whether checs have been checked
   
+
+  - remove individual required attributes
+    - when visible, add "required" element
+    - could also aadd your own validation function
+
+
+  - how to post only the fields that are shown
+    - functions to populate object with uncommon fields?
+
+  - is active bootstrap
+  
+  Step 1: find the hello world version of the thing youre trying to do
+  Step 2: get the basic mechanism of it working
+  Step 3: add complexity from there
+
+
+  https://codepen.io/jlengstorf/pen/YWJLwz?editors=0110
+
+
 ------------------------------------------------------------------------------------------------->
 
 <!--
@@ -196,7 +226,7 @@ form name: dpwAppealCreditApplication
 
 
 	  <!-- Form -->
-		<form name="dpwAppealCreditApplication" class="form">
+		<form id="dpwAppealCreditApplication" name="dpwAppealCreditApplication" class="form">
 
       <!-- COMMON BEGINNING -->
       <div id="commonBeginning" class="common">
@@ -212,14 +242,14 @@ form name: dpwAppealCreditApplication
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentFirstName">First Name: <span class="requiredField">*</span></label>
-              <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
+              <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control"  >
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentLastName">Last Name: <span class="requiredField">*</span></label>
-              <input type="text" name="constituentLastName" id="constituentLastName" class="form-control" required>
+              <input type="text" name="constituentLastName" id="constituentLastName" class="form-control"  >
             </div>
           </div>
         </div>
@@ -241,8 +271,8 @@ form name: dpwAppealCreditApplication
 
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="form-group">
-              <label for="constituentTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
-              <input type="text" name="constituentTaxAccounts" id="constituentTaxAccounts" class="form-control" required>
+              <label for="constituentTaxAccounts">Tax account number(s): <span class=" Field">*</span></label>
+              <input type="text" name="constituentTaxAccounts" id="constituentTaxAccounts" class="form-control"  >
               <!-- TODO: form-text block necessary? -->
               <div class="form-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
             </div>
@@ -260,7 +290,7 @@ form name: dpwAppealCreditApplication
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentAddress1">Street Address: <span class="requiredField">*</span></label>
-              <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control" required>
+              <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control"  >
             </div>
           </div>
 
@@ -276,21 +306,21 @@ form name: dpwAppealCreditApplication
           <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerCity">City: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerCity" id="ownerCity" class="form-control" required>
+              <input type="text" name="ownerCity" id="ownerCity" class="form-control"  >
             </div>
           </div>   
           
           <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerState">State: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerState" id="ownerState" class="form-control" required>
+              <input type="text" name="ownerState" id="ownerState" class="form-control"  >
             </div>
           </div>   
 
           <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerZip">Zip Code: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerZip" id="ownerZip" class="form-control" required>
+              <input type="text" name="ownerZip" id="ownerZip" class="form-control"  >
             </div>
           </div>
         </div>
@@ -335,7 +365,7 @@ form name: dpwAppealCreditApplication
               <div class="form-select">
                 <label for="a1TierCurrent">The property is currently classified as: 
                   <span class="requiredField">*</span></label>
-                <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+                <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent"  >
                   <option selected value="">Please select</option>
                   <option value="WPRF01">WPRF01: Tier 1 Residential</option>
                   <option value="WPRF02">WPRF02: Tier 2 Residential</option>
@@ -348,7 +378,7 @@ form name: dpwAppealCreditApplication
               <div class="form-select">
                 <label for="a1TierProposed">The property should be classified as: 
                   <span class="requiredField">*</span></label>
-                <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+                <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed"  >
                   <option selected value="">Please select</option>
                   <option value="WPRF01">WPRF01: Tier 1 Residential</option>
                   <option value="WPRF02">WPRF02: Tier 2 Residential</option>
@@ -364,20 +394,20 @@ form name: dpwAppealCreditApplication
               Reason: <span class="requiredField">*</span><br>
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
-                  value="The property's tier is incorrect based on its zoning" required>
+                  value="The property's tier is incorrect based on its zoning"  >
                 <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
-                  value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3" required>
+                  value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3"  >
                 <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
                     categorized as Tier 3</label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
-                  value="The property should be classified as the next lower tier due to the amount of impervious surface on site" required>
+                  value="The property should be classified as the next lower tier due to the amount of impervious surface on site"  >
                 <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
                     amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
                     Less than 1,200 sq ft for a Tier 2 property)</label>
@@ -494,7 +524,7 @@ form name: dpwAppealCreditApplication
 
         <div class="row">
           <div class="col-12">
-            <button class="btn btn-primary" type="submit" id="submitButton">Submit Form</button>
+            <button class="btn btn-primary" type="submit" id="submitButton" >Submit Form</button>
           </div>
         </div>
       </div> <!-- END COMMON ENDING -->
@@ -542,10 +572,49 @@ form name: dpwAppealCreditApplication
   }
 
   /* Show parent appeal container, toggled child divs will become visible */
-  function showAppealOptions(){
+  function sshowAppealOptions(){
     $("#applicationTypes, #appealTypes").hide();
     $(".common, .appealOptions").show();
+  }
+
+
+  //https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
+  //https://www.w3schools.com/js/js_arrays.asp
+  //declare array to store selected appeal options
+  const selectedAppealOptions = [];
+
+  function showAppealOptions() {
+    console.log("method called");
+    //get ids of any checkboxes that are active
+    //https://www.w3schools.com/jsref/prop_checkbox_checked.asp
+    //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_checkbox_order
+    //https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
+
+    //https://www.w3schools.com/jsref/coll_doc_forms.asp
+    //document.forms.namedItem("appealTypes")... something else
+    //google how to loop through checkboxes within a div
+    var appealChecks = document.forms[0];
+    for (var i = 0; i < appealChecks.length; i++) {
+      console.log(i);
+      if (appealChecks[i].checked) {
+        //store those ids in an array selectedAppealTypes
+        selectedAppealOptions[i] = appealChecks[i].value;
+        console.log(appealChecks[i].value);
+      }
     }
+
+
+    //send the object to a function that shows each corresponding div (change ID;s to classes?)
+    //recieving function loops through object with .length attribute
+    //selectedAppealTypes will be used later for posting data
+
+    console.log(selectedAppealOptions);
+    console.log("end function");
+  }
+
+
+    //may be conflicting with a bootstrap class visible
+    //may be error because fields are required
 
   /* Show credit appeal container */
   function showCreditOptions(selectedCreditType) {
@@ -563,70 +632,78 @@ form name: dpwAppealCreditApplication
 
 
 
- /*
+
+
+  
 
   const form = document.getElementById('dpwAppealCreditApplication');
     const jsonData = {};
-    const cmObject = {
-      caseTypeUUID: '80b411c6-ebe8-4edd-a23b-0ed118c67b4c',
-      jsonData: jsonData,
-    };
+
 
   // @Desc: Handle Form Submit
   form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    /*
-    grecaptcha.ready(() => {
-      grecaptcha
-        .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
-          action: 'submit',
-        })
-        .then((token) => {
-          jsonData.token = token;
-          jsonData.requestType = selectedItem._title.VALUE === 'Other' ? $('#inputGroupSelect01 option:selected').val() : selectedItem.Request_Type_Abbreviation_.VALUE;
-          jsonData.requestTypeFullDesc = selectedItem._title.VALUE;
-    
-          jsonData.constituentFirstName = $('#constituentFirstName').val();
-          jsonData.constituentLastName = $('#constituentLastName').val();
-          jsonData.ownerAddress1 = $('#ownerAddress1').val();
-          jsonData.ownerAddress2 = $('#ownerAddress2').val();
-          jsonData.ownerCity = $('#ownerCity').val();
-          jsonData.ownerState = $('#ownerState').val();
-          jsonData.ownerZip = $('#ownerZip').val();
-          /*
-          jsonData.a1Reason =
-            $('#a1Reason1').is(':checked') == true
-              ? $('#a1Reason1').val()
-              : $('#a1Reason2').is(':checked') == true
-              ? $('#a1Reason2').val()
-              : $('#a1Reason3').is(':checked') == true
-              ? $('#a1Reason3').val()
-              : false;
+    // event.preventDefault(); //lookup
+    console.log(event);
 
-          jsonData.maximumFee = $('#maximumFee').val();
-          jsonData.feeWaiver = $('#feeWaiver').val();
-          jsonData.personInInterest = $('#personInInterestYes').is(':checked') == true ? true : false;
-          jsonData.resolution = $('#resolution').val();
-          jsonData.attachments = attachment;
-          
-          console.log(jsonData);
-        });
+    //common json data
+    jsonData.caseTypeId = $('').val
+    jsonData.constituentFirstName = $('#constituentFirstName').val();
+    jsonData.constituentLastName = $('#constituentLastName').val();
+    jsonData.constituentAddress1 = $('#constituentAddress1').val();
+    jsonData.constituentAddress1 = $('#constituentAddress1').val();
+    jsonData.ownerCity = $('#ownerCity').val();
+    jsonData.ownerState = $('#ownerState').val();
+    jsonData.ownerZip = $('#ownerZip').val();
+    
+    //call method to populate json data for specifically chosen options
+    //or several if statements in here
+    console.log(jsonData);
+
+ 
+    // // grecaptcha.ready(() => {
+    // //   grecaptcha
+    // //     .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
+    // //       action: 'submit',
+    // //     })
+
+    //   jsonData.token = token;
+    //   jsonData.requestType = selectedItem._title.VALUE === 'Other' ? $('#inputGroupSelect01 option:selected').val() : selectedItem.Request_Type_Abbreviation_.VALUE;
+    //   jsonData.requestTypeFullDesc = selectedItem._title.VALUE;
+
+    //   jsonData.a1Reason =
+    //     $('#a1Reason1').is(':checked') == true
+    //       ? $('#a1Reason1').val()
+    //       : $('#a1Reason2').is(':checked') == true
+    //       ? $('#a1Reason2').val()
+    //       : $('#a1Reason3').is(':checked') == true
+    //       ? $('#a1Reason3').val()
+    //       : false;
+
+    //   jsonData.maximumFee = $('#maximumFee').val();
+    //   jsonData.feeWaiver = $('#feeWaiver').val();
+    //   jsonData.personInInterest = $('#personInInterestYes').is(':checked') == true ? true : false;
+    //   jsonData.resolution = $('#resolution').val();
+    //   jsonData.attachments = attachment;
+      
+    //   console.log(jsonData);
+    });
 
 
  
-  function handleSubmit(event) {
-    event.preventDefault();
+  // function handleSubmit(event) {
+  //   event.preventDefault();
 
-    console.log(jsonData);
-  }
+  //   console.log("jsonData");
+  // }
 
-  form.addEventListener('submit', handleSubmit);
+  // form.addEventListener('submit', handleSubmit);
 
 
-  let jsonData = {};
-  const form = document.getElementById('');
+  // let jsonData = {};
+  // const form = document.getElementById('');
 
-  form.addEventListener('submit', (e) => {
+  // form.addEventListener('submit', (e) => {
+    
     /*jsonData['caseTypeUUID'] = '3c1eb0ad-f923-4b31-8aae-4d9591462d7f';
     field = {};
     /*field['token'] = token;
@@ -659,7 +736,7 @@ form name: dpwAppealCreditApplication
   (function($) {
     $(document).ready(function() {
 
-      //on click, refresh page
+      //on click, refresh page --> change to a forward and back vs a refresh (works w/ intermediate contue button)
       $("#backButton").click(function() {
         window.location.reload();
       });

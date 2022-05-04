@@ -258,7 +258,7 @@
     <!-- Cards -->
 
     <!-- FORM -->
-    <div class="bootstrap-iso" style="display: none" id="pia-form">
+    <div class="bootstrap-iso" id="pia-form">
       <!-- <div class="container"> -->
 
       <div id="formTitle" style="margin-bottom: 3%"></div>
@@ -443,6 +443,9 @@
     </div>
     <!-- FORM -->
   </body>
+
+
+  
   <script>
     // cards
     const form = document.getElementById('piaForm');
@@ -714,9 +717,10 @@
             jsonData.resolution = $('#resolution').val();
             jsonData.attachments = attachment;
             console.log('post obj', cmObject);
-            PostToIssueFlow();
+            // PostToIssueFlow();
           });
       });
+      console.log("JSON DATA ", jsonData);
     });
 
     // @Desc: Handle Post to Issue Flow
