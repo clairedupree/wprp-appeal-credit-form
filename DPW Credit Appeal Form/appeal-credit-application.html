@@ -558,63 +558,116 @@ form name: dpwAppealCreditApplication
 <!-- JavaScript -->
 <script type="text/javascript">
 
+  //REPLACE THESE WITH AN INTERMEDIATE STEP THAT STORES THE
+  //SELECTIONS IN AN ARRAY, AND SENDS THAT ARRAY TO A FUNCTION
+  // TO SHOW/HIDE WHATS IN THE ARRAY (use a loop, if == then vsible, else not visible)
   /* Toggle visibility of child appeal divs */
   function toggleAppealOptions(selectedAppealType) {
     $(selectedAppealType).toggle();
   }
-
-  /* combine with showAppealOptions() once it works*/
-  function validateChecks() {
-      if($('div#appealChecks:checkbox:checked').length = 0)
-        console.log("test1");
-      if ($('#appealChecks').checked == false)
-        console.log("test2");  
-  }
-
   /* Show parent appeal container, toggled child divs will become visible */
-  function sshowAppealOptions(){
+  function showAppealForms(){
     $("#applicationTypes, #appealTypes").hide();
     $(".common, .appealOptions").show();
   }
 
 
-  //https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
-  //https://www.w3schools.com/js/js_arrays.asp
-  //declare array to store selected appeal options
-  const selectedAppealOptions = [];
 
+  //declare array to store selected appeal options const or let?
+  //const selectedAppealTypes = [];
+
+  //could repalce with const continueBtn = document.getElementById("continueButton");
+  //continueBtn.addEventListener('click', (event) => {
+    //add function here
+  //});
   function showAppealOptions() {
-    console.log("method called");
+    console.log("call showAppealOptions()");
+    if (validateCheckboxes("#appealTypes") == false)
+      alert("Please select at least one appeal type.");
+    else
+    {
+      //https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
+
+      //determine which appeal types are checked
+      let checkboxes = document.querySelectorAll('input[name="appealCheckbox"]:checked');
+      console.log(checkboxes);
+
+      //add them to the selectedAppealTypes array
+      let selectedAppealTypes = [];
+      checkboxes.forEach((checkbox) => {
+        selectedAppealTypes.push(checkbox.id);
+      });
+
+      //send the array to a method to display them
+      console.log(selectedAppealTypes);
+    }  
+
+    //simpler solution: instead of saving to an array, a loop that goes thru each element and
+    // shows if checked, hides if unchecked? also adds a required field to the html?
+      
     //get ids of any checkboxes that are active
     //https://www.w3schools.com/jsref/prop_checkbox_checked.asp
     //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_checkbox_order
     //https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
 
     //https://www.w3schools.com/jsref/coll_doc_forms.asp
-    //document.forms.namedItem("appealTypes")... something else
+    //document.forms.namedItem("appealTypes").innerHTML; ... something else
     //google how to loop through checkboxes within a div
-    var appealChecks = document.forms[0];
-    for (var i = 0; i < appealChecks.length; i++) {
-      console.log(i);
-      if (appealChecks[i].checked) {
-        //store those ids in an array selectedAppealTypes
-        selectedAppealOptions[i] = appealChecks[i].value;
-        console.log(appealChecks[i].value);
-      }
-    }
+    // var appealChecks = document.forms[0];
+    // for (var i = 0; i < appealChecks.length; i++) {
+    //   console.log("index " + i);
+    //   if (appealChecks[i].checked) {
+    //     //store those ids in an array selectedAppealTypes
+    //     //selectedAppealOptions[i] = appealChecks[i].value;
+    //     console.log(appealChecks[i].value);
+    //   }
+    // }
 
+    // //works for a single checkbox
+    // const appealChecks = document.getElementById('appealType1');
+    // for (var i = 0; i < 4; i++) {
+    //   if (appealChecks.checked) {
+    //     console.log("checked");
+    //   }
+    //   else
+    //   console.log("not checked");
+    // }
 
     //send the object to a function that shows each corresponding div (change ID;s to classes?)
     //recieving function loops through object with .length attribute
     //selectedAppealTypes will be used later for posting data
 
-    console.log(selectedAppealOptions);
-    console.log("end function");
+    //console.log(selectedAppealOptions[0]);
+    console.log("End showAppealOptions()");
   }
 
 
-    //may be conflicting with a bootstrap class visible
-    //may be error because fields are required
+
+
+
+
+
+  //determine if number of checked checkboxes in an element is > 0
+  //@param the id of the element you want to check
+  function validateCheckboxes(element) {
+      console.log("call ValidateCheckBoxes")
+      //Reference the CheckBoxes and determine Total Count of checked CheckBoxes.
+      var numChecked = $(element + " input[type=checkbox]:checked").length;
+        console.log("\tElement being validated: " + element);
+        console.log("\tNumber checked: " + numChecked);
+
+      console.log("\t " + numChecked + " checkboxes are checked.");
+
+      if (numChecked > 0) {
+          return true;
+          console.log("\tTRUE")
+      } else {
+          return false;
+          console.log("\tFALSE")
+      }
+  }
+
+
 
   /* Show credit appeal container */
   function showCreditOptions(selectedCreditType) {

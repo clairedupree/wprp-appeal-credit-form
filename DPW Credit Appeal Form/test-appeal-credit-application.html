@@ -295,6 +295,16 @@
   <!-- JavaScript -->
   <script type="text/javascript">
 
+    /* combine with showAppealOptions() once it works*/
+    function validateChecks() {
+        //var numChecked = $(element + " input[type=checkbox]:checked").length;
+        if($('div#appealChecks:checkbox:checked').length = 0)
+          console.log("test1");
+        if ($('#appealChecks').checked == false)
+          console.log("test2");  
+    }
+
+
 
   
     //on click, hide form, go back to main menu
