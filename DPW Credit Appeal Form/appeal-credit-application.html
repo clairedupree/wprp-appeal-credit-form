@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS -->
+	<!-- REMOTE Bootstrap CSS --
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -226,7 +226,6 @@ form name: dpwAppealCreditApplication
           <h4 id="creditHeader" class="creditOptions uncommon">Stormwater Credit Application</h4>
         </div>
       </div>
-    </div>
   </div> <!-- end option select -->
 
   <!-- FORM CONTAINER -->
@@ -777,8 +776,8 @@ form name: dpwAppealCreditApplication
 
     //common end JSON
 
-    console.log(jsonData);
-    console.log(jsonData.a1Comments);
+    console.log(JSON.stringify(jsonData));
+    console.log(JSON.stringify(jsonData.a1Comments));
   });
 
 
