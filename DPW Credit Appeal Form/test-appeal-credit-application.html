@@ -295,6 +295,25 @@
   <!-- JavaScript -->
   <script type="text/javascript">
 
+
+    //https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
+
+    //determine which appeal types are checked
+    let checkboxes = document.querySelectorAll('input[name="appealCheckbox"]:checked');
+    console.log(checkboxes);
+
+    //add them to the selectedAppealTypes array
+    let selectedAppealTypes = [];
+    checkboxes.forEach((checkbox) => {
+      selectedAppealTypes.push(checkbox.id);
+    });
+
+    //send the array to a method to display them
+    console.log(selectedAppealTypes);
+
+
+
+
     /* combine with showAppealOptions() once it works*/
     function validateChecks() {
         //var numChecked = $(element + " input[type=checkbox]:checked").length;
