@@ -296,6 +296,35 @@
   <script type="text/javascript">
 
 
+
+  // /* Show credit application 
+  // @param the id of the selected credit type to be shown*/
+  // function showCreditTypes(selectedCreditType) {
+  //   //clear selected array
+  //   selected.length = 0;
+  //   //add credit option to array
+  //   selected.push(selectedCreditType);
+
+  //   console.log("\tArray of selections inside method: " + JSON.stringify(selected));
+  //   //print oprions to user (test)
+  //   $("#showError").html("You selected: " + selected);
+
+
+
+  /* Toggle visibility of child appeal divs */
+  function toggleAppealOptions(selectedAppealType) {
+    $(selectedAppealType).toggle();
+  }
+  /* Show parent appeal container, toggled child divs will become visible */
+  function showAppealForms(){
+    $("#applicationTypes, #appealTypes").hide();
+    $(".common, .appealOptions").show();
+  }
+
+
+
+
+
     //https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
 
     //determine which appeal types are checked
@@ -350,6 +379,43 @@
     //})(jQuery);
 
 
+
+
+
+    //simpler solution: instead of saving to an array, a loop that goes thru each element and
+    // shows if checked, hides if unchecked? also adds a required field to the html?
+      
+    //get ids of any checkboxes that are active
+    //https://www.w3schools.com/jsref/prop_checkbox_checked.asp
+    //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_checkbox_order
+    //https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
+
+    //https://www.w3schools.com/jsref/coll_doc_forms.asp
+    //document.forms.namedItem("appealTypes").innerHTML; ... something else
+    //google how to loop through checkboxes within a div
+    // var appealChecks = document.forms[0];
+    // for (var i = 0; i < appealChecks.length; i++) {
+    //   console.log("index " + i);
+    //   if (appealChecks[i].checked) {
+    //     //store those ids in an array selectedAppealTypes
+    //     //selectedAppealOptions[i] = appealChecks[i].value;
+    //     console.log(appealChecks[i].value);
+    //   }
+    // }
+
+    // //works for a single checkbox
+    // const appealChecks = document.getElementById('appealType1');
+    // for (var i = 0; i < 4; i++) {
+    //   if (appealChecks.checked) {
+    //     console.log("checked");
+    //   }
+    //   else
+    //   console.log("not checked");
+    // }
+
+    //send the object to a function that shows each corresponding div (change ID;s to classes?)
+    //recieving function loops through object with .length attribute
+    //selectedAppealTypes will be used later for posting data
 
 
 
