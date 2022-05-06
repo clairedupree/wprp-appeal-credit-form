@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-  <title>Appeal / Credit Application</title>
+  <title>TEST APPEND</title>
 
   <!-- Embedded styles -->
 	<style>
@@ -51,89 +51,41 @@
 
 </head>
 
- 
-<!------------------------------------------------------------------------------------------------
-  TO DO:
-
-  - write json console.log function
-    - help w/ multi-select json translation
-
-
-  - write remaining forms
-
-
-  - evaluate checks on continue
-    - make continue step intermediate 
-    - how to valute whether checs have been checked
-  
-
-  - remove individual required attributes
-    - when visible, add "required" element
-    - could also aadd your own validation function
-
-  
-  Step 1: find the hello world version of the thing youre trying to do
-  Step 2: get the basic mechanism of it working
-  Step 3: add complexity from there
-
-
-  https://codepen.io/jlengstorf/pen/YWJLwz?editors=0110
-
-
-------------------------------------------------------------------------------------------------->
-
-<!--
-naming conventions hierarchy
-----------------------------
-#applicationTypes
-
-form name: dpwAppealCreditApplication
-#formContainer
-
-.common
-#commonBeginning   
-#commonEnding
-
-.uncommon
-#appealTypes
-  #appealType1-
-#creditTypes
-  #creditType1-
-
-.appealApplication
-  .appealType1-
-.creditApplication
-  .creditType1-
-  
-
-
-  saving mnarkup into variables, append to div
-  common begining
-  div
-  common end
-
-  or $("input").prop('required',true);
-  to add required tag to an element
-
--->
-
-
-
 
 
 <body>
   <div class="bootstrap-iso">
-    
-  <!-- CREDIT & APPEAL BUTTONS -->
-  <div id="applicationTypes">
 
+  <!-- Navigation -->
+  <div id="navigation" style="display: none">
     <div class="row">
+
+      <!-- Error message box -->
+      <div class="col-8 form-group">
+        <p id="showError" class="requiredField" style="text-align: center">Text should be replaced by an error message</p>
+      </div>
+
+      <!-- Go Back button -->
+      <div id="backButton" class="col-4 form-group">
+        <button class="btn btn-light btn-block">Go Back</button>
+      </div>
+    </div>
+  </div>  
+  
+  
+
+
+
+  <!-- SELECT APPLICATION -->
+  <div id="applicationSelect">
+
+    <div class="row applicationSelect">
       <div class="col-6">
-        <button class="btn btn-dark btn-block" id="appealTypes"><i class='far fa-comment'></i>Appeal</button>
+        <button class="btn btn-dark btn-block" name="appeal" id="appealButton"><i class='far fa-comment'></i>Appeal</button>
       </div>
       
-      <div class="col-6">
-        <button class="btn btn-dark btn-block" id="creditTypes"><i class='fas fa-edit'></i>Credit</button>
+      <div class="col-6 applicationSelect">
+        <button class="btn btn-dark btn-block" name="credit" id="creditButton"><i class='fas fa-edit'></i>Credit</button>
       </div>
     </div>  
   </div>
@@ -141,27 +93,11 @@ form name: dpwAppealCreditApplication
 
 
 
+  <!-- SELECT TYPE -->
   <div id="typeSelect">
 
-    <div id="formNavigation" class="common">
-      <div class="row">
-
-        <!-- Error message box -->
-        <div class="col-8 form-group">
-          <p id="showError" class="requiredField" style="text-align: center">Text should be replaced by an error message</p>
-        </div>
-
-        <!-- Go Back button -->
-        <div id="backButton" class="col-4 form-group">
-          <button class="btn btn-light btn-block">Go Back</button>
-        </div>
-      </div>
-    </div>
-
-
-
     <!-- Select Appeal Type(s) -->
-    <div id="aappealTypes" class="appealTypes uncommon">
+    <div id="appeal" style="display: none">
       <div class="row">
         <div id="appealChecks" class="col-12 form-group">
           <h5>Select the reason(s) for the appeal:</h5>
@@ -210,14 +146,14 @@ form name: dpwAppealCreditApplication
     
 
     <!-- Select Credit Type -->
-    <div id="ccreditTypes" class="creditTypes uncommon">
+    <div id="credit" style="display: none">
       <div class="row">
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
           <button class="btn btn-light btn-block" value="Property not under an NPDES permit" 
-            id="creditType1">Property not under an NPDES	permit</button>
+            id="creditType1" onclick="showCreditApplication('creditType1')">Property not under an NPDES	permit</button>
           <button class="btn btn-light btn-block" value="Property with an NPDES permit that includes stormwater management controls" 
-            id="creditType2">Property with an NPDES permit that includes	stormwater management controls</button>
+            id="creditType2" onclick="showCreditApplication('creditType2')">Property with an NPDES permit that includes	stormwater management controls</button>
         </div>
       </div>
     </div>
@@ -225,7 +161,7 @@ form name: dpwAppealCreditApplication
 
 
     <!-- Main Application Type Header -->
-    <div class="row">
+    <div class="row" style="display: none">
       <div class="col-12">
           <h4 id="appealHeader" class="appealApplication uncommon">Stormwater Fee Appeal Application</h4>
           <h4 id="creditHeader" class="creditApplication uncommon">Stormwater Credit Application</h4>
@@ -234,7 +170,8 @@ form name: dpwAppealCreditApplication
 
   </div> <!-- end type select -->
 
-  <!-- FORM CONTAINER -->
+
+  <!-- SHOW FORM -->
 	<div id="formContainer">
 	  <!-- Form -->
 		<form id="dpwAppealCreditApplication" name="dpwAppealCreditApplication" class="form">
@@ -337,215 +274,11 @@ form name: dpwAppealCreditApplication
         </div>
       </div> <!-- end common beginning -->
 
-      <div class="row">
-        <div class="col-12 text-center form-group">
-          <button type="button" class="btn btn-primary" id="append" onclick="show()">Add Appeal Type 1</button>
-        </div>
-      </div>
 
+
+      <!-- UNCOMMON MIDDLE -->
       <div id="uncommonMiddle">Options will be appended</div>
 
-
-      <!-- APPEAL OPTIONS-->
-      <div class="appealApplication">
-
-        <!-- APPEAL TYPE 1: Property placed in wrong residential tier -->
-        <div class="appealType1 uncommon"> 
-
-          <div class="row">
-            <div class="col-12">
-              <h5>Appeal Basis: Property placed in wrong residental tier</h5>
-            </div>
-          </div>
-
-          <!-- Residental Property Tier info -->
-          <div class="row form-group">
-            <div class="col-12">
-              <div style="background-color: #f0f0f0; padding: 10px">
-                <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
-                <ul style="margin-left: 20px">
-                  <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
-                    Residential Low Density (RLD) zoning</li>
-                  <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
-                    zoning</li>
-                  <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
-                    RLD, R1, R2, or R5 zoning
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          <div class="row form-group">
-            <div class="col-12">
-              <!-- TODO: change formatting? of "property bill"-->
-              On the property tax bill, <br>
-              <div class="form-select">
-                <label for="a1TierCurrent">The property is currently classified as: 
-                  <span class="requiredField">*</span></label>
-                <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent"  >
-                  <option selected value="">Please select</option>
-                  <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-                  <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-                  <option value="WPRF03">WPRF03: Tier 3 Residential</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-12">
-              <div class="form-select">
-                <label for="a1TierProposed">The property should be classified as: 
-                  <span class="requiredField">*</span></label>
-                <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed"  >
-                  <option selected value="">Please select</option>
-                  <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-                  <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-                  <option value="WPRF03">WPRF03: Tier 3 Residential</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="row form-group">
-
-            <div class="col-12">
-              Reason: <span class="requiredField">*</span><br>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
-                  value="The property's tier is incorrect based on its zoning"  >
-                <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
-                  value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3"  >
-                <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
-                    categorized as Tier 3</label>
-              </div>
-
-              <div class="form-check">
-                <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
-                  value="The property should be classified as the next lower tier due to the amount of impervious surface on site"  >
-                <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
-                    amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
-                    Less than 1,200 sq ft for a Tier 2 property)</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- TODO: include this in the radio button form-group row? -->
-          <div class="row form-group">
-            <div class="col-12">
-              <div id="a1ReasonHelpBlock" class="form-text">Use the <a href="www.aacounty.org/myannearundel" target="_blank">
-                My Anne Arundel application</a> to look up information on the stormwater fee, impervious amounts, and property zoning. 
-              </div>
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <div class="col-12">
-                <label for="a1Comments">Comments: </label>
-                <textarea class="form-control" id="a1Comments" rows="3"></textarea>
-            </div>
-          </div>
-        </div> <!--end appeal 1 options-->
-
-
-
-        <!-- APPEAL TYPE 2: Incorrect classification of	property -->
-        <div id="a2Options" class="appealType2 uncommon">
-
-          <div class="row">
-            <div class="col-12">
-              <h5>Appeal Basis: Incorrect classification of	property</h5>
-            </div>
-          </div>
-        </div> <!--end appeal 2 options-->
-
-
-
-        <!-- APPEAL TYPE 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
-        <div id="a3Options" class="appealType3 uncommon">
-          <div class="row">
-            <div class="col-12">
-              <h5>Appeal Basis: Homeowner's Association property where the fee cap is 
-                applicable but was not applied</h5>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- APPEAL TYPE 4: Mathematical error or incorrect	impervious surface calculation -->
-        <div id="a4Options" class="appealType4 uncommon">
-          <div class="row">
-            <div class="col-12">
-              <h5>Appeal Basis: Mathematical error or incorrect	impervious surface calculation</h5>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- APPEAL TYPE 5: Exempt or incorrect property owner -->  
-        <div id="a5Options" class="appealType5 uncommon">
-          <div class="row">
-            <div class="col-12">
-              <h5>Appeal Basis: Exempt or incorrect property owner</h5>
-            </div>
-          </div>
-        </div>
-
-      </div> <!-- END APPEAL APP -->
-
-
-      <!-- CREDIT OPTIONS-->
-      <div class="creditApplication">
-
-        <!-- CREDIT TYPE 1:  -->
-        <div class="creditType1 uncommon">
-          <div class="row">
-            <div class="col-12">
-              <h5>Credit Type: Property not under an NPDES permit</h5>
-            </div>
-          </div>
-
-          <div class="row form-group">
-            <div class="col-12">
-                <label for="c1Description">Briefly describe the stormwater practices on the property (type, quantity, location): </label>
-                <textarea class="form-control" id="c1Description" rows="3"></textarea>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- CREDIT TYPE 2:  -->
-        <div class="creditType2 uncommon">
-          <div class="row">
-            <div class="col-12">
-              <h5>Credit Type: Property with an NPDES permit that includes stormwater management controls</h5>
-            </div>
-          </div> 
-
-          <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              <div class="form-group">
-                <label for="c2NPDESPermitNumber">NPDES Permit Number: <span class="requiredField">*</span></label>
-                <input type="text" id="c2NPDESPermitNumber" class="form-control"  >
-              </div>
-            </div>
-  
-            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-              <div class="form-group">
-                <label for="c2RegistrationNumber">MDE Facility Registration Number: </label>
-                <input type="text" id="c2RegistrationNumber" class="form-control" >
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div> <!-- END CREDIT OPTIONS-->
 
 
       <!-- COMMON ENDING -->
@@ -567,8 +300,8 @@ form name: dpwAppealCreditApplication
         </div>
       </div> <!-- END COMMON ENDING -->
 
-		</form> <!-- END FORM -->
-  </div><!--END FORM CONTAINER-->
+		</form>
+  </div><!-- end form container-->
 </div> <!-- end bootstrap-iso container -->
 	
   
@@ -600,63 +333,90 @@ form name: dpwAppealCreditApplication
   let appealType1, appealType2, appealType3, appealType4, appealType5 = ""; //will contain uncommon form HTML markup
   let creditType1, creditType2 = ""; //will contain uncommon form HTML markup
 
-  appealType1 = '<div class="row"><div class="col-12"><h5>Appeal Basis: Property placed in wrong residental tier</h5></div></div>'
+  appealType1 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis: Property placed in wrong residental tier</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType2 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis: Incorrect classification of	property</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType3 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis: Homeowner\'s Association property where the fee cap is applicable but was not applied</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType4 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis: Mathematical error or incorrect	impervious surface calculation</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType5 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis: Exempt or incorrect property owner</h5>' +
+      '</div>' +
+    '</div>'
+
 
   function show() {
-    $("#uncommonMiddle").append(appealType1);
+    for (var i = 1; i < selected.length; i++)
+      $("#uncommonMiddle").append(selected[i]);
   }
 
-  /* Show credit or appeal types to select
-  @param the selected application type / credit or appeal */
-  /* Show credit application*/ 
-
-  // CAN YOU REFERENCE ELEMENTS BY NAME INSTEAD OF ID TO KEEP THINGS CLEANER?
-  //document.querySelector('[name="first_name"]') 
-  //also consider use of queryselector vs getelementby... class or id
-
-  //change to a function to also be called by back button
-  document.querySelectorAll("#appealTypes, #creditTypes").forEach((applicationType) => {
+  //show appeal or credit options
+  document.querySelectorAll("#creditButton, #appealButton").forEach((applicationType) => {
   applicationType.addEventListener('click', function(event) {
     //complete reset selected array
     selected.length = 0;
     //add selected credit type to array
-    selected.push(applicationType.id);
+    selected.push(applicationType.name);
     $("#showError").html("You selected: " + selected);
     //show / hide      
-    $("." + selected[0]).show();
+    $("#" + selected[0]).show();
 
-    $("#formNavigation").show();
-    $("#applicationTypes").hide();
+    $("#navigation").show();
+    $("#applicationSelect").hide();
 
     console.log(JSON.stringify(selected));
   }); 
 });
 
-  // function showTypes(selectedType) {
-  //   $(selectedType).show();
-  //   $("#formNavigation").show();
-  //   $("#applicationTypes").hide();
-  // }
 
-  /* Show credit application*/ 
-  //change to a function to also be called by back button (simpler argument calls also)
-  document.querySelectorAll("#creditType1, #creditType2").forEach((creditType) => {
-    creditType.addEventListener('click', function(event) {
-      //truncate selected array to only include app type
-      selected.length = 1;
-      console.log(JSON.stringify(selected));
-      //add selected credit type to array
-      selected.push(creditType.id);
-      $("#showError").html("You selected: " + selected);
-      //show / hide      
-      $("." + selected[0]).show();
+// //show selected credit form
+//   document.querySelectorAll("#creditType1, #creditType2").forEach((creditType) => {
+//     creditType.addEventListener('click', function(event) {
+//       //truncate selected array to only include app type
+//       selected.length = 1;
+//       console.log(JSON.stringify(selected));
+//       //add selected credit type to array
+//       selected.push(creditType.id);
+//       $("#showError").html("You selected: " + selected);
+//       //show / hide      
+//       $("." + selected[0]).show();
 
-      //$(selectedCreditType).show();
-      $("#applicationTypes, #creditTypes").hide();
-      $(".common, .creditApplication").show();
-      console.log(JSON.stringify(selected));
-    }); 
-  });
+//       //$(selectedCreditType).show();
+//       $("#applicationTypes, #creditTypes").hide();
+//       $(".common, .creditApplication").show();
+//       console.log(JSON.stringify(selected));
+//     }); 
+//   });
+
+  function showCreditApplication(creditSelect) {
+    $("#typeSelect").hide();
+    $("#commonBeginning, #commonEnding").show();
+    $("#uncommonMiddle").append(creditSelect);
+  }
 
 
    /* Show appeal application */
