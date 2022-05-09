@@ -29,10 +29,10 @@
       margin-right: 5px;
     }
 
-    /* .appealOptions initialized to not visible because of multi-select mechanism, .creditOptions are single-select*/
+    /* .appealOptions initialized to not visible because of multi-select mechanism, .creditOptions are single-select
     .common, .uncommon, .creditApplication, .appealApplication  {
       display: none;
-    }
+    } */
     
 
     .row {
@@ -81,11 +81,11 @@
 
     <div class="row applicationSelect">
       <div class="col-6">
-        <button class="btn btn-dark btn-block" name="appeal" id="appealButton"><i class='far fa-comment'></i>Appeal</button>
+        <button class="btn btn-dark btn-block" name="appeal" id="appealButton" onclick="showApplicationTypes('appeal')"><i class='far fa-comment'></i>Appeal</button>
       </div>
       
       <div class="col-6 applicationSelect">
-        <button class="btn btn-dark btn-block" name="credit" id="creditButton"><i class='fas fa-edit'></i>Credit</button>
+        <button class="btn btn-dark btn-block" name="credit" id="creditButton"onclick="showApplicationTypes('credit')"><i class='fas fa-edit'></i>Credit</button>
       </div>
     </div>  
   </div>
@@ -115,21 +115,21 @@
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="appealType3" name="appealCheckbox" 
-              value="Homeowner's Association property where the fee cap is applicable but was not applied">
+            <input class="form-check-input" type="checkbox" id="appealType3" name="appealCheckbox" value="Homeowner's Association property 
+              where the fee cap is applicable but was not applied">
             <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType4" name="appealCheckbox" 
               value="Mathematical error or incorrect impervious surface calculation">
-            <label class="form-check-label" for="appealType3">Mathematical error or incorrect impervious surface calculation</label>
+            <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface calculation</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="appealType5" name="appealCheckbox" 
               value="Exempt or incorrect property owner">
-            <label class="form-check-label" for="appealType3">Exempt or incorrect property owner</label>
+            <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
           </div>
 
         </div> 
@@ -138,7 +138,7 @@
       <!-- event listener validates checkboxes on click -->
       <div class="row">
         <div class="col-12 text-center form-group">
-          <button type="button" class="btn btn-primary" id="continueButton">Continue</button>
+          <button type="button" class="btn btn-primary" id="continueButton" onclick="showAppealApplication()">Continue</button>
         </div>
       </div>
     </div>
@@ -158,21 +158,20 @@
       </div>
     </div>
 
-
-
-    <!-- Main Application Type Header -->
-    <div class="row" style="display: none">
-      <div class="col-12">
-          <h4 id="appealHeader" class="appealApplication uncommon">Stormwater Fee Appeal Application</h4>
-          <h4 id="creditHeader" class="creditApplication uncommon">Stormwater Credit Application</h4>
-        </div>
-      </div>
-
   </div> <!-- end type select -->
 
 
   <!-- SHOW FORM -->
-	<div id="formContainer">
+	<div id="formContainer" style="display: none">
+
+    <!-- Application Header Div -->
+    <div class="row">
+      <div class="col-12">
+        <div id="formHeader">
+        </div>
+      </div>
+    </div>
+
 	  <!-- Form -->
 		<form id="dpwAppealCreditApplication" name="dpwAppealCreditApplication" class="form">
 
@@ -329,190 +328,220 @@
 <script type="text/javascript">
   
   let selected = []; //user selection array
-  const jsonData = {}; //json submit object
   let appealType1, appealType2, appealType3, appealType4, appealType5 = ""; //will contain uncommon form HTML markup
   let creditType1, creditType2 = ""; //will contain uncommon form HTML markup
-
-  appealType1 = 
-    '<div class="row">' +
-      '<div class="col-12">' +
-        '<h5>Appeal Basis: Property placed in wrong residental tier</h5>' +
-      '</div>' +
-    '</div>'
-
-  appealType2 = 
-    '<div class="row">' +
-      '<div class="col-12">' +
-        '<h5>Appeal Basis: Incorrect classification of	property</h5>' +
-      '</div>' +
-    '</div>'
-
-  appealType3 = 
-    '<div class="row">' +
-      '<div class="col-12">' +
-        '<h5>Appeal Basis: Homeowner\'s Association property where the fee cap is applicable but was not applied</h5>' +
-      '</div>' +
-    '</div>'
-
-  appealType4 = 
-    '<div class="row">' +
-      '<div class="col-12">' +
-        '<h5>Appeal Basis: Mathematical error or incorrect	impervious surface calculation</h5>' +
-      '</div>' +
-    '</div>'
-
-  appealType5 = 
-    '<div class="row">' +
-      '<div class="col-12">' +
-        '<h5>Appeal Basis: Exempt or incorrect property owner</h5>' +
-      '</div>' +
-    '</div>'
+  const jsonData = {}; //json submit object
 
 
-  function show() {
-    for (var i = 1; i < selected.length; i++)
-      $("#uncommonMiddle").append(selected[i]);
-  }
+  // BACK BUTTON 
+  $("#backButton").click(function() {
 
-  //show appeal or credit options
-  document.querySelectorAll("#creditButton, #appealButton").forEach((applicationType) => {
-  applicationType.addEventListener('click', function(event) {
-    //complete reset selected array
+    if ($("#appeal").is(":visible") || $("#credit").is(":visible"))
+    {
+      console.log("Leaving application type select")
+      //window.location.reload(); //default
+      //show initial options
+      $("#navigation, #appeal, #credit").hide();
+      $("#applicationSelect").show();      
+    }
+    
+    else if ($("#formContainer").is(":visible"))
+    {
+      console.log("Leaving application")
+      //window.location.reload(); //default
+      // display(selected[0]); //show application types 
+      $("#" + selected[0]).show();      
+      $("#formContainer").hide();      
+    }
+
+    else
+    {
+      console.log("Default - page refresh")
+      window.location.reload(); //default
+    }
+  });
+
+
+
+  // SHOW APPLICATION TYPE
+  function showApplicationTypes(applicationType) {
+
+    //reset selected array
     selected.length = 0;
-    //add selected credit type to array
-    selected.push(applicationType.name);
-    $("#showError").html("You selected: " + selected);
-    //show / hide      
-    $("#" + selected[0]).show();
 
+    //add choice to array
+    selected.push(applicationType);
+    $("#showError").html("You selected: " + selected);
+
+    //show application
+    $("#" + selected[0]).show();
+    //hide initial options
     $("#navigation").show();
     $("#applicationSelect").hide();
 
+    // Print selections so far
     console.log(JSON.stringify(selected));
-  }); 
-});
-
-
-// //show selected credit form
-//   document.querySelectorAll("#creditType1, #creditType2").forEach((creditType) => {
-//     creditType.addEventListener('click', function(event) {
-//       //truncate selected array to only include app type
-//       selected.length = 1;
-//       console.log(JSON.stringify(selected));
-//       //add selected credit type to array
-//       selected.push(creditType.id);
-//       $("#showError").html("You selected: " + selected);
-//       //show / hide      
-//       $("." + selected[0]).show();
-
-//       //$(selectedCreditType).show();
-//       $("#applicationTypes, #creditTypes").hide();
-//       $(".common, .creditApplication").show();
-//       console.log(JSON.stringify(selected));
-//     }); 
-//   });
-
-  function showCreditApplication(creditSelect) {
-    $("#typeSelect").hide();
-    $("#commonBeginning, #commonEnding").show();
-    $("#uncommonMiddle").append(creditSelect);
   }
 
 
-   /* Show appeal application */
-   //change to a function to also be called by back button
-  const continueButton = document.getElementById("continueButton");
-  continueButton.addEventListener('click', (event) => {
-  //function showAppealTypes() {
-    console.log("call showAppealOptions()");
-    // if validation is false, alert console
-    if (validateCheckboxes(".appealTypes") == false)
-      //alert("Please select at least one appeal type.");
-      $("#showError").html("Please select at least one appeal type.");
 
-    // if checkboxes pass validation,
-    else
-    {
-      //show .common elements
-      $(".common, .appealApplication").show();
+  // SHOW CREDIT APPLICATION
+  function showCreditApplication(creditType) {
+    
+    console.log("Reset array and uncommon div, set header");           
+    selected.length = 1; //truncate the contents of the selected array
+    $("#uncommonMiddle").html(""); //reset the contents of middle div
+    $("#formHeader").html('<h4 id="creditHeader" style="display: none">Stormwater Credit Application</h4>'); //set header
 
-      // display checked, hide unchecked (and add selected elements to array)
-      showSelectedChecks();
+    console.log("Populate array data & append uncommon div");
+    switch (creditType) {
+      case "creditType1":
+        $("#uncommonMiddle").append(creditType1);
+        selected.push(creditType);
+        break;
 
-      //hide menu options
-      $(".appealTypes").hide();
-    }  
-    console.log("End showAppealOptions()");
-  });
+      case "creditType2":
+        $("#uncommonMiddle").append(creditType2);
+        selected.push(creditType);
+        break;
+        
+      default:
+        $("#showError").html("Error appending credit types.");
+    }   
 
-  //show associated classes of checked checkboxes, add selected to array
-  function showSelectedChecks() {
-    //store the appealTypes checkbox into a variable
-    let appealCheckbox = document.querySelectorAll('input[name="appealCheckbox"]');
-    //create an array to store the current appeal type IDs
-    // OR change the div ids to classes that match
-    let appealTypeIds = [];
+    console.log("Show credit application");
+    $("#credit").hide(); //hide credit select  
+    $("#creditHeader, #formContainer").show(); //show form
 
-    // for each checkbox element, push the id to the appealtype array
-    appealCheckbox.forEach((checkbox) => {
-      appealTypeIds.push(checkbox.id); //will be used to toggle divs
-    });
-    console.log(JSON.stringify(appealTypeIds));
-
-    //trunmcate the contents of the selected array
-    selected.length = 1;
-
-    for (var i = 0; i < appealTypeIds.length; i++)
-    {
-      // if the id stored in the checkbox array is checked,
-      if (document.getElementById(appealTypeIds[i]).checked) {
-        // print to console, push value to selected array, show the associated .class divs
-        console.log("\tChecked: " + appealTypeIds[i]);
-        selected.push(appealTypeIds[i]);
-        $("." + appealTypeIds[i]).show();
-      }
-      // if the id stored in the checkbox array is NOT checked,
-      else if (!document.getElementById(appealTypeIds[i]).checked)
-      {
-        // print to console, hide the associated .class divs
-        console.log("\tNot checked: " + appealTypeIds[i]);
-        $("." + appealTypeIds[i]).hide();
-      }
-
-      // if neither o above option, print error to console          
-      else 
-        console.log("Error w appeal checkbox array");
-    } 
-    //print selected check options to console
-    console.log("\tArray of selections inside method: " + JSON.stringify(selected));
-    //print oprions to user (test)
+    // Print selections so far
+    console.log(JSON.stringify(selected));
     $("#showError").html("You selected: " + selected);
   }
 
-  //determine if number of checked checkboxes in an element is > 0
-  //@param the id of the element you want to check
-  function validateCheckboxes(element) {
-      console.log("call ValidateCheckBoxes")
-      //Reference the CheckBoxes and determine Total Count of checked CheckBoxes.
-      var numChecked = $(element + " input[type=checkbox]:checked").length;
-        console.log("\tElement being validated: " + element);
-        console.log("\tNumber checked: " + numChecked);
 
-      console.log("\t" + numChecked + " checkboxes are checked.");
 
-      if (numChecked > 0) {
-          return true;
-          console.log("\tTRUE")
-      } else {
-          console.log("\tFALSE")
-          return false;
+  // SHOW APPEAL APPLICATION
+  function showAppealApplication() {
+
+    console.log("Validate checkboxes");
+    if (validateCheckboxes("#appeal") == false)
+    $("#showError").html("Please select at least one appeal type.");
+
+    else
+    {
+      console.log("Reset array and uncommon div, set header");           
+      selected.length = 1; //truncate the contents of the selected array
+      $("#uncommonMiddle").html(""); //reset the contents of middle div
+      $("#formHeader").html('<h4 id="appealHeader" style="display: none">Stormwater Fee Appeal Application</h4>'); //set header
+
+      
+      console.log("Populate array data & append uncommon div");
+      populateSelectedAppealTypes();
+
+      for (var i = 1; i < selected.length; i++)
+      {
+        console.log("\tAppending matching appeal types");
+        switch (selected[i]) {
+          case "appealType1":
+            $("#uncommonMiddle").append(appealType1);
+            break;
+
+          case "appealType2":
+            $("#uncommonMiddle").append(appealType2);
+            break;
+
+          case "appealType3":
+            $("#uncommonMiddle").append(appealType3);
+            break;
+
+          case "appealType4":
+            $("#uncommonMiddle").append(appealType4);
+            break;
+          
+          case "appealType5":
+            $("#uncommonMiddle").append(appealType5);
+            break;
+
+          default:
+            $("#showError").html("Error appending appeal types.");
+        }   
       }
+
+      console.log("Show appeal application");
+      $("#appeal").hide(); //hide appeal select  
+      $("#appealHeader, #formContainer").show(); //show header and form
+
+      // Print selections so far
+      console.log(JSON.stringify(selected));
+      $("#showError").html("You selected: " + selected);
+    }  
+  }
+
+
+  // Validate checked checkboxes is > 0
+  //@param The element id to be checked (can be used for other form checkboxes)
+  function validateCheckboxes(element) {
+
+    // Reference the checked checkboxes of the element
+    var numChecked = $(element + " input[type=checkbox]:checked").length;
+      // console.log("\tElement being validated: " + element);
+      // console.log("\tNumber checked: " + numChecked);
+    console.log("\t" + numChecked + " checkboxes are checked");
+
+    if (numChecked > 0) 
+    {
+        return true;
+        console.log("\tPASS")
+    } 
+    else 
+    {
+        console.log("\tFAIL")
+        return false;
+    }
+  }
+
+
+  // Populate array selection data in the selected array
+  function populateSelectedAppealTypes() {
+
+    // Create a local array of current appeal ids
+    let appealCheckbox = document.querySelectorAll('input[name="appealCheckbox"]'); 
+    let appealTypeIds = [];
+
+    appealCheckbox.forEach((checkbox) => {
+      appealTypeIds.push(checkbox.id); 
+    });
+
+    // Loop through checkboxes
+    for (var i = 0; i < appealTypeIds.length; i++)
+    {
+      // If checkbox is checked,
+      if (document.getElementById(appealTypeIds[i]).checked) {
+        console.log("\tChecked: " + appealTypeIds[i]);
+        // add to selected array
+        selected.push(appealTypeIds[i]);
+      }
+
+      // If checkbox is NOT checked,
+      else if (!document.getElementById(appealTypeIds[i]).checked)
+      {
+        // print to console
+        console.log("\t" + appealTypeIds[i]);
+      }
+
+      else 
+        console.log("\tError populating selected appeals in array");
+    } 
   }
 
 
 
 
-  
+  //Tuesday 3/9/22
+  // Logic flow works, you last left off on the appeal case structure, review that to catch up
+  // next, work on cleaning up the json data (below)
+  // also, delete vestigial element names, classes, and ids that are no longer needed w this new logic
+
   // @Desc: Handle Form Submit
   const form = document.getElementById('dpwAppealCreditApplication');
   form.addEventListener('submit', (event) => {
@@ -577,56 +606,178 @@
 
 
 
-  (function($) {
-    $(document).ready(function() {
+  appealType1 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis 1: Property placed in wrong residental tier</h5>' +
+      '</div>' +
+    '</div>'
 
-    // REDUCE THIS CODE
-    //consider changing event listeners to functions that can be called for the back button as well
-    //clean up classes / ids (use queryselector())
+  appealType2 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis 2: Incorrect classification of	property</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType3 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis 3: Homeowner\'s Association property where the fee cap is applicable but was not applied</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType4 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis 4: Mathematical error or incorrect	impervious surface calculation</h5>' +
+      '</div>' +
+    '</div>'
+
+  appealType5 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Appeal Basis 5: Exempt or incorrect property owner</h5>' +
+      '</div>' +
+    '</div>'
+
+  creditType1 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Credit Type 1: Property not under an NPDES	permit</h5>' +
+      '</div>' +
+    '</div>'
+
+  creditType2 = 
+    '<div class="row">' +
+      '<div class="col-12">' +
+        '<h5>Credit Type 2: Property with an NPDES permit that includes stormwater management controls</h5>' +
+      '</div>' +
+    '</div>'
 
 
-    // on click, determie what is currently displayed
-      $("#backButton").click(function() {
-
-        //when on a credit select page:
-        if ($(".creditTypes").is(":visible")) {
-          console.log("Leaving credit menu options")
-          //showapplicationTypes();
-          window.location.reload();
-        }
-
-        //when on an appeal select page:
-        else if ($(".appealTypes").is(":visible")) {
-          console.log("Leaving appeal menu options")
-          //showApplicationTypes();
-          window.location.reload();
-        }
-
-        //add more phases as you build the rest
-        //when on an appeal application:
-        else if ($(".appealApplication").is(":visible")) {
-          console.log("Leaving appeal application")
-          //showAppealTypes();
-          window.location.reload();
-        }
-
-        //when on a credit application:
-        else if ($(".creditApplication").is(":visible")) {
-          console.log("Leaving credit application")
-          //showCreditTypes();
-          window.location.reload();
-        }
-
-        // if none is true, refresh page as fail-safe
-        else {
-          console.log("General page refresh.")
-          window.location.reload();
-        }
-      });
 
 
-    });
-  })(jQuery);
+
+    
+
+
+
+
+  // //show associated classes of checked checkboxes, add selected to array
+  // function populateSelectedAppealTypes() {  
+  //   //store the appealTypes checkbox into a variable
+  //   let appealCheckbox = document.querySelectorAll('input[name="appealCheckbox"]');
+  //   //create an array to store the current appeal type IDs
+  //   // OR change the div ids to classes that match
+  //   let appealTypeIds = [];
+
+  //   // for each checkbox element, push the id to the appealtypeIds array
+  //   appealCheckbox.forEach((checkbox) => {
+  //     appealTypeIds.push(checkbox.id); //will be used to toggle divs
+  //   });
+  //   console.log(JSON.stringify(appealTypeIds));
+
+  //   //truncate the contents of the selected array
+  //   selected.length = 1;
+
+  //   for (var i = 0; i < appealTypeIds.length; i++)
+  //   {
+  //     // if the id stored in the checkbox array is checked,
+  //     // if (document.getElementById(appealTypeIds[i]).checked) {
+  //     //   // print to console, push value to selected array, show the associated .class divs
+  //     //   console.log("\tChecked: " + appealTypeIds[i]);
+  //     //   selected.push(appealTypeIds[i]);
+  //     //   $("." + appealTypeIds[i]).show();
+
+  //     //if checkbox id is checked,
+  //     if (document.getElementById(appealTypeIds[i]).checked) {
+  //       console.log("\tChecked: " + appealTypeIds[i]);
+  //       //add to selected array
+  //       selected.push(appealTypeIds[i]);
+  //     }
+  //     // if the id stored in the checkbox array is NOT checked,
+  //     else if (!document.getElementById(appealTypeIds[i]).checked)
+  //     {
+  //       // print to console, hide the associated .class divs
+  //       console.log("\tNot checked: " + appealTypeIds[i]);
+  //       // $("." + appealTypeIds[i]).hide();
+  //     }
+  //     else 
+  //       console.log("Error in appeal checkbox array");
+  //   } 
+  //   //print selected check options to console
+  //   console.log("\tAll selected: " + JSON.stringify(selected));
+  //   //print oprions to user (test)
+  //   $("#showError").html("You selected: " + selected);
+  // }
+
+
+
+
+
+
+  // function showTypes() {
+  //   $("#" + selected[0]).hide();
+  //   for (var i = 1; i < selected.length; i++)
+  //     $("#uncommonMiddle").append(selected[i]);
+  // }
+
+  // document.querySelectorAll("#creditButton, #appealButton").forEach((applicationType) => {
+  // applicationType.addEventListener('click', function(event) {
+  //   }); 
+  // });
+
+
+
+// //show selected credit form
+//   document.querySelectorAll("#creditType1, #creditType2").forEach((creditType) => {
+//     creditType.addEventListener('click', function(event) {
+//       //truncate selected array to only include app type
+//       selected.length = 1;
+//       console.log(JSON.stringify(selected));
+//       //add selected credit type to array
+//       selected.push(creditType.id);
+//       $("#showError").html("You selected: " + selected);
+//       //show / hide      
+//       $("." + selected[0]).show();
+
+//       //$(selectedCreditType).show();
+//       $("#applicationTypes, #creditTypes").hide();
+//       $(".common, .creditApplication").show();
+//       console.log(JSON.stringify(selected));
+//     }); 
+//   });
+
+
+
+
+  //  /* Show appeal application */
+  //  //change to a function to also be called by back button
+  // const continueButton = document.getElementById("continueButton");
+  // continueButton.addEventListener('click', (event) => {
+  // //function showAppealTypes() {
+  //   console.log("call showAppealOptions()");
+  //   // if validation is false, alert console
+  //   if (validateCheckboxes("#appeal") == false)
+  //     //alert("Please select at least one appeal type.");
+  //     $("#showError").html("Please select at least one appeal type.");
+
+  //   // if checkboxes pass validation,
+  //   else
+  //   {
+  //     //show .common elements
+  //     $(".common, .appealApplication").show();
+
+  //     // display checked, hide unchecked (and add selected elements to array)
+  //     showSelectedChecks();
+
+  //     //hide menu options
+  //     $(".appealTypes").hide();
+  //   }  
+  //   console.log("End showAppealOptions()");
+  // });
+
 
 </script>
 </html>
