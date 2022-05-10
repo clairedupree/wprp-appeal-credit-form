@@ -29,12 +29,6 @@
       margin-right: 5px;
     }
 
-    /* .appealOptions initialized to not visible because of multi-select mechanism, .creditOptions are single-select
-    .common, .uncommon, .creditApplication, .appealApplication  {
-      display: none;
-    } */
-    
-
     .row {
       /* using .form-group for padding */
       /* .row used for organization & responsiveness */
@@ -61,6 +55,8 @@
     <div class="row">
 
       <!-- Error message box -->
+      <!-- TODO: Replace with a custom reportValidity(); -->
+      <!-- https://stackoverflow.com/questions/56406865/how-do-i-trigger-html5-validation-error-popup-when-custom-validation-message-is -->
       <div class="col-8 form-group">
         <p id="showError" class="requiredField" style="text-align: center">Text should be replaced by an error message</p>
       </div>
@@ -173,10 +169,10 @@
     </div>
 
 	  <!-- Form -->
-		<form id="dpwAppealCreditApplication" name="dpwAppealCreditApplication" class="form">
+		<form id="wprfApplication" name="wprfApplication" class="form">
 
       <!-- COMMON BEGINNING -->
-      <div id="commonBeginning" class="common">
+      <div id="commonBeginning">
 
         <!-- Owner Information -->
         <div class="row">
@@ -189,14 +185,14 @@
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentFirstName">First Name: <span class="requiredField">*</span></label>
-              <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control"  >
+              <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentLastName">Last Name: <span class="requiredField">*</span></label>
-              <input type="text" name="constituentLastName" id="constituentLastName" class="form-control"  >
+              <input type="text" name="constituentLastName" id="constituentLastName" class="form-control" required>
             </div>
           </div>
         </div>
@@ -213,7 +209,7 @@
         <!-- Tax Account(s) -->
         <div class="row">
           <div class="col-12">
-            <h5>Tax Accounts</h5> <!-- TODO: header necessary?-->
+            <h5>Tax Accounts</h5>
           </div>
 
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -237,14 +233,14 @@
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentAddress1">Street Address: <span class="requiredField">*</span></label>
-              <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control"  >
+              <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="constituentAddress2">Address Line 2:</label>
-              <input type="text" name="constituentAddress2" id="constituentAddress2" class="form-control" >
+              <input type="text" name="constituentAddress2" id="constituentAddress2" class="form-control">
             </div>
           </div>
         </div>
@@ -253,21 +249,21 @@
           <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerCity">City: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerCity" id="ownerCity" class="form-control"  >
+              <input type="text" name="ownerCity" id="ownerCity" class="form-control" required>
             </div>
           </div>   
           
           <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerState">State: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerState" id="ownerState" class="form-control"  >
+              <input type="text" name="ownerState" id="ownerState" class="form-control" required>
             </div>
           </div>   
 
           <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerZip">Zip Code: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerZip" id="ownerZip" class="form-control"  >
+              <input type="text" name="ownerZip" id="ownerZip" class="form-control" required>
             </div>
           </div>
         </div>
@@ -301,6 +297,90 @@
 
 		</form>
   </div><!-- end form container-->
+
+
+  <div id="appeal1Application" style="display: none">
+    <div class="row">
+      <div class="col-12">
+        <h5>Appeal Basis 1: Property placed in wrong residental tier</h5>
+      </div>
+    </div>
+
+    <!-- Residental Property Tier info -->
+    <div class="row form-group">
+      <div class="col-12">
+        <div style="background-color: #f0f0f0; padding: 10px">
+          <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
+          <ul style="margin-left: 20px">
+            <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
+              Residential Low Density (RLD) zoning</li>
+            <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
+              zoning</li>
+            <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
+              RLD, R1, R2, or R5 zoning
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row form-group">
+      <div class="col-12">
+        On the property tax bill, <br>
+        <div class="form-select">
+          <label for="a1TierCurrent">The property is currently classified as: 
+            <span class="requiredField">*</span></label>
+          <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+            <option selected value="">Please select</option>
+            <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+            <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+            <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="form-select">
+          <label for="a1TierProposed">The property should be classified as: 
+            <span class="requiredField">*</span></label>
+            <!-- TODO: onchange: cannot be the same as a1TierCurrent -->
+          <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+            <option selected value="">Please select</option>
+            <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+            <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+            <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-12">
+        Reason: <span class="requiredField">*</span><br>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
+            value="The property's tier is incorrect based on its zoning" required>
+          <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
+            value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3" required>
+          <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
+              categorized as Tier 3</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
+            value="The property should be classified as the next lower tier due to the amount of impervious surface on site" required>
+          <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
+              amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
+              Less than 1,200 sq ft for a Tier 2 property)</label>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end appeal 1 application -->
+
 </div> <!-- end bootstrap-iso container -->
 	
   
@@ -329,6 +409,7 @@
   
   let selected = []; //user selection array
   let appealType1, appealType2, appealType3, appealType4, appealType5 = ""; //will contain uncommon form HTML markup
+  let appealHeader, appealAcknowledgement, creditHeader, creditAuthorization = ""; //will contain uncommon form HTML markup
   let creditType1, creditType2 = ""; //will contain uncommon form HTML markup
   const jsonData = {}; //json submit object
 
@@ -378,6 +459,7 @@
     //hide initial options
     $("#navigation").show();
     $("#applicationSelect").hide();
+    // TODO: reset checkboxes somehow (default, checked: false)
 
     // Print selections so far
     console.log(JSON.stringify(selected));
@@ -388,12 +470,13 @@
   // SHOW CREDIT APPLICATION
   function showCreditApplication(creditType) {
     
-    console.log("Reset array and uncommon div, set header");           
+    console.log("Reset uncommon members (array, middle div, form header)");
     selected.length = 1; //truncate the contents of the selected array
     $("#uncommonMiddle").html(""); //reset the contents of middle div
-    $("#formHeader").html('<h4 id="creditHeader" style="display: none">Stormwater Credit Application</h4>'); //set header
+    $("#formHeader").html(creditHeader); //set header
+ // also append credit authorization
 
-    console.log("Populate array data & append uncommon div");
+    console.log("Populate array data & append middle div");
     switch (creditType) {
       case "creditType1":
         $("#uncommonMiddle").append(creditType1);
@@ -406,7 +489,7 @@
         break;
         
       default:
-        $("#showError").html("Error appending credit types.");
+        $("#showError").html("Error appending credit types");
     }   
 
     console.log("Show credit application");
@@ -429,21 +512,23 @@
 
     else
     {
-      console.log("Reset array and uncommon div, set header");           
+      console.log("Reset uncommon members (array, middle div, form header)");           
       selected.length = 1; //truncate the contents of the selected array
       $("#uncommonMiddle").html(""); //reset the contents of middle div
-      $("#formHeader").html('<h4 id="appealHeader" style="display: none">Stormwater Fee Appeal Application</h4>'); //set header
-
+      $("#formHeader").html(appealHeader); //set header
+    // also append appeal acknowledgement
       
-      console.log("Populate array data & append uncommon div");
+      console.log("Populate array data");
       populateSelectedAppealTypes();
 
+      console.log("Append middle div");
       for (var i = 1; i < selected.length; i++)
       {
-        console.log("\tAppending matching appeal types");
+        //append divs written outside the form, rather than variables
+        console.log("Appending matching appeal types");
         switch (selected[i]) {
           case "appealType1":
-            $("#uncommonMiddle").append(appealType1);
+            $("#uncommonMiddle").append($("#appeal1Application").html());
             break;
 
           case "appealType2":
@@ -484,19 +569,17 @@
 
     // Reference the checked checkboxes of the element
     var numChecked = $(element + " input[type=checkbox]:checked").length;
-      // console.log("\tElement being validated: " + element);
-      // console.log("\tNumber checked: " + numChecked);
     console.log("\t" + numChecked + " checkboxes are checked");
 
     if (numChecked > 0) 
     {
-        return true;
-        console.log("\tPASS")
+      console.log("\tPASS")
+      return true;
     } 
     else 
     {
-        console.log("\tFAIL")
-        return false;
+      console.log("\tFAIL")
+      return false;
     }
   }
 
@@ -525,8 +608,8 @@
       // If checkbox is NOT checked,
       else if (!document.getElementById(appealTypeIds[i]).checked)
       {
-        // print to console
-        console.log("\t" + appealTypeIds[i]);
+        // hide / print to console
+        // console.log("\t" + appealTypeIds[i]);
       }
 
       else 
@@ -538,34 +621,48 @@
 
 
   //Tuesday 3/9/22
-  // Logic flow works, you last left off on the appeal case structure, review that to catch up
   // next, work on cleaning up the json data (below)
+  // fully flesh out the common beginning and end, add required elements back
+  // fully ready appeal 1, add required back, save to variable, ready JSON for submission
+    // both^ will entail collecting data on select inputs
   // also, delete vestigial element names, classes, and ids that are no longer needed w this new logic
 
+  // next, try creating a function: objects of class .required, if visible, add (required, true) attribute.
+  // https://stackoverflow.com/questions/43104653/form-hidden-field-and-required-validation-use
+
   // @Desc: Handle Form Submit
-  const form = document.getElementById('dpwAppealCreditApplication');
+  const form = document.getElementById('wprfApplication');
   form.addEventListener('submit', (event) => {
-    // event.preventDefault(); //lookup
+    // event.preventDefault(); //preventing page refresh?
     console.log(event);
 
-    //json app type
-    //do first, index[0] in seelcted array
-    if (selected[0] == "appealTypes")
-      jsonData.applicationType = "Appeal Application";
-    else if (selected[0] == "creditTypes")
-      jsonData.applicationType = "Credit Application";
-    else
-      jsonData.applicationType = $("error").val();
-
-    //then, populate common json data
-    jsonData.caseTypeId = $('').val
-    jsonData.constituentFirstName = $('#constituentFirstName').val();
-    jsonData.constituentLastName = $('#constituentLastName').val();
-    jsonData.constituentAddress1 = $('#constituentAddress1').val();
-    jsonData.constituentAddress1 = $('#constituentAddress1').val();
-    jsonData.ownerCity = $('#ownerCity').val();
-    jsonData.ownerState = $('#ownerState').val();
-    jsonData.ownerZip = $('#ownerZip').val();
+    //populate common json data
+    jsonData.caseTypeId = $('').val();
+    jsonData.applicationType = selected[0];
+    jsonData.constituentFirstName = $('#constituentFirstName').val(); //ownerFirstName
+    jsonData.constituentLastName = $('#constituentLastName').val(); //ownerLastName
+    jsonData.constituentOrganization = $('constituentOrganization').val(); //ownerOrganization
+    jsonData.constituentAddress1 = $('#constituentAddress1').val(); //propertyAddress1
+    jsonData.constituentAddress2 = $('#constituentAddress2').val(); //propertyAddress2
+    jsonData.ownerCity = $('#ownerCity').val(); //propertyCity
+    jsonData.ownerState = $('#ownerState').val(); //propertyState
+    jsonData.ownerZip = $('#ownerZip').val(); //propertyZip
+    jsonData.applicantRepresentative = $('input[name="applicantRepresentative"]:checked').val(); //should be yes or no
+      if (jsonData.applicantRepresentative == 'yes') {
+        jsonData.applicantFirstName = $('#applicantFirstName').val();
+        jsonData.applicantLastName = $('#applicantLastName').val();
+        jsonData.applicantOrganization = $('#applicantOrganization').val();
+      }
+    jsonData.phone = $('#phone').val();
+    jsonData.email = $('#email').val();
+    jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
+      if (jsonData.mailingDifferent == 'yes') {
+        jsonData.mailingAddress1 = $('#mailingAddress1').val();
+        jsonData.mailingAddress2 = $('#mailingAddress2').val();
+        jsonData.mailingCity = $('#mailingCity').val();
+        jsonData.mailingState = $('#mailingState').val();
+        jsonData.mailingZip = $('#mailingZip').val();
+      }
 
     //then, populate uncommon selections from array
     for (var i = 0; i < selected.length; i++)
@@ -589,22 +686,24 @@
         break;
 
       case 'creditType1':
-        jsonData.creditType1 = $('#creditType2').val();
+        jsonData.creditType = $('#creditType2').val();
         jsonData.c1Description = $('#c1Description').val();
         break;
 
       case 'creditType2':
-        jsonData.creditType1 = $('#creditType2').val();          
+        jsonData.creditType = $('#creditType2').val();          
         jsonData.c2NPDESPermitNumber = $('#c2NPDESPermitNumber').val();
         jsonData.c2RegistrationNumber = $('#c2RegistrationNumber').val();
         break;
 
       default:
-        console.log("Error: populate uncommon json default.")
+        console.log("Error populating uncommon JSON")
     }
   }
 
-
+  appealHeader = '<h4 id="appealHeader" style="display: none">Stormwater Fee Appeal Application</h4>';
+  
+  creditHeader = '<h4 id="creditHeader" style="display: none">Stormwater Credit Application</h4>';
 
   appealType1 = 
     '<div class="row">' +
@@ -655,8 +754,9 @@
       '</div>' +
     '</div>'
 
+ appealAcknowledgement = "";
 
-
+  creditAuthorization = "";
 
 
     
