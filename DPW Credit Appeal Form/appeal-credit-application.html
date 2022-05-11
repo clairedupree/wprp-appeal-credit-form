@@ -46,14 +46,12 @@
 
 <!-- TODO: 
 
-  TODO: Wednesday, 3/11/22
+  TODO: Thursday, 3/12/22
 
-  ready json data for submission
-  finish common beginning and end
-    (including collecting data on radios and selects)
-  implement div solution, delete unusded variables
-    fully ready appeal 1
-    (including collecting data on radios and selects)
+  finish common end
+  fully ready appeal 1,
+  some of credit 2 (to test)
+  schedule a meeting w/ ryan to discuss how to post
   delete vestigial element names, classes, variables and ids
   implement javascript doc comments
 
@@ -181,15 +179,15 @@
 
 
   <!-- FORM CONTAINER -->
-	<div id="formContainer" style="display: none">
+	<div id="formContainer" style="display: none"> <!-- style="display: none-->
 
     <!-- Header -->
-    <div id="formHeader">
+    <div id="formHeader" class="uncommon">
       <!-- to be apended -->
     </div>
 
     <!-- Form -->
-    <form id="wprfApplication" name="wprfApplication" class="form">
+    <form id="wprfApplication" class="form">
 
       <!-- COMMON BEGINNING -->
       <div id="commonBeginning">
@@ -197,21 +195,21 @@
         <!-- Owner Information -->
         <div class="row">
           <div class="col-12">
-            <h5>Owner Information</h5>
+            <h5>Property Owner Information</h5>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="constituentFirstName">First Name: <span class="requiredField">*</span></label>
+              <label for="constituentFirstName">Owner First Name: <span class="requiredField">*</span></label>
               <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="constituentLastName">Last Name: <span class="requiredField">*</span></label>
+              <label for="constituentLastName">Owner Last Name: <span class="requiredField">*</span></label>
               <input type="text" name="constituentLastName" id="constituentLastName" class="form-control" required>
             </div>
           </div>
@@ -220,7 +218,7 @@
         <div class="row">  
           <div class="col-12">
             <div class="form-group">
-              <label for="constituentOrganization">Company / Organization (if applicable):</label>
+              <label for="constituentOrganization">Owner Company / Organization (if applicable):</label>
               <input type="text" name="constituentOrganization" id="constituentOrganization" class="form-control">
             </div>
           </div>
@@ -235,7 +233,7 @@
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="form-group">
               <label for="constituentTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
-              <input type="text" name="constituentTaxAccounts" id="constituentTaxAccounts" class="form-control"  >
+              <input type="text" name="constituentTaxAccounts" id="constituentTaxAccounts" class="form-control" required>
               <!-- TODO: form-text block necessary? -->
               <div class="form-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
             </div>
@@ -287,11 +285,89 @@
             </div>
           </div>
         </div>
+
+        <!-- Contact Information -->
+        <div class="row">
+          <div class="col-12">
+            <h5>Contact Information</h5>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              Is applicant a person other than the property owner? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="representativeYes" name="applicantRepresentative" 
+                  value="yes" onchange="representativeToggle()" required>
+                <label class="form-check-label" for="representativeYes">Yes</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="representativeNo" name="applicantRepresentative" 
+                  value="no" onchange="representativeToggle()" required>
+                <label class="form-check-label" for="representativeNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- append only if "representativeYes: checked" -->
+        <div id="representativeContactInfo" class="uncommon">
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="requiredField">*</span></label>
+              <input type="text" id="phone" name="phone" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="email">Email Address <span class="requiredField">*</span></label>
+              <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <h5>Mailing Address</h5>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              Is the mailing address different than the property address? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="mailingDifferentYes" name="mailingDifferent" 
+                  value="yes" onchange="mailingAddressToggle()" required>
+                <label class="form-check-label" for="mailingDifferentYes">Yes</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="mailingDifferentNo" name="mailingDifferent" 
+                  value="no" onchange="mailingAddressToggle()" required>
+                <label class="form-check-label" for="mailingDifferentNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- append only if "mailingDifferentYes: checked" -->
+        <div id="mailingAddress" class="uncommon">
+        </div>
+
+
       </div> <!-- End common beginning -->
 
 
       <!-- UNCOMMON MIDDLE -->
-      <div id="uncommonMiddle">
+      <div id="uncommonMiddle" class="uncommon">
         <!-- to be appended -->
       </div>
 
@@ -324,6 +400,74 @@
 <!-- To be appended based on selection -->
 <!-- TODO: change words "application" to "form"? -->
 <div id="uncommonForms" style="display: none">
+
+  <div id="representativeApplication">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="applicantFirstName">Applicant First Name: <span class="requiredField">*</span></label>
+          <input type="text"  name="applicantFirstName" id="applicantFirstName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="applicantLastName">Applicant Last Name: <span class="requiredField">*</span></label>
+          <input type="text" name="applicantLastName" id="applicantLastName" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="applicantOrganization">Applicant Company / Organization (if applicable):</label>
+          <input type="text" name="applicantOrganization" id="applicantOrganization" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mailingAddressApplication">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="mailingAddress1">Street Address: <span class="requiredField">*</span></label>
+          <input type="text" name="mailingAddress1" id="mailingAddress1" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="mailingAddress2">Address Line 2:</label>
+          <input type="text" name="mailingAddress2" id="mailingAddress2" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="mailingCity">City: <span class="requiredField">*</span></label>
+          <input type="text" name="mailingCity" id="mailingCity" class="form-control" required>
+        </div>
+      </div>   
+      
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="mailingState">State: <span class="requiredField">*</span></label>
+          <input type="text" name="mailingState" id="mailingState" class="form-control" required>
+        </div>
+      </div>   
+
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="mailingZip">Zip Code: <span class="requiredField">*</span></label>
+          <input type="text" name="mailingZip" id="mailingZip" class="form-control" required>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Headers -->
   <div id="appealHeader">
@@ -552,6 +696,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" 
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
     crossorigin="anonymous"></script>
+  
+  <!-- Axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </body>
 
 
@@ -559,8 +707,44 @@
 <!-- JavaScript -->
 <script type="text/javascript">
   
+  const form = document.getElementById('wprfApplication');
   let selected = []; //user selection array
   const jsonData = {}; //json submit object
+  //case manager object
+  const cmObject = {
+    caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
+    jsonData: jsonData,
+  };
+
+
+  // combine utility functions later
+  // const representative = document.getElementsByName("applicantRepresentative");
+  // representative.addEventListener('change', (event) => {
+  // });
+  function mailingAddressToggle() {
+    if (document.getElementById("mailingDifferentYes").checked) {
+      console.log('yes');
+      // TODO: this doesnt reset when form is reset
+      $("#mailingAddress").html($("#mailingAddressApplication").html());
+    }
+    else {
+      console.log('no');
+      $("#mailingAddress").html("");
+    }
+  }
+
+    
+  // combine utility functions later
+  function representativeToggle() {
+    if (document.getElementById("representativeYes").checked) {
+      console.log('yes');
+      $("#representativeContactInfo").html($("#representativeApplication").html());
+    }
+    else {
+      console.log('no');
+      $("#representativeContactInfo").html("");
+    }
+  }
 
   // BACK BUTTON 
   $("#backButton").click(function() {
@@ -607,6 +791,7 @@
     // reset form
     console.log('resetting form')
     document.getElementById('wprfApplication').reset();
+    $(".uncommon").html("");
 
     //add choice to array
     selected.push(applicationType);
@@ -777,14 +962,11 @@
 
   // TODO format comments to match jsdoc
   // @Desc: Handle Form Submit
-  const form = document.getElementById('wprfApplication');
   form.addEventListener('submit', (event) => {
     // event.preventDefault(); //preventing page refresh?
     console.log(event);
 
     //populate common json data
-    jsonData.caseTypeId = $('').val();
-    jsonData.applicationType = selected[0];
     jsonData.constituentFirstName = $('#constituentFirstName').val(); //ownerFirstName
     jsonData.constituentLastName = $('#constituentLastName').val(); //ownerLastName
     jsonData.constituentOrganization = $('constituentOrganization').val(); //ownerOrganization
@@ -809,18 +991,20 @@
         jsonData.mailingState = $('#mailingState').val();
         jsonData.mailingZip = $('#mailingZip').val();
       }
+    jsonData.applicationType = selected[0];
 
-    //then, populate uncommon selections from array
-    for (var i = 0; i < selected.length; i++)
+    //populate uncommon selections from array
+    for (var i = 1; i < selected.length; i++)
       populateUncommonJson(selected[i]);
 
-    console.log(JSON.stringify(jsonData));
+    console.log('Post object', JSON.stringify(cmObject));
+    //postToIssueFlow();
   });
 
   
   //populate json based on user selection
   function populateUncommonJson(element) {
-    console.log('populateUncommonJson()');
+    //console.log('populateUncommonJson()');
 
     switch (element) {
       case 'appealType1':
@@ -846,5 +1030,29 @@
         console.log("Error populating uncommon JSON")
     }
   }
+
+
+// EXAMPLE FROM PIA FORM:
+  const postToIssueFlow = () => {
+    let config = {
+      headers: {
+        Authorization: '933540812E9970aB83486CA5m06Bte126BD5Faf523F',
+      },
+    };
+    let url = 'https://issueflowtest.aacounty.org/caseManagerDirect';
+    axios
+      .post(url, cmObject, config)
+      .then(function (response) {
+        console.log(response);
+        window.scrollTo(0, 0);
+        // $('#formTitle').hide();
+        // $('#piaForm').hide();
+        // $('#message').show();
+      })
+    .catch(function (error) {
+      console.log({ error: error, message: 'Error posting to Case Manager' });
+    });
+  };
+
 </script>
 </html>
