@@ -47,33 +47,21 @@
 <!-- TODO: 
 
   TODO: Wednesday, 3/11/22
-    next, work on cleaning up the json data (below)
-    fully flesh out the common beginning and end, add required elements back
-    fully ready appeal 1, add required back, save to variable, ready JSON for submission
-      both^ will entail collecting data on select inputs
-    also, delete vestigial element names, classes, and ids that are no longer needed w this new logic
 
-    next, try creating a function: objects of class .required, if visible, add (required, true) attribute.
-    https://stackoverflow.com/questions/43104653/form-hidden-field-and-required-validation-use
-
-    implement div solution into code that accounts for variables & delete unsuded variables
-
-    research javascript doc comments
+  ready json data for submission
+  finish common beginning and end
+    (including collecting data on radios and selects)
+  implement div solution, delete unusded variables
+    fully ready appeal 1
+    (including collecting data on radios and selects)
+  delete vestigial element names, classes, variables and ids
+  implement javascript doc comments
 
   
 
   Step 1: find the hello world version of the thing youre trying to do
   Step 2: get the basic mechanism of it working
   Step 3: add complexity from there
-
-
-  https://codepen.io/jlengstorf/pen/YWJLwz?editors=0110
-
-
-  saving mnarkup into variables, append to div
-  common begining
-  div
-  common end
 
   or $("input").prop('required',true);
   to add required tag to an element
@@ -196,16 +184,12 @@
 	<div id="formContainer" style="display: none">
 
     <!-- Header -->
-    <div class="row">
-      <div class="col-12">
-        <div id="formHeader">
-          <!-- to be apended -->
-        </div>
-      </div>
+    <div id="formHeader">
+      <!-- to be apended -->
     </div>
 
     <!-- Form -->
-		<form id="wprfApplication" name="wprfApplication" class="form">
+    <form id="wprfApplication" name="wprfApplication" class="form">
 
       <!-- COMMON BEGINNING -->
       <div id="commonBeginning">
@@ -282,21 +266,21 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerCity">City: <span class="requiredField">*</span></label>
               <input type="text" name="ownerCity" id="ownerCity" class="form-control" required>
             </div>
           </div>   
           
-          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerState">State: <span class="requiredField">*</span></label>
               <input type="text" name="ownerState" id="ownerState" class="form-control" required>
             </div>
           </div>   
 
-          <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="ownerZip">Zip Code: <span class="requiredField">*</span></label>
               <input type="text" name="ownerZip" id="ownerZip" class="form-control" required>
@@ -307,7 +291,9 @@
 
 
       <!-- UNCOMMON MIDDLE -->
-      <div id="uncommonMiddle">Options will be appended</div>
+      <div id="uncommonMiddle">
+        <!-- to be appended -->
+      </div>
 
 
       <!-- COMMON ENDING -->
@@ -334,29 +320,36 @@
 
 
 
-  <!-- UNCOMMON DIVS -->
-  <!-- To be appended based on selection -->
+<!-- UNCOMMON DIVS -->
+<!-- To be appended based on selection -->
+<!-- TODO: change words "application" to "form"? -->
+<div id="uncommonForms" style="display: none">
+
   <!-- Headers -->
-  <div id="appealHeader" style="display: none">
+  <div id="appealHeader">
     <div class="row">
       <div class="col-12">
-        <h4 style="display: none">Stormwater Fee Appeal Application</h4> 
+        <h4>Stormwater Fee Appeal Application</h4> 
       </div>
     </div>
   </div>
 
-  <div id="creditHeader" style="display: none">
+  <div id="creditHeader">
     <div class="row">
       <div class="col-12">
-        <h4 style="display: none">Stormwater Credit Application</h4>
+        <h4>Stormwater Credit Application</h4>
       </div>
     </div>
   </div>
+
+  <!-- TODO: signatures / auth -->
+  <!-- appealAcknowledgement = "";
+  creditAuthorization = ""; -->
 
 
   <!-- APPEAL APPLICATIONS -->
   <!-- Appeal Type 1: Property places in wrong residential tier -->
-  <div id="appeal1Application" style="display: none">
+  <div id="appeal1Application">
     <div class="row">
       <div class="col-12">
         <h5>Appeal Basis 1: Property placed in wrong residental tier</h5>
@@ -456,20 +449,20 @@
 
 
   <!-- Appeal Type 1: Incorrect classification of	property -->
-  <div id="appeal2Application" style="display: none">
+  <div id="appeal2Application">
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis: Incorrect classification of	property</h5>
+        <h5>Appeal Basis 2: Incorrect classification of	property</h5>
       </div>
     </div>
   </div> <!-- End appeal 2 application -->
 
 
   <!-- Appeal Type 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
-  <div id="appeal3Application" style="display: none">
+  <div id="appeal3Application">
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis: Homeowner's Association property where the fee cap is 
+        <h5>Appeal Basis 3: Homeowner's Association property where the fee cap is 
           applicable but was not applied</h5>
       </div>
     </div>
@@ -477,73 +470,68 @@
 
 
   <!-- Appeal Type 4: Mathematical error or incorrect	impervious surface calculation -->
-  <div id="appeal4Application" style="display: none">
+  <div id="appeal4Application">
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis: Mathematical error or incorrect	impervious surface calculation</h5>
+        <h5>Appeal Basis 4: Mathematical error or incorrect	impervious surface calculation</h5>
       </div>
     </div>
   </div> <!-- End appeal 4 application -->
 
 
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
-  <div id="appeal5Application" style="display: none">
+  <div id="appeal5Application">
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis: Exempt or incorrect property owner</h5>
+        <h5>Appeal Basis 5: Exempt or incorrect property owner</h5>
       </div>
     </div>
   </div> <!-- End appeal 5 application -->
 
 
-  <!-- CREDIT TYPES -->
-  <!-- TODO: format to match appeal1Application -->
-  <div class="creditApplication" style="display: none">
-
-    <!-- CREDIT TYPE 1:  -->
-    <div class="creditType1 uncommon">
-      <div class="row">
-        <div class="col-12">
-          <h5>Credit Type: Property not under an NPDES permit</h5>
-        </div>
-      </div>
-
-      <div class="row form-group">
-        <div class="col-12">
-            <label for="c1Description">Briefly describe the stormwater practices on the property (type, quantity, location): </label>
-            <textarea class="form-control" id="c1Description" rows="3"></textarea>
-        </div>
+  <!-- CREDIT APPLICATIONS -->
+  <!-- Credit Type 1: Property not under an NPDES permit -->
+  <div id="credit1Application">
+    <div class="row">
+      <div class="col-12">
+        <h5>Credit Type 1: Property not under an NPDES permit</h5>
       </div>
     </div>
 
+    <div class="row form-group">
+      <div class="col-12">
+          <label for="c1Description">Briefly describe the stormwater practices on the property (type, quantity, location): </label>
+          <textarea class="form-control" id="c1Description" rows="3" required></textarea>
+      </div>
+    </div>
+  </div>
 
 
-    <!-- CREDIT TYPE 2:  -->
-    <div class="creditType2 uncommon">
-      <div class="row">
-        <div class="col-12">
-          <h5>Credit Type: Property with an NPDES permit that includes stormwater management controls</h5>
+  <!-- Credit Type 2: Property with an NPDES permit that includes stormwater management controls -->
+  <div id="credit2Application">
+    <div class="row">
+      <div class="col-12">
+        <h5>Credit Type 2: Property with an NPDES permit that includes stormwater management controls</h5>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c2NPDESPermitNumber">NPDES Permit Number: <span class="requiredField">*</span></label>
+          <input type="text" id="c2NPDESPermitNumber" class="form-control" required>
         </div>
-      </div> 
+      </div>
 
-      <div class="row">
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-          <div class="form-group">
-            <label for="c2NPDESPermitNumber">NPDES Permit Number: <span class="requiredField">*</span></label>
-            <input type="text" id="c2NPDESPermitNumber" class="form-control"  >
-          </div>
-        </div>
-
-        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-          <div class="form-group">
-            <label for="c2RegistrationNumber">MDE Facility Registration Number: </label>
-            <input type="text" id="c2RegistrationNumber" class="form-control" >
-          </div>
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c2RegistrationNumber">MDE Facility Registration Number: </label>
+          <input type="text" id="c2RegistrationNumber" class="form-control" required>
         </div>
       </div>
     </div>
-
-  </div> <!-- END CREDIT OPTIONS-->
+  </div>
+</div> <!-- End "display: none" uncommon divs-->
   
 </div> <!-- end bootstrap-iso container -->
 	
@@ -572,11 +560,7 @@
 <script type="text/javascript">
   
   let selected = []; //user selection array
-  let appealType1, appealType2, appealType3, appealType4, appealType5 = ""; //will contain uncommon form HTML markup
-  let appealHeader, appealAcknowledgement, creditHeader, creditAuthorization = ""; //will contain uncommon form HTML markup
-  let creditType1, creditType2 = ""; //will contain uncommon form HTML markup
   const jsonData = {}; //json submit object
-
 
   // BACK BUTTON 
   $("#backButton").click(function() {
@@ -595,7 +579,9 @@
       console.log("Leaving application")
       //window.location.reload(); //default
       // display(selected[0]); //show application types 
-      $("#" + selected[0]).show();      
+      $("#" + selected[0]).show();  
+      console.log('reset middle div');
+      //$("#uncommonMiddle").html(""); //reset the contents of middle div
       $("#formContainer").hide();      
     }
 
@@ -611,8 +597,16 @@
   // SHOW APPLICATION TYPE
   function showApplicationTypes(applicationType) {
 
-    //reset selected array
+    // reset selected array
     selected.length = 0;
+
+    // reset appeal checkboxes
+    console.log('resetting checkboxes')
+    $('input[type=checkbox]').prop('checked', false);
+
+    // reset form
+    console.log('resetting form')
+    document.getElementById('wprfApplication').reset();
 
     //add choice to array
     selected.push(applicationType);
@@ -637,18 +631,18 @@
     console.log("Reset uncommon members (array, middle div, form header)");
     selected.length = 1; //truncate the contents of the selected array
     $("#uncommonMiddle").html(""); //reset the contents of middle div
-    $("#formHeader").html(creditHeader); //set header
+    $("#formHeader").html($("#creditHeader").html()); //set header
  // also append credit authorization
 
     console.log("Populate array data & append middle div");
     switch (creditType) {
       case "creditType1":
-        $("#uncommonMiddle").append(creditType1);
+        $("#uncommonMiddle").html($("#credit1Application").html());
         selected.push(creditType);
         break;
 
       case "creditType2":
-        $("#uncommonMiddle").append(creditType2);
+        $("#uncommonMiddle").html($("#credit2Application").html());
         selected.push(creditType);
         break;
         
@@ -658,7 +652,7 @@
 
     console.log("Show credit application");
     $("#credit").hide(); //hide credit select  
-    $("#creditHeader, #formContainer").show(); //show form
+    $("#formContainer").show(); //show form
 
     // Print selections so far
     console.log(JSON.stringify(selected));
@@ -679,7 +673,7 @@
       console.log("Reset uncommon members (array, middle div, form header)");           
       selected.length = 1; //truncate the contents of the selected array
       $("#uncommonMiddle").html(""); //reset the contents of middle div
-      $("#formHeader").html(appealHeader); //set header
+      $("#formHeader").html($("#appealHeader").html()); //set header
     // also append appeal acknowledgement
       
       console.log("Populate array data");
@@ -696,19 +690,19 @@
             break;
 
           case "appealType2":
-            $("#uncommonMiddle").append(appealType2);
+            $("#uncommonMiddle").append($("#appeal2Application").html());
             break;
 
           case "appealType3":
-            $("#uncommonMiddle").append(appealType3);
+            $("#uncommonMiddle").append($("#appeal3Application").html());
             break;
 
           case "appealType4":
-            $("#uncommonMiddle").append(appealType4);
+            $("#uncommonMiddle").append($("#appeal4Application").html());
             break;
           
           case "appealType5":
-            $("#uncommonMiddle").append(appealType5);
+            $("#uncommonMiddle").append($("#appeal5Application").html());
             break;
 
           default:
@@ -718,7 +712,7 @@
 
       console.log("Show appeal application");
       $("#appeal").hide(); //hide appeal select  
-      $("#appealHeader, #formContainer").show(); //show header and form
+      $("#formContainer").show(); //show header and form
 
       // Print selections so far
       console.log(JSON.stringify(selected));
@@ -852,281 +846,5 @@
         console.log("Error populating uncommon JSON")
     }
   }
-
-// TODO: delete once resolved
-  appealAcknowledgement = "";
-
-  creditAuthorization = "";
-
-
-
-// delete once resolved
-
-//   let selected = []; //user selection array
-//   const jsonData = {}; //json submit object
-
-
-//   /* Show credit or appeal types to select
-//   @param the selected application type / credit or appeal */
-//   /* Show credit application*/ 
-
-//   // CAN YOU REFERENCE ELEMENTS BY NAME INSTEAD OF ID TO KEEP THINGS CLEANER?
-//   //document.querySelector('[name="first_name"]') 
-//   //also consider use of queryselector vs getelementby... class or id
-
-//   //change to a function to also be called by back button
-//   document.querySelectorAll("#appealTypes, #creditTypes").forEach((applicationType) => {
-//   applicationType.addEventListener('click', function(event) {
-//     //complete reset selected array
-//     selected.length = 0;
-//     //add selected credit type to array
-//     selected.push(applicationType.id);
-//     $("#showError").html("You selected: " + selected);
-//     //show / hide      
-//     $("." + selected[0]).show();
-
-//     $("#formNavigation").show();
-//     $("#applicationTypes").hide();
-
-//     console.log(JSON.stringify(selected));
-//   }); 
-// });
-
-//   // function showTypes(selectedType) {
-//   //   $(selectedType).show();
-//   //   $("#formNavigation").show();
-//   //   $("#applicationTypes").hide();
-//   // }
-
-//   /* Show credit application*/ 
-//   //change to a function to also be called by back button (simpler argument calls also)
-//   document.querySelectorAll("#creditType1, #creditType2").forEach((creditType) => {
-//     creditType.addEventListener('click', function(event) {
-//       //truncate selected array to only include app type
-//       selected.length = 1;
-//       console.log(JSON.stringify(selected));
-//       //add selected credit type to array
-//       selected.push(creditType.id);
-//       $("#showError").html("You selected: " + selected);
-//       //show / hide      
-//       $("." + selected[0]).show();
-
-//       //$(selectedCreditType).show();
-//       $("#applicationTypes, #creditTypes").hide();
-//       $(".common, .creditApplication").show();
-//       console.log(JSON.stringify(selected));
-//     }); 
-//   });
-
-
-//    /* Show appeal application */
-//    //change to a function to also be called by back button
-//   const continueButton = document.getElementById("continueButton");
-//   continueButton.addEventListener('click', (event) => {
-//   //function showAppealTypes() {
-//     console.log("call showAppealOptions()");
-//     // if validation is false, alert console
-//     if (validateCheckboxes(".appealTypes") == false)
-//       //alert("Please select at least one appeal type.");
-//       $("#showError").html("Please select at least one appeal type.");
-
-//     // if checkboxes pass validation,
-//     else
-//     {
-//       //show .common elements
-//       $(".common, .appealApplication").show();
-
-//       // display checked, hide unchecked (and add selected elements to array)
-//       showSelectedChecks();
-
-//       //hide menu options
-//       $(".appealTypes").hide();
-//     }  
-//     console.log("End showAppealOptions()");
-//   });
-
-//   //show associated classes of checked checkboxes, add selected to array
-//   function showSelectedChecks() {
-//     //store the appealTypes checkbox into a variable
-//     let appealCheckbox = document.querySelectorAll('input[name="appealCheckbox"]');
-//     //create an array to store the current appeal type IDs
-//     // OR change the div ids to classes that match
-//     let appealTypeIds = [];
-
-//     // for each checkbox element, push the id to the appealtype array
-//     appealCheckbox.forEach((checkbox) => {
-//       appealTypeIds.push(checkbox.id); //will be used to toggle divs
-//     });
-//     console.log(JSON.stringify(appealTypeIds));
-
-//     //trunmcate the contents of the selected array
-//     selected.length = 1;
-
-//     for (var i = 0; i < appealTypeIds.length; i++)
-//     {
-//       // if the id stored in the checkbox array is checked,
-//       if (document.getElementById(appealTypeIds[i]).checked) {
-//         // print to console, push value to selected array, show the associated .class divs
-//         console.log("\tChecked: " + appealTypeIds[i]);
-//         selected.push(appealTypeIds[i]);
-//         $("." + appealTypeIds[i]).show();
-//       }
-//       // if the id stored in the checkbox array is NOT checked,
-//       else if (!document.getElementById(appealTypeIds[i]).checked)
-//       {
-//         // print to console, hide the associated .class divs
-//         console.log("\tNot checked: " + appealTypeIds[i]);
-//         $("." + appealTypeIds[i]).hide();
-//       }
-
-//       // if neither o above option, print error to console          
-//       else 
-//         console.log("Error w appeal checkbox array");
-//     } 
-//     //print selected check options to console
-//     console.log("\tArray of selections inside method: " + JSON.stringify(selected));
-//     //print oprions to user (test)
-//     $("#showError").html("You selected: " + selected);
-//   }
-
-//   //determine if number of checked checkboxes in an element is > 0
-//   //@param the id of the element you want to check
-//   function validateCheckboxes(element) {
-//       console.log("call ValidateCheckBoxes")
-//       //Reference the CheckBoxes and determine Total Count of checked CheckBoxes.
-//       var numChecked = $(element + " input[type=checkbox]:checked").length;
-//         console.log("\tElement being validated: " + element);
-//         console.log("\tNumber checked: " + numChecked);
-
-//       console.log("\t" + numChecked + " checkboxes are checked.");
-
-//       if (numChecked > 0) {
-//           return true;
-//           console.log("\tTRUE")
-//       } else {
-//           console.log("\tFALSE")
-//           return false;
-//       }
-//   }
-
-
-
-
-  
-//   // @Desc: Handle Form Submit
-//   const form = document.getElementById('dpwAppealCreditApplication');
-//   form.addEventListener('submit', (event) => {
-//     // event.preventDefault(); //lookup
-//     console.log(event);
-
-//     //json app type
-//     //do first, index[0] in seelcted array
-//     if (selected[0] == "appealTypes")
-//       jsonData.applicationType = "Appeal Application";
-//     else if (selected[0] == "creditTypes")
-//       jsonData.applicationType = "Credit Application";
-//     else
-//       jsonData.applicationType = $("error").val();
-
-//     //then, populate common json data
-//     jsonData.caseTypeId = $('').val
-//     jsonData.constituentFirstName = $('#constituentFirstName').val();
-//     jsonData.constituentLastName = $('#constituentLastName').val();
-//     jsonData.constituentAddress1 = $('#constituentAddress1').val();
-//     jsonData.constituentAddress1 = $('#constituentAddress1').val();
-//     jsonData.ownerCity = $('#ownerCity').val();
-//     jsonData.ownerState = $('#ownerState').val();
-//     jsonData.ownerZip = $('#ownerZip').val();
-
-//     //then, populate uncommon selections from array
-//     for (var i = 0; i < selected.length; i++)
-//       populateUncommonJson(selected[i]);
-
-//     console.log(JSON.stringify(jsonData));
-//   });
-
-  
-//   //populate json based on user selection
-//   function populateUncommonJson(element) {
-//     console.log('populateUncommonJson()');
-
-//     switch (element) {
-//       case 'appealType1':
-//         jsonData.appealType1 = $('#appealType1').val();
-//         jsonData.a1TierCurrent = $('#a1TierCurrent').val();
-//         jsonData.a1TierProposed = $('#a1TierProposed').val();
-//         jsonData.a1Reason = $('#a1Reason').val();
-//         jsonData.a1Comments = $('#a1Comments').val();
-//         break;
-
-//       case 'creditType1':
-//         jsonData.creditType1 = $('#creditType2').val();
-//         jsonData.c1Description = $('#c1Description').val();
-//         break;
-
-//       case 'creditType2':
-//         jsonData.creditType1 = $('#creditType2').val();          
-//         jsonData.c2NPDESPermitNumber = $('#c2NPDESPermitNumber').val();
-//         jsonData.c2RegistrationNumber = $('#c2RegistrationNumber').val();
-//         break;
-
-//       default:
-//         console.log("Error: populate uncommon json default.")
-//     }
-//   }
-
-
-
-//   (function($) {
-//     $(document).ready(function() {
-
-//     // REDUCE THIS CODE
-//     //consider changing event listeners to functions that can be called for the back button as well
-//     //clean up classes / ids (use queryselector())
-
-
-//     // on click, determie what is currently displayed
-//       $("#backButton").click(function() {
-
-//         //when on a credit select page:
-//         if ($(".creditTypes").is(":visible")) {
-//           console.log("Leaving credit menu options")
-//           //showapplicationTypes();
-//           window.location.reload();
-//         }
-
-//         //when on an appeal select page:
-//         else if ($(".appealTypes").is(":visible")) {
-//           console.log("Leaving appeal menu options")
-//           //showApplicationTypes();
-//           window.location.reload();
-//         }
-
-//         //add more phases as you build the rest
-//         //when on an appeal application:
-//         else if ($(".appealApplication").is(":visible")) {
-//           console.log("Leaving appeal application")
-//           //showAppealTypes();
-//           window.location.reload();
-//         }
-
-//         //when on a credit application:
-//         else if ($(".creditApplication").is(":visible")) {
-//           console.log("Leaving credit application")
-//           //showCreditTypes();
-//           window.location.reload();
-//         }
-
-//         // if none is true, refresh page as fail-safe
-//         else {
-//           console.log("General page refresh.")
-//           window.location.reload();
-//         }
-//       });
-
-
-//     });
-//   })(jQuery);
-
 </script>
 </html>
