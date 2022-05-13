@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -48,15 +48,14 @@
 
   TODO: Thursday, 3/12/22
 
-  schedule a meeting w/ ryan
   delete vestigial element names, classes, variables and ids
   implement javascript doc comments
 
   Questions for ryan:
     document upload
-    signature
-    casemanager base names
-    testing JSON posting
+    signature - prob not necessary?
+    casemanager base names - get from tom
+    testing JSON posting -good
   
 
   Step 1: find the hello world version of the thing youre trying to do
@@ -878,149 +877,113 @@
 
   // BACK BUTTON 
   $("#backButton").click(function() {
-
-    if ($("#appeal").is(":visible") || $("#credit").is(":visible"))
-    {
+    if ($("#appeal").is(":visible") || $("#credit").is(":visible")) {
       console.log("Leaving application type select")
-      //window.location.reload(); //default
-      //show initial options
       $("#navigation, #appeal, #credit").hide();
       $("#applicationSelect").show();      
     }
-    
-    else if ($("#formContainer").is(":visible"))
-    {
+    else if ($("#formContainer").is(":visible")) {
       console.log("Leaving application")
-      //window.location.reload(); //default
-      // display(selected[0]); //show application types 
       $("#" + selected[0]).show();  
       console.log('reset middle div');
-      //$("#uncommonMiddle").html(""); //reset the contents of middle div
       $("#formContainer").hide();      
     }
-
-    else
-    {
+    else {
       console.log("Default - page refresh")
       window.location.reload(); //default
     }
   });
 
 
-
   // SHOW APPLICATION TYPE
   function showApplicationTypes(applicationType) {
-
-    // reset selected array
+    // reset array, appeal checkboxes, form input, uncommon divs
     selected.length = 0;
-
-    // reset appeal checkboxes
-    console.log('resetting checkboxes')
     $('input[type=checkbox]').prop('checked', false);
-
-    // reset form
-    console.log('resetting form')
     document.getElementById('wprfApplication').reset();
-    // reset uncommon divs
-    $(".uncommon").html("");
+    //$(".uncommon").html("");
 
     //add choice to array
     selected.push(applicationType);
-    $("#showError").html("You selected: " + selected);
+    $("#showError").html("You selected: " + selected); //display temp console
 
     //show application
     $("#" + selected[0]).show();
     //hide initial options
     $("#navigation").show();
     $("#applicationSelect").hide();
-    // TODO: reset checkboxes somehow (default, checked: false)
 
     // Print selections so far
     console.log(JSON.stringify(selected));
   }
 
 
-
   // SHOW CREDIT APPLICATION
   function showCreditApplication(creditType) {
-    
-    console.log("Reset uncommon members (array, middle div, form header)");
-    selected.length = 1; //truncate the contents of the selected array
-    $("#uncommonMiddle").html(""); //reset the contents of middle div
-    $("#formHeader").html($("#creditHeader").html()); //set header
-    $("#statement").html($("#creditAuthorization").html()); //append credit authorization
+    selected.length = 1; //truncate array
+    $(".uncommon").html(""); //reset uncomon divs
 
+    $("#formHeader").html($("#creditHeader").html()); //set credit header
+    $("#statement").html($("#creditAuthorization").html()); //set credit auth statement
+
+    // set uncommon credit options
     console.log("Populate array data & append middle div");
     switch (creditType) {
       case "creditType1":
         $("#uncommonMiddle").html($("#credit1Application").html());
         selected.push(creditType);
         break;
-
       case "creditType2":
         $("#uncommonMiddle").html($("#credit2Application").html());
         selected.push(creditType);
         break;
-        
       default:
         $("#showError").html("Error appending credit types");
     }   
 
-    console.log("Show credit application");
     $("#credit").hide(); //hide credit select  
     $("#formContainer").show(); //show form
 
-    // Print selections so far
     console.log(JSON.stringify(selected));
-    $("#showError").html("You selected: " + selected);
+    $("#showError").html("You selected: " + selected); //temporary
   }
 
 
 
   // SHOW APPEAL APPLICATION
   function showAppealApplication() {
-
     console.log("Validate checkboxes");
     if (validateCheckboxes("#appeal") == false)
-    $("#showError").html("Please select at least one appeal type.");
+      $("#showError").html("Please select at least one appeal type.");
 
-    else
-    {
-      console.log("Reset uncommon members (array, middle div, form header)");           
-      selected.length = 1; //truncate the contents of the selected array
-      $("#uncommonMiddle").html(""); //reset the contents of middle div
-      $("#formHeader").html($("#appealHeader").html()); //set header
-      $("#statement").html($("#appealAcknowledgement").html()); //append credit authorization
+    else {
+      selected.length = 1; //truncate array
+      $(".uncommon").html(""); //reset uncomon divs
 
-      console.log("Populate array data");
-      populateSelectedAppealTypes();
+      $("#formHeader").html($("#appealHeader").html()); //set appeal header
+      $("#statement").html($("#appealAcknowledgement").html()); //set appeal ack statement
 
-      console.log("Append middle div");
-      for (var i = 1; i < selected.length; i++)
-      {
-        //append divs written outside the form, rather than variables
+      populateSelectedAppealTypes(); //populate selected array
+
+      // set uncommon appeal options
+      for (var i = 1; i < selected.length; i++) {
         console.log("Appending matching appeal types");
         switch (selected[i]) {
           case "appealType1":
             $("#uncommonMiddle").append($("#appeal1Application").html());
             break;
-
           case "appealType2":
             $("#uncommonMiddle").append($("#appeal2Application").html());
             break;
-
           case "appealType3":
             $("#uncommonMiddle").append($("#appeal3Application").html());
             break;
-
           case "appealType4":
             $("#uncommonMiddle").append($("#appeal4Application").html());
             break;
-          
           case "appealType5":
             $("#uncommonMiddle").append($("#appeal5Application").html());
             break;
-
           default:
             $("#showError").html("Error appending appeal types.");
         }   
@@ -1028,11 +991,10 @@
 
       console.log("Show appeal application");
       $("#appeal").hide(); //hide appeal select  
-      $("#formContainer").show(); //show header and form
+      $("#formContainer").show(); //show form
 
-      // Print selections so far
       console.log(JSON.stringify(selected));
-      $("#showError").html("You selected: " + selected);
+      $("#showError").html("You selected: " + selected); //temporary
     }  
   }
 
@@ -1040,19 +1002,14 @@
   // Validate checked checkboxes is > 0
   //@param The element id to be checked (can be used for other form checkboxes)
   function validateCheckboxes(element) {
-
     // Reference the checked checkboxes of the element
     var numChecked = $(element + " input[type=checkbox]:checked").length;
     console.log("\t" + numChecked + " checkboxes are checked");
 
-    if (numChecked > 0) 
-    {
-      console.log("\tPASS")
+    if (numChecked > 0) {
       return true;
     } 
-    else 
-    {
-      console.log("\tFAIL")
+    else {
       return false;
     }
   }
@@ -1060,41 +1017,73 @@
 
   // Populate array selection data in the selected array
   function populateSelectedAppealTypes() {
-
-    // Create a local array of current appeal ids
+    // Create a local array of appeal ids
     let appealCheckbox = document.querySelectorAll('input[name="appealCheckbox"]'); 
-    let appealTypeIds = [];
-
+    let appealOptions = [];
     appealCheckbox.forEach((checkbox) => {
-      appealTypeIds.push(checkbox.id); 
+      appealOptions.push(checkbox.id); 
     });
 
-    // Loop through checkboxes
-    for (var i = 0; i < appealTypeIds.length; i++)
-    {
-      // If checkbox is checked,
-      if (document.getElementById(appealTypeIds[i]).checked) {
-        console.log("\tChecked: " + appealTypeIds[i]);
-        // add to selected array
-        selected.push(appealTypeIds[i]);
+    // If checked, add to array
+    for (var i = 0; i < appealOptions.length; i++) {
+      if (document.getElementById(appealOptions[i]).checked) {
+        console.log("\tChecked: " + appealOptions[i]);
+        selected.push(appealOptions[i]);
       }
-
-      // If checkbox is NOT checked,
-      else if (!document.getElementById(appealTypeIds[i]).checked)
-      {
-        // hide / print to console
-        // console.log("\t" + appealTypeIds[i]);
-      }
-
-      else 
-        console.log("\tError populating selected appeals in array");
     } 
   }
+
+  // -----------------------------------------------
+  //@Desc: Handle file upload
+  Array.prototype.forEach.call(document.querySelectorAll('.file-upload-btn'), (button) => {
+    const hiddenInput = button.parentElement.querySelector('.file-upload-input');
+    const label = button.parentElement.querySelector('.file-upload-label');
+    const defaulLabelText = 'No File(s) Selected';
+    label.textContent = defaulLabelText;
+    label.title = defaulLabelText;
+
+    button.addEventListener('click', () => {
+      hiddenInput.click();
+    });
+    hiddenInput.addEventListener('change', () => {
+      fileUploads = [];
+      let fileNameList = '';
+      fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
+        fileUploads.push(file);
+        return file.name;
+      });
+
+      base64Ready();
+      label.textContent = fileNameList.join(', ') || defaulLabelText;
+      label.title = label.textContent;
+    });
+  });
+
+  //@Desc: convert to base64
+  const toBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  //@Desc: build base64 obj
+  const base64Ready = () => {
+    fileUploads.forEach(async (element) => {
+      let getBase64 = await toBase64(element);
+      let base64 = getBase64.split(',')[1];
+      attachment.push({ name: element.name, base64: base64 });
+    });
+  };
+
+  // ------------------------------------------------------------
 
   // TODO format comments to match jsdoc
   // @Desc: Handle Form Submit
   form.addEventListener('submit', (event) => {
-    // event.preventDefault(); //preventing page refresh?
+    event.preventDefault(); //preventing page refresh?
     console.log(event);
 
     //populate common json data
@@ -1128,7 +1117,7 @@
     for (var i = 1; i < selected.length; i++)
       populateUncommonJson(selected[i]);
 
-    jsonData.supportingDoc = '';
+    jsonData.supportingDoc = attachment; // refer to file mgmt function
     if (jsonData.applicationType == 'appeal')
       jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
     else if (jsonData.applicationType == 'credit')
