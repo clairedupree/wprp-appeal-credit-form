@@ -1086,25 +1086,63 @@
     event.preventDefault(); //preventing page refresh?
     console.log(event);
 
+    /*
+      reorder based on case management structure,
+      constituent should be first for contact info
+
+      --
+
+      constituent name
+      constituent org
+      constituent address
+        if representative = no
+          constituent name = owner name
+        if representative = yes
+          constituent name = form input     
+      
+      owner name
+      owner org
+      property address
+        if mailingdiff = no
+          mailing address = property address
+        if mailingdiff = yes
+          mailing address = form input
+    */
+
+    // TODO match these json values in the form, maybe change the order?
+
     //populate common json data
-    jsonData.constituentFirstName = $('#constituentFirstName').val(); //ownerFirstName
-    jsonData.constituentLastName = $('#constituentLastName').val(); //ownerLastName
-    jsonData.constituentOrganization = $('constituentOrganization').val(); //ownerOrganization
-    jsonData.constituentAddress1 = $('#constituentAddress1').val(); //propertyAddress1
-    jsonData.constituentAddress2 = $('#constituentAddress2').val(); //propertyAddress2
-    jsonData.ownerCity = $('#ownerCity').val(); //propertyCity
-    jsonData.ownerState = $('#ownerState').val(); //propertyState
-    jsonData.ownerZip = $('#ownerZip').val(); //propertyZip
+    jsonData.ownerFirstName = $('#ownerFirstName').val(); //ownerFirstName
+    jsonData.ownerLastName = $('#ownerLastName').val(); //ownerLastName
+    jsonData.ownerOrganization = $('ownerOrganization').val(); //ownerOrganization
+    jsonData.propertyAddress1 = $('#propertyAddress1').val(); //propertyAddress1
+    jsonData.propertyAddress2 = $('#propertyAddress2').val(); //propertyAddress2
+    jsonData.propertyCity = $('#propertyCity').val(); //propertyCity
+    jsonData.propertyState = $('#propertyState').val(); //propertyState
+    jsonData.propertyZip = $('#propertyZip').val(); //propertyZip
     jsonData.applicantRepresentative = $('input[name="applicantRepresentative"]:checked').val(); //yes or no
-      if (jsonData.applicantRepresentative == 'yes') {
-        jsonData.applicantFirstName = $('#applicantFirstName').val();
-        jsonData.applicantLastName = $('#applicantLastName').val();
-        jsonData.applicantOrganization = $('#applicantOrganization').val();
-      }
-    jsonData.phone = $('#phone').val();
-    jsonData.email = $('#email').val();
+    if (jsonData.applicantRepresentative == 'no') {
+        jsonData.constituentFirstName = ownerFirstName;
+        jsonData.constituentLastName = ownerLastName;
+        jsonData.constituentOrganization = ownerOrganization;
+    }
+    else if (jsonData.applicantRepresentative == 'yes') {
+        jsonData.constituentFirstName = $('#applicantFirstName').val();
+        jsonData.constituentLastName = $('#applicantLastName').val();
+        jsonData.constituentOrganization = $('#applicantOrganization').val();
+    }
+    jsonData.phone = $('#constituentPhone').val();
+    jsonData.email = $('#constituentEmail').val();
+
     jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
-      if (jsonData.mailingDifferent == 'yes') {
+    if (jsonData.mailingDifferent == 'no') {
+        jsonData.mailingAddress1 = propertyAddress1;
+        jsonData.mailingAddress2 = propertyAddress2;
+        jsonData.mailingCity = propertyCity;
+        jsonData.mailingState = propertyState;
+        jsonData.mailingZip = propertyZip;
+      }  
+    else if (jsonData.mailingDifferent == 'yes') {
         jsonData.mailingAddress1 = $('#mailingAddress1').val();
         jsonData.mailingAddress2 = $('#mailingAddress2').val();
         jsonData.mailingCity = $('#mailingCity').val();
