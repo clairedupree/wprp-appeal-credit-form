@@ -203,15 +203,15 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="constituentFirstName">Owner First Name: <span class="requiredField">*</span></label>
-              <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
+              <label for="ownerFirstName">Owner First Name: <span class="requiredField">*</span></label>
+              <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="constituentLastName">Owner Last Name: <span class="requiredField">*</span></label>
-              <input type="text" name="constituentLastName" id="constituentLastName" class="form-control" required>
+              <label for="ownerLastName">Owner Last Name: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
             </div>
           </div>
         </div>
@@ -219,8 +219,8 @@
         <div class="row">  
           <div class="col-12">
             <div class="form-group">
-              <label for="constituentOrganization">Owner Company / Organization (if applicable)</label>
-              <input type="text" name="constituentOrganization" id="constituentOrganization" class="form-control">
+              <label for="ownerOrganization">Owner Company / Organization (if applicable)</label>
+              <input type="text" name="ownerOrganization" id="ownerOrganization" class="form-control">
             </div>
           </div>
         </div>
@@ -233,8 +233,8 @@
 
           <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="form-group">
-              <label for="constituentTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
-              <input type="text" name="constituentTaxAccounts" id="constituentTaxAccounts" class="form-control" required>
+              <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
               <!-- TODO: form-text block necessary? -->
               <div class="form-text"><a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">Look up your tax account number</a></div>
             </div>
@@ -251,15 +251,15 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="constituentAddress1">Street Address: <span class="requiredField">*</span></label>
-              <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control" required>
+              <label for="propertyAddress1">Street Address: <span class="requiredField">*</span></label>
+              <input type="text" name="propertyAddress1" id="propertyAddress1" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="constituentAddress2">Address Line 2:</label>
-              <input type="text" name="constituentAddress2" id="constituentAddress2" class="form-control">
+              <label for="propertyAddress2">Address Line 2:</label>
+              <input type="text" name="propertyAddress2" id="propertyAddress2" class="form-control">
             </div>
           </div>
         </div>
@@ -267,22 +267,22 @@
         <div class="row">
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
-              <label for="ownerCity">City: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerCity" id="ownerCity" class="form-control" required>
+              <label for="propertyCity">City: <span class="requiredField">*</span></label>
+              <input type="text" name="propertyCity" id="propertyCity" class="form-control" required>
             </div>
           </div>   
           
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
-              <label for="ownerState">State: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerState" id="ownerState" class="form-control" required>
+              <label for="propertyState">State: <span class="requiredField">*</span></label>
+              <input type="text" name="propertyState" id="propertyState" class="form-control" required>
             </div>
           </div>   
 
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
-              <label for="ownerZip">Zip Code: <span class="requiredField">*</span></label>
-              <input type="text" name="ownerZip" id="ownerZip" class="form-control" required>
+              <label for="propertyZip">Zip Code: <span class="requiredField">*</span></label>
+              <input type="text" name="propertyZip" id="propertyZip" class="form-control" required>
             </div>
           </div>
         </div>
@@ -313,22 +313,22 @@
           </div>
         </div>
 
-        <div id="representativeContactInfo" class="uncommon">
+        <div id="representative" class="uncommon">
           <!-- append only if "representativeYes: checked" -->
         </div>
 
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="phone">Phone Number <span class="requiredField">*</span></label>
-              <input type="text" id="phone" name="phone" class="form-control" required>
+              <label for="constituentPhone">Phone Number <span class="requiredField">*</span></label>
+              <input type="text" id="constituentPhone" name="constituentPhone" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="email">Email Address <span class="requiredField">*</span></label>
-              <input type="email" id="email" name="email" class="form-control" required>
+              <label for="constituentEmail">Email Address <span class="requiredField">*</span></label>
+              <input type="email" id="constituentEmail" name="constituentEmail" class="form-control" required>
             </div>
           </div>
         </div>
@@ -381,14 +381,47 @@
           </div>
         </div> 
 
-        <div class="row">
-          <div class="col-12">
-            <div class="form-group">
-              <!-- <label for="supportingDoc">Supporting Documentation</label> -->
-              <input class="form-control-file" type="file" id="supportingDoc" name="supportingDoc" multiple>
-            </div>
+        <!-- file upload -->
+        <div class="col-12">
+          <div class="form-group">
+            <input
+              style="display:none"
+              type="file"
+              class="form-control file-upload-input"
+              id="piaAttachments"
+              name="piaAttachments[]"
+              multiple
+              accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            />
+            <button type="button" class="file-upload-btn btn btn-secondary">Choose Files</button>
+            <span style="margin-left: 10px" class="file-upload-label"></span>
           </div>
         </div>
+        <!-- file upload -->
+      <!-- file upload
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <input
+              type="file" class="form-control-file file-upload-input" 
+              id="supportingDocuments" name="supportingDocuments" multiple
+              accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+            
+            <button type="button" class="file-upload-btn btn btn-secondary">Choose File(s)</button>
+            <span class="file-upload-label"></span>
+          </div>
+        </div>
+      </div>
+    -->
+        <!-- <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <!-- <label for="supportingDoc">Supporting Documentation</label> --
+              <input class="form-control-file" type="file" id="supportingDoc" 
+                name="fileUploadButton" multiple>
+            </div>
+          </div>
+        </div> -->
         
 
         <div id="statement" class="uncommon">
@@ -416,7 +449,7 @@
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
               <label for="signatureTitle">Title (if applicable)</label>
-              <input type="text" name="signatureTitle" id="signatureTitle" class="form-control" required>
+              <input type="text" name="signatureTitle" id="signatureTitle" class="form-control">
             </div>
           </div>
         </div>
@@ -454,10 +487,9 @@
 
 <!-- UNCOMMON DIVS -->
 <!-- To be appended based on selection -->
-<!-- TODO: change words "application" to "form"? -->
 <div id="uncommonForms" style="display: none">
 
-  <div id="representativeApplication">
+  <div id="representativeForm">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
@@ -484,19 +516,19 @@
     </div>
   </div>
 
-  <div id="mailingAddressApplication">
+  <div id="mailingAddressForm">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
-          <label for="mailingAddress1">Street Address: <span class="requiredField">*</span></label>
-          <input type="text" name="mailingAddress1" id="mailingAddress1" class="form-control" required>
+          <label for="constituentAddress1">Street Address: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentAddress1" id="constituentAddress1" class="form-control" required>
         </div>
       </div>
 
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
-          <label for="mailingAddress2">Address Line 2:</label>
-          <input type="text" name="mailingAddress2" id="mailingAddress2" class="form-control">
+          <label for="constituentAddress2">Address Line 2:</label>
+          <input type="text" name="constituentAddress2" id="constituentAddress2" class="form-control">
         </div>
       </div>
     </div>
@@ -504,22 +536,22 @@
     <div class="row">
       <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
         <div class="form-group">
-          <label for="mailingCity">City: <span class="requiredField">*</span></label>
-          <input type="text" name="mailingCity" id="mailingCity" class="form-control" required>
+          <label for="constituentCity">City: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentCity" id="constituentCity" class="form-control" required>
         </div>
       </div>   
       
       <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
         <div class="form-group">
-          <label for="mailingState">State: <span class="requiredField">*</span></label>
-          <input type="text" name="mailingState" id="mailingState" class="form-control" required>
+          <label for="constituentState">State: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentState" id="constituentState" class="form-control" required>
         </div>
       </div>   
 
       <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
         <div class="form-group">
-          <label for="mailingZip">Zip Code: <span class="requiredField">*</span></label>
-          <input type="text" name="mailingZip" id="mailingZip" class="form-control" required>
+          <label for="constituentZip">Zip Code: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentZip" id="constituentZip" class="form-control" required>
         </div>
       </div>
     </div>
@@ -546,7 +578,7 @@
 
   <!-- APPEAL APPLICATIONS -->
   <!-- Appeal Type 1: Property places in wrong residential tier -->
-  <div id="appeal1Application">
+  <div id="appeal1Form">
     <div class="row">
       <div class="col-12">
         <h5>Appeal Basis 1: Property placed in wrong residental tier</h5>
@@ -656,7 +688,7 @@
 
 
   <!-- Appeal Type 1: Incorrect classification of	property -->
-  <div id="appeal2Application">
+  <div id="appeal2Form">
     <div class="row">
       <div class="col-12">
         <h5>Appeal Basis 2: Incorrect classification of	property</h5>
@@ -666,7 +698,7 @@
 
 
   <!-- Appeal Type 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
-  <div id="appeal3Application">
+  <div id="appeal3Form">
     <div class="row">
       <div class="col-12">
         <h5>Appeal Basis 3: Homeowner's Association property where the fee cap is 
@@ -677,7 +709,7 @@
 
 
   <!-- Appeal Type 4: Mathematical error or incorrect	impervious surface calculation -->
-  <div id="appeal4Application">
+  <div id="appeal4Form">
     <div class="row">
       <div class="col-12">
         <h5>Appeal Basis 4: Mathematical error or incorrect	impervious surface calculation</h5>
@@ -687,7 +719,7 @@
 
 
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
-  <div id="appeal5Application">
+  <div id="appeal5Form">
     <div class="row">
       <div class="col-12">
         <h5>Appeal Basis 5: Exempt or incorrect property owner</h5>
@@ -698,7 +730,7 @@
 
   <!-- CREDIT APPLICATIONS -->
   <!-- Credit Type 1: Property not under an NPDES permit -->
-  <div id="credit1Application">
+  <div id="credit1Form">
     <div class="row">
       <div class="col-12">
         <h5>Credit Type 1: Property not under an NPDES permit</h5>
@@ -717,7 +749,7 @@
 
 
   <!-- Credit Type 2: Property with an NPDES permit that includes stormwater management controls -->
-  <div id="credit2Application">
+  <div id="credit2Form">
     <div class="row">
       <div class="col-12">
         <h5>Credit Type 2: Property with an NPDES permit that includes stormwater management controls</h5>
@@ -845,6 +877,9 @@
     caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
     jsonData: jsonData,
   };
+  let fileUploads = []; //copied from pia form
+  let attachment = []; //copied from pia form
+    
 
   // combine utility functions later
   // const representative = document.getElementsByName("applicantRepresentative");
@@ -854,7 +889,7 @@
     if (document.getElementById("mailingDifferentYes").checked) {
       console.log('yes');
       // TODO: this doesnt reset when form is reset
-      $("#mailingAddress").html($("#mailingAddressApplication").html());
+      $("#mailingAddress").html($("#mailingAddressForm").html());
     }
     else {
       console.log('no');
@@ -867,11 +902,11 @@
   function representativeToggle() {
     if (document.getElementById("representativeYes").checked) {
       console.log('yes');
-      $("#representativeContactInfo").html($("#representativeApplication").html());
+      $("#representative").html($("#representativeForm").html());
     }
     else {
       console.log('no');
-      $("#representativeContactInfo").html("");
+      $("#representative").html("");
     }
   }
 
@@ -930,11 +965,11 @@
     console.log("Populate array data & append middle div");
     switch (creditType) {
       case "creditType1":
-        $("#uncommonMiddle").html($("#credit1Application").html());
+        $("#uncommonMiddle").html($("#credit1Form").html());
         selected.push(creditType);
         break;
       case "creditType2":
-        $("#uncommonMiddle").html($("#credit2Application").html());
+        $("#uncommonMiddle").html($("#credit2Form").html());
         selected.push(creditType);
         break;
       default:
@@ -970,19 +1005,19 @@
         console.log("Appending matching appeal types");
         switch (selected[i]) {
           case "appealType1":
-            $("#uncommonMiddle").append($("#appeal1Application").html());
+            $("#uncommonMiddle").append($("#appeal1Form").html());
             break;
           case "appealType2":
-            $("#uncommonMiddle").append($("#appeal2Application").html());
+            $("#uncommonMiddle").append($("#appeal2Form").html());
             break;
           case "appealType3":
-            $("#uncommonMiddle").append($("#appeal3Application").html());
+            $("#uncommonMiddle").append($("#appeal3Form").html());
             break;
           case "appealType4":
-            $("#uncommonMiddle").append($("#appeal4Application").html());
+            $("#uncommonMiddle").append($("#appeal4Form").html());
             break;
           case "appealType5":
-            $("#uncommonMiddle").append($("#appeal5Application").html());
+            $("#uncommonMiddle").append($("#appeal5Form").html());
             break;
           default:
             $("#showError").html("Error appending appeal types.");
@@ -1033,14 +1068,14 @@
     } 
   }
 
-  // -----------------------------------------------
+  // Copied from pia form
   //@Desc: Handle file upload
   Array.prototype.forEach.call(document.querySelectorAll('.file-upload-btn'), (button) => {
     const hiddenInput = button.parentElement.querySelector('.file-upload-input');
     const label = button.parentElement.querySelector('.file-upload-label');
-    const defaulLabelText = 'No File(s) Selected';
-    label.textContent = defaulLabelText;
-    label.title = defaulLabelText;
+    const defaultLabelText = 'No files chosen';
+    label.textContent = defaultLabelText;
+    label.title = defaultLabelText;
 
     button.addEventListener('click', () => {
       hiddenInput.click();
@@ -1054,7 +1089,7 @@
       });
 
       base64Ready();
-      label.textContent = fileNameList.join(', ') || defaulLabelText;
+      label.textContent = fileNameList.join(', ') || defaultLabelText;
       label.title = label.textContent;
     });
   });
@@ -1074,80 +1109,98 @@
     fileUploads.forEach(async (element) => {
       let getBase64 = await toBase64(element);
       let base64 = getBase64.split(',')[1];
-      attachment.push({ name: element.name, base64: base64 });
+      attachment.push({ filename: element.name, base64: base64 });
     });
   };
+  
+  // //@Desc: Handle file upload
+  // Array.prototype.forEach.call(document.querySelectorAll('.file-upload-btn'), (button) => {
+  //   const hiddenInput = button.parentElement.querySelector('.file-upload-input');
+  //   const label = button.parentElement.querySelector('.file-upload-label');
+  //   const defaultLabelText = 'No File(s) Selected';
+  //   label.textContent = defaultLabelText;
+  //   label.title = defaultLabelText;
 
-  // ------------------------------------------------------------
+  //   button.addEventListener('click', () => {
+  //     hiddenInput.click();
+  //   });
+  //   hiddenInput.addEventListener('change', () => {
+  //     fileUploads = [];
+  //     let fileNameList = '';
+  //     fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
+  //       fileUploads.push(file);
+  //       return file.name;
+  //     });
 
+  //     base64Ready();
+  //     label.textContent = fileNameList.join(', ') || defaultLabelText;
+  //     label.title = label.textContent;
+  //   });
+  // });
+
+  // //@Desc: convert to base64
+  // const toBase64 = (file) => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => resolve(reader.result);
+  //     reader.onerror = (error) => reject(error);
+  //   });
+  // };
+
+  // //@Desc: build base64 obj
+  // const base64Ready = () => {
+  //   fileUploads.forEach(async (element) => {
+  //     let getBase64 = await toBase64(element);
+  //     let base64 = getBase64.split(',')[1];
+  //     attachment.push({ name: element.name, base64: base64 });
+  //   });
+  // };
+
+  
   // TODO format comments to match jsdoc
   // @Desc: Handle Form Submit
   form.addEventListener('submit', (event) => {
     event.preventDefault(); //preventing page refresh?
     console.log(event);
 
-    /*
-      reorder based on case management structure,
-      constituent should be first for contact info
-
-      --
-
-      constituent name
-      constituent org
-      constituent address
-        if representative = no
-          constituent name = owner name
-        if representative = yes
-          constituent name = form input     
-      
-      owner name
-      owner org
-      property address
-        if mailingdiff = no
-          mailing address = property address
-        if mailingdiff = yes
-          mailing address = form input
-    */
-
-    // TODO match these json values in the form, maybe change the order?
-
-    //populate common json data
-    jsonData.ownerFirstName = $('#ownerFirstName').val(); //ownerFirstName
-    jsonData.ownerLastName = $('#ownerLastName').val(); //ownerLastName
-    jsonData.ownerOrganization = $('ownerOrganization').val(); //ownerOrganization
-    jsonData.propertyAddress1 = $('#propertyAddress1').val(); //propertyAddress1
-    jsonData.propertyAddress2 = $('#propertyAddress2').val(); //propertyAddress2
-    jsonData.propertyCity = $('#propertyCity').val(); //propertyCity
-    jsonData.propertyState = $('#propertyState').val(); //propertyState
-    jsonData.propertyZip = $('#propertyZip').val(); //propertyZip
+    // TODO: reorder these so constituent is first?
+    jsonData.ownerFirstName = $('#ownerFirstName').val();
+    jsonData.ownerLastName = $('#ownerLastName').val();
+    jsonData.ownerOrganization = $('#ownerOrganization').val();
+    jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
+    jsonData.propertyAddress1 = $('#propertyAddress1').val();
+    jsonData.propertyAddress2 = $('#propertyAddress2').val();
+    jsonData.propertyCity = $('#propertyCity').val();
+    jsonData.propertyState = $('#propertyState').val();
+    jsonData.propertyZip = $('#propertyZip').val();
     jsonData.applicantRepresentative = $('input[name="applicantRepresentative"]:checked').val(); //yes or no
     if (jsonData.applicantRepresentative == 'no') {
-        jsonData.constituentFirstName = ownerFirstName;
-        jsonData.constituentLastName = ownerLastName;
-        jsonData.constituentOrganization = ownerOrganization;
+        jsonData.constituentFirstName = jsonData.ownerFirstName;
+        jsonData.constituentLastName = jsonData.ownerLastName;
+        jsonData.constituentOrganization = jsonData.ownerOrganization;
     }
     else if (jsonData.applicantRepresentative == 'yes') {
         jsonData.constituentFirstName = $('#applicantFirstName').val();
         jsonData.constituentLastName = $('#applicantLastName').val();
         jsonData.constituentOrganization = $('#applicantOrganization').val();
     }
-    jsonData.phone = $('#constituentPhone').val();
-    jsonData.email = $('#constituentEmail').val();
-
+    jsonData.constituentPhone = $('#constituentPhone').val();
+    jsonData.constituentEmail = $('#constituentEmail').val();
     jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
     if (jsonData.mailingDifferent == 'no') {
-        jsonData.mailingAddress1 = propertyAddress1;
-        jsonData.mailingAddress2 = propertyAddress2;
-        jsonData.mailingCity = propertyCity;
-        jsonData.mailingState = propertyState;
-        jsonData.mailingZip = propertyZip;
+        jsonData.constituentAddress1 = jsonData.propertyAddress1;
+        jsonData.constituentAddress2 = jsonData.propertyAddress2;
+        jsonData.constituentCity = jsonData.propertyCity;
+        jsonData.constituentState = jsonData.propertyState;
+        jsonData.constituentZip = jsonData.propertyZip;
       }  
     else if (jsonData.mailingDifferent == 'yes') {
-        jsonData.mailingAddress1 = $('#mailingAddress1').val();
-        jsonData.mailingAddress2 = $('#mailingAddress2').val();
-        jsonData.mailingCity = $('#mailingCity').val();
-        jsonData.mailingState = $('#mailingState').val();
-        jsonData.mailingZip = $('#mailingZip').val();
+        jsonData.constituentAddress1 = $('#constituentAddress1').val(); //mailingAddress1
+        jsonData.constituentAddress2 = $('#constituentAddress2').val(); //mailingAddress2
+        jsonData.constituentCity = $('#constituentCity').val();
+        jsonData.constituentState = $('#constituentState').val();
+        jsonData.constituentgZip = $('#constituentZip').val();
       }
     jsonData.applicationType = selected[0];
 
@@ -1155,7 +1208,7 @@
     for (var i = 1; i < selected.length; i++)
       populateUncommonJson(selected[i]);
 
-    jsonData.supportingDoc = attachment; // refer to file mgmt function
+    jsonData.supportingDocuments = attachment; // refer to file mgmt function
     if (jsonData.applicationType == 'appeal')
       jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
     else if (jsonData.applicationType == 'credit')
