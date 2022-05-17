@@ -1,3 +1,6 @@
+<!-- 
+  Claire Dupree
+ -->
 <!doctype html>
 <html lang="en">
 
@@ -428,15 +431,6 @@
         </div>
 
 
-        <!-- <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-              <label for="signature">Signature <span class="requiredField">*</span></label>
-              <div id="signature"></div>
-            </div>
-          </div>
-        </div> -->
-
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
@@ -611,7 +605,7 @@
           <div class="form-select">
             <label for="a1TierCurrent">The property is currently classified as: 
               <span class="requiredField">*</span></label>
-            <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+            <select class="form-select a1Select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
               <option selected value="">Please select</option>
               <option value="WPRF01">WPRF01: Tier 1 Residential</option>
               <option value="WPRF02">WPRF02: Tier 2 Residential</option>
@@ -625,7 +619,7 @@
             <label for="a1TierProposed">The property should be classified as: 
               <span class="requiredField">*</span></label>
               <!-- TODO: onchange: cannot be the same as a1TierCurrent -->
-            <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+            <select class="form-select a1Select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
               <option selected value="">Please select</option>
               <option value="WPRF01">WPRF01: Tier 1 Residential</option>
               <option value="WPRF02">WPRF02: Tier 2 Residential</option>
@@ -923,7 +917,7 @@
       $("#formContainer").hide();      
     }
     else {
-      console.log("Default - page refresh")
+      console.log("Back button default - page refresh")
       window.location.reload(); //default
     }
   });
@@ -1111,52 +1105,8 @@
       attachment.push({ filename: element.name, base64: base64 });
     });
   };
-  
-  // //@Desc: Handle file upload
-  // Array.prototype.forEach.call(document.querySelectorAll('.file-upload-btn'), (button) => {
-  //   const hiddenInput = button.parentElement.querySelector('.file-upload-input');
-  //   const label = button.parentElement.querySelector('.file-upload-label');
-  //   const defaultLabelText = 'No File(s) Selected';
-  //   label.textContent = defaultLabelText;
-  //   label.title = defaultLabelText;
 
-  //   button.addEventListener('click', () => {
-  //     hiddenInput.click();
-  //   });
-  //   hiddenInput.addEventListener('change', () => {
-  //     fileUploads = [];
-  //     let fileNameList = '';
-  //     fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
-  //       fileUploads.push(file);
-  //       return file.name;
-  //     });
 
-  //     base64Ready();
-  //     label.textContent = fileNameList.join(', ') || defaultLabelText;
-  //     label.title = label.textContent;
-  //   });
-  // });
-
-  // //@Desc: convert to base64
-  // const toBase64 = (file) => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => resolve(reader.result);
-  //     reader.onerror = (error) => reject(error);
-  //   });
-  // };
-
-  // //@Desc: build base64 obj
-  // const base64Ready = () => {
-  //   fileUploads.forEach(async (element) => {
-  //     let getBase64 = await toBase64(element);
-  //     let base64 = getBase64.split(',')[1];
-  //     attachment.push({ name: element.name, base64: base64 });
-  //   });
-  // };
-
-  
   // TODO format comments to match jsdoc
   // @Desc: Handle Form Submit
   form.addEventListener('submit', (event) => {
