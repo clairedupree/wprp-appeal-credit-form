@@ -1,292 +1,176 @@
-<!DOCTYPE html>
+<!-- 
+Claire Dupree
+-->
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
 
-    <!-- Import fontawesome styles library -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"/>
+<head>
+  <meta charset="utf-8">
 
-    <!-- Import bootstrap styles library -->
-    <link rel="stylesheet" href="https://www.aacounty.org/_template-assets/css/bootstrap4-iso.min.css" />
+  <!-- REMOTE Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!---->
+  
+  <!-- LOCAL Bootstrap CSS -->
+  <link rel="stylesheet" href="https://www.aacounty.org/_template-assets/css/bootstrap4-iso.min.css" />
+  <!---->
 
-    <!-- ? -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
-    
+  <!-- FontAwesome Icon Library -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-    <!-- Ajax -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"></script>
+  <title>Appeal / Credit Application</title>
 
-    <!-- Import bootstrap styles library -->
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"></script>
+  <!-- Embedded styles -->
+  <style>
+    .requiredField {
+      color: red;
+    }
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
-    <title>SANDBOX</title>
+    i {
+      margin-right: 5px;
+    }
 
-
-    <!-- styles unique to this page, not part of AAC templates -->
-    <style>
-      .dropdown-menu {
-        position: relative !important;
-        width: 100%;
-        overflow: visible !important;
-        transform: translate3d(0px, 35px, 0px) !important;
-        top: -40px !important;
-      }
-
-      .requiredField {
-        color: red;
-      }
-      
-      .row {
+    .row {
+      /* using .form-group for padding */
+      /* .row used for organization & responsiveness */
+        padding: 0px !important;
         background: none !important;
         border-top: 0px !important;
         margin: auto !important;
-      }
-
-      .ui-autocomplete {
-        max-height: 150px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        font-size: 10pt;
-        z-index: 999;
-      }
-
-      * html .ui-autocomplete {
-        height: 100px;
-      }
-
-      i {
-        margin-right: 5px;
-      }
-
-      /*test*/
-      #creditOptions, #appealOptions {
-        margin-bottom: 10px;
-      }
-    </style>
-  </head>
+    }
+    
+    .dropdown-menu {
+      text-align: center !important;
+    }
+  </style>
+</head>
 
 <body>
   <div class="bootstrap-iso">
-    
-    <!-- Credit or Appeal buttons -->
-    <div class="bootstrap-iso" id="initialOptions">
-      <button class="btn btn-dark btn-block" id="appeal" onclick="showTypes('appeal')"><i class='far fa-comment'></i>Appeal</button>
-      <button class="btn btn-dark btn-block" id="credit" onclick="showTypes('credit')"><i class='fas fa-edit'></i>Credit</button>
-    </div>
-
-    <!-- Credit type buttons -->
-    <div class="bootstrap-iso" id="editTypes" style="display: none">
-      <button class="btn btn-light btn-block" onclick="showCreditTypes('creditType1')">
-        Property not under an NPDES	permit</button>
-      <button class="btn btn-light btn-block" onclick="showCreditTypes('creditType2')">
-        Property with an NPDES permit that includes	stormwater management controls</button>
-    </div>
-
-    <!-- Appeal type buttons -->
-    <div class="bootstrap-iso" id="-appealTypes" style="display: none">
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType1')">
-        Property placed in wrong residential tier</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType2')">
-        Incorrect classification of	property</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType3')">
-        Homeowner's Association property where the fee cap is applicable but was not applied</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType4')">
-        Mathematical error or incorrect	impervious surface calculation</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType5')">
-        Exempt or incorrect property owner</button>
-    </div>
 
 
 
 
 
-
-    
-    <!-- Appeal Dropdown-->
-    <div class="row">
-      <div class="col-12">
-        <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="appealTypes" 
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class='far fa-comment'></i>Appeal</button>
-
-        <div class="col-12 dropdown-menu" aria-labelledby="appealTypes">
-
-          <a class="dropdown-item" href="#" id="appealType1" onclick="show('appealHeader', '.a1Options')">
-            Property placed in wrong residential tier</a>
-            
-          <a class="dropdown-item" href="#" id="appealType2" onclick="show('appealHeader', '.a2Options')">
-            Incorrect classification of	property</a>
-
-          <a class="dropdown-item" href="#" id="appealType3" onclick="show('appealHeader', '.a3Options')">
-            Homeowner's Association property where the fee cap is applicable but was not applied</a>
-
-          <a class="dropdown-item" href="#" id="appealType4" onclick="show('appealHeader', '.a4Options')">
-            Mathematical error or incorrect	impervious surface calculation</a>
-
-          <a class="dropdown-item" href="#" id="appealType5" onclick="show('appealHeader', '.a5Options')">
-            Exempt or incorrect property owner</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Credit Dropdown -->
-    <div class="row">    
-      <div class="col-12">
-        <button class="btn btn-dark btn-block dropdown-toggle" type="button" id="creditTypes" 
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class='far fa-edit'></i>Credit</button>
-
-        <div class="col-12 dropdown-menu" aria-labelledby="creditTypes">
-          
-          <a class="dropdown-item" href="#" id="creditType1" onclick="show('creditHeader', '.c1Options')">
-            Property not under an NPDES	permit</a>
-            
-          <a class="dropdown-item" href="#" id="creditType2" onclick="show('creditHeader', '.c2Options')">
-            Property with an NPDES permit that includes	stormwater management controls</a>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-    <!-- Credit or Appeal buttons -->
-    <div class="bootstrap-iso">
-        <button class="btn btn-dark btn-block" id="appeal"><i class='far fa-comment'></i>Appeal</button>
-        <button class="btn btn-dark btn-block" id="credit"><i class='fas fa-edit'></i>Credit</button>
-    </div>
-
-    <div class="bootstrap-iso">
-        <div id="formHeader">
-          <h4>This should be replaced</h4>
-      </div>
-    </div>
-
-    <!-- TEST BUTTON-->
-    <div class=" bootstrap-iso">
-        <div id="headerButton">
-          <button class="btn btn-light" onclick="replace('Button Click')">Change Header</button>
-        </div>
-    </div>
-
-
-
-
-
-
-
-    <!-- Select Credit or Appeal-->
-    <div class="bootstrap-iso" id="initialOptions">
-      <button class="btn btn-dark btn-block" onclick="showTypes('appeal')"><i class='far fa-comment'></i>Appeal</button>
-      <button class="btn btn-dark btn-block" onclick="showTypes('credit')"><i class='fas fa-edit'></i>Credit</button>
-    </div>
-
-    <!-- Credit type options -->
-    <div class="bootstrap-iso" id="creditOptions" style="display: none">
-      <button class="btn btn-light btn-block" onclick="showCredit('creditType1')">Property not under an NPDES permit</button>
-      <button class="btn btn-light btn-block" onclick="showCredit('credit2')">Property with an NPDES permit that includes stormwater management controls</button>
-    </div>
-
-    <!-- Appeal type options -->
-    <div class="bootstrap-iso" id="appealOptions" style="display: none">
-      <button class="btn btn-light btn-block" onclick="showAppeal('Appeal_Type_1')">Property placed in wrong residential tier</button>
-      <button class="btn btn-light btn-block" onclick="showAppeal('Appeal_Type_2')">Incorrect classification of property</button>
-      <button class="btn btn-light btn-block" onclick="showAppeal('Appeal_Type_3')">Homeowner's Association property where the fee cap is applicable but was not applied</button>
-      <button class="btn btn-light btn-block" onclick="showAppeal('Appeal_Type_4')">Mathematical error or incorrect impervious surface calculation</button>
-      <button class="btn btn-light btn-block" onclick="showAppeal('Appeal_Type_5')">Exempt or incorrect property owner</button>
-    </div>
-
-
-
-
-
-
-        <!-- Credit type buttons -->
-    <div class="bootstrap-iso" id="creditTypes" style="display: none">
-      <button class="btn btn-light btn-block" onclick="showCreditTypes('creditType1')">
-        Property not under an NPDES	permit</button>
-      <button class="btn btn-light btn-block" onclick="showCreditTypes('creditType2')">
-        Property with an NPDES permit that includes	stormwater management controls</button>
-    </div>
-
-    <!-- Appeal type buttons -->
-    <!-- Change to bootstrap dropdown menu -->
-    <div class="bootstrap-iso" id="appealTypes" style="display: none">
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType1')">
-        Property placed in wrong residentialtier</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType2')">
-        Incorrect classification of	property</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType3')">
-        Homeowner's Association property where the fee cap is applicable but was not applied</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType4')">
-        Mathematical error or incorrect	impervious surface calculation</button>
-      <button class="btn btn-light btn-block" onclick="showAppealTypes('appealType5')">
-        Exempt or incorrect property owner</button>
-    </div>
-
-
-
-
-
-
-
+    <form id="form">
     <!-- Appeal 1 Form -->
-    <form name="Appeal_Type_1" id="Appeal_Type_1" method="post" action="" style="display: none">
-      <div>
-        <p>WPRF01/Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or Residential Low Density (RLD) zoning<br>
-        WPRF02/Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential zoning<br>    
-        WPRF03/Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, RLD, R1, R2, or R5 zoning</p>
-      
-        <label for="A1_Tier_Current">On the property tax bill, the property is currently classified as:</label>
-        <select name="A1_Tier_Current" id="A1_Tier_Current">
-          <option value="Tier_1">WPRF01- Tier 1 Residential</option> 
-          <option value="Tier_2">WPRF02- Tier 2 Residential</option> 
-          <option value="Tier_3">WPRF03- Tier 3 Residential</option> 
-        </select>
+    <div id="appeal1Form">
+      <div class="row">
+        <div class="col-12">
+          <h5>Appeal Basis 1: Property placed in wrong residental tier</h5>
+        </div>
       </div>
-
-     <div>
-        <label for="A1_Tier_Proposed">The property should be classified as:</label>
-        <select name="A1_Tier_Proposed" id="A1_Tier_Proposed">
-          <option value="Tier_1">WPRF01- Tier 1 Residential</option> 
-          <option value="Tier_2">WPRF02- Tier 2 Residential</option> 
-          <option value="Tier_3">WPRF03- Tier 3 Residential</option> 
-        </select>
-      </div>
-
-      <div>
-        Reason:<br>
-        <input type="radio" id="Reason_1" name="A1_Reason" value="Reason_1">
-          <label for="Reason_1">The property's tier is incorrect based on its zoning</label><br>
-        <input type="radio" id="Reason_3" name="A1_Reason" value="Reason_2">
-          <label for="Reason_1">The property is an attached dwelling in residential zoning but is not categorized as Tier 3</label><br>
-        <input type="radio" id="Reason_2" name="A1_Reason" value="Reason_3">
-          <label for="Reason_1">The property should be classified as the next lower tier due to the amount of impervious surface on site 
-            (Less than 2,900 sq ft for a Tier 1 property; Less than 1,200 sq ft for a Tier 2 property)</label>
-
-        <p>Use the My Anne Arundel application to look up information on the stormwater fee, 
-        impervious amounts, and property zoning <a href="www.aacounty.org/myannearundel">aacounty.org/myannearundel</a></p>
+  
+      <!-- Residental Property Tier info -->
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12">
+            <div style="background-color: #f0f0f0; padding: 10px">
+              <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
+              <ul style="margin-left: 20px">
+                <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
+                  Residential Low Density (RLD) zoning</li>
+                <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
+                  zoning</li>
+                <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
+                  RLD, R1, R2, or R5 zoning
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
       
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12">
+            On the property tax bill, <br>
+            <div class="form-select">
+              <label for="a1TierCurrent">The property is currently classified as: 
+                <span class="requiredField">*</span></label>
+              <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+                <option selected value="">Please select</option>
+                <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
+                <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
+                <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <div class="form-select">
+              <label for="a1TierProposed">The property should be classified as: 
+                <span class="requiredField">*</span></label>
+                <!-- TODO: onchange: cannot be the same as a1TierCurrent -->
+              <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+                <option selected value="">Please select</option>
+                <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
+                <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
+                <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            Reason: <span class="requiredField">*</span><br>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
+                value="The property's tier is incorrect based on its zoning" required>
+              <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
+            </div>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
+                value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3" required>
+              <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
+                  categorized as Tier 3</label>
+            </div>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
+                value="The property should be classified as the next lower tier due to the amount of impervious surface on site" required>
+              <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
+                  amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
+                  Less than 1,200 sq ft for a Tier 2 property)</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit" id="submitButton" >Submit Form</button>
+        </div>
+      </div>
+    </div> <!-- End common ending -->
+
     </form>
   </div>
+
+    <!-- Script imports -->
+  <!-- jQuery (must come before Bootstrap & Popper.js) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <!-- Popper.js (must come after jQuery, before Bootstrap js) -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" 
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+    crossorigin="anonymous"></script>
+
+  <!-- Bootstrap js script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" 
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+    crossorigin="anonymous"></script>
+  
+  <!-- Axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </body>
 
 
@@ -295,359 +179,55 @@
 
 
 
-  <!-- JavaScript -->
-  <script type="text/javascript">
+<!-- JavaScript -->
+<script type="text/javascript">
 
+  const form = document.getElementById('form');
+  const jsonData = {}; //json submit object
+  //case manager object
+  const cmObject = {
+    caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
+    jsonData: jsonData,
+  };
 
+  //how or when to validate the dropdown selections
+  // to make sure there arent duplicates?
 
-  // /* Show credit application 
-  // @param the id of the selected credit type to be shown*/
-  // function showCreditTypes(selectedCreditType) {
-  //   //clear selected array
-  //   selected.length = 0;
-  //   //add credit option to array
-  //   selected.push(selectedCreditType);
+  // PRINT ALL SELECTED DROPDOWNS
 
-  //   console.log("\tArray of selections inside method: " + JSON.stringify(selected));
-  //   //print oprions to user (test)
-  //   $("#showError").html("You selected: " + selected);
+  // COMPARE ALL DROPDOWN VALUES
 
 
-
-  /* Toggle visibility of child appeal divs */
-  function toggleAppealOptions(selectedAppealType) {
-    $(selectedAppealType).toggle();
-  }
-  /* Show parent appeal container, toggled child divs will become visible */
-  function showAppealForms(){
-    $("#applicationTypes, #appealTypes").hide();
-    $(".common, .appealOptions").show();
-  }
-
-
-
-
-
-    //https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
-
-    //determine which appeal types are checked
-    let checkboxes = document.querySelectorAll('input[name="appealCheckbox"]:checked');
-    console.log(checkboxes);
-
-    //add them to the selectedAppealTypes array
-    let selectedAppealTypes = [];
-    checkboxes.forEach((checkbox) => {
-      selectedAppealTypes.push(checkbox.id);
-    });
-
-    //send the array to a method to display them
-    console.log(selectedAppealTypes);
-
-
-
-
-    /* combine with showAppealOptions() once it works*/
-    function validateChecks() {
-        //var numChecked = $(element + " input[type=checkbox]:checked").length;
-        if($('div#appealChecks:checkbox:checked').length = 0)
-          console.log("test1");
-        if ($('#appealChecks').checked == false)
-          console.log("test2");  
-    }
-
-
-
-  
-    //on click, hide form, go back to main menu
-    $("#backButton").click(function() {
-      $(".common, .uncommon, .appealOptions").hide();
-      $("#applicationTypes").show();
-    });
-  
-
-
-
-
-
-    //(function($) {
-    $(document).ready(function() {
-    });
-
-    function replace(header) {
-      console.log(header);
-      $("#formHeader").html("<h4>" + header + "</h4>");
-    }
-
-      /*$("#formHeader").html("<h4>" + "New Header" + "</h4>");*/
-    //})(jQuery);
-
-
-
-
-
-    //simpler solution: instead of saving to an array, a loop that goes thru each element and
-    // shows if checked, hides if unchecked? also adds a required field to the html?
-      
-    //get ids of any checkboxes that are active
-    //https://www.w3schools.com/jsref/prop_checkbox_checked.asp
-    //https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_checkbox_order
-    //https://developer.mozilla.org/en-US/docs/Web/API/Document/forms
-
-    //https://www.w3schools.com/jsref/coll_doc_forms.asp
-    //document.forms.namedItem("appealTypes").innerHTML; ... something else
-    //google how to loop through checkboxes within a div
-    // var appealChecks = document.forms[0];
-    // for (var i = 0; i < appealChecks.length; i++) {
-    //   console.log("index " + i);
-    //   if (appealChecks[i].checked) {
-    //     //store those ids in an array selectedAppealTypes
-    //     //selectedAppealOptions[i] = appealChecks[i].value;
-    //     console.log(appealChecks[i].value);
-    //   }
-    // }
-
-    // //works for a single checkbox
-    // const appealChecks = document.getElementById('appealType1');
-    // for (var i = 0; i < 4; i++) {
-    //   if (appealChecks.checked) {
-    //     console.log("checked");
-    //   }
-    //   else
-    //   console.log("not checked");
-    // }
-
-    //send the object to a function that shows each corresponding div (change ID;s to classes?)
-    //recieving function loops through object with .length attribute
-    //selectedAppealTypes will be used later for posting data
-
-
-
-
-
-
-  function showAppealOptions(){
-    //https://html.form.guide/html-form/html-checkbox-events/
-    //https://www.w3schools.com/howto/howto_js_display_checkbox_text.asp
-
-  }
-
-  
-
-
-
-
-
-
-  function show(headerType, form) {
-    console.log("header variable recieved: " + headerType);
-
-    /* if using this function: replace current headers w/ this <div id="formHeader"></div> */
-
-    if (headerType == "appealHeader") 
-      $("#formHeader").html("<h4>Stormwater Fee Appeal Application</h4>");
-
-    else if (headerType == "creditHeader") 
-      $("#formHeader").html("<h4>Stormwater Credit Application</h4>");
-
-    $(".commonOptions").show();
-    console.log("variable recieved: " + form);
-    $(form).show();
-    $("#initialOptions").hide();    
-  }
-
-
-
-
-
-    
-    (function($) {
-      $(document).ready(function() {
-        $("#credit").click(function() {
-          $("#appealTypes").hide();
-          $("#creditTypes").toggle();
-        });
-
-        $("#appeal").click(function() {
-          $("#creditTypes").hide();
-          $("#appealTypes").toggle();
-        });
-      });
-    })(jQuery);
-
-
-
-
-
-
-
-    (function($) {
-    $(document).ready(function() {
-
-      //on click, show appeal 1 form
-      $("#appealType1").click(function() {
-        $(".commonOptions").show();
-        $(".a1Options").show();
-        //$(".uncommonOptions").show();
-        $("#initialOptions").hide();
-      });
-
-      //on click, show appeal 2 form
-      $("#appealType2").click(function() {
-        $(".commonOptions, .a2Options").show();
-        $("#initialOptions").hide();
-      });
-      //on click, show appeal 3 form
-      $("#appealType3").click(function() {
-        $(".commonOptions, .a3Options").show();
-        $("#initialOptions").hide();
-      });
-      //on click, show appeal 4 form
-      $("#appealType4").click(function() {
-        $(".commonOptions, .a4Options").show();
-        $("#initialOptions").hide();
-      });
-      //on click, show appeal 5 form
-      $("#appealType5").click(function() {
-        $(".commonOptions, .a5Options").show();
-        $("#initialOptions").hide();
-      });
-
-      //on click, show credit 1 form
-      $("#creditType1").click(function() {
-        $(".commonOptions, .c1Options").show();
-        $("#initialOptions").hide();
-      });
-      //on click, show credit 2 form
-      $("#creditType2").click(function() {
-        $(".commonOptions, .c2Options").show();
-        $("#initialOptions").hide();
-      });
-
-
-      //on click, hide form, go back to main menu
-      $("#backButton").click(function() {
-        $(".commonOptions, .uncommonOptions").hide();
-        $("#initialOptions").show();
-      });
-
-      $('.dropdown').on('show.bs.dropdown', function() {
-        $('body').append($('.dropdown').css({
-          position: 'absolute',
-          left: $('.dropdown').offset().left,
-          top: $('.dropdown').offset().top
-        }).detach());
-      });
-
-            /*
-      $('.dropdown').on('show.bs.dropdown', function() {
-        $('body').append($('.dropdown').css({
-          position: 'absolute',
-          left: $('.dropdown').offset().left,
-          top: $('.dropdown').offset().top
-        }).detach());
-      });*/
-    });
-  })(jQuery);
-
-
-
-
-
-
-
-
-
-    var appealHeader = "Stormwater Fee Appeal Application";
-    var creditHeader = "Stormwater Credit Application"
-
-    function show(headerType, form) {
-      console.log("header variable recieved: " + headerType);
-
-      if (headerType == "appealHeader") 
-        $("#formHeader").html("<h4>Stormwater Fee Appeal Application</h4>");
-
-      else if (headerType == "creditHeader") 
-        $("#formHeader").html("<h4>Stormwater Credit Application</h4>");
-
-      $(".commonOptions").show();
-      console.log("variable recieved: " + form);
-      $(form).show();
-      $("#initialOptions").hide();    
-
-      //$("#formHeader").html("<h4>" + header + "</h4>");
-      //$("#formHeader").html("<h4>Appeal Application</h4>");
-      //$("#formHeader").append("<h4>" + header + "</h4>");
-    }
-
-
-
-
-
-
-
-  
-  function showOptions(optionType) {
-    if (optionType == "appeal") {
-      $("#appealTypeSelect, #backButton").show();
-      $("#initialOptions").hide();
+  // TESTING PREVENTING DUPLICATE DROPDOWNS
+  function duplicates() {
+    if ($('#a1TierCurrent').val() == $('#a1TierProposed').val()) {
+      console.log('duplicates true')
+      return true;
     }
     else {
-      $("#creditTypeSelect, #backButton").show();
-      $("#initialOptions").hide();
+      console.log('duplicates false')
+      return false;
     }
   }
 
+// TODO format comments to match jsdoc
+  // @Desc: Handle Form Submit
+  form.addEventListener('submit', (event) => {
+      event.preventDefault(); //preventing page refresh?
+      console.log(event);
 
-
-
-
-
-
-    // Show credit or appeal options
-    function showTypes(type){
-      //$('#initialOptions').hide();
-      if(type == 'credit'){
-        $('#appealOptions').hide();
-        $('#creditOptions').show();
-      }
-      else{
-        $('#creditOptions').hide();
-        $('#appealOptions').show();
-
-      }
+    if (duplicates() == true) {
+      return;
     }
-
-    // Show credit types
-    function showCredit(type) {
-      switch(type) {
-        case 'creditType1':
-          $('#creditType1Options').show();
-          break;
-        case 'credit2':
-          $('#credit2Options').show();
-          break;
-      }
+    else {
+        jsonData.appealType1 = $('#appealType1').val();
+        jsonData.a1TierCurrent = $('#a1TierCurrent').val();
+        jsonData.a1TierProposed = $('#a1TierProposed').val();
+        jsonData.a1Reason = $('#a1Reason').val();
+        jsonData.a1Comments = $('#a1Comments').val();
+      console.log('Post object', JSON.stringify(cmObject));
     }
+  });
 
-    // Show appeal types
-    function showAppeal(type) {
-      switch(type) {
-        case 'Appeal_Type_1':
-          $('#Appeal_Type_1').show();
-          break;
-        case 'Appeal_Type_2':
-          $('#Appeal_Type_2').show();
-          break;
-        case 'Appeal_Type_3':
-          $('#Appeal_Type_3').show();
-          break;
-        case 'Appeal_Type_4':
-          $('#Appeal_Type_4').show();
-          break;
-        case 'Appeal_Type_5':
-          $('#Appeal_Type_5').show();
-          break;
-      }
-    }
-  </script>
+</script>
 </html>

@@ -605,11 +605,11 @@
           <div class="form-select">
             <label for="a1TierCurrent">The property is currently classified as: 
               <span class="requiredField">*</span></label>
-            <select class="form-select a1Select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+            <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
               <option selected value="">Please select</option>
-              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+              <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
+              <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
+              <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
             </select>
           </div>
         </div>
@@ -619,11 +619,11 @@
             <label for="a1TierProposed">The property should be classified as: 
               <span class="requiredField">*</span></label>
               <!-- TODO: onchange: cannot be the same as a1TierCurrent -->
-            <select class="form-select a1Select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+            <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
               <option selected value="">Please select</option>
-              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
-              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
-              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+              <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
+              <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
+              <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
             </select>
           </div>
         </div>
@@ -874,6 +874,18 @@
   let attachment = []; //copied from pia form
     
 
+  // TESTING PREVENTING DUPLICATE DROPDOWNS
+  function duplicates() {
+    if ($('#a1TierCurrent').val() == $('#a1TierProposed').val()) {
+      console.log('duplicates true')
+      return true;
+    }
+    else {
+      console.log('duplicates false')
+      return false;
+    }
+  }
+
   // combine utility functions later
   // const representative = document.getElementsByName("applicantRepresentative");
   // representative.addEventListener('change', (event) => {
@@ -1110,66 +1122,71 @@
   // TODO format comments to match jsdoc
   // @Desc: Handle Form Submit
   form.addEventListener('submit', (event) => {
-    event.preventDefault(); //preventing page refresh?
-    console.log(event);
+      event.preventDefault(); //preventing page refresh?
+      console.log(event);
+    if (duplicates() == true) {
+      return;
+    }
+    else {
 
-    // TODO: reorder these so constituent is first?
-    jsonData.ownerFirstName = $('#ownerFirstName').val();
-    jsonData.ownerLastName = $('#ownerLastName').val();
-    jsonData.ownerOrganization = $('#ownerOrganization').val();
-    jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
-    jsonData.propertyAddress1 = $('#propertyAddress1').val();
-    jsonData.propertyAddress2 = $('#propertyAddress2').val();
-    jsonData.propertyCity = $('#propertyCity').val();
-    jsonData.propertyState = $('#propertyState').val();
-    jsonData.propertyZip = $('#propertyZip').val();
-    jsonData.applicantRepresentative = $('input[name="applicantRepresentative"]:checked').val(); //yes or no
-    if (jsonData.applicantRepresentative == 'no') {
-        jsonData.constituentFirstName = jsonData.ownerFirstName;
-        jsonData.constituentLastName = jsonData.ownerLastName;
-        jsonData.constituentOrganization = jsonData.ownerOrganization;
-    }
-    else if (jsonData.applicantRepresentative == 'yes') {
-        jsonData.constituentFirstName = $('#applicantFirstName').val();
-        jsonData.constituentLastName = $('#applicantLastName').val();
-        jsonData.constituentOrganization = $('#applicantOrganization').val();
-    }
-    jsonData.constituentPhone = $('#constituentPhone').val();
-    jsonData.constituentEmail = $('#constituentEmail').val();
-    jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
-    if (jsonData.mailingDifferent == 'no') {
-        jsonData.constituentAddress1 = jsonData.propertyAddress1;
-        jsonData.constituentAddress2 = jsonData.propertyAddress2;
-        jsonData.constituentCity = jsonData.propertyCity;
-        jsonData.constituentState = jsonData.propertyState;
-        jsonData.constituentZip = jsonData.propertyZip;
-      }  
-    else if (jsonData.mailingDifferent == 'yes') {
-        jsonData.constituentAddress1 = $('#constituentAddress1').val(); //mailingAddress1
-        jsonData.constituentAddress2 = $('#constituentAddress2').val(); //mailingAddress2
-        jsonData.constituentCity = $('#constituentCity').val();
-        jsonData.constituentState = $('#constituentState').val();
-        jsonData.constituentgZip = $('#constituentZip').val();
+      // TODO: reorder these so constituent is first?
+      jsonData.ownerFirstName = $('#ownerFirstName').val();
+      jsonData.ownerLastName = $('#ownerLastName').val();
+      jsonData.ownerOrganization = $('#ownerOrganization').val();
+      jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
+      jsonData.propertyAddress1 = $('#propertyAddress1').val();
+      jsonData.propertyAddress2 = $('#propertyAddress2').val();
+      jsonData.propertyCity = $('#propertyCity').val();
+      jsonData.propertyState = $('#propertyState').val();
+      jsonData.propertyZip = $('#propertyZip').val();
+      jsonData.applicantRepresentative = $('input[name="applicantRepresentative"]:checked').val(); //yes or no
+      if (jsonData.applicantRepresentative == 'no') {
+          jsonData.constituentFirstName = jsonData.ownerFirstName;
+          jsonData.constituentLastName = jsonData.ownerLastName;
+          jsonData.constituentOrganization = jsonData.ownerOrganization;
       }
-    jsonData.applicationType = selected[0];
+      else if (jsonData.applicantRepresentative == 'yes') {
+          jsonData.constituentFirstName = $('#applicantFirstName').val();
+          jsonData.constituentLastName = $('#applicantLastName').val();
+          jsonData.constituentOrganization = $('#applicantOrganization').val();
+      }
+      jsonData.constituentPhone = $('#constituentPhone').val();
+      jsonData.constituentEmail = $('#constituentEmail').val();
+      jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
+      if (jsonData.mailingDifferent == 'no') {
+          jsonData.constituentAddress1 = jsonData.propertyAddress1;
+          jsonData.constituentAddress2 = jsonData.propertyAddress2;
+          jsonData.constituentCity = jsonData.propertyCity;
+          jsonData.constituentState = jsonData.propertyState;
+          jsonData.constituentZip = jsonData.propertyZip;
+        }  
+      else if (jsonData.mailingDifferent == 'yes') {
+          jsonData.constituentAddress1 = $('#constituentAddress1').val(); //mailingAddress1
+          jsonData.constituentAddress2 = $('#constituentAddress2').val(); //mailingAddress2
+          jsonData.constituentCity = $('#constituentCity').val();
+          jsonData.constituentState = $('#constituentState').val();
+          jsonData.constituentgZip = $('#constituentZip').val();
+        }
+      jsonData.applicationType = selected[0];
 
-    //populate uncommon selections from array
-    for (var i = 1; i < selected.length; i++)
-      populateUncommonJson(selected[i]);
+      //populate uncommon selections from array
+      for (var i = 1; i < selected.length; i++)
+        populateUncommonJson(selected[i]);
 
-    jsonData.supportingDocuments = attachment; // refer to file mgmt function
-    if (jsonData.applicationType == 'appeal')
-      jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
-    else if (jsonData.applicationType == 'credit')
-      jsonData.statementCredit = $('input[name="statementCredit"]:checked').val();
-    
-    //jsonData.signature = ''; 
-    jsonData.signaturePrinted = $('#signaturePrinted').val();
-    jsonData.signatureTitle = $('#signatureTitle').val();
-    jsonData.signatureOrganization = $('#signatureOrganization').val();
+      jsonData.supportingDocuments = attachment; // refer to file mgmt function
+      if (jsonData.applicationType == 'appeal')
+        jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
+      else if (jsonData.applicationType == 'credit')
+        jsonData.statementCredit = $('input[name="statementCredit"]:checked').val();
+      
+      //jsonData.signature = ''; 
+      jsonData.signaturePrinted = $('#signaturePrinted').val();
+      jsonData.signatureTitle = $('#signatureTitle').val();
+      jsonData.signatureOrganization = $('#signatureOrganization').val();
 
-    console.log('Post object', JSON.stringify(cmObject));
-    postToIssueFlow();
+      console.log('Post object', JSON.stringify(cmObject));
+      //postToIssueFlow();
+    }
   });
 
   
