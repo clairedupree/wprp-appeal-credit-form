@@ -317,7 +317,7 @@ form.addEventListener('submit', (event) => {
     jsonData.signatureOrganization = $('#signatureOrganization').val();
 
     console.log('Post object', JSON.stringify(cmObject));
-    //postToIssueFlow();
+    postToIssueFlow();
 });
 
 
@@ -332,6 +332,13 @@ function populateUncommonJson(element) {
       jsonData.a1TierProposed = $('#a1TierProposed').val();
       jsonData.a1Reason = $('#a1Reason').val();
       jsonData.a1Comments = $('#a1Comments').val();
+      break;
+    
+    case 'appealType2':
+      jsonData.appealType2 = $('#appealType2').val();
+      jsonData.a2TypeCurrent = $('#a2TypeCurrent').val();
+      jsonData.a2TypeProposed = $('#a2TypeProposed').val();
+      jsonData.a2Comments = $('#a2Comments').val();
       break;
 
     case 'creditType1':
