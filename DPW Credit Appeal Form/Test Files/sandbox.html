@@ -20,7 +20,7 @@ Claire Dupree
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-  <title>Appeal / Credit Application</title>
+  <title>SANDBOX</title>
 
   <!-- Embedded styles -->
   <style>
@@ -90,11 +90,11 @@ Claire Dupree
             <div class="form-select">
               <label for="a1TierCurrent">The property is currently classified as: 
                 <span class="requiredField">*</span></label>
-              <select class="form-select" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
+              <select class="form-select" onchange="validateDuplicates(id, 'a1TierProposed')" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" required>
                 <option selected value="">Please select</option>
-                <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
-                <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
-                <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+                <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+                <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+                <option value="WPRF03">WPRF03: Tier 3 Residential</option>
               </select>
             </div>
           </div>
@@ -104,11 +104,75 @@ Claire Dupree
               <label for="a1TierProposed">The property should be classified as: 
                 <span class="requiredField">*</span></label>
                 <!-- TODO: onchange: cannot be the same as a1TierCurrent -->
-              <select class="form-select" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
+              <select class="form-select" onchange="validateDuplicates(id, 'a1TierCurrent')" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" required>
                 <option selected value="">Please select</option>
-                <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
-                <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
-                <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+                <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+                <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+                <option value="WPRF03">WPRF03: Tier 3 Residential</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12">
+            On the property tax bill, <br>
+            <div class="form-select">
+              <label for="a2TypeCurrent">The property is currently classified as: 
+                <span class="requiredField">*</span></label>
+              <select class="form-select" onchange="validateDuplicates(id, 'a2TypeProposed')" name="a2TypeCurrent" id="a2TypeCurrent" aria-label="a1TierCurrent" required>
+                <option selected value="">Please select</option>
+                <option value="WPRF01, WPRF02, WPRF03">WPRF01, WPRF02, WPRF03: Residental in a Residential Zone</option>
+                <option value="WPRF04">WPRF04: Farm</option>
+                <option value="WPRF05">WPRF05: Mobile Home Park</option>
+                <!-- <option value="WPRF06"></option> -->
+                <option value="WPRF07">WPRF07: Non-Residential Religious Organization</option>
+                <option value="WPRF08">WPRF08: Private Academic School</option>
+                <option value="WPRF09">WPRF09: Private Road Not HOA-Owned</option>
+                <option value="WPRF10">WPRF10: Private Airport</option>
+                <option value="WPRF11">WPRF11: Standard Marina (&#60;7.5 impervious acres)</option>
+                <option value="WPRF12">WPRF12: Large Marina (>7.5 impervious acres)</option>
+                <!-- <option value="WPRF13"></option> -->
+                <option value="WPRF14">WPRF14: Non-Residential Charitable, 501(c)(3) or (d)</option>
+                <option value="WPRF15">WPRF15: NPDES Permit Holder w/ Stormwater Management Controls</option>
+                <option value="WPRF16">WPRF16: Homeowners Association</option>
+                <option value="WPRF17">WPRF17: Multifamily Dwelling</option>
+                <!-- <option value="WPRF18"></option> -->
+                <option value="WPRF19">WPRF19: Residential Condo</option>
+                <option value="WPRF20">WPRF20: Residential Property in a Non:Residential Zone</option>
+                <option value="WPRF21">WPRF21: Non-Residential, General</option>
+              </select>
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <div class="form-select">
+              <label for="a2TypeProposed">The property should be classified as: 
+                <span class="requiredField">*</span></label>
+                <!-- TODO: onchange: cannot be the same as a2TierCurrent -->
+              <select class="form-select" onchange="validateDuplicates(id, 'a2TypeCurrent')" name="a2TypeProposed" id="a2TypeProposed" aria-label="a2TypeProposed" required>
+                <option selected value="">Please select</option>
+                <option value="WPRF01, WPRF02, WPRF03">WPRF01, WPRF02, WPRF03: Residental in a Residential Zone</option>
+                <option value="WPRF04">WPRF04: Farm</option>
+                <option value="WPRF05">WPRF05: Mobile Home Park</option>
+                <!-- <option value="WPRF06"></option> -->
+                <option value="WPRF07">WPRF07: Non-Residential Religious Organization</option>
+                <option value="WPRF08">WPRF08: Private Academic School</option>
+                <option value="WPRF09">WPRF09: Private Road Not HOA-Owned</option>
+                <option value="WPRF10">WPRF10: Private Airport</option>
+                <option value="WPRF11">WPRF11: Standard Marina (&#60;7.5 impervious acres)</option>
+                <option value="WPRF12">WPRF12: Large Marina (>7.5 impervious acres)</option>
+                <!-- <option value="WPRF13"></option> -->
+                <option value="WPRF14">WPRF14: Non-Residential Charitable, 501(c)(3) or (d)</option>
+                <option value="WPRF15">WPRF15: NPDES Permit Holder w/ Stormwater Management Controls</option>
+                <option value="WPRF16">WPRF16: Homeowners Association</option>
+                <option value="WPRF17">WPRF17: Multifamily Dwelling</option>
+                <!-- <option value="WPRF18"></option> -->
+                <option value="WPRF19">WPRF19: Residential Condo</option>
+                <option value="WPRF20">WPRF20: Residential Property in a Non:Residential Zone</option>
+                <option value="WPRF21">WPRF21: Non-Residential, General</option>
               </select>
             </div>
           </div>
@@ -171,63 +235,6 @@ Claire Dupree
   <!-- Axios -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+  <script src="sandbox-script.js"></script>
 </body>
-
-
-
-
-
-
-
-<!-- JavaScript -->
-<script type="text/javascript">
-
-  const form = document.getElementById('form');
-  const jsonData = {}; //json submit object
-  //case manager object
-  const cmObject = {
-    caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
-    jsonData: jsonData,
-  };
-
-  //how or when to validate the dropdown selections
-  // to make sure there arent duplicates?
-
-  // PRINT ALL SELECTED DROPDOWNS
-
-  // COMPARE ALL DROPDOWN VALUES
-
-
-  // TESTING PREVENTING DUPLICATE DROPDOWNS
-  function duplicates() {
-    if ($('#a1TierCurrent').val() == $('#a1TierProposed').val()) {
-      console.log('duplicates true')
-      return true;
-    }
-    else {
-      console.log('duplicates false')
-      return false;
-    }
-  }
-
-// TODO format comments to match jsdoc
-  // @Desc: Handle Form Submit
-  form.addEventListener('submit', (event) => {
-      event.preventDefault(); //preventing page refresh?
-      console.log(event);
-
-    if (duplicates() == true) {
-      return;
-    }
-    else {
-        jsonData.appealType1 = $('#appealType1').val();
-        jsonData.a1TierCurrent = $('#a1TierCurrent').val();
-        jsonData.a1TierProposed = $('#a1TierProposed').val();
-        jsonData.a1Reason = $('#a1Reason').val();
-        jsonData.a1Comments = $('#a1Comments').val();
-      console.log('Post object', JSON.stringify(cmObject));
-    }
-  });
-
-</script>
 </html>
