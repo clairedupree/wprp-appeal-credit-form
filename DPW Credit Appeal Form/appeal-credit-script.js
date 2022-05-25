@@ -23,7 +23,7 @@ function validateDuplicates(id, compareId) {
 }
 
 // combine utility functions later
-// const representative = document.getElementsByName("applicantRepresentative");
+// const representative = document.getElementsByName("constituentIsOwner");
 // representative.addEventListener('change', (event) => {
 // });
 function mailingAddressToggle() {
@@ -38,16 +38,16 @@ function mailingAddressToggle() {
   }
 }
 
-  
+  //change this so representative is "constituent" or "applicant"
 // combine utility functions later
 function representativeToggle() {
-  if (document.getElementById("representativeYes").checked) {
+  if (document.getElementById("constituentDifferentYes").checked) {
     console.log('yes');
-    $("#representative").html($("#representativeForm").html());
+    $("#contactInfo").html($("#contactInfoForm").html());
   }
   else {
     console.log('no');
-    $("#representative").html("");
+    $("#contactInfo").html("");
   }
 }
 
@@ -262,42 +262,46 @@ form.addEventListener('submit', (event) => {
     console.log(event);
 
     // TODO: reorder these so constituent is first?
+    jsonData.token = "override"; //eventually replaced with grecaptcha
     jsonData.ownerFirstName = $('#ownerFirstName').val();
     jsonData.ownerLastName = $('#ownerLastName').val();
-    jsonData.ownerOrganization = $('#ownerOrganization').val();
+    jsonData.ownerCompanyName = $('#ownerCompanyName').val();
     jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
-    jsonData.propertyAddress1 = $('#propertyAddress1').val();
-    jsonData.propertyAddress2 = $('#propertyAddress2').val();
-    jsonData.propertyCity = $('#propertyCity').val();
-    jsonData.propertyState = $('#propertyState').val();
-    jsonData.propertyZip = $('#propertyZip').val();
-    jsonData.applicantRepresentative = $('input[name="applicantRepresentative"]:checked').val(); //yes or no
-    if (jsonData.applicantRepresentative == 'no') {
+    jsonData.locationHouseNumber = $('#locationHouseNumber').val();
+    jsonData.locationStreetName = $('#locationStreetName').val();
+    jsonData.locationStreetType = $('#locationStreetType').val();
+    jsonData.locationCity = $('#locationCity').val();
+    jsonData.locationState = $('#locationState').val();
+    jsonData.locationZip = $('#locationZip').val();
+    jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
+    if (jsonData.constituentDifferent == 'no') {
         jsonData.constituentFirstName = jsonData.ownerFirstName;
         jsonData.constituentLastName = jsonData.ownerLastName;
-        jsonData.constituentOrganization = jsonData.ownerOrganization;
+        jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
     }
-    else if (jsonData.applicantRepresentative == 'yes') {
-        jsonData.constituentFirstName = $('#applicantFirstName').val();
-        jsonData.constituentLastName = $('#applicantLastName').val();
-        jsonData.constituentOrganization = $('#applicantOrganization').val();
+    else if (jsonData.constituentDifferent == 'yes') {
+        jsonData.constituentFirstName = $('#constituentFirstName').val();
+        jsonData.constituentLastName = $('#constituentLastName').val();
+        jsonData.companyName = $('#constituentCompanyName').val();
     }
     jsonData.constituentPhone = $('#constituentPhone').val();
-    jsonData.constituentEmail = $('#constituentEmail').val();
+    jsonData.email = $('#email').val();
     jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
     if (jsonData.mailingDifferent == 'no') {
-        jsonData.constituentAddress1 = jsonData.propertyAddress1;
-        jsonData.constituentAddress2 = jsonData.propertyAddress2;
-        jsonData.constituentCity = jsonData.propertyCity;
-        jsonData.constituentState = jsonData.propertyState;
-        jsonData.constituentZip = jsonData.propertyZip;
+        jsonData.constituentHouseNumber = jsonData.locationHouseNumber;
+        jsonData.constituentStreetName = jsonData.locationStreetName;
+        jsonData.constituentStreetType = jsonData.locationStreetType;
+        jsonData.constituentCity = jsonData.locationCity;
+        jsonData.constituentState = jsonData.locationState;
+        jsonData.constituentZip = jsonData.locationZip;
       }  
     else if (jsonData.mailingDifferent == 'yes') {
-        jsonData.constituentAddress1 = $('#constituentAddress1').val(); //mailingAddress1
-        jsonData.constituentAddress2 = $('#constituentAddress2').val(); //mailingAddress2
+        jsonData.constituentHouseNumber = $('#constituentHouseNumber').val();
+        jsonData.constituentStreetName = $('#constituentStreetName').val();
+        jsonData.constituentStreetType = $('#constituentStreetType').val();
         jsonData.constituentCity = $('#constituentCity').val();
         jsonData.constituentState = $('#constituentState').val();
-        jsonData.constituentgZip = $('#constituentZip').val();
+        jsonData.constituentZip = $('#constituentZip').val();
       }
     jsonData.applicationType = selected[0];
 
@@ -314,7 +318,7 @@ form.addEventListener('submit', (event) => {
     //jsonData.signature = ''; 
     jsonData.signaturePrinted = $('#signaturePrinted').val();
     jsonData.signatureTitle = $('#signatureTitle').val();
-    jsonData.signatureOrganization = $('#signatureOrganization').val();
+    jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
     console.log('Post object', JSON.stringify(cmObject));
     postToIssueFlow();
