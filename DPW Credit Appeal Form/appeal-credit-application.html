@@ -116,39 +116,41 @@
     <!-- Select Appeal Type(s) -->
     <div id="appeal" style="display: none">
       <div class="row">
-        <div id="appealChecks" class="col-12 form-group">
-          <h5>Select the reason(s) for the appeal:</h5>
+        <div class="col-12">
+          <div class="form-group">
+            <h5>Select the reason(s) for the appeal:</h5>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="appealType1" name="appealCheckbox" 
-              value="Property placed in wrong residential tier">
-            <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
-          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType1" name="appealType" 
+                value="Property placed in wrong residential tier">
+              <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
+            </div>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="appealType2" name="appealCheckbox" 
-              value="Incorrect classification of property">
-            <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
-          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType2" name="appealType" 
+                value="Incorrect classification of property">
+              <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
+            </div>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="appealType3" name="appealCheckbox" value="Homeowner's Association property 
-              where the fee cap is applicable but was not applied">
-            <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
-          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType3" name="appealType" value="Homeowner's Association property 
+                where the fee cap is applicable but was not applied">
+              <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
+            </div>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="appealType4" name="appealCheckbox" 
-              value="Mathematical error or incorrect impervious surface calculation">
-            <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface calculation</label>
-          </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType4" name="appealType" 
+                value="Mathematical error or incorrect impervious surface calculation">
+              <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface calculation</label>
+            </div>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="appealType5" name="appealCheckbox" 
-              value="Exempt or incorrect property owner">
-            <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
-          </div>
-        </div> 
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType5" name="appealType" 
+                value="Exempt or incorrect property owner">
+              <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
+            </div>
+          </div> 
+        </div>
       </div>
 
       <!-- Continue button -->
@@ -166,9 +168,9 @@
       <div class="row">
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
-          <button class="btn btn-light btn-block" value="Property not under an NPDES permit" 
+          <button class="btn btn-light btn-block" value="Property not under an NPDES permit" name="creditType"
             id="creditType1" onclick="showCreditApplication('creditType1')">Property not under an NPDES	permit</button>
-          <button class="btn btn-light btn-block" value="Property with an NPDES permit that includes stormwater management controls" 
+          <button class="btn btn-light btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
             id="creditType2" onclick="showCreditApplication('creditType2')">Property with an NPDES permit that includes	stormwater management controls</button>
         </div>
       </div>
@@ -177,7 +179,7 @@
   </div> <!-- end type select -->
 
   <!-- FORM CONTAINER -->
-	<div id="formContainer"> <!-- style="display: none-->
+	<div id="formContainer" style="display: none"> <!-- style="display: none"-->
 
     <!-- Header -->
     <div id="formHeader" class="uncommon">
@@ -189,7 +191,7 @@
 
       <!-- COMMON BEGINNING -->
       <div id="commonBeginning">
-
+        <!-- <hr> -->
         <!-- Owner Information -->
         <div class="row">
           <div class="col-12">
@@ -376,7 +378,7 @@
 
       <!-- COMMON ENDING -->
       <div id="commonEnding">
-
+        <hr>
         <!-- jsonData.supportingDoc = ''; --> 
         <div class="row">
           <div class="col-12">
@@ -477,7 +479,7 @@
 
 <!-- UNCOMMON DIVS -->
 <!-- To be appended based on selection -->
-<div id="uncommonForms"> <!-- style="display: none" -->
+<div id="uncommonForms" style="display: none"> <!-- style="display: none" -->
 
   <div id="constituentInfoForm">
     <div class="row">
@@ -806,7 +808,8 @@
         <div class="form-group">
           <label for="a3HOAHouses">The number of property tax accounts for homes and unimproved lots within the boundaries of the Homeowners Association: <span class="requiredField">*</span></label>
           <input type="number" name="a3HOAHouses" id="a3HOAHouses" class="form-control" min="0" step="1" required>
-          <small id="a3HOAHousesHelpBlock" class="form-text text-muted">This number does not include property tax accounts owned by the Homeowners Association.
+          <small id="a3HOAHousesHelpBlock" class="form-text text-muted">
+            This number does not include property tax accounts owned by the Homeowners Association.
             Unimproved lots are considered to be lots with their own separate tax account numer on which a residential 
             dwelling is allowed to be built, regardless of whether it has been built yet or not.</small>  
         </div>
@@ -818,9 +821,9 @@
         <div class="form-group">
           <label for="a1Comments">Comments: </label>
           <textarea class="form-control" id="a3Comments" rows="3"></textarea>
-          <small id="a3EndingHelpBlock" class="form-text text-muted">Documentation showing 
-            the boundaries of the area served by the Homeowners Association should be 
-            uploaded in the <em>Supporting Documentation</em> section.</small> 
+          <small id="a3EndingHelpBlock" class="form-text text-muted">
+            Documentation showing the boundaries of the area served by the Homeowners Association 
+            should be uploaded in the <em>Supporting Documentation</em> section.</small> 
         </div>
       </div>
     </div>
@@ -837,14 +840,48 @@
 
     <div class="row">
       <div class="col-12">
+        <div id="a4Checks" class="form-group">
+          Check all that apply: <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a4Category1" name="a4Category" 
+              value="Mathematical error in the calculation of the fee" onchange="validateCheckboxes('#a4Checks', id)">
+            <label class="form-check-label" for="a4Category1">Mathematical error in the calculation of the fee</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a4Category2" name="a4Category" 
+              value="Incorrect calculation of the impervious surface of the property" onchange="validateCheckboxes('#a4Checks', id)">
+            <label class="form-check-label" for="a4Category2">Incorrect calculation of the impervious surface of the property</label>
+          </div>
+
+          <small id="a4CategoryHelpBlock" class="form-text text-muted">
+            <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-rate-information/">
+            Click here for information on how the stormwater fee is calculated.</a><br>
+            Use the <a href="www.aacounty.org/myannearundel" target="_blank">My Anne Arundel application</a> 
+            to look up information on the stormwater fee, impervious amounts, and property zoning.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
         <div class="form-group">
-          <label for="a4Comments">Comments: </label>
+          <label for="a4Comments">Explanation: </label>
           <textarea class="form-control" id="a4Comments" rows="3"></textarea>
+          <small id="a4CommentsHelpBlock" class="form-text text-muted">
+            If appealing on the basis that the impervious surface amount is incorrect, 
+            documentation showing the impervious surface on the property should be uploaded 
+            in the Supporting Documentation section (e.g., plans, reports, photos).</small>  
         </div>
       </div>
     </div>
   </div> <!-- End appeal 4 application -->
 
+  <!-- TODO 5/27: (WHERE U LEFT OFF) complete appeal 5 application, using similar
+  TODO: validation methods as appeal 4, work on incoorporating the
+  TODO: continueButton into the same methods, adding custom validity
+  TODO: on change, and then somehow forcing validation check onclick -->
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
   <div id="appeal5Form">
     <hr>
@@ -926,20 +963,20 @@
             <!-- <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b> -->
             I/we, the undersigned do hereby declare under the penalties of perjury that the information 
             provided on and with this application is, to the best of my/our knowledge and belief, true, correct, 
-            and complete.  I/we also understand that the failure to provide all information and/or documentation 
+            and complete. I/we also understand that the failure to provide all information and/or documentation 
             as required is a basis for a denial of the appeal. I/we understand that by filing this appeal, we are 
             authorizing the Department of Public Works to confirm the information provided with this application, 
             including, but not limited to, inspecting and entering the property to verify the amount of impervious 
             surface area. I/we understand that if the Department of Public Works grants the appeal and it results 
-            in a change in the stormwater remediation fee, I/we will be issued a new bill.  I/we understand that if 
+            in a change in the stormwater remediation fee, I/we will be issued a new bill. I/we understand that if 
             I/we are aggrieved by the decision of the Department of Public Works, I/we shall pay the stormwater 
             remediation fee, may request a refund and if a refund is denied, may appeal to the Maryland Tax Court 
-            in accordance with Article 24, § 9-710 and 9-712 of the Annotated Code of Maryland
+            in accordance with Article 24, &sect; 9-710 and 9-712 of the Annotated Code of Maryland
           </div>
   
           <div class="col-12">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="statementAppeal" name="statementAppeal" value="acknowledged" required>
+              <input class="form-check-input" type="checkbox" id="statementAppeal" name="statementAppeal" value="acknowledged" required>
               <label class="form-check-label" for="statementAppeal">I understand <span class="requiredField">*</span></label>
             </div>
           </div>
@@ -971,7 +1008,7 @@
 
         <div class="col-12">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="statementCredit" name="statementCredit" value="authorized" required>
+            <input class="form-check-input" type="checkbox" id="statementCredit" name="statementCredit" value="authorized" required>
             <label class="form-check-label" for="statementCredit">I understand <span class="requiredField">*</span></label>
           </div>
         </div>

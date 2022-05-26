@@ -129,8 +129,12 @@ function showCreditApplication(creditType) {
 // SHOW APPEAL APPLICATION
 function showAppealApplication() {
   console.log("Validate checkboxes");
-  if (validateCheckboxes("#appeal") == false)
+  // TODO: rewrite this so the validation is added on change
+  // todo: then force-validate on button click
+  // TODO: make the validate function create an error, let that error stop from proceeding
+  if (validateCheckboxes("#appeal", 'continueButton') == false)
     $("#showError").html("Please select at least one appeal type.");
+    // $('#continueButton')[0].reportValidity();
 
   else {
     selected.length = 1; //truncate array
@@ -176,16 +180,18 @@ function showAppealApplication() {
 
 
 // Validate checked checkboxes is > 0
-//@param The element id to be checked (can be used for other form checkboxes)
-function validateCheckboxes(element) {
+//@param The element to be checked .name or #name (can be used for other form checkboxes)
+function validateCheckboxes(element, id) {
   // Reference the checked checkboxes of the element
   var numChecked = $(element + " input[type=checkbox]:checked").length;
   console.log("\t" + numChecked + " checkboxes are checked");
 
   if (numChecked > 0) {
+    document.getElementById(id).setCustomValidity("");
     return true;
   } 
   else {
+    document.getElementById(id).setCustomValidity("Please select at least one.");
     return false;
   }
 }
@@ -194,7 +200,7 @@ function validateCheckboxes(element) {
 // Populate array selection data in the selected array
 function populateSelectedAppealTypes() {
   // Create a local array of appeal ids
-  let appealCheckbox = document.querySelectorAll('input[name="appealCheckbox"]'); 
+  let appealCheckbox = document.querySelectorAll('input[name="appealType"]'); 
   let appealOptions = [];
   appealCheckbox.forEach((checkbox) => {
     appealOptions.push(checkbox.id); 
@@ -316,6 +322,8 @@ form.addEventListener('submit', (event) => {
         //populate uncommon selections from array
         for (var i = 1; i < selected.length; i++)
           populateUncommonJson(selected[i]);
+          // TODO: send i as argument, use for documenting the appeal applications
+          // i.e. ("appealType" + i) if needed for cleaner json
 
         jsonData.supportingDocuments = attachment; // refer to file mgmt function
         if (jsonData.applicationType == 'appeal')
@@ -353,6 +361,28 @@ function populateUncommonJson(element) {
       jsonData.a2TypeCurrent = $('#a2TypeCurrent').val();
       jsonData.a2TypeProposed = $('#a2TypeProposed').val();
       jsonData.a2Comments = $('#a2Comments').val();
+      break;
+
+    case 'appealType3':
+      jsonData.appealType3 = $('#appealType3').val();
+      jsonData.a3HOAHouses = $('#a3HOAHouses').val();
+      jsonData.a3HOAFee = $('#a3HOAFee').val();
+      jsonData.a3Comments = $('#a3Comments').val();
+      break;
+
+    case 'appealType4':
+      jsonData.appealType4 = $('#appealType4').val();
+      // TODO: change to append (make a4Category a string instead of array), if needed for CSV export formatting
+      jsonData.a4Category = [];
+      document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
+        jsonData.a4Category.push(checkbox.value);
+      });
+      jsonData.a4Comments = $('#a4Comments').val();
+      break;
+      
+    case 'appealType5':
+      jsonData.appealType5 = $('#appealType5').val();
+      jsonData.a5Comments = $('#a5Comments').val();
       break;
 
     case 'creditType1':
