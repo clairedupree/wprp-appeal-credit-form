@@ -14,7 +14,8 @@ let attachment = []; //copied from pia form
 // is it more readable as an onchange function?
 function toggleDivs(id) {
   switch(id) {
-    case 'constituentDifferentYes', 'constituentDifferentNo':
+    case 'constituentDifferentYes':
+    case 'constituentDifferentNo':
         if (document.getElementById("constituentDifferentYes").checked) { //validate on each call
         $("#constituentInfo").html($("#constituentInfoForm").html());
       }
@@ -23,7 +24,8 @@ function toggleDivs(id) {
       }
       break;
 
-    case 'mailingDifferentYes', 'mailingDifferentNo':
+    case 'mailingDifferentYes': 
+    case 'mailingDifferentNo':
       if (document.getElementById("mailingDifferentYes").checked) { //validate on each call
         $("#mailingAddress").html($("#mailingAddressForm").html());
       }
