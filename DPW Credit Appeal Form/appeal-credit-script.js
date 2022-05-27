@@ -9,6 +9,75 @@ const cmObject = {
 let fileUploads = []; //copied from pia form
 let attachment = []; //copied from pia form
   
+//TODO: should this be a queryselectorall? make a class called uncommonToggle
+// is it more readable as an onchange function?
+function toggleDivs(id) {
+  switch(id) {
+    case 'a5Category1':
+      if (document.getElementById(id).checked) {
+        $("#a5Category1Toggle").html($("#a5Category1Form").html());
+        $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
+      }
+      else {
+        $("#a5Category1Toggle").html("");
+        $("#a5Category1Span").html("");
+      }
+      break;
+
+    case 'a5Category2':
+      if (document.getElementById(id).checked) {
+        $("#a5Category2Toggle").html($("#a5Category2Form").html());
+      }
+      else {
+        $("#a5Category2Toggle").html("");
+      }
+      break;
+
+    // validate every time
+    case 'mailingDifferentYes':
+    case 'mailingDifferentNo':
+      if (document.getElementById("mailingDifferentYes").checked) {
+        $("#mailingAddress").html($("#mailingAddressForm").html());
+      }
+      else {
+        $("#mailingAddress").html("");
+      }
+      break;
+
+    // validate every time
+    case 'constituentDifferentYes':
+    case 'constituentDifferentNo':
+        if (document.getElementById("constituentDifferentYes").checked) {
+        $("#constituentInfo").html($("#constituentInfoForm").html());
+      }
+      else {
+        $("#constituentInfo").html("");
+      }
+      break;
+  }
+}
+
+// function a5Category1Toggle() {
+//   if (document.getElementById("a5Category1").checked) {
+//     console.log("toggle category1");
+//     $("#a5Category1Toggle").html($("#a5Category1Form").html());
+//     $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
+//   }
+//   else {
+//     $("#a5Category1Toggle").html("");
+//     $("#a5Category1Span").html("");
+//   }
+// }
+
+// function a5Category2Toggle() {
+//   if (document.getElementById("a5Category2").checked) {
+//     console.log("toggle category2");
+//     $("#a5Category2Toggle").html($("#a5Category2Form").html());
+//   }
+//   else {
+//     $("#a5Category2Toggle").html("");
+//   }
+// }
 
 function validateDuplicates(id, compareId) {
   console.log($("#" + id).val(), $("#" + compareId).val());
@@ -22,34 +91,34 @@ function validateDuplicates(id, compareId) {
   }
 }
 
-// combine utility functions later
+// TODO: combine utility functions into a single function uncommonToggle(){}
 // const representative = document.getElementsByName("constituentIsOwner");
 // representative.addEventListener('change', (event) => {
 // });
-function mailingAddressToggle() {
-  if (document.getElementById("mailingDifferentYes").checked) {
-    console.log('yes');
-    // TODO: this doesnt reset when form is reset
-    $("#mailingAddress").html($("#mailingAddressForm").html());
-  }
-  else {
-    console.log('no');
-    $("#mailingAddress").html("");
-  }
-}
+// function mailingAddressToggle() {
+//   if (document.getElementById("mailingDifferentYes").checked) {
+//     console.log('yes');
+//     // TODO: this doesnt reset when form is reset
+//     // TODO: add .uncommon class to the div
+//     $("#mailingAddress").html($("#mailingAddressForm").html());
+//   }
+//   else {
+//     console.log('no');
+//     $("#mailingAddress").html("");
+//   }
+// }
 
-  //change this so representative is "constituent" or "applicant"
 // combine utility functions later
-function constituentInfoToggle() {
-  if (document.getElementById("constituentDifferentYes").checked) {
-    console.log('yes');
-    $("#constituentInfo").html($("#constituentInfoForm").html());
-  }
-  else {
-    console.log('no');
-    $("#constituentInfo").html("");
-  }
-}
+// function constituentInfoToggle() {
+//   if (document.getElementById("constituentDifferentYes").checked) {
+//     console.log('yes');
+//     $("#constituentInfo").html($("#constituentInfoForm").html());
+//   }
+//   else {
+//     console.log('no');
+//     $("#constituentInfo").html("");
+//   }
+// }
 
 // BACK BUTTON 
 $("#backButton").click(function() {
@@ -77,11 +146,13 @@ function showApplicationTypes(applicationType) {
   selected.length = 0;
   $('input[type=checkbox]').prop('checked', false);
   document.getElementById('wprfApplication').reset();
-  //$(".uncommon").html("");
+  // reset applicant info
+  $(".constituentInfo").html(""); 
 
   //add choice to array
   selected.push(applicationType);
-  $("#showError").html("You selected: " + selected); //display temp console
+  //TEMPORARY
+  $("#showError").html("You selected: " + selected);
 
   //show application
   $("#" + selected[0]).show();
@@ -188,11 +259,11 @@ function validateCheckboxes(element, id) {
 
   if (numChecked > 0) {
     document.getElementById(id).setCustomValidity("");
-    return true;
+    return true; //eventually unnecessary
   } 
   else {
     document.getElementById(id).setCustomValidity("Please select at least one.");
-    return false;
+    return false; //eventually unnecessary
   }
 }
 
@@ -373,15 +444,29 @@ function populateUncommonJson(element) {
     case 'appealType4':
       jsonData.appealType4 = $('#appealType4').val();
       // TODO: change to append (make a4Category a string instead of array), if needed for CSV export formatting
-      jsonData.a4Category = [];
+      // TODO: OR / use this method for all the appeal selections as well?
+      jsonData.a4Categories = [];
       document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
-        jsonData.a4Category.push(checkbox.value);
+        jsonData.a4Categories.push(checkbox.value);
       });
       jsonData.a4Comments = $('#a4Comments').val();
       break;
       
     case 'appealType5':
       jsonData.appealType5 = $('#appealType5').val();
+      jsonData.a5Categories = [];
+      document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
+        jsonData.a5Categories.push(checkbox.value);
+      });
+      if (document.getElementById("a5Category1").checked) {
+        jsonData.a5Category1Reasons = [];
+        document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
+          jsonData.a5Category1Reasons.push(checkbox.value);
+        });
+      }
+      if (document.getElementById("a5Category2").checked) {
+        jsonData.a5Category2NewOwner = $('#a5Category2NewOwner').val();
+      }
       jsonData.a5Comments = $('#a5Comments').val();
       break;
 
@@ -402,7 +487,7 @@ function populateUncommonJson(element) {
 }
 
 
-// EXAMPLE FROM PIA FORM:
+// BORROWED FROM PIA FORM:
 const postToIssueFlow = () => {
   let config = {
     headers: {
