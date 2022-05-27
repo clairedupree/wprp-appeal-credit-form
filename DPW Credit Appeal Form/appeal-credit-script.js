@@ -9,10 +9,29 @@ const cmObject = {
 let fileUploads = []; //copied from pia form
 let attachment = []; //copied from pia form
   
+
 //TODO: should this be a queryselectorall? make a class called uncommonToggle
 // is it more readable as an onchange function?
 function toggleDivs(id) {
   switch(id) {
+    case 'constituentDifferentYes', 'constituentDifferentNo':
+        if (document.getElementById("constituentDifferentYes").checked) { //validate on each call
+        $("#constituentInfo").html($("#constituentInfoForm").html());
+      }
+      else {
+        $("#constituentInfo").html("");
+      }
+      break;
+
+    case 'mailingDifferentYes', 'mailingDifferentNo':
+      if (document.getElementById("mailingDifferentYes").checked) { //validate on each call
+        $("#mailingAddress").html($("#mailingAddressForm").html());
+      }
+      else {
+        $("#mailingAddress").html("");
+      }
+      break;
+
     case 'a5Category1':
       if (document.getElementById(id).checked) {
         $("#a5Category1Toggle").html($("#a5Category1Form").html());
@@ -32,53 +51,12 @@ function toggleDivs(id) {
         $("#a5Category2Toggle").html("");
       }
       break;
-
-    // validate every time
-    case 'mailingDifferentYes':
-    case 'mailingDifferentNo':
-      if (document.getElementById("mailingDifferentYes").checked) {
-        $("#mailingAddress").html($("#mailingAddressForm").html());
-      }
-      else {
-        $("#mailingAddress").html("");
-      }
-      break;
-
-    // validate every time
-    case 'constituentDifferentYes':
-    case 'constituentDifferentNo':
-        if (document.getElementById("constituentDifferentYes").checked) {
-        $("#constituentInfo").html($("#constituentInfoForm").html());
-      }
-      else {
-        $("#constituentInfo").html("");
-      }
-      break;
   }
 }
 
-// function a5Category1Toggle() {
-//   if (document.getElementById("a5Category1").checked) {
-//     console.log("toggle category1");
-//     $("#a5Category1Toggle").html($("#a5Category1Form").html());
-//     $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
-//   }
-//   else {
-//     $("#a5Category1Toggle").html("");
-//     $("#a5Category1Span").html("");
-//   }
-// }
-
-// function a5Category2Toggle() {
-//   if (document.getElementById("a5Category2").checked) {
-//     console.log("toggle category2");
-//     $("#a5Category2Toggle").html($("#a5Category2Form").html());
-//   }
-//   else {
-//     $("#a5Category2Toggle").html("");
-//   }
-// }
-
+// TODO: JSDOC COMMENTS
+// if not for someone else, at least for you
+// youve never worked on a project this big
 function validateDuplicates(id, compareId) {
   console.log($("#" + id).val(), $("#" + compareId).val());
   if ($("#" + id).val() == $("#" + compareId).val()) {
@@ -91,34 +69,6 @@ function validateDuplicates(id, compareId) {
   }
 }
 
-// TODO: combine utility functions into a single function uncommonToggle(){}
-// const representative = document.getElementsByName("constituentIsOwner");
-// representative.addEventListener('change', (event) => {
-// });
-// function mailingAddressToggle() {
-//   if (document.getElementById("mailingDifferentYes").checked) {
-//     console.log('yes');
-//     // TODO: this doesnt reset when form is reset
-//     // TODO: add .uncommon class to the div
-//     $("#mailingAddress").html($("#mailingAddressForm").html());
-//   }
-//   else {
-//     console.log('no');
-//     $("#mailingAddress").html("");
-//   }
-// }
-
-// combine utility functions later
-// function constituentInfoToggle() {
-//   if (document.getElementById("constituentDifferentYes").checked) {
-//     console.log('yes');
-//     $("#constituentInfo").html($("#constituentInfoForm").html());
-//   }
-//   else {
-//     console.log('no');
-//     $("#constituentInfo").html("");
-//   }
-// }
 
 // BACK BUTTON 
 $("#backButton").click(function() {
@@ -194,7 +144,6 @@ function showCreditApplication(creditType) {
   console.log(JSON.stringify(selected));
   $("#showError").html("You selected: " + selected); //temporary
 }
-
 
 
 // SHOW APPEAL APPLICATION
@@ -407,7 +356,7 @@ form.addEventListener('submit', (event) => {
         jsonData.signatureTitle = $('#signatureTitle').val();
         jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
-        // postToIssueFlow();
+        postToIssueFlow();
       // });
     // });
   console.log('Post object', JSON.stringify(cmObject));
