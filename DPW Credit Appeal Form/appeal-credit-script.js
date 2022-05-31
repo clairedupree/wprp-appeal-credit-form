@@ -38,6 +38,7 @@ function toggleDivs(id) {
       if (document.getElementById(id).checked) {
         $("#a5Category1Toggle").html($("#a5Category1Form").html());
         $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
+        validateCheckboxes('#a5ReasonChecks', 'a5Reason1');
       }
       else {
         $("#a5Category1Toggle").html("");
@@ -155,7 +156,7 @@ function showAppealApplication() {
   // todo: then force-validate on button click
   // TODO: make the validate function create an error, let that error stop from proceeding
   if (validateCheckboxes("#appeal", 'continueButton') == false)
-    $("#showError").html("Please select at least one appeal type.");
+    $("#showError").html("Please select at least one of these options.");
     // $('#continueButton')[0].reportValidity();
 
   else {
@@ -182,10 +183,12 @@ function showAppealApplication() {
           break;
         case "appealType4":
           $("#uncommonMiddle").append($("#appeal4Form").html());
+          validateCheckboxes('#a4Checks', 'a4Category1');
           break;
         case "appealType5":
           $("#uncommonMiddle").append($("#appeal5Form").html());
-          break;
+          validateCheckboxes('#a5Checks .a5Initial', 'a5Category1');
+        break;
         default:
           $("#showError").html("Error appending appeal types.");
       }   
@@ -205,15 +208,22 @@ function showAppealApplication() {
 //@param The element to be checked .name or #name (can be used for other form checkboxes)
 function validateCheckboxes(element, id) {
   // Reference the checked checkboxes of the element
+  //TODO: try testing elements by name, rather than div id
+  //TODO: nested checkboxes acting as part of parent,
+  //todo: not clearing validation
   var numChecked = $(element + " input[type=checkbox]:checked").length;
-  console.log("\t" + numChecked + " checkboxes are checked");
+  var numBoxes = $(element + " input[type=checkbox]").length;
+  console.log($(element + " input[type=checkbox]"));
+  console.log("\t" + numChecked + " checkboxes are checked out of " + numBoxes);
 
   if (numChecked > 0) {
+    console.log('\tpass: ' + id)
     document.getElementById(id).setCustomValidity("");
     return true; //eventually unnecessary
   } 
   else {
-    document.getElementById(id).setCustomValidity("Please select at least one.");
+    console.log('\tfail: ' + id)
+    document.getElementById(id).setCustomValidity("Please select at least one of these options.");
     return false; //eventually unnecessary
   }
 }
@@ -358,7 +368,7 @@ form.addEventListener('submit', (event) => {
         jsonData.signatureTitle = $('#signatureTitle').val();
         jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
-        postToIssueFlow();
+        //postToIssueFlow();
       // });
     // });
   console.log('Post object', JSON.stringify(cmObject));
@@ -394,20 +404,20 @@ function populateUncommonJson(element) {
 
     case 'appealType4':
       jsonData.appealType4 = $('#appealType4').val();
-      // TODO: change to append (make a4Category a string instead of array), if needed for CSV export formatting
-      // TODO: OR / use this method for all the appeal selections as well?
-      jsonData.a4Categories = [];
+      // TODO: use array or append strings?
+      jsonData.a4Category = [];
       document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
-        jsonData.a4Categories.push(checkbox.value);
+        jsonData.a4Category.push(checkbox.value);
       });
       jsonData.a4Comments = $('#a4Comments').val();
       break;
       
     case 'appealType5':
       jsonData.appealType5 = $('#appealType5').val();
-      jsonData.a5Categories = [];
+      // TODO: use array or append strings?
+      jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
-        jsonData.a5Categories.push(checkbox.value);
+        jsonData.a5Category.push(checkbox.value);
       });
       if (document.getElementById("a5Category1").checked) {
         jsonData.a5Category1Reasons = [];

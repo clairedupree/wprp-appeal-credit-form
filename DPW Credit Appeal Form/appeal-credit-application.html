@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -47,17 +47,14 @@
 	</style>
 </head>
 
-<!-- TODO: 
+<!--
 
-  TODO: week of 5/25, ongoing
+  html markup credit 1
+  html markup credit 2
 
-  TODO: site exec not uploading new files? Not sure why, maybe because server is down?
-  Try again on friday?
+  solve checkbox validity for option select
 
-  apply same validity solution to checkbox selections
-  
-  finish working on html markup for rest of forms
-    remember to add to the json object
+  grecaptcha
   
   delete vestigial element names, classes, variables and ids
   implement javascript doc comments especially in beg of document
@@ -790,6 +787,7 @@
       </div>
     </div>
 
+    <!-- TODO: Dollar sign appearing weird on aacounty - default styles? -->
     <div class="row">
       <div class="col-12">
         <div class="form-group">
@@ -845,13 +843,13 @@
           Check all that apply: <span class="requiredField">*</span><br>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a4Category1" name="a4Category" 
-              value="Mathematical error in the calculation of the fee" onchange="validateCheckboxes('#a4Checks', id)">
+              value="Mathematical error in the calculation of the fee" onchange="validateCheckboxes('#a4Checks', 'a4Category1')">
             <label class="form-check-label" for="a4Category1">Mathematical error in the calculation of the fee</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a4Category2" name="a4Category" 
-              value="Incorrect calculation of the impervious surface of the property" onchange="validateCheckboxes('#a4Checks', id)">
+              value="Incorrect calculation of the impervious surface of the property" onchange="validateCheckboxes('#a4Checks', 'a4Category1')">
             <label class="form-check-label" for="a4Category2">Incorrect calculation of the impervious surface of the property</label>
           </div>
 
@@ -880,11 +878,8 @@
     </div>
   </div> <!-- End appeal 4 application -->
 
-  <!-- TODO 5/27: (WHERE U LEFT OFF) complete appeal 5 application, using similar
-  TODO: validation methods as appeal 4, work on incoorporating the
-  TODO: continueButton into the same methods, adding custom validity
-  TODO: on change, and then somehow forcing validation check onclick -->
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
+  <!-- TODO: format the sub-options for a5cat1 so its easier to read (think about screen readers also) -->
   <div id="appeal5Form">
     <hr>
     <div class="row">
@@ -897,28 +892,30 @@
       <div class="col-12">
         <div id="a5Checks" class="form-group">
           Check all that apply: <span class="requiredField">*</span><br>
-          <div class="form-check">
+
+          <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category1" name="a5Category" 
-              value="The property is not subject to the stormwater fee" onchange="validateCheckboxes('#a5Checks', id), toggleDivs(id)">
+              value="The property is not subject to the stormwater fee" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'), toggleDivs(id)">
             <label class="form-check-label" for="a5Category1">The property is not subject to the stormwater fee 
               <span id="a5Category1Span"></span></label>
           </div>
 
           <div id="a5Category1Toggle" class="uncommon"></div>
 
-          <div class="form-check">
+          <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category2" name="a5Category" 
-              value="The person billed is not the record owner of the property" onchange="validateCheckboxes('#a5Checks', id), toggleDivs(id)">
+              value="The person billed is not the record owner of the property" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'), toggleDivs(id)">
             <label class="form-check-label" for="a5Category2">The person billed is not the record owner of the property</label>
           </div>
 
           <div id="a5Category2Toggle" class="uncommon"></div>
 
-          <div class="form-check">
+          <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category3" name="a5Category" 
-              value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year" onchange="validateCheckboxes('#a5Checks', id)">
+              value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1')">
             <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship exemption from the stormwater fee for the current billing year</label>
           </div>
+
 
           <!-- TODO: add link for office of finance? https://www.aacounty.org/departments/finance/ -->
           <small id="a5CategoryHelpBlock" class="form-text text-muted">
@@ -949,37 +946,37 @@
         <div id="a5ReasonChecks" class="form-group">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason1" name="a5Reason" 
-              value="unimproved (contains no impervious surface)" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="unimproved (contains no impervious surface)" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason1">unimproved (contains no impervious surface)</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason2" name="a5Reason" 
-              value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason2">in the City of Annapolis</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason3" name="a5Reason" 
-              value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason3">owned by the State of Maryland</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason4" name="a5Reason" 
-              value="owned by a County" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="owned by a County" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason4">owned by a County</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason5" name="a5Reason" 
-              value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason5">owned by a municipality</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason6" name="a5Reason" 
-              value="owned by a regularly organized volunteer fire department that is used for public purposes" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="owned by a regularly organized volunteer fire department that is used for public purposes" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason6">owned by a regularly organized volunteer fire department that is used for public purposes</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason7" name="a5Reason" 
-              value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code" onchange="validateCheckboxes('#a5ReasonChecks', id)">
+              value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
             <label class="form-check-label" for="a5Reason7">owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code</label>
           </div>
 
@@ -1144,6 +1141,7 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <!-- ReCaptcha -->
+  <!-- TODO: talk to tom about retrofitting this -->
   <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa"></script> -->
 
   <!-- Appeal / Credit Javascript -->
