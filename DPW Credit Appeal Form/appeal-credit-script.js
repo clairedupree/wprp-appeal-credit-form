@@ -37,7 +37,7 @@ function toggleDivs(id) {
     case 'a5Category1':
       if (document.getElementById(id).checked) {
         $("#a5Category1Toggle").html($("#a5Category1Form").html());
-        $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
+        // $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
         validateCheckboxes('#a5ReasonChecks', 'a5Reason1');
       }
       else {
