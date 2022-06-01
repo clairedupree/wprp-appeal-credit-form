@@ -58,8 +58,6 @@ function toggleDivs(id) {
 }
 
 // TODO: JSDOC COMMENTS
-// if not for someone else, at least for you
-// youve never worked on a project this big
 function validateDuplicates(id, compareId) {
   console.log($("#" + id).val(), $("#" + compareId).val());
   if ($("#" + id).val() == $("#" + compareId).val()) {
@@ -148,18 +146,17 @@ function showCreditApplication(creditType) {
   $("#showError").html("You selected: " + selected); //temporary
 }
 
-
 // SHOW APPEAL APPLICATION
 function showAppealApplication() {
   console.log("Validate checkboxes");
-  // TODO: rewrite this so the validation is added on change
-  // todo: then force-validate on button click
-  // TODO: make the validate function create an error, let that error stop from proceeding
-  if (validateCheckboxes("#appeal", 'continueButton') == false)
-    $("#showError").html("Please select at least one of these options.");
-    // $('#continueButton')[0].reportValidity();
 
+  // TODO: test moving the checkboxes into the form to be validated
+  if (validateCheckboxes("#appeal", 'appealType1') == false)
+    ($("#wprfApplication")[0].reportValidity());
   else {
+    ($('#wprfApplication')[0].checkValidity())
+    console.log('validation success');
+
     selected.length = 1; //truncate array
     $(".uncommon").html(""); //reset uncomon divs
 
@@ -200,8 +197,62 @@ function showAppealApplication() {
 
     console.log(JSON.stringify(selected));
     $("#showError").html("You selected: " + selected); //temporary
-  }  
+  }
 }
+
+// // SHOW APPEAL APPLICATION
+// function showAppealApplication() {
+//   console.log("Validate checkboxes");
+//   // TODO: rewrite this so the validation is added on change
+//   // todo: then force-validate on button click
+//   // TODO: make the validate function create an error, let that error stop from proceeding
+//   if (validateCheckboxes("#appeal", 'continueButton') == false)
+//     $("#showError").html("Please select at least one of these options.");
+//     // $('#continueButton')[0].reportValidity();
+
+//   else {
+//     selected.length = 1; //truncate array
+//     $(".uncommon").html(""); //reset uncomon divs
+
+//     $("#formHeader").html($("#appealHeader").html()); //set appeal header
+//     $("#statement").html($("#appealAcknowledgement").html()); //set appeal ack statement
+
+//     populateSelectedAppealTypes(); //populate selected array
+
+//     // set uncommon appeal options
+//     for (var i = 1; i < selected.length; i++) {
+//       console.log("Appending matching appeal types");
+//       switch (selected[i]) {
+//         case "appealType1":
+//           $("#uncommonMiddle").append($("#appeal1Form").html());
+//           break;
+//         case "appealType2":
+//           $("#uncommonMiddle").append($("#appeal2Form").html());
+//           break;
+//         case "appealType3":
+//           $("#uncommonMiddle").append($("#appeal3Form").html());
+//           break;
+//         case "appealType4":
+//           $("#uncommonMiddle").append($("#appeal4Form").html());
+//           validateCheckboxes('#a4Checks', 'a4Category1');
+//           break;
+//         case "appealType5":
+//           $("#uncommonMiddle").append($("#appeal5Form").html());
+//           validateCheckboxes('#a5Checks .a5Initial', 'a5Category1');
+//         break;
+//         default:
+//           $("#showError").html("Error appending appeal types.");
+//       }   
+//     }
+
+//     console.log("Show appeal application");
+//     $("#appeal").hide(); //hide appeal select  
+//     $("#formContainer").show(); //show form
+
+//     console.log(JSON.stringify(selected));
+//     $("#showError").html("You selected: " + selected); //temporary
+//   }  
+// }
 
 
 // Validate checked checkboxes is > 0
@@ -404,7 +455,7 @@ function populateUncommonJson(element) {
 
     case 'appealType4':
       jsonData.appealType4 = $('#appealType4').val();
-      // TODO: use array or append strings?
+      // TODO: use array or concatenated string? Depends on CSV need
       jsonData.a4Category = [];
       document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
         jsonData.a4Category.push(checkbox.value);
@@ -414,7 +465,7 @@ function populateUncommonJson(element) {
       
     case 'appealType5':
       jsonData.appealType5 = $('#appealType5').val();
-      // TODO: use array or append strings?
+      // TODO: use array or concatenated string? Depends on CSV need
       jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
         jsonData.a5Category.push(checkbox.value);
