@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS -->
+	<!-- REMOTE Bootstrap CSS --
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -33,12 +33,10 @@
     }
 
     .row {
-      /* using .form-group for padding */
-      /* .row used for organization & responsiveness */
-        padding: 0px !important;
-        background: none !important;
-        border-top: 0px !important;
-        margin: auto !important;
+      padding: 0px !important;
+      background: none !important;
+      border-top: 0px !important;
+      margin: auto !important;
     }
     
     .dropdown-menu {
@@ -48,16 +46,7 @@
 </head>
 
 <!--
-
-  html markup credit 1
-  html markup credit 2
-
-  solve checkbox validity for option select
-
-  grecaptcha
-  
-  delete vestigial element names, classes, variables and ids
-  implement javascript doc comments especially in beg of document
+  TODO: delete vestigial element names, classes, variables and ids
 
   Step 1: find the hello world version of the thing youre trying to do
   Step 2: get the basic mechanism of it working
@@ -65,27 +54,13 @@
 
 -->
 
-
-
 <body>
   <div class="bootstrap-iso">
 
-  <!-- Form -->
-  <form id="wprfApplication" class="form">
-
   <!-- Back Button -->
   <div id="navigation" style="display: none">
-    <div class="row">
-
-      <!-- Error message box -->
-      <!-- Delete when replaced with custom validity -->
-      <!-- https://stackoverflow.com/questions/56406865/how-do-i-trigger-html5-validation-error-popup-when-custom-validation-message-is -->
-      <div class="col-8 form-group">
-        <p id="showError" class="requiredField" style="text-align: center">Text should be replaced by an error message</p>
-      </div>
-
-      <!-- Go Back button -->
-      <div id="backButton" class="col-4 form-group">
+    <div id="backButton" class="row justify-content-end">
+      <div class="col-4 form-group">
         <button class="btn btn-light btn-block">Go Back</button>
       </div>
     </div>
@@ -111,7 +86,8 @@
   <div id="typeSelect">
 
     <!-- Select Appeal Type(s) -->
-    <div id="appeal" style="display: none">
+    <!-- TODO: change to appealSelect, find where the id is used elsewhere first -->
+    <form id="appeal" class="form" style="display: none">
       <div class="row">
         <div class="col-12">
           <div class="form-group">
@@ -157,7 +133,7 @@
           <button type="button" class="btn btn-primary" id="continueButton" onclick="showAppealApplication()">Continue</button>
         </div>
       </div>
-    </div>
+    </form>
 
 
     <!-- Select Credit Type -->
@@ -175,7 +151,6 @@
 
   </div> <!-- end type select -->
 
-  
   <!-- FORM CONTAINER -->
 	<div id="formContainer" style="display: none"> <!-- style="display: none"-->
 
@@ -184,9 +159,8 @@
       <!-- to be apended -->
     </div>
 
-    <!-- Form --
+    <!-- Form -->
     <form id="wprfApplication" class="form">
-    -->
 
       <!-- COMMON BEGINNING -->
       <div id="commonBeginning">
@@ -386,6 +360,7 @@
         </div> 
 
         <!-- file upload -->
+        <!-- TODO: change to default bootstrap button, not an invisible button -->
         <div class="col-12">
           <div class="form-group">
             <input style="display:none" type="file" class="form-control file-upload-input"id="piaAttachments" name="piaAttachments[]" 
@@ -581,12 +556,12 @@
     </div>
 
     <!-- Residental Property Tier info -->
-    <div class="form-group">
-      <div class="row">
-        <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
           <div style="background-color: #f0f0f0; padding: 10px">
             <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
-            <ul style="margin-left: 20px">
+            <ul style="margin-bottom: 0">
               <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
                 Residential Low Density (RLD) zoning</li>
               <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
@@ -771,9 +746,9 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="row">
-        <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
           <div style="background-color: #f0f0f0; padding: 10px">
             <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
             If the total stormwater remediation fee across all Homeowners Association-owned tax accounts 
@@ -799,7 +774,7 @@
           <label for="a3HOAFee">The total stormwater fee charged for all properties owned by the same Homeowners Association: <span class="requiredField">*</span></label> 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">&dollar;</span>
+              <span class="input-group-text">	&#36;</span>
             </div>
             <input type="number" class="form-control" name="a3HOAFee" id="a3HOAFee" class="form-control" min="0" step="0.01" aria-label="Amount (to the nearest dollar)" required>
             </div> 
@@ -884,7 +859,7 @@
   </div> <!-- End appeal 4 application -->
 
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
-  <!-- TODO: format the sub-options for a5cat1 so its easier to read (think about screen readers also) -->
+  <!-- TODO: format the sub-options for a5cat1 so its easier to read (think about screen readers / aria-label) -->
   <div id="appeal5Form">
     <hr>
     <div class="row">
@@ -1007,6 +982,7 @@
 
   <!-- CREDIT APPLICATIONS -->
   <!-- Credit Type 1: Property not under an NPDES permit -->
+  <!-- TODO: Write markup -->
   <div id="credit1Form">
     <hr>
     <div class="row">
@@ -1015,11 +991,54 @@
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <!-- TODO: Make a scrolling textbox -->
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            By Law, the maximum credit for any property is 50% of the Stormwater Remediation Fee. 
+            To receive the full 50% credit, the entire impervious surface area of the property 
+            must be treated using private on-site stormwater management practices that control at 
+            least one inch of rainfall and are designed, approved, constructed, and maintained in 
+            accordance with the County Standards, Stormwater Management Practices and Procedures 
+            Manual, and/or the 2000 Maryland Stormwater Design Manual, Volumes I and II and 
+            Supplements. If only a portion of the site's impervious area is treated or if the 
+            practices control less than one inch of rainfall, partial credit can be awarded.
+            <br><br>
+            Approved credits are valid up to a period of three years. To continue to receive credit, 
+            function verification of the BMP is required. This verification will automatically be 
+            conducted by the County and the owner will be notified only if the practice(s) is found 
+            to be out of compliance. A renewal application is not necessary. 
+            <br><br>
+            <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-credit-program/Credit%20Manual%20Version%201.1.2019%20with%20appendices.pdf" target="_blank">
+              Click here for the Stormwater Remediation Credit Policy and Guidance document.</a>
+            <br><br>
+            Disclaimer: If you are not able to provide the requested documentation, County staff 
+            will attempt to obtain the needed information about the stormwater management practices 
+            and the water quality treatment they provide from available records and resources. 
+            However, as the applicant is ultimately responsible for providing documentation, if 
+            County staff is unable to locate the necessary information then the lack of documentation 
+            from the applicant would be a grounds for denial of the credit.
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row form-group">
       <div class="col-12">
         <div class="form-group">
           <label for="c5Description">Briefly describe the stormwater practices on the property (type, quantity, location): <span class="requiredField">*</span></label>
           <textarea class="form-control" id="c5Description" rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1Comments">Comments: </label>
+          <textarea class="form-control" id="c1Comments" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -1035,6 +1054,22 @@
     </div> 
 
     <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            Properties that are regulated through a National Pollutant Discharge Elimination 
+            System (NPDES) permit with stormwater management controls are eligible for a stormwater 
+            remediation fee credit not to exceeed 50&#37; of the assessed stormwater remediation fee. Marina 
+            properties are eligible for up to a 25&#37; credit if they are regulated under an NPDES permit 
+            with stormwater management controls and up to a 50&#37; credit if they are also in good standing 
+            with the Maryland Department of Natural Resources for the Clean Marina Initiative.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
           <label for="c2NPDESPermitNumber">NPDES Permit Number: <span class="requiredField">*</span></label>
@@ -1046,6 +1081,82 @@
         <div class="form-group">
           <label for="c2RegistrationNumber">MDE Facility Registration Number: <span class="requiredField">*</span></label>
           <input type="text" id="c2RegistrationNumber" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Is the property a marina that has been certified by Maryland DNR as a Clean Marina? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c2CleanMarinaYes" name="c2CleanMarina" 
+              value="yes" required>
+            <label class="form-check-label" for="c2CleanMarinaYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c2CleanMarinaNo" name="c2CleanMarina" 
+              value="no" required>
+            <label class="form-check-label" for="c2CleanMarinaNo">No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div id="c2Checks" class="form-group">
+          Documentation Checklist (check all that apply): <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation1" name="c2Documentation" 
+              value="MDE's NPDES Permit Acceptance Letter with Registration Number" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation1">MDE's NPDES Permit Acceptance Letter with Registration Number</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation2" name="c2Documentation" 
+              value="Stormwater Pollution Prevention Plan" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation2">Stormwater Pollution Prevention Plan</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation3" name="c2Documentation" 
+              value="Site Plan Showing Location of BMPs" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation3">Site Plan Showing Location of BMPs</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation4" name="c2Documentation" 
+              value="Inspection and Maintenance Reports" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation4">Inspection and Maintenance Reports</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation5" name="c2Documentation" 
+              value="DNR Certification of Clean Marina Initiative" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation5">DNR Certification of Clean Marina Initiative</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation6" name="c2Documentation" 
+              value="Other" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation6">Other</label>
+          </div>
+
+          <small id="c2DocumentationHelpBlock" class="form-text text-muted">
+            <!-- TODO: add local links to similar help text blocks? -->
+            Upload the indicated documents in the <em>Supporting Documentation</em> section, as applicable.
+          </small> 
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c2Comments">Comments: </label>
+          <textarea class="form-control" id="c2Comments" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -1146,8 +1257,8 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <!-- ReCaptcha -->
-  <!-- TODO: talk to tom about retrofitting this -->
-  <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa"></script> -->
+  <!-- TODO: Research recaptcha, make sure using correct API import -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa"></script>
 
   <!-- Appeal / Credit Javascript -->
   <script src="appeal-credit-script.js"></script>

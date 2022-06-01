@@ -1,3 +1,5 @@
+// TODO: implement javascript doc comments
+
 const form = document.getElementById('wprfApplication');
 let selected = []; //user selection array
 const jsonData = {}; //json submit object
@@ -102,8 +104,6 @@ function showApplicationTypes(applicationType) {
 
   //add choice to array
   selected.push(applicationType);
-  //TEMPORARY
-  $("#showError").html("You selected: " + selected);
 
   //show application
   $("#" + selected[0]).show();
@@ -133,28 +133,27 @@ function showCreditApplication(creditType) {
       break;
     case "creditType2":
       $("#uncommonMiddle").html($("#credit2Form").html());
+      validateCheckboxes('#c2Checks', 'c2Documentation1');
       selected.push(creditType);
       break;
     default:
-      $("#showError").html("Error appending credit types");
+      console.log("Error appending credit types");
   }   
 
   $("#credit").hide(); //hide credit select  
   $("#formContainer").show(); //show form
 
   console.log(JSON.stringify(selected));
-  $("#showError").html("You selected: " + selected); //temporary
 }
 
 // SHOW APPEAL APPLICATION
 function showAppealApplication() {
   console.log("Validate checkboxes");
 
-  // TODO: test moving the checkboxes into the form to be validated
   if (validateCheckboxes("#appeal", 'appealType1') == false)
-    ($("#wprfApplication")[0].reportValidity());
+    ($("#appeal")[0].reportValidity());
   else {
-    ($('#wprfApplication')[0].checkValidity())
+    ($('#appeal')[0].checkValidity())
     console.log('validation success');
 
     selected.length = 1; //truncate array
@@ -184,10 +183,11 @@ function showAppealApplication() {
           break;
         case "appealType5":
           $("#uncommonMiddle").append($("#appeal5Form").html());
-          validateCheckboxes('#a5Checks .a5Initial', 'a5Category1');
+          // TODO: Use name attribute instead of nested classes?
+          validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'); // 'input[name="a5Category"]
         break;
         default:
-          $("#showError").html("Error appending appeal types.");
+          console.log("Error appending appeal types.");
       }   
     }
 
@@ -196,63 +196,8 @@ function showAppealApplication() {
     $("#formContainer").show(); //show form
 
     console.log(JSON.stringify(selected));
-    $("#showError").html("You selected: " + selected); //temporary
   }
 }
-
-// // SHOW APPEAL APPLICATION
-// function showAppealApplication() {
-//   console.log("Validate checkboxes");
-//   // TODO: rewrite this so the validation is added on change
-//   // todo: then force-validate on button click
-//   // TODO: make the validate function create an error, let that error stop from proceeding
-//   if (validateCheckboxes("#appeal", 'continueButton') == false)
-//     $("#showError").html("Please select at least one of these options.");
-//     // $('#continueButton')[0].reportValidity();
-
-//   else {
-//     selected.length = 1; //truncate array
-//     $(".uncommon").html(""); //reset uncomon divs
-
-//     $("#formHeader").html($("#appealHeader").html()); //set appeal header
-//     $("#statement").html($("#appealAcknowledgement").html()); //set appeal ack statement
-
-//     populateSelectedAppealTypes(); //populate selected array
-
-//     // set uncommon appeal options
-//     for (var i = 1; i < selected.length; i++) {
-//       console.log("Appending matching appeal types");
-//       switch (selected[i]) {
-//         case "appealType1":
-//           $("#uncommonMiddle").append($("#appeal1Form").html());
-//           break;
-//         case "appealType2":
-//           $("#uncommonMiddle").append($("#appeal2Form").html());
-//           break;
-//         case "appealType3":
-//           $("#uncommonMiddle").append($("#appeal3Form").html());
-//           break;
-//         case "appealType4":
-//           $("#uncommonMiddle").append($("#appeal4Form").html());
-//           validateCheckboxes('#a4Checks', 'a4Category1');
-//           break;
-//         case "appealType5":
-//           $("#uncommonMiddle").append($("#appeal5Form").html());
-//           validateCheckboxes('#a5Checks .a5Initial', 'a5Category1');
-//         break;
-//         default:
-//           $("#showError").html("Error appending appeal types.");
-//       }   
-//     }
-
-//     console.log("Show appeal application");
-//     $("#appeal").hide(); //hide appeal select  
-//     $("#formContainer").show(); //show form
-
-//     console.log(JSON.stringify(selected));
-//     $("#showError").html("You selected: " + selected); //temporary
-//   }  
-// }
 
 
 // Validate checked checkboxes is > 0
@@ -350,16 +295,16 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
   // TODO: add grecaptcha
-  // grecaptcha.ready(() => {
-  //   console.log("execute grecaptcha token");
-  //   grecaptcha
-  //     .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
-  //       action: 'submit',
-  //     })
-  //     .then((token) => {
-  //       console.log("populate JSON data");
-  //       jsonData.token = token;
-        jsonData.token = "override"; //replace with grecaptcha
+  grecaptcha.ready(() => {
+    console.log("execute grecaptcha token");
+    grecaptcha
+      .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
+        action: 'submit',
+      })
+      .then((token) => {
+        console.log("populate JSON data");
+        jsonData.token = token;
+        // jsonData.token = "override"; //replace with grecaptcha
         jsonData.ownerFirstName = $('#ownerFirstName').val();
         jsonData.ownerLastName = $('#ownerLastName').val();
         jsonData.ownerCompanyName = $('#ownerCompanyName').val();
@@ -405,7 +350,7 @@ form.addEventListener('submit', (event) => {
         //populate uncommon selections from array
         for (var i = 1; i < selected.length; i++)
           populateUncommonJson(selected[i]);
-          // TODO: send i as argument, use for documenting the appeal applications
+          // TODO: send i as argument? For documenting the number of appeal applications selected?
           // i.e. ("appealType" + i) if needed for cleaner json
 
         jsonData.supportingDocuments = attachment; // refer to file mgmt function
@@ -419,10 +364,10 @@ form.addEventListener('submit', (event) => {
         jsonData.signatureTitle = $('#signatureTitle').val();
         jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
+        console.log('Post object', JSON.stringify(cmObject));
         //postToIssueFlow();
-      // });
-    // });
-  console.log('Post object', JSON.stringify(cmObject));
+      });
+    });
 });
 
 
@@ -466,6 +411,7 @@ function populateUncommonJson(element) {
     case 'appealType5':
       jsonData.appealType5 = $('#appealType5').val();
       // TODO: use array or concatenated string? Depends on CSV need
+      // TODO: change to a json object instead of an array
       jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
         jsonData.a5Category.push(checkbox.value);
@@ -483,14 +429,22 @@ function populateUncommonJson(element) {
       break;
 
     case 'creditType1':
-      jsonData.creditType = $('#creditType2').val();
+      jsonData.creditType1 = $('#creditType2').val();
       jsonData.c1Description = $('#c1Description').val();
+      jsonData.c1Comments = $('#c1Comments').val();
       break;
 
     case 'creditType2':
-      jsonData.creditType = $('#creditType2').val();          
+      jsonData.creditType2 = $('#creditType2').val();          
       jsonData.c2NPDESPermitNumber = $('#c2NPDESPermitNumber').val();
       jsonData.c2RegistrationNumber = $('#c2RegistrationNumber').val();
+      // TODO: USE THIS FOR THE INITIAL CHECKBOXES IN APPEAL 5
+      jsonData.c2CleanMarina = $('input[name="c2CleanMarina"]:checked').val();
+      jsonData.c2Documentation = [];
+      document.querySelectorAll('input[name="c2Documentation"]:checked').forEach((checkbox) => {
+        jsonData.c2Documentation.push(checkbox.value);
+      });
+      jsonData.c2Comments = $('#c2Comments').val();
       break;
 
     default:
