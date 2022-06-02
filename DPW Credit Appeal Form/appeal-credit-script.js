@@ -57,6 +57,7 @@ function toggleDivs(element) {
     case 'c1GradingPermit': 
       if (document.getElementById("c1GradingPermitYes").checked) {
         $("#c1GradingPermitToggle").html($("#c1GradingPermitYesForm").html());
+        $("#c1InstallerToggle").html("");
       }
       else {
         $("#c1GradingPermitToggle").html("");
@@ -85,6 +86,15 @@ function toggleDivs(element) {
       }
       else {
         $("#c1InstallerToggle").html("");
+      }
+      break;
+
+    case 'c1InstallerPlans': 
+      if (document.getElementById("c1InstallerPlansNo").checked) {
+        $("#c1TreatmentDescriptionToggle").html($("#c1TreatmentDescriptionForm").html());
+      }
+      else {
+        $("#c1TreatmentDescriptionToggle").html("");
       }
       break;
 
