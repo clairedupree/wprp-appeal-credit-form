@@ -14,11 +14,10 @@ let attachment = []; //copied from pia form
 
 //TODO: should this be a queryselectorall? make a class called uncommonToggle
 // is it more readable as an onchange function?
-function toggleDivs(id) {
-  switch(id) {
-    case 'constituentDifferentYes':
-    case 'constituentDifferentNo':
-        if (document.getElementById("constituentDifferentYes").checked) { //validate on each call
+function toggleDivs(element) {
+  switch(element) {
+    case 'constituentDifferent':
+      if (document.getElementById("constituentDifferentYes").checked) {
         $("#constituentInfo").html($("#constituentInfoForm").html());
       }
       else {
@@ -26,9 +25,8 @@ function toggleDivs(id) {
       }
       break;
 
-    case 'mailingDifferentYes': 
-    case 'mailingDifferentNo':
-      if (document.getElementById("mailingDifferentYes").checked) { //validate on each call
+    case 'mailingDifferent': 
+      if (document.getElementById("mailingDifferentYes").checked) {
         $("#mailingAddress").html($("#mailingAddressForm").html());
       }
       else {
@@ -37,9 +35,8 @@ function toggleDivs(id) {
       break;
 
     case 'a5Category1':
-      if (document.getElementById(id).checked) {
+      if (document.getElementById(element).checked) {
         $("#a5Category1Toggle").html($("#a5Category1Form").html());
-        // $("#a5Category1Span").html('because it is (select all that apply): <span class="requiredField">*</span> ');
         validateCheckboxes('#a5ReasonChecks', 'a5Reason1');
       }
       else {
@@ -49,11 +46,54 @@ function toggleDivs(id) {
       break;
 
     case 'a5Category2':
-      if (document.getElementById(id).checked) {
+      if (document.getElementById(element).checked) {
         $("#a5Category2Toggle").html($("#a5Category2Form").html());
       }
       else {
         $("#a5Category2Toggle").html("");
+      }
+      break;
+
+    case 'c1GradingPermit': 
+      if (document.getElementById("c1GradingPermitYes").checked) {
+        $("#c1GradingPermitToggle").html($("#c1GradingPermitYesForm").html());
+      }
+      else {
+        $("#c1GradingPermitToggle").html("");
+        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+      }
+      break;
+
+    case 'c1GPPlans': 
+      if (document.getElementById("c1SWMReportNo").checked)
+        return;
+        
+      if (document.getElementById("c1GPPlansNo").checked) {
+        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+      }
+      else {
+        $("#c1InstallerToggle").html("");
+      }
+      break;
+
+    case 'c1SWMReport': 
+      if (document.getElementById("c1GPPlansNo").checked)
+        return;
+
+      if (document.getElementById("c1SWMReportNo").checked) {
+      $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+      }
+      else {
+        $("#c1InstallerToggle").html("");
+      }
+      break;
+
+    case 'c1IMAgreement': 
+      if (document.getElementById("c1IMAgreementYes").checked) {
+        $("#c1FeeAgreementToggle").html("");
+      }
+      else {
+        $("#c1FeeAgreementToggle").html($("#c1FeeAgreementForm").html());
       }
       break;
   }

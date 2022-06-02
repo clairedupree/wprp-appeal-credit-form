@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -280,13 +280,13 @@
               Is applicant a person other than the property owner? <span class="requiredField">*</span><br>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="constituentDifferentYes" name="constituentDifferent" 
-                  value="yes" onchange="toggleDivs(id)" required>
+                  value="yes" onchange="toggleDivs(name)" required>
                 <label class="form-check-label" for="constituentDifferentYes">Yes</label>
               </div>
               
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="constituentDifferentNo" name="constituentDifferent" 
-                  value="no" onchange="toggleDivs(id)" required>
+                  value="no" onchange="toggleDivs(name)" required>
                 <label class="form-check-label" for="constituentDifferentNo">No</label>
               </div>
             </div>
@@ -326,13 +326,13 @@
               Is the mailing address different than the property address? <span class="requiredField">*</span><br>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="mailingDifferentYes" name="mailingDifferent" 
-                  value="yes" onchange="toggleDivs(id)" required>
+                  value="yes" onchange="toggleDivs(name)" required>
                 <label class="form-check-label" for="mailingDifferentYes">Yes</label>
               </div>
               
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="mailingDifferentNo" name="mailingDifferent" 
-                  value="no" onchange="toggleDivs(id)" required>
+                  value="no" onchange="toggleDivs(name)" required>
                 <label class="form-check-label" for="mailingDifferentNo">No</label>
               </div>
             </div>
@@ -919,7 +919,6 @@
 
   <!-- Appeal Type 5 Uncommon Options -->
   <div id="a5Category1Form">
-
     <div class="row">
       <div class="col-12">
         <div id="a5ReasonChecks" class="form-group" style="margin-left: 2em">
@@ -968,7 +967,6 @@
       </div>
     </div>
   </div>
-
   <div id="a5Category2Form">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -1013,14 +1011,15 @@
             <br><br>
             <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-credit-program/Credit%20Manual%20Version%201.1.2019%20with%20appendices.pdf" target="_blank">
               Click here for the Stormwater Remediation Credit Policy and Guidance document.</a>
-            <br><br>
+          </div>
+          <small id="c1BeginningHelpBlock" class="form-text text-muted">
             Disclaimer: If you are not able to provide the requested documentation, County staff 
             will attempt to obtain the needed information about the stormwater management practices 
             and the water quality treatment they provide from available records and resources. 
             However, as the applicant is ultimately responsible for providing documentation, if 
             County staff is unable to locate the necessary information then the lack of documentation 
             from the applicant would be a grounds for denial of the credit.
-          </div>
+          </small> 
         </div>
       </div>
     </div>
@@ -1028,8 +1027,24 @@
     <div class="row form-group">
       <div class="col-12">
         <div class="form-group">
-          <label for="c5Description">Briefly describe the stormwater practices on the property (type, quantity, location): <span class="requiredField">*</span></label>
-          <textarea class="form-control" id="c5Description" rows="3" required></textarea>
+          <label for="c1Description">Briefly describe the stormwater practices on the property (type, quantity, location): <span class="requiredField">*</span></label>
+          <textarea class="form-control" id="c1Description" rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c1InstallDate">Approximate installation date: <span class="requiredField">*</span></label>
+          <input type="date" name="c1InstallDate" id="c1InstallDate" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c1Installer">Installer: <span class="requiredField">*</span></label>
+          <input type="text"  name="c1Installer" id="c1Installer" class="form-control" required>
         </div>
       </div>
     </div>
@@ -1037,12 +1052,182 @@
     <div class="row">
       <div class="col-12">
         <div class="form-group">
-          <label for="c1Comments">Comments: </label>
+          <label for="c1InstallerContact">Installer contact information (if recently installed): </label>
+          <textarea class="form-control" id="c1InstallerContact" name="c1InstallerContact" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Were the practices installed under a County grading permit? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GradingPermitYes" name="c1GradingPermit" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GradingPermitYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GradingPermitNo" name="c1GradingPermit" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GradingPermitNo">No</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GradingPermitUnsure" name="c1GradingPermit" 
+              value="unsure" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GradingPermitUnsure">Unsure</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="c1GradingPermitToggle" class="uncommon"></div>
+
+    <div id="c1InstallerToggle" class="uncommon"></div>
+
+    <div id="c1TreatmentDescriptionToggle" class="uncommon"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Is the property under an Inspection and Maintenance Agreement for private stormwater management? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1IMAgreementYes" name="c1IMAgreement" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1IMAgreementYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1IMAgreementNo" name="c1IMAgreement" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1IMAgreementNo">No</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1IMAgreementUnsure" name="c1IMAgreement" 
+              value="unsure" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1IMAgreementUnsure">Unsure</label>
+          </div>
+
+          <small id="c1IMAgreementHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div id="c1FeeAgreementToggle" class="uncommon"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1Comments">Additional comments: </label>
           <textarea class="form-control" id="c1Comments" rows="3"></textarea>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Credit Type 1 Uncommon Options -->
+  <div id="c1GradingPermitYesForm">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c1GPNumber">Grading permit number: <span class="requiredField">*</span></label>
+          <input type="text" name="c1GPNumber" id="c1GPNumber" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Do you have a copy of the plans for this grading permit? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GPPlansYes" name="c1GPPlans" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GPPlansYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GPPlansNo" name="c1GPPlans" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GPPlansNo">No</label>
+          </div>
+          <small id="c1GPPLansHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Do you have the stormwater management report associated with this grading permit? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1SWMReportYes" name="c1SWMReport" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1SWMReportYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1SWMReportNo" name="c1SWMReport" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1SWMReportNo">No</label>
+          </div>
+          <small id="c1SWMReportHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c1InstallerForm">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Do you have plans and documentation from the installer? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1InstallerPlansYes" name="c1InstallerPlans" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1InstallerPlansYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1InstallerPlansNo" name="c1InstallerPlans" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1InstallerPlansNo">No</label>
+          </div>
+          <small id="c1InstallerPlansHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c1TreatmentDescriptionForm">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1TreatmentDescription">If plans or documentation from the installer are not available, 
+            to the best of your knowledge, describe the water quality treatment provided by the practices 
+            (e.g., design factors, size, drainage area, etc.): <span class="requiredField">*</span></label>
+          <textarea class="form-control" id="c1TreatmentDescription" name="c1TreatmentDescription" rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c1FeeAgreementForm">
+    <!-- TODO: finish this form entry readio list -->
+    The Stormwater Remediation Fee Credit Agreement will be sent to the applicant for signature via:
+  </div>
+
 
   <!-- Credit Type 2: Property with an NPDES permit that includes stormwater management controls -->
   <div id="credit2Form">
