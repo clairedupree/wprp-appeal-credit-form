@@ -1,13 +1,15 @@
 <!-- 
-  Claire Dupree
+  @author Claire Dupree
+  @since 04/26/22
  -->
+
 <!doctype html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS -->
+	<!-- REMOTE Bootstrap CSS --
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -51,7 +53,6 @@
   Step 1: find the hello world version of the thing youre trying to do
   Step 2: get the basic mechanism of it working
   Step 3: add complexity from there
-
 -->
 
 <body>
@@ -69,14 +70,14 @@
   <!-- SELECT APPLICATION TYPE -->
   <div id="applicationSelect">
 
-    <div class="row applicationSelect">
+    <div class="row">
       <div class="col-6">
-        <button class="btn btn-dark btn-block" name="appeal" id="appealButton" onclick="showApplicationTypes('appeal')">
+        <button class="btn btn-dark btn-block" name="appealButton" id="appealButton" onclick="showApplicationTypes('appeal')">
           <i class='far fa-comment'></i>Appeal</button>
       </div>
       
-      <div class="col-6 applicationSelect">
-        <button class="btn btn-dark btn-block" name="credit" id="creditButton"onclick="showApplicationTypes('credit')">
+      <div class="col-6">
+        <button class="btn btn-dark btn-block" name="creditButton" id="creditButton"onclick="showApplicationTypes('credit')">
           <i class='fas fa-edit'></i>Credit</button>
       </div>
     </div>  
@@ -86,8 +87,7 @@
   <div id="typeSelect">
 
     <!-- Select Appeal Type(s) -->
-    <!-- TODO: change to appealSelect, find where the id is used elsewhere first -->
-    <form id="appeal" class="form" style="display: none">
+    <form id="appeal" class="form typeSelect" style="display: none">
       <div class="row">
         <div class="col-12">
           <div class="form-group">
@@ -137,14 +137,14 @@
 
 
     <!-- Select Credit Type -->
-    <div id="credit" style="display: none">
+    <div id="credit" class="typeSelect" style="display: none">
       <div class="row">
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
           <button class="btn btn-light btn-block" value="Property not under an NPDES permit" name="creditType"
-            id="creditType1" onclick="showCreditApplication('creditType1')">Property not under an NPDES	permit</button>
+            id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES	permit</button>
           <button class="btn btn-light btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
-            id="creditType2" onclick="showCreditApplication('creditType2')">Property with an NPDES permit that includes	stormwater management controls</button>
+            id="creditType2" onclick="showCreditApplication(id)">Property with an NPDES permit that includes	stormwater management controls</button>
         </div>
       </div>
     </div>
@@ -984,7 +984,6 @@
 
   <!-- CREDIT APPLICATIONS -->
   <!-- Credit Type 1: Property not under an NPDES permit -->
-  <!-- TODO: Write markup -->
   <div id="credit1Form">
     <hr>
     <div class="row">
@@ -997,7 +996,7 @@
       <div class="col-12">
         <div class="form-group">
           <div style="background-color: #f0f0f0; padding: 10px">
-            <!-- TODO: Make a scrolling textbox -->
+            <!-- TODO: Make a scrolling textbox? -->
             <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
             By Law, the maximum credit for any property is 50% of the Stormwater Remediation Fee. 
             To receive the full 50% credit, the entire impervious surface area of the property 
@@ -1497,7 +1496,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <!-- ReCaptcha -->
-  <!-- TODO: Research recaptcha, make sure using correct API import -->
   <script src="https://www.google.com/recaptcha/api.js?render=6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa"></script>
 
   <!-- Appeal / Credit Javascript -->

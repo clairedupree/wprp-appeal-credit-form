@@ -1,19 +1,30 @@
-// TODO: implement javascript doc comments
+/**
+ * @author Claire Dupree
+ * @since 04/26/22
+ * 
+ * @todo finish jsdoc comments
+ * @todo go back thru git and document tutorials used throughout process ith @tutorial
+ * @todo change #ctedit and #appeal to creditSleect anf #appealSelect
+ */
+
 
 const form = document.getElementById('wprfApplication');
 let selected = []; //user selection array
 const jsonData = {}; //json submit object
-//case manager object
-const cmObject = {
+const cmObject = { //case manager object
   caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
   jsonData: jsonData,
-};
-let fileUploads, 
-    attachment = []; //copied from pia form
-//boolean variables for populating credit type 1 data
+}; 
+let fileUploads, attachment = []; //supporting documentation
+//boolean variables for populating credit type 1 json data
 let c1GradingPermitForm, c1InstallerForm, c1TreatmentDescriptionForm, c1FeeAgreementForm = false;
 
 
+/**
+ * Appends HTML markup to designated div tags, depending on
+ * the value of the calling element.
+ * @param {object} element The calling element's id or name attribute
+ */
 function toggleDivs(element) {
   switch(element) {
     case 'constituentDifferent':
@@ -105,7 +116,15 @@ function toggleDivs(element) {
   }
 }
 
-// TODO: JSDOC COMMENTS
+
+/**
+ * Compares the values of two elements and sets a custom validity message
+ * in the browser if the values are duplicates. 
+ * @param {string} id The calling element's id
+ * @param {string} compareId The element to be compared against
+ * 
+ * @todo Replace awkward concatenation syntax with getElementById
+ */
 function validateDuplicates(id, compareId) {
   console.log($("#" + id).val(), $("#" + compareId).val());
   if ($("#" + id).val() == $("#" + compareId).val()) {
@@ -119,59 +138,63 @@ function validateDuplicates(id, compareId) {
 }
 
 
-// BACK BUTTON 
+/**
+ * Event listener for the #backButton in #navigation.
+ * Shows / hides divs depending on what is currently on screen.
+ */
 $("#backButton").click(function() {
-  if ($("#appeal").is(":visible") || $("#credit").is(":visible")) {
-    console.log("Leaving application type select")
+  if ($(".typeSelect").is(":visible")) {
     $("#navigation, #appeal, #credit").hide();
     $("#applicationSelect").show();      
   }
   else if ($("#formContainer").is(":visible")) {
-    console.log("Leaving application")
     $("#" + selected[0]).show();  
-    console.log('reset middle div');
+    // $("#typeSelect").show();      
     $("#formContainer").hide();      
   }
   else {
-    console.log("Back button default - page refresh")
+    console.log("Back button error, refreshing page")
     window.location.reload(); //default
   }
 });
 
 
-// SHOW APPLICATION TYPE
+/**
+ * Shows / hides #appeal or #credit divs depending on value 
+ * of parameter. Resets selected[], form fields, navigation checkboxes, 
+ * and any common divs with appended html markup.
+ * @param {string} applicationType Either credit or appeal, to be saved in selected[0]
+ */
 function showApplicationTypes(applicationType) {
-  // reset array, appeal checkboxes, form input, uncommon divs
-  selected.length = 0;
-  $('input[type=checkbox]').prop('checked', false);
-  document.getElementById('wprfApplication').reset();
-  // reset applicant info
-  $(".constituentInfo").html(""); 
+  selected.length = 0; //reset selected array
+  document.getElementById('appeal').reset(); //reset appeal checkboxes
+  document.getElementById('wprfApplication').reset(); //reset form fields
+  $(".constituentInfo").html(""); //reset constituent / mailing divs within form
 
-  //add choice to array
-  selected.push(applicationType);
+  selected.push(applicationType); 
 
   //show application
   $("#" + selected[0]).show();
-  //hide initial options
   $("#navigation").show();
   $("#applicationSelect").hide();
 
-  // Print selections so far
-  console.log(JSON.stringify(selected));
+  console.log(JSON.stringify(selected));  //TODO: temporary
 }
 
 
-// SHOW CREDIT APPLICATION
+/**
+ * Called on either button click in #credit div.
+ * Replaces HTML markup of uncommon divs and #uncommonMiddle 
+ * with HTML markup of selected credit type. Saves selection to selected[1].
+ * @param {string} creditType Id of selected button
+ */
 function showCreditApplication(creditType) {
   selected.length = 1; //truncate array
   $(".uncommon").html(""); //reset uncomon divs
-
   $("#formHeader").html($("#creditHeader").html()); //set credit header
-  $("#statement").html($("#creditAuthorization").html()); //set credit auth statement
+  $("#statement").html($("#creditAuthorization").html()); //set credit acknowledgement
 
-  // set uncommon credit options
-  console.log("Populate array data & append middle div");
+  //replace #uncommonMiddle with corresponding credit div
   switch (creditType) {
     case "creditType1":
       $("#uncommonMiddle").html($("#credit1Form").html());
@@ -183,19 +206,25 @@ function showCreditApplication(creditType) {
       selected.push(creditType);
       break;
     default:
-      console.log("Error appending credit types");
+      console.log("Error appending credit type divs.");
   }   
 
   $("#credit").hide(); //hide credit select  
   $("#formContainer").show(); //show form
 
-  console.log(JSON.stringify(selected));
+  console.log(JSON.stringify(selected)); //TODO: temporary
 }
 
-// SHOW APPEAL APPLICATION
-function showAppealApplication() {
-  console.log("Validate checkboxes");
 
+/**
+ * Called on #continueButton click in #appeal div. 
+ * Replaces HTML markup of uncommon divs and #uncommonMiddle with HTML markup 
+ * of selected appeal type(s). Accomodates multiple selections, saves to selected[1-5].
+ * 
+ * @todo clean up chekcbox validation, does #appeal need to be a form?
+ * @todo cleaner way to validate iniital checks in appeal5 - acces by name insyead of class? input[name="a5Category"
+ */
+function showAppealApplication() {
   if (validateCheckboxes("#appeal", 'appealType1') == false)
     ($("#appeal")[0].reportValidity());
   else {
@@ -204,13 +233,13 @@ function showAppealApplication() {
 
     selected.length = 1; //truncate array
     $(".uncommon").html(""); //reset uncomon divs
-
     $("#formHeader").html($("#appealHeader").html()); //set appeal header
-    $("#statement").html($("#appealAcknowledgement").html()); //set appeal ack statement
+    $("#statement").html($("#appealAcknowledgement").html()); //set appeal acknowledgement
 
-    populateSelectedAppealTypes(); //populate selected array
-
-    // set uncommon appeal options
+    //populate selected[] with appeal selections
+    populateSelectedAppealTypes();
+    
+    //loop thru selected[] and append appeal markup to #uncommonMiddle
     for (var i = 1; i < selected.length; i++) {
       console.log("Appending matching appeal types");
       switch (selected[i]) {
@@ -225,62 +254,69 @@ function showAppealApplication() {
           break;
         case "appealType4":
           $("#uncommonMiddle").append($("#appeal4Form").html());
-          validateCheckboxes('#a4Checks', 'a4Category1');
+          validateCheckboxes('#a4Checks', 'a4Category1'); //force initial validation of appended divs w/ehecks
           break;
         case "appealType5":
           $("#uncommonMiddle").append($("#appeal5Form").html());
-          // TODO: Use name attribute instead of nested classes?
-          validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'); // 'input[name="a5Category"]
+          validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'); //force initial validation of appended divs w/checks
         break;
         default:
-          console.log("Error appending appeal types.");
+          console.log("Error appending appeal type divs.");
       }   
     }
-
-    console.log("Show appeal application");
+    console.log("Show appeal application"); //TODO temporary
     $("#appeal").hide(); //hide appeal select  
     $("#formContainer").show(); //show form
 
-    console.log(JSON.stringify(selected));
+    console.log(JSON.stringify(selected)); //TODO temporary
   }
 }
 
 
-// Validate checked checkboxes is > 0
-//@param The element to be checked .name or #name (can be used for other form checkboxes)
+/**
+ * Validate that checked checkboxes within an element is > 0 and
+ * sets a custom validity message on the browser.
+ * @param {object} element The element to be validated 
+ * @param {string} id The id of the input element where validation will be set
+ * @returns true if checked > 0 //TODO eventually unnecessary
+ * 
+ * @todo can the validity be applied to the div or does it have to be an input element?
+ * @todo how to access checkboxes by name and not div id?
+ * @todo remove bool return, change logic in {@link showAppealApplication}
+ */
 function validateCheckboxes(element, id) {
   // Reference the checked checkboxes of the element
-  //TODO: try testing elements by name, rather than div id
-  //TODO: nested checkboxes acting as part of parent,
-  //todo: not clearing validation
   var numChecked = $(element + " input[type=checkbox]:checked").length;
   var numBoxes = $(element + " input[type=checkbox]").length;
-  console.log($(element + " input[type=checkbox]"));
-  console.log("\t" + numChecked + " checkboxes are checked out of " + numBoxes);
 
-  if (numChecked > 0) {
-    console.log('\tpass: ' + id)
-    document.getElementById(id).setCustomValidity("");
-    return true; //eventually unnecessary
+  console.log($(element + " input[type=checkbox]")); //TODO temporary
+  console.log("\t" + numChecked + " checkboxes are checked out of " + numBoxes); //TODO temporary
+
+  if (numChecked > 0) { //is valid
+    console.log('\tpass: ' + id); //TODO temporary
+    document.getElementById(id).setCustomValidity(""); //will pass validation on submit
+    return true; //TODO: eventually unnecessary
   } 
-  else {
-    console.log('\tfail: ' + id)
-    document.getElementById(id).setCustomValidity("Please select at least one of these options.");
-    return false; //eventually unnecessary
+  else { //is invalid
+    console.log('\tfail: ' + id); //TODO temporary
+    document.getElementById(id).setCustomValidity("Please select at least one of these options."); //will not pass validation on submit
+    return false; //TODO eventually unnecessary
   }
 }
 
 
-// Populate array selection data in the selected array
+/**
+ * Populate the selected[] with checked appeal options in #appeal div
+ */
 function populateSelectedAppealTypes() {
-  // Create a local array of appeal ids
+  //create a local array of appeal ids
   let appealCheckbox = document.querySelectorAll('input[name="appealType"]'); 
   let appealOptions = [];
   appealCheckbox.forEach((checkbox) => {
     appealOptions.push(checkbox.id); 
   });
 
-  // If checked, add to array
+  //if checked, add to selected array
   for (var i = 0; i < appealOptions.length; i++) {
     if (document.getElementById(appealOptions[i]).checked) {
       console.log("\tChecked: " + appealOptions[i]);
@@ -289,8 +325,11 @@ function populateSelectedAppealTypes() {
   } 
 }
 
-// Copied from pia form
-//@Desc: Handle file upload
+
+/**
+ * Copied from pia form
+ * @Desc: Handle file upload
+ */
 Array.prototype.forEach.call(document.querySelectorAll('.file-upload-btn'), (button) => {
   const hiddenInput = button.parentElement.querySelector('.file-upload-input');
   const label = button.parentElement.querySelector('.file-upload-label');
@@ -315,7 +354,10 @@ Array.prototype.forEach.call(document.querySelectorAll('.file-upload-btn'), (but
   });
 });
 
-//@Desc: convert to base64
+/**
+ * Copied from pia form
+ * @Desc: convert to base64
+ */
 const toBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -325,7 +367,10 @@ const toBase64 = (file) => {
   });
 };
 
-//@Desc: build base64 obj
+/**
+ * Copied from pia form
+ * @Desc: build base64 obj
+ */
 const base64Ready = () => {
   fileUploads.forEach(async (element) => {
     let getBase64 = await toBase64(element);
@@ -335,12 +380,12 @@ const base64Ready = () => {
 };
 
 
-// TODO format comments to match jsdoc
-// @Desc: Handle Form Submit
+/**
+ * Handle form submit, get recaptcha token, populate common JSON data
+ */
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
-  // TODO: add grecaptcha
   grecaptcha.ready(() => {
     console.log("execute grecaptcha token");
     grecaptcha
@@ -396,8 +441,6 @@ form.addEventListener('submit', (event) => {
         //populate uncommon selections from array
         for (var i = 1; i < selected.length; i++)
           populateUncommonJson(selected[i]);
-          // TODO: send i as argument? For documenting the number of appeal applications selected?
-          // i.e. ("appealType" + i) if needed for cleaner json
 
         jsonData.supportingDocuments = attachment; // refer to file mgmt function
         if (jsonData.applicationType == 'appeal')
@@ -417,10 +460,13 @@ form.addEventListener('submit', (event) => {
 });
 
 
-//populate json based on user selection
+/**
+ * Populate uncommon JSON data based on values stored in selected[].
+ * @param {string} element The id of the selected element
+ * 
+ * @todo change json variables with multiple options to concat strings or nested objects? instead of arrays[]?
+ */
 function populateUncommonJson(element) {
-  //console.log('populateUncommonJson()');
-
   switch (element) {
     case 'appealType1':
       jsonData.appealType1 = $('#appealType1').val();
@@ -457,8 +503,7 @@ function populateUncommonJson(element) {
     case 'appealType5':
       jsonData.appealType5 = $('#appealType5').val();
       // TODO: use array or concatenated string? Depends on CSV need
-      // TODO: change to a json object instead of an array
-      // ask abt js syntax on adding json object fields on a loop
+      // TODO: change to a json object instead of an array / adding on a loop? syntax?
       jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
         jsonData.a5Category.push(checkbox.value);
@@ -518,7 +563,9 @@ function populateUncommonJson(element) {
 }
 
 
-// BORROWED FROM PIA FORM:
+/**
+ * Send JSON object to issueFlow, show confirmation message.
+ */
 const postToIssueFlow = () => {
   let config = {
     headers: {
