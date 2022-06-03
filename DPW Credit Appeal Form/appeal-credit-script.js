@@ -8,12 +8,12 @@ const cmObject = {
   caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
   jsonData: jsonData,
 };
-let fileUploads = []; //copied from pia form
-let attachment = []; //copied from pia form
-  
+let fileUploads, 
+    attachment = []; //copied from pia form
+//boolean variables for populating credit type 1 data
+let c1GradingPermitForm, c1InstallerForm, c1TreatmentDescriptionForm, c1FeeAgreementForm = false;
 
-//TODO: should this be a queryselectorall? make a class called uncommonToggle
-// is it more readable as an onchange function?
+
 function toggleDivs(element) {
   switch(element) {
     case 'constituentDifferent':
@@ -41,7 +41,6 @@ function toggleDivs(element) {
       }
       else {
         $("#a5Category1Toggle").html("");
-        $("#a5Category1Span").html("");
       }
       break;
 
@@ -56,54 +55,51 @@ function toggleDivs(element) {
 
     case 'c1GradingPermit': 
       if (document.getElementById("c1GradingPermitYes").checked) {
-        $("#c1GradingPermitToggle").html($("#c1GradingPermitYesForm").html());
+        $("#c1GradingPermitToggle").html($("#c1GradingPermitForm").html());
+        c1GradingPermitForm = true;
         $("#c1InstallerToggle").html("");
+        c1InstallerForm = false;
       }
       else {
         $("#c1GradingPermitToggle").html("");
+        c1GradingPermitForm = false;
         $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+        c1InstallerForm = true;
       }
       break;
 
     case 'c1GPPlans': 
-      if (document.getElementById("c1SWMReportNo").checked)
-        return;
-        
-      if (document.getElementById("c1GPPlansNo").checked) {
-        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
-      }
-      else {
-        $("#c1InstallerToggle").html("");
-      }
-      break;
-
     case 'c1SWMReport': 
-      if (document.getElementById("c1GPPlansNo").checked)
-        return;
-
-      if (document.getElementById("c1SWMReportNo").checked) {
-      $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+      if (document.getElementById("c1SWMReportNo").checked ||
+        (document.getElementById("c1GPPlansNo").checked)) {
+        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+        c1InstallerForm = true;
       }
       else {
         $("#c1InstallerToggle").html("");
+        c1InstallerForm = false;
       }
       break;
 
     case 'c1InstallerPlans': 
       if (document.getElementById("c1InstallerPlansNo").checked) {
         $("#c1TreatmentDescriptionToggle").html($("#c1TreatmentDescriptionForm").html());
+        c1TreatmentDescriptionForm = true;
       }
       else {
         $("#c1TreatmentDescriptionToggle").html("");
+        c1TreatmentDescriptionForm = false;
       }
       break;
 
     case 'c1IMAgreement': 
       if (document.getElementById("c1IMAgreementYes").checked) {
         $("#c1FeeAgreementToggle").html("");
+        c1FeeAgreementForm = false;
       }
       else {
         $("#c1FeeAgreementToggle").html($("#c1FeeAgreementForm").html());
+        c1FeeAgreementForm = true;
       }
       break;
   }
@@ -415,7 +411,7 @@ form.addEventListener('submit', (event) => {
         jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
         console.log('Post object', JSON.stringify(cmObject));
-        //postToIssueFlow();
+        postToIssueFlow();
       });
     });
 });
@@ -462,6 +458,7 @@ function populateUncommonJson(element) {
       jsonData.appealType5 = $('#appealType5').val();
       // TODO: use array or concatenated string? Depends on CSV need
       // TODO: change to a json object instead of an array
+      // ask abt js syntax on adding json object fields on a loop
       jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
         jsonData.a5Category.push(checkbox.value);
@@ -479,8 +476,27 @@ function populateUncommonJson(element) {
       break;
 
     case 'creditType1':
-      jsonData.creditType1 = $('#creditType2').val();
+      jsonData.creditType1 = $('#creditType1').val();
       jsonData.c1Description = $('#c1Description').val();
+      jsonData.c1InstallDate = $('#c1InstallDate').val();
+      jsonData.c1Installer = $('#c1Installer').val();
+      jsonData.c1InstallerContact = $('#c1InstallerContact').val();
+      jsonData.c1GradingPermit = $('input[name="c1GradingPermit"]:checked').val();
+      if (c1GradingPermitForm == true) {
+        jsonData.c1GPNumber = $('#c1GPNumber').val();
+        jsonData.c1GPPlans = $('input[name="c1GPPlans"]:checked').val();
+        jsonData.c1SWMReport = $('input[name="c1SWMReport"]:checked').val();
+      }
+      if (c1InstallerForm == true) {
+        jsonData.c1InstallerPlans = $('input[name="c1InstallerPlans"]:checked').val();
+      }
+      if (c1TreatmentDescriptionForm == true) {
+        jsonData.c1TreatmentDescription = $('#c1TreatmentDescription').val();
+      }
+      jsonData.c1IMAgreement = $('input[name="c1IMAgreement"]:checked').val();
+      if (c1FeeAgreementForm = true) {
+        jsonData.c1FeeCrAgreement = $('input[name="c1FeeCrAgreement"]:checked').val();
+      }
       jsonData.c1Comments = $('#c1Comments').val();
       break;
 
@@ -488,7 +504,6 @@ function populateUncommonJson(element) {
       jsonData.creditType2 = $('#creditType2').val();          
       jsonData.c2NPDESPermitNumber = $('#c2NPDESPermitNumber').val();
       jsonData.c2RegistrationNumber = $('#c2RegistrationNumber').val();
-      // TODO: USE THIS FOR THE INITIAL CHECKBOXES IN APPEAL 5
       jsonData.c2CleanMarina = $('input[name="c2CleanMarina"]:checked').val();
       jsonData.c2Documentation = [];
       document.querySelectorAll('input[name="c2Documentation"]:checked').forEach((checkbox) => {
@@ -516,9 +531,9 @@ const postToIssueFlow = () => {
     .then(function (response) {
       console.log(response);
       window.scrollTo(0, 0);
-      // $('#formTitle').hide();
-      // $('#piaForm').hide();
-      // $('#message').show();
+      $('#navigation').hide();
+      $('#formContainer').hide();
+      $('#submitMessage').show();
     })
   .catch(function (error) {
     console.log({ error: error, message: 'Error posting to Case Manager' });

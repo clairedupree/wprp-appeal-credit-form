@@ -7,7 +7,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<!-- REMOTE Bootstrap CSS --
+	<!-- REMOTE Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!---->
@@ -451,6 +451,10 @@
 		</form>
   </div><!-- End form container -->
 
+  <div id="submitMessage" style="display: none">
+    <h5 style="text-align: center; padding: 1rem 1rem !important">Thank you, your application was submitted successfully.</h5>
+  </div>
+
 <!-- UNCOMMON DIVS -->
 <!-- To be appended based on selection -->
 <div id="uncommonForms" style="display: none"> <!-- style="display: none" -->
@@ -860,6 +864,7 @@
 
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
   <!-- TODO: format the sub-options for a5cat1 so its easier to read (think about screen readers / aria-label) -->
+  <!-- TODO: find a simpler way to reference only the parent a5 checkboxes, input=name? -->
   <div id="appeal5Form">
     <hr>
     <div class="row">
@@ -876,8 +881,7 @@
           <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category1" name="a5Category" 
               value="The property is not subject to the stormwater fee" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'), toggleDivs(id)">
-            <label class="form-check-label" for="a5Category1">The property is not subject to the stormwater fee 
-              <span id="a5Category1Span"></span></label>
+            <label class="form-check-label" for="a5Category1">The property is not subject to the stormwater fee</label>
           </div>
 
           <div id="a5Category1Toggle" class="uncommon"></div>
@@ -1011,15 +1015,16 @@
             <br><br>
             <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-credit-program/Credit%20Manual%20Version%201.1.2019%20with%20appendices.pdf" target="_blank">
               Click here for the Stormwater Remediation Credit Policy and Guidance document.</a>
+            <br><br>
+            <small id="c1BeginningHelpBlock" class="form-text text-muted">
+              Disclaimer: If you are not able to provide the requested documentation, County staff 
+              will attempt to obtain the needed information about the stormwater management practices 
+              and the water quality treatment they provide from available records and resources. 
+              However, as the applicant is ultimately responsible for providing documentation, if 
+              County staff is unable to locate the necessary information then the lack of documentation 
+              from the applicant would be a grounds for denial of the credit.
+            </small> 
           </div>
-          <small id="c1BeginningHelpBlock" class="form-text text-muted">
-            Disclaimer: If you are not able to provide the requested documentation, County staff 
-            will attempt to obtain the needed information about the stormwater management practices 
-            and the water quality treatment they provide from available records and resources. 
-            However, as the applicant is ultimately responsible for providing documentation, if 
-            County staff is unable to locate the necessary information then the lack of documentation 
-            from the applicant would be a grounds for denial of the credit.
-          </small> 
         </div>
       </div>
     </div>
@@ -1128,10 +1133,26 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>
+            In addition to the documents already requested, the following should be uploaded 
+            in the Supporting Documentation section: 
+            <ol style="margin-bottom: 0">
+              <li>Photographs of the practices and their drainage areas</li>
+              <li>A site plan/sketch that shows the approximate layout of the property and the location of the stormwater management practices</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Credit Type 1 Uncommon Options -->
-  <div id="c1GradingPermitYesForm">
+  <div id="c1GradingPermitForm">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
@@ -1224,8 +1245,42 @@
   </div>
 
   <div id="c1FeeAgreementForm">
-    <!-- TODO: finish this form entry readio list -->
-    The Stormwater Remediation Fee Credit Agreement will be sent to the applicant for signature via:
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            If the property does not have an Inspection and Maintenance Agreement, the owner will 
+            need to enter into a Stormwater Remediation Fee Credit Agreement with the County prior 
+            to approval of the credit. County staff will provide the applicant with this agreement 
+            at a later point in the application review process. A hard copy of this document will 
+            need to be signed by the property owner and returned by mail. 
+            <br><br>
+            <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-credit-agreement/Stormwater_Remediation_fee_credit_agreement_final_V1.1.pdf" target="_blank">
+              Click here for an example Stormwater Remediation Fee Credit Agreement.</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          The Stormwater Remediation Fee Credit Agreement will be sent to the applicant for signature via: <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1FeeCrAgreementPostalMail" name="c1FeeCrAgreement" 
+              value="postal mail" required>
+            <label class="form-check-label" for="c1FeeCrAgreementPostalMail">Postal Mail</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1FeeCrAgreementEmail" name="c1FeeCrAgreement" 
+              value="email" required>
+            <label class="form-check-label" for="c1FeeCrAgreementEmail">Email</label>
+          </div>
+        </div>
+      </div>
+    </div>  
   </div>
 
 
