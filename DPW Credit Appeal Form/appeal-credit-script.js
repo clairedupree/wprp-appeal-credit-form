@@ -2,9 +2,9 @@
  * @author Claire Dupree
  * @since 04/26/22
  * 
- * @todo finish jsdoc comments
- * @todo go back thru git and document tutorials used throughout process ith @tutorial
- * @todo change #ctedit and #appeal to creditSleect anf #appealSelect
+ * @todo ocument tutorials used throughout process with @tutorial?
+ * @todo change #credit and #appeal to #creditSelect and #appealSelect?
+ * might not work if id is being pushed to selected array
  */
 
 

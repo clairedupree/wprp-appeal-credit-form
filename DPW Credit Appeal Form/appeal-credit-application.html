@@ -49,10 +49,6 @@
 
 <!--
   TODO: delete vestigial element names, classes, variables and ids
-
-  Step 1: find the hello world version of the thing youre trying to do
-  Step 2: get the basic mechanism of it working
-  Step 3: add complexity from there
 -->
 
 <body>
@@ -360,7 +356,7 @@
         </div> 
 
         <!-- file upload -->
-        <!-- TODO: change to default bootstrap button, not an invisible button -->
+        <!-- TODO: change to default bootstrap button?, not an invisible button -->
         <div class="col-12">
           <div class="form-group">
             <input style="display:none" type="file" class="form-control file-upload-input"id="piaAttachments" name="piaAttachments[]" 
@@ -771,7 +767,7 @@
       </div>
     </div>
 
-    <!-- TODO: Dollar sign appearing weird on aacounty - default styles? -->
+    <!-- TODO: Dollar sign appearing weird on aacounty.org - override styles? -->
     <div class="row">
       <div class="col-12">
         <div class="form-group">
@@ -863,7 +859,7 @@
   </div> <!-- End appeal 4 application -->
 
   <!-- Appeal Type 5: Exempt or incorrect property owner -->  
-  <!-- TODO: format the sub-options for a5cat1 so its easier to read (think about screen readers / aria-label) -->
+  <!-- TODO: Add aria-label for sub-options for a5cat1 for better accessibility -->
   <!-- TODO: find a simpler way to reference only the parent a5 checkboxes, input=name? -->
   <div id="appeal5Form">
     <hr>
@@ -899,7 +895,6 @@
               value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1')">
             <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship exemption from the stormwater fee for the current billing year</label>
           </div>
-
 
           <!-- TODO: add link for office of finance? https://www.aacounty.org/departments/finance/ -->
           <small id="a5CategoryHelpBlock" class="form-text text-muted">
@@ -1384,7 +1379,7 @@
           </div>
 
           <small id="c2DocumentationHelpBlock" class="form-text text-muted">
-            <!-- TODO: add local links to similar help text blocks? -->
+            <!-- TODO: add jump link? apply to similar help text blocks? -->
             Upload the indicated documents in the <em>Supporting Documentation</em> section, as applicable.
           </small> 
         </div>
