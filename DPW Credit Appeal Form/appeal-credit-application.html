@@ -22,8 +22,6 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
-  <title>Appeal / Credit Application</title>
-
   <!-- Embedded styles -->
 	<style>
 		.requiredField {
@@ -40,7 +38,15 @@
       border-top: 0px !important;
       margin: auto !important;
     }
-    
+
+    /* [class^="col"] {
+      padding-left: 0px !important;
+    } */
+
+    h1 {
+      padding-left: 15px !important;
+    }
+
     .dropdown-menu {
       text-align: center !important;
     }
@@ -52,13 +58,19 @@
 -->
 
 <body>
-  <div class="bootstrap-iso">
+  <div class="bootstrap-iso"> 
+  
+  <div class="row">  
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
 
   <!-- Back Button -->
   <div id="navigation" style="display: none">
     <div id="backButton" class="row justify-content-end">
       <div class="col-4 form-group">
-        <button class="btn btn-light btn-block">Go Back</button>
+        <button class="btn btn-secondary btn-block">Go Back</button>
       </div>
     </div>
   </div>  
@@ -67,14 +79,19 @@
   <div id="applicationSelect">
 
     <div class="row">
-      <div class="col-6">
-        <button class="btn btn-dark btn-block" name="appealButton" id="appealButton" onclick="showApplicationTypes('appeal')">
-          <i class='far fa-comment'></i>Appeal</button>
+      <div class="col-12">
+        <h5>Select the application type:</h5>
       </div>
-      
-      <div class="col-6">
-        <button class="btn btn-dark btn-block" name="creditButton" id="creditButton"onclick="showApplicationTypes('credit')">
-          <i class='fas fa-edit'></i>Credit</button>
+    </div>
+
+    <div class="row">
+      <div class="col-12 form-group">
+        <div class="form-group form-group">
+          <button class="btn btn-dark btn-block" name="appealButton" id="appealButton" onclick="showApplicationTypes('appeal')">
+            <i class='far fa-comment'></i>Appeal</button>
+          <button class="btn btn-dark btn-block" name="creditButton" id="creditButton"onclick="showApplicationTypes('credit')">
+            <i class='fas fa-edit'></i>Credit</button>
+        </div>
       </div>
     </div>  
   </div>
@@ -87,7 +104,7 @@
       <div class="row">
         <div class="col-12">
           <div class="form-group">
-            <h5>Select the reason(s) for the appeal:</h5>
+            <h5>Select the appeal basis (check all that apply):</h5>
 
             <div class="form-check">
               <input class="form-check-input" type="checkbox" id="appealType1" name="appealType" 
@@ -133,13 +150,14 @@
 
 
     <!-- Select Credit Type -->
+    <!-- TODO: btn-light / btn-dark / btn-secondary? -->
     <div id="credit" class="typeSelect" style="display: none">
       <div class="row">
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
-          <button class="btn btn-light btn-block" value="Property not under an NPDES permit" name="creditType"
+          <button class="btn btn-dark btn-block" value="Property not under an NPDES permit" name="creditType"
             id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES	permit</button>
-          <button class="btn btn-light btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
+          <button class="btn btn-dark btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
             id="creditType2" onclick="showCreditApplication(id)">Property with an NPDES permit that includes	stormwater management controls</button>
         </div>
       </div>
@@ -532,7 +550,7 @@
   <div id="appealHeader">
     <div class="row">
       <div class="col-12">
-        <h4>Stormwater Fee Appeal Application</h4> 
+        <h4>Appeal Application</h4> 
       </div>
     </div>
   </div>
@@ -540,7 +558,7 @@
   <div id="creditHeader">
     <div class="row">
       <div class="col-12">
-        <h4>Stormwater Credit Application</h4>
+        <h4>Credit Application</h4>
       </div>
     </div>
   </div>
@@ -551,7 +569,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis 1: Property placed in wrong residental tier</h5>
+        <h5>Appeal Basis: Property placed in wrong residental tier</h5>
       </div>
     </div>
 
@@ -651,7 +669,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis 2: Incorrect classification of	property</h5>
+        <h5>Appeal Basis: Incorrect classification of	property</h5>
       </div>
     </div>
 
@@ -741,7 +759,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis 3: Homeowner's Association property where the fee cap is 
+        <h5>Appeal Basis: Homeowner's Association property where the fee cap is 
           applicable but was not applied</h5>
       </div>
     </div>
@@ -813,7 +831,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis 4: Mathematical error or incorrect	impervious surface calculation</h5>
+        <h5>Appeal Basis: Mathematical error or incorrect	impervious surface calculation</h5>
       </div>
     </div>
 
@@ -865,7 +883,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Appeal Basis 5: Exempt or incorrect property owner</h5>
+        <h5>Appeal Basis: Exempt or incorrect property owner</h5>
       </div>
     </div>
 
@@ -983,7 +1001,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Credit Type 1: Property not under an NPDES permit</h5>
+        <h5>Credit Type: Property not under an NPDES permit</h5>
       </div>
     </div>
 
@@ -1283,7 +1301,7 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Credit Type 2: Property with an NPDES permit that includes stormwater management controls</h5>
+        <h5>Credit Type: Property with an NPDES permit that includes stormwater management controls</h5>
       </div>
     </div> 
 
@@ -1406,27 +1424,25 @@
     </div> 
 
     <div class="row">
-      <div class="form-group">
-        <div style="background-color: #f0f0f0; padding: 10px">
-          <div class="col-12">
-            <!-- <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b> -->
-            I/we, the undersigned do hereby declare under the penalties of perjury that the information 
-            provided on and with this application is, to the best of my/our knowledge and belief, true, correct, 
-            and complete. I/we also understand that the failure to provide all information and/or documentation 
-            as required is a basis for a denial of the appeal. I/we understand that by filing this appeal, we are 
-            authorizing the Department of Public Works to confirm the information provided with this application, 
-            including, but not limited to, inspecting and entering the property to verify the amount of impervious 
-            surface area. I/we understand that if the Department of Public Works grants the appeal and it results 
-            in a change in the stormwater remediation fee, I/we will be issued a new bill. I/we understand that if 
-            I/we are aggrieved by the decision of the Department of Public Works, I/we shall pay the stormwater 
-            remediation fee, may request a refund and if a refund is denied, may appeal to the Maryland Tax Court 
-            in accordance with Article 24, &sect; 9-710 and 9-712 of the Annotated Code of Maryland
-          </div>
-  
-          <div class="col-12">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+              <!-- <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b> -->
+              I/we, the undersigned do hereby declare under the penalties of perjury that the information 
+              provided on and with this application is, to the best of my/our knowledge and belief, true, correct, 
+              and complete. I/we also understand that the failure to provide all information and/or documentation 
+              as required is a basis for a denial of the appeal. I/we understand that by filing this appeal, we are 
+              authorizing the Department of Public Works to confirm the information provided with this application, 
+              including, but not limited to, inspecting and entering the property to verify the amount of impervious 
+              surface area. I/we understand that if the Department of Public Works grants the appeal and it results 
+              in a change in the stormwater remediation fee, I/we will be issued a new bill. I/we understand that if 
+              I/we are aggrieved by the decision of the Department of Public Works, I/we shall pay the stormwater 
+              remediation fee, may request a refund and if a refund is denied, may appeal to the Maryland Tax Court 
+              in accordance with Article 24, &sect; 9-710 and 9-712 of the Annotated Code of Maryland
+            <br><br>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="statementAppeal" name="statementAppeal" value="acknowledged" required>
-              <label class="form-check-label" for="statementAppeal">I understand <span class="requiredField">*</span></label>
+              <label class="form-check-label" for="statementAppeal"><b>I understand </b><span class="requiredField">*</span></label>
             </div>
           </div>
         </div>
@@ -1443,9 +1459,9 @@
     </div> 
 
   <div class="row">
-    <div class="form-group">
-      <div style="background-color: #f0f0f0; padding: 10px">
-        <div class="col-12">
+    <div class="col-12">
+      <div class="form-group">
+        <div style="background-color: #f0f0f0; padding: 10px">
           <!-- <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b> -->
           By signing this form, you certify that (1) you have read and understand the Stormwater 
           Remediation Credit Policy and Guidance requirements; (2) the information provided on this 
@@ -1453,13 +1469,10 @@
           have been maintained and are in proper working order; and (4) you grant the County 
           permission to conduct site inspections of the stormwater management practices 
           included as part of this application package.
-        </div>
-
-        <div class="col-12">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="statementCredit" name="statementCredit" value="authorized" required>
-            <label class="form-check-label" for="statementCredit">I understand <span class="requiredField">*</span></label>
-          </div>
+        <br><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="statementCredit" name="statementCredit" value="authorized" required>
+          <label class="form-check-label" for="statementCredit"><b>I understand </b><span class="requiredField">*</span></label>
         </div>
       </div>
     </div>
