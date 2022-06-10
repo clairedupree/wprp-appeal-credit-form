@@ -15,7 +15,7 @@ const cmObject = { //case manager object
   caseTypeUUID: '6d788088-0501-4db3-82b2-9a72bf61820f',
   jsonData: jsonData,
 }; 
-let fileUploads, attachment = []; //supporting documentation
+let fileUploads, attachments = []; //supporting documentation
 //boolean variables for populating credit type 1 json data
 let c1GradingPermitForm, c1InstallerForm, c1TreatmentDescriptionForm, c1FeeAgreementForm = false;
 
@@ -120,22 +120,35 @@ function toggleDivs(element) {
 /**
  * Compares the values of two elements and sets a custom validity message
  * in the browser if the values are duplicates. 
- * @param {string} id The calling element's id
- * @param {string} compareId The element to be compared against
- * 
- * @todo Replace awkward concatenation syntax with getElementById
+ * @param {string} thisElement The calling element's id
+ * @param {string} compareElement The element to be compared against
+ * @param {string} validityTarget The id of the input element where validation will be set 
  */
-function validateDuplicates(id, compareId) {
-  console.log($("#" + id).val(), $("#" + compareId).val());
-  if ($("#" + id).val() == $("#" + compareId).val()) {
+function validateDuplicates(thisElement, compareElement, validityTarget) {
+
+  console.log($(thisElement).val(), $(compareElement).val(), validityTarget);
+    
+  if ($(thisElement).val() == $(compareElement).val()) {
     console.log('duplicates = true')
-    document.getElementById(id).setCustomValidity("Property classification cannot be the same.");
+    document.getElementById(validityTarget).setCustomValidity("Property classification cannot be the same.");
   }
   else {
     console.log("duplicates = false")
-    document.getElementById(id).setCustomValidity("");
+    document.getElementById(validityTarget).setCustomValidity("");
   }
 }
+
+
+// function validateTest(className, validate) {
+//   let compare = document.getElementsByClassName(className);
+//   console.log(compare.val());
+//   if (compare[0].val() == compare[1].val()) {
+//     console.log('duplicates true');
+//   }
+//   else {
+//     console.log('duplicates false');
+//   }
+// }
 
 
 /**
@@ -375,7 +388,7 @@ const base64Ready = () => {
   fileUploads.forEach(async (element) => {
     let getBase64 = await toBase64(element);
     let base64 = getBase64.split(',')[1];
-    attachment.push({ filename: element.name, base64: base64 });
+    attachments.push({ filename: element.name, base64: base64 });
   });
 };
 
@@ -442,7 +455,7 @@ form.addEventListener('submit', (event) => {
         for (var i = 1; i < selected.length; i++)
           populateUncommonJson(selected[i]);
 
-        jsonData.supportingDocuments = attachment; // refer to file mgmt function
+        jsonData.attachments = attachments; // refer to file mgmt function
         if (jsonData.applicationType == 'appeal')
           jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
         else if (jsonData.applicationType == 'credit')

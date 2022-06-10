@@ -50,11 +50,22 @@
     .dropdown-menu {
       text-align: center !important;
     }
+
+    .btn-primary {
+      background-color: #0072bc !important;
+    }
 	</style>
 </head>
 
 <!--
   TODO: delete vestigial element names, classes, variables and ids
+  TODO: form bottom cut off in small resolution
+
+  TODO:
+  SPAM
+  get rid of notes
+  get rid of console.logs
+  finish implementing the duplicates module with appeal2
 -->
 
 <body>
@@ -602,7 +613,7 @@
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
           <label for="a1TierCurrent">The property is currently classified as: <span class="requiredField">*</span></label>
           <select class="form-control" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" 
-            onchange="validateDuplicates(id, 'a1TierProposed')" required>
+            onchange="validateDuplicates('#a1TierCurrent', '#a1TierProposed', 'a1TierCurrent')" required>
             <option selected value="">Please select</option>
             <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
             <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
@@ -613,7 +624,7 @@
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <label for="a1TierProposed">The property should be classified as: <span class="requiredField">*</span></label>
             <select class="form-control" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" 
-              onchange="validateDuplicates(id, 'a1TierCurrent')" required>
+              onchange="validateDuplicates('#a1TierProposed', '#a1TierCurrent', 'a1TierCurrent')" required>
               <option selected value="">Please select</option>
               <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
               <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
