@@ -1,0 +1,1523 @@
+<!-- 
+  @author Claire Dupree
+  @since 04/26/22
+ -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<!-- REMOTE Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!---->
+  
+  <!-- LOCAL Bootstrap CSS -->
+  <link rel="stylesheet" href="https://www.aacounty.org/_template-assets/css/bootstrap4-iso.min.css" />
+  <!---->
+
+	<!-- FontAwesome Icon Library -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+		integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <title>TEST</title>
+  <!-- Embedded styles -->
+	<style>
+		.requiredField {
+			color: red;
+		}
+
+    i {
+      margin-right: 5px;
+    }
+
+    .row {
+      padding: 0px !important;
+      background: none !important;
+      border-top: 0px !important;
+      margin: auto !important;
+    }
+
+    h1 {
+      padding-left: 15px !important;
+    }
+
+    .dropdown-menu {
+      text-align: center !important;
+    }
+
+    .btn-primary {
+      background-color: #0072bc !important;
+    }
+	</style>
+</head>
+
+<!--
+  TODO: delete vestigial element names, classes, variables and ids
+  TODO: form bottom cut off in small resolution
+
+  TODO: wrap up all open issues
+  TODO: clean up all console.logs
+  TODO: update checkboxes method similar to duplicates method
+  SPAM
+  get rid of notes
+  get rid of console.logs
+  finish implementing the duplicates module with appeal2
+-->
+
+<body>
+  <div class="bootstrap-iso"> 
+  
+  <div class="row">  
+    <div class="col-12">
+      <hr>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div id="navigation" style="display: none">
+    <div id="backButton" class="row justify-content-end">
+      <div class="col-4 form-group">
+        <button class="btn btn-secondary btn-block">Go Back</button>
+      </div>
+    </div>
+  </div>  
+
+  <!-- SELECT APPLICATION TYPE -->
+  <div id="applicationSelect">
+
+    <div class="row">
+      <div class="col-12">
+        <h5>Select the application type:</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 form-group">
+        <div class="form-group form-group">
+          <button class="btn btn-dark btn-block" name="appealButton" id="appealButton" onclick="showApplicationTypes('appeal')">
+            <i class='far fa-comment'></i>Appeal</button>
+          <button class="btn btn-dark btn-block" name="creditButton" id="creditButton"onclick="showApplicationTypes('credit')">
+            <i class='fas fa-edit'></i>Credit</button>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+  <!-- SELECT APPEAL or CREDIT TYPE -->
+  <div id="typeSelect">
+
+    <!-- Select Appeal Type(s) -->
+    <form id="appeal" class="form typeSelect" style="display: none">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <h5>Select the appeal basis (check all that apply):</h5>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType1" name="appealType" 
+                value="Property placed in wrong residential tier">
+              <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType2" name="appealType" 
+                value="Incorrect classification of property">
+              <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType3" name="appealType" value="Homeowner's Association property 
+                where the fee cap is applicable but was not applied">
+              <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType4" name="appealType" 
+                value="Mathematical error or incorrect impervious surface calculation">
+              <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface calculation</label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="appealType5" name="appealType" 
+                value="Exempt or incorrect property owner">
+              <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <!-- Continue button -->
+      <div class="row">
+        <div class="col-12 text-center form-group">
+          <!-- onclick: validates checkboxes, resets selections, appends new selections -->
+          <button type="button" class="btn btn-primary" id="continueButton" onclick="showAppealApplication()">Continue</button>
+        </div>
+      </div>
+    </form>
+
+
+    <!-- Select Credit Type -->
+    <!-- TODO: btn-light / btn-dark / btn-secondary? -->
+    <div id="credit" class="typeSelect" style="display: none">
+      <div class="row">
+        <div class="col-12 form-group">
+          <h5>Select the credit type:</h5>
+          <button class="btn btn-dark btn-block" value="Property not under an NPDES permit" name="creditType"
+            id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES	permit</button>
+          <button class="btn btn-dark btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
+            id="creditType2" onclick="showCreditApplication(id)">Property with an NPDES permit that includes	stormwater management controls</button>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- end type select -->
+
+  <!-- FORM CONTAINER -->
+	<div id="formContainer" style="display: none"> <!-- style="display: none"-->
+
+    <!-- Header -->
+    <div id="formHeader" class="uncommon">
+      <!-- to be apended -->
+    </div>
+
+    <!-- Form -->
+    <form id="wprfApplication" class="form">
+
+      <!-- COMMON BEGINNING -->
+      <div id="commonBeginning">
+        <!-- <hr> -->
+        <!-- Owner Information -->
+        <div class="row">
+          <div class="col-12">
+            <h5>Property Owner Information</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="ownerFirstName">Owner First Name: <span class="requiredField">*</span></label>
+              <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="ownerLastName">Owner Last Name: <span class="requiredField">*</span></label>
+              <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">  
+          <div class="col-12">
+            <div class="form-group">
+              <label for="ownerCompanyName">Owner Company / Organization (if applicable): </label>
+              <input type="text" name="ownerCompanyName" id="ownerCompanyName" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <h5>Tax Accounts</h5>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="form-group">
+              <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
+              <small id="ownerTaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
+          </div>	
+        </div>
+
+        <!-- Property Address -->
+        <div class="row">
+          <div class="col-12">
+            <h5>Property Address</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="locationHouseNumber">Street Number: <span class="requiredField">*</span></label>
+              <input type="text" name="locationHouseNumber" id="locationHouseNumber" class="form-control" aria-label="Property Street Number" required>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="locationStreetName">Street Name: <span class="requiredField">*</span></label>
+              <input type="text" name="locationStreetName" id="locationStreetName" class="form-control" aria-label="Property Street Name" required>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="locationStreetType">Street Type: <span class="requiredField">*</span></label>
+              <input type="text" name="locationStreetType" id="locationStreetType" class="form-control" placeholder="Street, Drive, etc."  aria-label="Property Street Type" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="locationCity">City: <span class="requiredField">*</span></label>
+              <input type="text" name="locationCity" id="locationCity" class="form-control"  aria-label="Property City" required>
+            </div>
+          </div>   
+
+          <!-- TODO: make a drop down of state abbreviations? -->
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="locationState">State: <span class="requiredField">*</span></label>
+              <input type="text" name="locationState" id="locationState" class="form-control" aria-label="Property State" required>
+            </div>
+          </div>   
+
+          <!-- TODO: make a zip code type input? -->
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="locationZip">Zip Code: <span class="requiredField">*</span></label>
+              <input type="text" name="locationZip" id="locationZip" class="form-control" aria-label="Property Zip Code" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="row">
+          <div class="col-12">
+            <h5>Contact Information</h5>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              Is applicant a person other than the property owner? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="constituentDifferentYes" name="constituentDifferent" 
+                  value="yes" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="constituentDifferentYes">Yes</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="constituentDifferentNo" name="constituentDifferent" 
+                  value="no" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="constituentDifferentNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="constituentInfo" class="constituentInfo">
+          <!-- append only if "constituentDifferentNo: checked" -->
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="constituentPhone">Phone Number: <span class="requiredField">*</span></label>
+              <input type="tel" id="constituentPhone" name="constituentPhone" class="form-control" aria-label="Applicant Phone Number" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="email">Email Address: <span class="requiredField">*</span></label>
+              <input type="email" id="email" name="email" class="form-control" aria-label="Applicant Email Address" required>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <h5>Mailing Address</h5>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              Is the mailing address different than the property address? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="mailingDifferentYes" name="mailingDifferent" 
+                  value="yes" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="mailingDifferentYes">Yes</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="mailingDifferentNo" name="mailingDifferent" 
+                  value="no" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="mailingDifferentNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="mailingAddress" class="constituentInfo">
+          <!-- append only if "mailingDifferentYes: checked" -->
+        </div>
+      </div> <!-- End common beginning -->
+
+      <!-- UNCOMMON MIDDLE -->
+      <div id="uncommonMiddle" class="uncommon">
+        <!-- to be appended w/ selected appeal or credit type(s) -->
+      </div>
+
+      <!-- COMMON ENDING -->
+      <div id="commonEnding">
+        <hr>
+        <!-- jsonData.supportingDoc = ''; --> 
+        <div class="row">
+          <div class="col-12">
+            <h5>Supporting Documentation</h5>
+          </div>
+        </div> 
+
+        <!-- file upload -->
+        <!-- TODO: change to default bootstrap button?, not an invisible button -->
+        <div class="col-12">
+          <div class="form-group">
+            <input style="display:none" type="file" class="form-control file-upload-input"id="piaAttachments" name="piaAttachments[]" 
+            multiple accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            <button type="button" class="file-upload-btn btn btn-secondary">Choose Files</button>
+            <span style="margin-left: 10px" class="file-upload-label"></span>
+          </div>
+        </div>
+        <!-- file upload -->
+      <!-- file upload
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <input
+              type="file" class="form-control-file file-upload-input" 
+              id="supportingDocuments" name="supportingDocuments" multiple
+              accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+            
+            <button type="button" class="file-upload-btn btn btn-secondary">Choose File(s)</button>
+            <span class="file-upload-label"></span>
+          </div>
+        </div>
+      </div>
+    -->
+        <!-- <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <!-- <label for="supportingDoc">Supporting Documentation</label> --
+              <input class="form-control-file" type="file" id="supportingDoc" 
+                name="fileUploadButton" multiple>
+            </div>
+          </div>
+        </div> -->
+        
+
+        <div id="statement" class="uncommon">
+          <!-- to be appended w/ appeal acknowledgement or credit authorization  -->
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="signaturePrinted">Printed Signature <span class="requiredField">*</span></label>
+              <input type="text" id="signaturePrinted" name="signaturePrinted" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="signatureTitle">Title (if applicable)</label>
+              <input type="text" name="signatureTitle" id="signatureTitle" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">  
+          <div class="col-12">
+            <div class="form-group">
+              <label for="signatureCompanyName">Company / Organization (if applicable)</label>
+              <input type="text" name="signatureCompanyName" id="signatureCompanyName" class="form-control">
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Submit -->
+        <div class="row">
+          <div class="col-12">
+            <div class="input-group">
+              <button class="btn btn-primary" type="submit" id="submitButton" >Submit Form</button>
+              <span style="margin-left: 10px">
+                <small id="requiredHelpBlock" class="form-text text-muted">Fields marked with <span class="requiredField">*</span> are required</small>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- <div class="row">
+          <div class="col-12">
+            <div id="requiredHelpBlock" class="form-text text-muted">
+              <small>Fields marked with <span class="requiredField">*</span> are required</small>
+            </div>
+          </div>
+        </div> -->
+      </div> <!-- End common ending -->
+
+		</form>
+  </div><!-- End form container -->
+
+  <div id="submitMessage" style="display: none">
+    <h5 style="text-align: center; padding: 1rem 1rem !important">Thank you, your application was submitted successfully.</h5>
+  </div>
+
+<!-- UNCOMMON DIVS -->
+<!-- To be appended based on selection -->
+<div id="uncommonForms" style="display: none"> <!-- style="display: none" -->
+
+  <div id="constituentInfoForm">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="constituentFirstName">Applicant First Name: <span class="requiredField">*</span></label>
+          <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="constituentLastName">Applicant Last Name: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentLastName" id="constituentLastName" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="constituentCompanyName">Applicant Company / Organization (if applicable): </label>
+          <input type="text" name="constituentCompanyName" id="constituentCompanyName" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mailingAddressForm">    
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="constituentHouseNumber">Street Number: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentHouseNumber" id="constituentHouseNumber" class="form-control" aria-label="Mailing Street Number" required>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="constituentStreetName">Street Name: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentStreetName" id="constituentStreetName" class="form-control" aria-label="Mailing Street Name" required>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="constituentStreetType">Street Type: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentStreetType" id="constituentStreetType" class="form-control" placeholder="Street, Drive, etc." aria-label="Mailing Street Type" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="constituentCity">City: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentCity" id="constituentCity" class="form-control" aria-label="Mailing City" required>
+        </div>
+      </div>   
+      
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="constituentState">State: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentState" id="constituentState" class="form-control" aria-label="Mailing State" required>
+        </div>
+      </div>   
+
+      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <div class="form-group">
+          <label for="constituentZip">Zip Code: <span class="requiredField">*</span></label>
+          <input type="text" name="constituentZip" id="constituentZip" class="form-control" aria-label="Mailing Zip Code" required>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Headers -->
+  <div id="appealHeader">
+    <div class="row">
+      <div class="col-12">
+        <h4>Appeal Application</h4> 
+      </div>
+    </div>
+  </div>
+
+  <div id="creditHeader">
+    <div class="row">
+      <div class="col-12">
+        <h4>Credit Application</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPEAL APPLICATIONS -->
+  <!-- Appeal Type 1: Property places in wrong residential tier -->
+  <div id="appeal1Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Appeal Basis: Property placed in wrong residental tier</h5>
+      </div>
+    </div>
+
+    <!-- Residental Property Tier info -->
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b>
+            <ul style="margin-bottom: 0">
+              <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural (RA) or
+                Residential Low Density (RLD) zoning</li>
+              <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5 residential
+                zoning</li>
+              <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in RA, 
+                RLD, R1, R2, or R5 zoning
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="row">
+        <div class="col-12">
+          On the property tax bill,      
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <label for="a1TierCurrent">The property is currently classified as: <span class="requiredField">*</span></label>
+          <select class="form-control" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" 
+            onchange="validateDuplicates('#a1TierCurrent', '#a1TierProposed', '#a1TierCurrent')" required>
+            <option selected value="">Please select</option>
+            <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
+            <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
+            <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+          </select>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <label for="a1TierProposed">The property should be classified as: <span class="requiredField">*</span></label>
+            <select class="form-control" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" 
+              onchange="validateDuplicates('#a1TierProposed', '#a1TierCurrent', '#a1TierCurrent')" required>
+              <option selected value="">Please select</option>
+              <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
+              <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
+              <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Reason: <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason" 
+              value="The property's tier is incorrect based on its zoning" required>
+            <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its zoning</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="a1Reason2" name="a1Reason" 
+              value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3" required>
+            <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential zoning but is not 
+                categorized as Tier 3</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason" 
+              value="The property should be classified as the next lower tier due to the amount of impervious surface on site" required>
+            <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier due to the 
+                amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property; 
+                Less than 1,200 sq ft for a Tier 2 property)</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a1Comments">Comments: </label>
+          <textarea class="form-control" id="a1Comments" rows="3"></textarea>
+          <small id="a1EndingHelpBlock" class="form-text text-muted">Use the 
+            <a href="https://www.aacounty.org/myannearundel" target="_blank">My Anne Arundel application</a> 
+            to look up information on the stormwater fee, impervious amounts, and property zoning.</small> 
+        </div>
+      </div>
+    </div>
+  </div> <!-- End appeal 1 application -->
+
+  <!-- Appeal Type 1: Incorrect classification of	property -->
+  <div id="appeal2Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Appeal Basis: Incorrect classification of	property</h5>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-12">
+          On the property tax bill,      
+        </div>
+
+        <div class="col-12">
+          <label for="a2TypeCurrent">The property is currently classified as: 
+            <span class="requiredField">*</span></label>
+          <select class="form-control" name="a2TypeCurrent" id="a2TypeCurrent" aria-label="a2TypeCurrent" 
+            onchange="validateDuplicates('#a2TypeCurrent', '#a2TypeProposed', '#a2TypeCurrent')" required>
+            <option selected value="">Please select</option>
+            <option value="WPRF01, WPRF02, WPRF03">WPRF01, WPRF02, WPRF03: Residental in a Residential Zone</option>
+            <option value="WPRF04">WPRF04: Farm</option>
+            <option value="WPRF05">WPRF05: Mobile Home Park</option>
+            <!-- <option value="WPRF06"></option> -->
+            <option value="WPRF07">WPRF07: Non-Residential Religious Organization</option>
+            <option value="WPRF08">WPRF08: Private Academic School</option>
+            <option value="WPRF09">WPRF09: Private Road Not HOA-Owned</option>
+            <option value="WPRF10">WPRF10: Private Airport</option>
+            <option value="WPRF11">WPRF11: Standard Marina (&#60;7.5 impervious acres)</option>
+            <option value="WPRF12">WPRF12: Large Marina (>7.5 impervious acres)</option>
+            <!-- <option value="WPRF13"></option> -->
+            <option value="WPRF14">WPRF14: Non-Residential Charitable, 501(c)(3) or (d)</option>
+            <option value="WPRF15">WPRF15: NPDES Permit Holder w/ Stormwater Management Controls</option>
+            <option value="WPRF16">WPRF16: Homeowners Association</option>
+            <option value="WPRF17">WPRF17: Multifamily Dwelling</option>
+            <!-- <option value="WPRF18"></option> -->
+            <option value="WPRF19">WPRF19: Residential Condo</option>
+            <option value="WPRF20">WPRF20: Residential Property in a Non:Residential Zone</option>
+            <option value="WPRF21">WPRF21: Non-Residential, General</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-12">
+          <label for="a2TypeProposed">The property should be classified as: 
+            <span class="requiredField">*</span></label>
+          <select class="form-control" name="a2TypeProposed" id="a2TypeProposed" aria-label="a2TypeProposed" 
+            onchange="validateDuplicates('#a2TypeProposed', '#a2TypeCurrent', '#a2TypeCurrent')" required>
+            <option selected value="">Please select</option>
+            <option value="WPRF01, WPRF02, WPRF03">WPRF01, WPRF02, WPRF03: Residental in a Residential Zone</option>
+            <option value="WPRF04">WPRF04: Farm</option>
+            <option value="WPRF05">WPRF05: Mobile Home Park</option>
+            <!-- <option value="WPRF06"></option> -->
+            <option value="WPRF07">WPRF07: Non-Residential Religious Organization</option>
+            <option value="WPRF08">WPRF08: Private Academic School</option>
+            <option value="WPRF09">WPRF09: Private Road Not HOA-Owned</option>
+            <option value="WPRF10">WPRF10: Private Airport</option>
+            <option value="WPRF11">WPRF11: Standard Marina (&#60;7.5 impervious acres)</option>
+            <option value="WPRF12">WPRF12: Large Marina (>7.5 impervious acres)</option>
+            <!-- <option value="WPRF13"></option> -->
+            <option value="WPRF14">WPRF14: Non-Residential Charitable, 501(c)(3) or (d)</option>
+            <option value="WPRF15">WPRF15: NPDES Permit Holder w/ Stormwater Management Controls</option>
+            <option value="WPRF16">WPRF16: Homeowners Association</option>
+            <option value="WPRF17">WPRF17: Multifamily Dwelling</option>
+            <!-- <option value="WPRF18"></option> -->
+            <option value="WPRF19">WPRF19: Residential Condo</option>
+            <option value="WPRF20">WPRF20: Residential Property in a Non:Residential Zone</option>
+            <option value="WPRF21">WPRF21: Non-Residential, General</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a2Comments">Comments: </label>
+          <textarea class="form-control" id="a2Comments" rows="3"></textarea>
+          <small id="a2EndingHelpBlock" class="form-text text-muted">Use the 
+            <a href="https://www.aacounty.org/myannearundel" target="_blank">My Anne Arundel application</a> 
+            to look up information on the stormwater fee, impervious amounts, and property zoning.</small> 
+        </div>
+      </div>
+    </div>    
+  </div> <!-- End appeal 2 application -->
+
+  <!-- Appeal Type 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
+  <div id="appeal3Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Appeal Basis: Homeowner's Association property where the fee cap is 
+          applicable but was not applied</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            If the total stormwater remediation fee across all Homeowners Association-owned tax accounts 
+            is more than the number of property tax accounts for the homes and unimproved lots within the boundaries of 
+            the Homeowners Association multiplied by 40% of the base rate, the Homeowners Association may appeal to have 
+            the fee capped in accordance with 13-7-103(g).
+            <!-- <br><br>
+            All tax account numbers for HOA-owned property should be entered 
+            into the <em>Tax Account Number(s)</em> field at the beginning of the form. -->
+          </div>
+          <small id="a3BeginningHelpBlock" class="form-text text-muted">
+            All tax account numbers for HOA-owned property should be entered 
+            into the <em>Tax Account Number(s)</em> field at the beginning of the form.
+          </small>  
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO: Dollar sign appearing weird on aacounty.org - override styles? -->
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a3HOAFee">The total stormwater fee charged for all properties owned by the same Homeowners Association: <span class="requiredField">*</span></label> 
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">	&#36;</span>
+            </div>
+            <input type="number" class="form-control" name="a3HOAFee" id="a3HOAFee" class="form-control" min="0" step="0.01" aria-label="Amount (to the nearest dollar)" required>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a3HOAHouses">The number of property tax accounts for homes and unimproved lots within the boundaries of the Homeowners Association: <span class="requiredField">*</span></label>
+          <input type="number" name="a3HOAHouses" id="a3HOAHouses" class="form-control" min="0" step="1" required>
+          <small id="a3HOAHousesHelpBlock" class="form-text text-muted">
+            This number does not include property tax accounts owned by the Homeowners Association.
+            Unimproved lots are considered to be lots with their own separate tax account numer on which a residential 
+            dwelling is allowed to be built, regardless of whether it has been built yet or not.</small>  
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a1Comments">Comments: </label>
+          <textarea class="form-control" id="a3Comments" rows="3"></textarea>
+          <small id="a3EndingHelpBlock" class="form-text text-muted">
+            Documentation showing the boundaries of the area served by the Homeowners Association 
+            should be uploaded in the <em>Supporting Documentation</em> section.</small> 
+        </div>
+      </div>
+    </div>
+  </div> <!-- End appeal 3 application -->
+
+  <!-- Appeal Type 4: Mathematical error or incorrect	impervious surface calculation -->
+  <div id="appeal4Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Appeal Basis: Mathematical error or incorrect	impervious surface calculation</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div id="a4Checks" class="form-group">
+          Check all that apply: <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a4Category1" name="a4Category" 
+              value="Mathematical error in the calculation of the fee" onchange="validateCheckboxes('#a4Checks', '#a4Category1')">
+            <label class="form-check-label" for="a4Category1">Mathematical error in the calculation of the fee</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a4Category2" name="a4Category" 
+              value="Incorrect calculation of the impervious surface of the property" onchange="validateCheckboxes('#a4Checks', '#a4Category1')">
+            <label class="form-check-label" for="a4Category2">Incorrect calculation of the impervious surface of the property</label>
+          </div>
+
+          <small id="a4CategoryHelpBlock" class="form-text text-muted">
+            <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-rate-information/" target="_blank">
+            Click here for information on how the stormwater fee is calculated.</a><br>
+            Use the <a href="https://www.aacounty.org/myannearundel" target="_blank">My Anne Arundel application</a> 
+            to look up information on the stormwater fee, impervious amounts, and property zoning.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a4Comments">Explanation: </label>
+          <!-- TODO: required? -->
+          <textarea class="form-control" id="a4Comments" rows="3"></textarea>
+          <small id="a4CommentsHelpBlock" class="form-text text-muted">
+            If appealing on the basis that the impervious surface amount is incorrect, 
+            documentation showing the impervious surface on the property should be uploaded 
+            in the Supporting Documentation section (e.g., plans, reports, photos).</small>  
+        </div>
+      </div>
+    </div>
+  </div> <!-- End appeal 4 application -->
+
+  <!-- Appeal Type 5: Exempt or incorrect property owner -->  
+  <!-- TODO: Add aria-label for sub-options for a5cat1 for better accessibility -->
+  <!-- TODO: find a simpler way to reference only the parent a5 checkboxes, input=name? -->
+  <div id="appeal5Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Appeal Basis: Exempt or incorrect property owner</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div id="a5Checks" class="form-group">
+          Check all that apply: <span class="requiredField">*</span><br>
+
+          <div class="a5Initial form-check">
+            <input class="form-check-input" type="checkbox" id="a5Category1" name="a5Category" 
+              value="The property is not subject to the stormwater fee" onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'), toggleDivs(id)">
+            <label class="form-check-label" for="a5Category1">The property is not subject to the stormwater fee</label>
+          </div>
+
+          <div id="a5Category1Toggle" class="uncommon"></div>
+
+          <div class="a5Initial form-check">
+            <input class="form-check-input" type="checkbox" id="a5Category2" name="a5Category" 
+              value="The person billed is not the record owner of the property" onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'), toggleDivs(id)">
+            <label class="form-check-label" for="a5Category2">The person billed is not the record owner of the property</label>
+          </div>
+
+          <div id="a5Category2Toggle" class="uncommon"></div>
+
+          <div class="a5Initial form-check">
+            <input class="form-check-input" type="checkbox" id="a5Category3" name="a5Category" 
+              value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year" onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1')">
+            <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship exemption from the stormwater fee for the current billing year</label>
+          </div>
+
+          <!-- TODO: add link for office of finance? https://www.aacounty.org/departments/finance/ -->
+          <small id="a5CategoryHelpBlock" class="form-text text-muted">
+            This form is not used to apply for a financial hardship exemption from the stormwater fee. 
+            To apply for this exemption, <a href="https://www.aacounty.org/departments/finance/forms-and-publications/Residential_Stormwater_Hardship.pdf" target="_blank">
+            click here to download the following form and submit it to the Office of Finance.</a>
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="a5Comments">Comments: </label>
+          <textarea class="form-control" id="a5Comments" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <!-- Appeal Type 5 Uncommon Options -->
+  <div id="a5Category1Form">
+    <div class="row">
+      <div class="col-12">
+        <div id="a5ReasonChecks" class="form-group" style="margin-left: 2em">
+          Because it is (check all that apply): <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason1" name="a5Reason" 
+              value="unimproved (contains no impervious surface)" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason1">unimproved (contains no impervious surface)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason2" name="a5Reason" 
+              value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason2">in the City of Annapolis</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason3" name="a5Reason" 
+              value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason3">owned by the State of Maryland</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason4" name="a5Reason" 
+              value="owned by a County" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason4">owned by a County</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason5" name="a5Reason" 
+              value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason5">owned by a municipality</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason6" name="a5Reason" 
+              value="owned by a regularly organized volunteer fire department that is used for public purposes" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason6">owned by a regularly organized volunteer fire department that is used for public purposes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="a5Reason7" name="a5Reason" 
+              value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+            <label class="form-check-label" for="a5Reason7">owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code</label>
+          </div>
+
+          <small id="a5ReasonHelpBlock" class="form-text text-muted">
+            Provide proof of location, ownership, or lack of impervious area, as applicable, 
+            in the <em>Comments</em> and <em>Supporting Documentation</em> sections.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="a5Category2Form">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group" style="margin-left: 2em">
+          <label for="a5Category2NewOwner">The name of the new owner is: <span class="requiredField">*</span></label>
+          <input type="text"  name="a5Category2NewOwner" id="a5Category2NewOwner" class="form-control" required>
+        </div>
+      </div>
+    </div>
+  </div><!-- End appeal 5 application -->
+
+  <!-- CREDIT APPLICATIONS -->
+  <!-- Credit Type 1: Property not under an NPDES permit -->
+  <div id="credit1Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Credit Type: Property not under an NPDES permit</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <!-- TODO: Make a scrolling textbox? -->
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            By Law, the maximum credit for any property is 50% of the Stormwater Remediation Fee. 
+            To receive the full 50% credit, the entire impervious surface area of the property 
+            must be treated using private on-site stormwater management practices that control at 
+            least one inch of rainfall and are designed, approved, constructed, and maintained in 
+            accordance with the County Standards, Stormwater Management Practices and Procedures 
+            Manual, and/or the 2000 Maryland Stormwater Design Manual, Volumes I and II and 
+            Supplements. If only a portion of the site's impervious area is treated or if the 
+            practices control less than one inch of rainfall, partial credit can be awarded.
+            <br><br>
+            Approved credits are valid up to a period of three years. To continue to receive credit, 
+            function verification of the BMP is required. This verification will automatically be 
+            conducted by the County and the owner will be notified only if the practice(s) is found 
+            to be out of compliance. A renewal application is not necessary. 
+            <br><br>
+            <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-credit-program/Credit%20Manual%20Version%201.1.2019%20with%20appendices.pdf" target="_blank">
+              Click here for the Stormwater Remediation Credit Policy and Guidance document.</a>
+            <br><br>
+            <small id="c1BeginningHelpBlock" class="form-text text-muted">
+              Disclaimer: If you are not able to provide the requested documentation, County staff 
+              will attempt to obtain the needed information about the stormwater management practices 
+              and the water quality treatment they provide from available records and resources. 
+              However, as the applicant is ultimately responsible for providing documentation, if 
+              County staff is unable to locate the necessary information then the lack of documentation 
+              from the applicant would be a grounds for denial of the credit.
+            </small> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1Description">Briefly describe the stormwater practices on the property (type, quantity, location): <span class="requiredField">*</span></label>
+          <textarea class="form-control" id="c1Description" rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c1InstallDate">Approximate installation date: <span class="requiredField">*</span></label>
+          <input type="date" name="c1InstallDate" id="c1InstallDate" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c1Installer">Installer: <span class="requiredField">*</span></label>
+          <input type="text"  name="c1Installer" id="c1Installer" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1InstallerContact">Installer contact information (if recently installed): </label>
+          <textarea class="form-control" id="c1InstallerContact" name="c1InstallerContact" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Were the practices installed under a County grading permit? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GradingPermitYes" name="c1GradingPermit" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GradingPermitYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GradingPermitNo" name="c1GradingPermit" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GradingPermitNo">No</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GradingPermitUnsure" name="c1GradingPermit" 
+              value="unsure" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GradingPermitUnsure">Unsure</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="c1GradingPermitToggle" class="uncommon"></div>
+
+    <div id="c1InstallerToggle" class="uncommon"></div>
+
+    <div id="c1TreatmentDescriptionToggle" class="uncommon"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Is the property under an Inspection and Maintenance Agreement for private stormwater management? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1IMAgreementYes" name="c1IMAgreement" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1IMAgreementYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1IMAgreementNo" name="c1IMAgreement" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1IMAgreementNo">No</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1IMAgreementUnsure" name="c1IMAgreement" 
+              value="unsure" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1IMAgreementUnsure">Unsure</label>
+          </div>
+
+          <small id="c1IMAgreementHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div id="c1FeeAgreementToggle" class="uncommon"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1Comments">Additional comments: </label>
+          <textarea class="form-control" id="c1Comments" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>
+            In addition to the documents already requested, the following should be uploaded 
+            in the Supporting Documentation section: 
+            <ol style="margin-bottom: 0">
+              <li>Photographs of the practices and their drainage areas</li>
+              <li>A site plan/sketch that shows the approximate layout of the property and the location of the stormwater management practices</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credit Type 1 Uncommon Options -->
+  <div id="c1GradingPermitForm">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c1GPNumber">Grading permit number: <span class="requiredField">*</span></label>
+          <input type="text" name="c1GPNumber" id="c1GPNumber" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Do you have a copy of the plans for this grading permit? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GPPlansYes" name="c1GPPlans" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GPPlansYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1GPPlansNo" name="c1GPPlans" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1GPPlansNo">No</label>
+          </div>
+          <small id="c1GPPLansHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Do you have the stormwater management report associated with this grading permit? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1SWMReportYes" name="c1SWMReport" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1SWMReportYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1SWMReportNo" name="c1SWMReport" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1SWMReportNo">No</label>
+          </div>
+          <small id="c1SWMReportHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c1InstallerForm">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Do you have plans and documentation from the installer? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1InstallerPlansYes" name="c1InstallerPlans" 
+              value="yes" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1InstallerPlansYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1InstallerPlansNo" name="c1InstallerPlans" 
+              value="no" onchange="toggleDivs(name)" required>
+            <label class="form-check-label" for="c1InstallerPlansNo">No</label>
+          </div>
+          <small id="c1InstallerPlansHelpBlock" class="form-text text-muted">
+            If yes, upload in the <em>Supporting Documentation</em> section.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c1TreatmentDescriptionForm">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c1TreatmentDescription">If plans or documentation from the installer are not available, 
+            to the best of your knowledge, describe the water quality treatment provided by the practices 
+            (e.g., design factors, size, drainage area, etc.): <span class="requiredField">*</span></label>
+          <textarea class="form-control" id="c1TreatmentDescription" name="c1TreatmentDescription" rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c1FeeAgreementForm">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            If the property does not have an Inspection and Maintenance Agreement, the owner will 
+            need to enter into a Stormwater Remediation Fee Credit Agreement with the County prior 
+            to approval of the credit. County staff will provide the applicant with this agreement 
+            at a later point in the application review process. A hard copy of this document will 
+            need to be signed by the property owner and returned by mail. 
+            <br><br>
+            <a href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/wprf-credit-agreement/Stormwater_Remediation_fee_credit_agreement_final_V1.1.pdf" target="_blank">
+              Click here for an example Stormwater Remediation Fee Credit Agreement.</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          The Stormwater Remediation Fee Credit Agreement will be sent to the applicant for signature via: <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1FeeCrAgreementPostalMail" name="c1FeeCrAgreement" 
+              value="postal mail" required>
+            <label class="form-check-label" for="c1FeeCrAgreementPostalMail">Postal Mail</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c1FeeCrAgreementEmail" name="c1FeeCrAgreement" 
+              value="email" required>
+            <label class="form-check-label" for="c1FeeCrAgreementEmail">Email</label>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+
+
+  <!-- Credit Type 2: Property with an NPDES permit that includes stormwater management controls -->
+  <div id="credit2Form">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Credit Type: Property with an NPDES permit that includes stormwater management controls</h5>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+            <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i></b>
+            Properties that are regulated through a National Pollutant Discharge Elimination 
+            System (NPDES) permit with stormwater management controls are eligible for a stormwater 
+            remediation fee credit not to exceeed 50&#37; of the assessed stormwater remediation fee. Marina 
+            properties are eligible for up to a 25&#37; credit if they are regulated under an NPDES permit 
+            with stormwater management controls and up to a 50&#37; credit if they are also in good standing 
+            with the Maryland Department of Natural Resources for the Clean Marina Initiative.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c2NPDESPermitNumber">NPDES Permit Number: <span class="requiredField">*</span></label>
+          <input type="text" id="c2NPDESPermitNumber" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="c2RegistrationNumber">MDE Facility Registration Number: <span class="requiredField">*</span></label>
+          <input type="text" id="c2RegistrationNumber" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          Is the property a marina that has been certified by Maryland DNR as a Clean Marina? <span class="requiredField">*</span><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c2CleanMarinaYes" name="c2CleanMarina" 
+              value="yes" required>
+            <label class="form-check-label" for="c2CleanMarinaYes">Yes</label>
+          </div>
+          
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="c2CleanMarinaNo" name="c2CleanMarina" 
+              value="no" required>
+            <label class="form-check-label" for="c2CleanMarinaNo">No</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div id="c2Checks" class="form-group">
+          Documentation Checklist (check all that apply): <span class="requiredField">*</span><br>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation1" name="c2Documentation" 
+              value="MDE's NPDES Permit Acceptance Letter with Registration Number" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation1">MDE's NPDES Permit Acceptance Letter with Registration Number</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation2" name="c2Documentation" 
+              value="Stormwater Pollution Prevention Plan" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation2">Stormwater Pollution Prevention Plan</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation3" name="c2Documentation" 
+              value="Site Plan Showing Location of BMPs" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation3">Site Plan Showing Location of BMPs</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation4" name="c2Documentation" 
+              value="Inspection and Maintenance Reports" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation4">Inspection and Maintenance Reports</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation5" name="c2Documentation" 
+              value="DNR Certification of Clean Marina Initiative" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation5">DNR Certification of Clean Marina Initiative</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="c2Documentation6" name="c2Documentation" 
+              value="Other" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
+            <label class="form-check-label" for="c2Documentation6">Other</label>
+          </div>
+
+          <small id="c2DocumentationHelpBlock" class="form-text text-muted">
+            <!-- TODO: add jump link? apply to similar help text blocks? -->
+            Upload the indicated documents in the <em>Supporting Documentation</em> section, as applicable.
+          </small> 
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label for="c2Comments">Comments: </label>
+          <textarea class="form-control" id="c2Comments" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statement Authentication -->
+  <div id="appealAcknowledgement">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Acknowledgement</h5>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <div style="background-color: #f0f0f0; padding: 10px">
+              <!-- <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b> -->
+              I/we, the undersigned do hereby declare under the penalties of perjury that the information 
+              provided on and with this application is, to the best of my/our knowledge and belief, true, correct, 
+              and complete. I/we also understand that the failure to provide all information and/or documentation 
+              as required is a basis for a denial of the appeal. I/we understand that by filing this appeal, we are 
+              authorizing the Department of Public Works to confirm the information provided with this application, 
+              including, but not limited to, inspecting and entering the property to verify the amount of impervious 
+              surface area. I/we understand that if the Department of Public Works grants the appeal and it results 
+              in a change in the stormwater remediation fee, I/we will be issued a new bill. I/we understand that if 
+              I/we are aggrieved by the decision of the Department of Public Works, I/we shall pay the stormwater 
+              remediation fee, may request a refund and if a refund is denied, may appeal to the Maryland Tax Court 
+              in accordance with Article 24, &sect; 9-710 and 9-712 of the Annotated Code of Maryland
+            <br><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="statementAppeal" name="statementAppeal" value="acknowledged" required>
+              <label class="form-check-label" for="statementAppeal"><b>I understand </b><span class="requiredField">*</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="creditAuthorization">
+    <hr>
+    <div class="row">
+      <div class="col-12">
+        <h5>Authorization</h5>
+      </div>
+    </div> 
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <div style="background-color: #f0f0f0; padding: 10px">
+          <!-- <b><i class="fas fa-info-circle" style="color: #0072bc; margin-right: 5px"></i>List of Residential Tiers</b> -->
+          By signing this form, you certify that (1) you have read and understand the Stormwater 
+          Remediation Credit Policy and Guidance requirements; (2) the information provided on this 
+          form is complete and factual; (3) the stormwater management system(s) on your property 
+          have been maintained and are in proper working order; and (4) you grant the County 
+          permission to conduct site inspections of the stormwater management practices 
+          included as part of this application package.
+        <br><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="statementCredit" name="statementCredit" value="authorized" required>
+          <label class="form-check-label" for="statementCredit"><b>I understand </b><span class="requiredField">*</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div> <!-- End "display: none" uncommon divs-->
+  
+</div> <!-- end bootstrap-iso container -->
+	
+  
+
+  <!-- Script imports -->
+  <!-- jQuery (must come before Bootstrap & Popper.js) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <!-- Popper.js (must come after jQuery, before Bootstrap js) -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" 
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+    crossorigin="anonymous"></script>
+
+  <!-- Bootstrap js script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" 
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+    crossorigin="anonymous"></script>
+  
+  <!-- Axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- ReCaptcha -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa"></script>
+
+  <!-- Appeal / Credit Javascript -->
+  <script src="TESTappeal-credit-script.js"></script>
+
+</body>
+</html>
