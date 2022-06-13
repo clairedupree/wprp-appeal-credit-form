@@ -39,10 +39,6 @@
       margin: auto !important;
     }
 
-    /* [class^="col"] {
-      padding-left: 0px !important;
-    } */
-
     h1 {
       padding-left: 15px !important;
     }
@@ -54,19 +50,13 @@
     .btn-primary {
       background-color: #0072bc !important;
     }
+
+    #footer-wrap {
+      top: 20px !important;
+      margin-bottom: 20px !important;
+    }
 	</style>
 </head>
-
-<!--
-  TODO: delete vestigial element names, classes, variables and ids
-  TODO: form bottom cut off in small resolution
-
-  TODO:
-  SPAM
-  get rid of notes
-  get rid of console.logs
-  finish implementing the duplicates module with appeal2
--->
 
 <body>
   <div class="bootstrap-iso"> 
@@ -161,17 +151,37 @@
 
 
     <!-- Select Credit Type -->
-    <!-- TODO: btn-light / btn-dark / btn-secondary? -->
     <div id="credit" class="typeSelect" style="display: none">
       <div class="row">
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
           <button class="btn btn-dark btn-block" value="Property not under an NPDES permit" name="creditType"
-            id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES	permit</button>
+            id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES permit</button>
           <button class="btn btn-dark btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
             id="creditType2" onclick="showCreditApplication(id)">Property with an NPDES permit that includes	stormwater management controls</button>
         </div>
       </div>
+
+      <!-- TODO: radio buttons instead of buttons? credit buttons dont wrap in smaller resolutions -->
+      <!-- <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <h5>Select the credit type:</h5>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="TESTcreditType1" name="TESTcreditType" 
+                value="Property not under an NPDES permit" required>
+              <label class="form-check-label" for="TESTcreditType1">Property not under an NPDES permit</label>
+            </div>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="TESTcreditType2" name="TESTcreditType" 
+                value="Property with an NPDES permit that includes stormwater management controls" required>
+              <label class="form-check-label" for="TESTcreditType2">Property with an NPDES permit that includes stormwater management controls</label>
+            </div>
+          </div>
+        </div>
+      </div>
+       -->
     </div>
 
   </div> <!-- end type select -->
@@ -275,7 +285,7 @@
             </div>
           </div>   
 
-          <!-- TODO: make a drop down of state abbreviations? -->
+          <!-- TODO: select input for state abbreviations? -->
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="locationState">State: <span class="requiredField">*</span></label>
@@ -283,7 +293,7 @@
             </div>
           </div>   
 
-          <!-- TODO: make a zip code type input? -->
+          <!-- TODO: zip code type input? -->
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="locationZip">Zip Code: <span class="requiredField">*</span></label>
@@ -380,7 +390,7 @@
         <!-- jsonData.supportingDoc = ''; --> 
         <div class="row">
           <div class="col-12">
-            <h5>Supporting Documentation</h5>
+            <h5><a id="supportingDocumentation">Supporting Documentation</a></h5>
           </div>
         </div> 
 
@@ -613,22 +623,22 @@
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
           <label for="a1TierCurrent">The property is currently classified as: <span class="requiredField">*</span></label>
           <select class="form-control" name="a1TierCurrent" id="a1TierCurrent" aria-label="a1TierCurrent" 
-            onchange="validateDuplicates('#a1TierCurrent', '#a1TierProposed', 'a1TierCurrent')" required>
+            onchange="validateDuplicates('#a1TierCurrent', '#a1TierProposed', '#a1TierCurrent')" required>
             <option selected value="">Please select</option>
-            <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
-            <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
-            <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+            <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+            <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+            <option value="WPRF03">WPRF03: Tier 3 Residential</option>
           </select>
         </div>
 
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <label for="a1TierProposed">The property should be classified as: <span class="requiredField">*</span></label>
             <select class="form-control" name="a1TierProposed" id="a1TierProposed" aria-label="a1TierProposed" 
-              onchange="validateDuplicates('#a1TierProposed', '#a1TierCurrent', 'a1TierCurrent')" required>
+              onchange="validateDuplicates('#a1TierProposed', '#a1TierCurrent', '#a1TierCurrent')" required>
               <option selected value="">Please select</option>
-              <option name="a1Test" value="WPRF01">WPRF01: Tier 1 Residential</option>
-              <option name="a1Test" value="WPRF02">WPRF02: Tier 2 Residential</option>
-              <option name="a1Test" value="WPRF03">WPRF03: Tier 3 Residential</option>
+              <option value="WPRF01">WPRF01: Tier 1 Residential</option>
+              <option value="WPRF02">WPRF02: Tier 2 Residential</option>
+              <option value="WPRF03">WPRF03: Tier 3 Residential</option>
             </select>
         </div>
       </div>
@@ -694,7 +704,7 @@
           <label for="a2TypeCurrent">The property is currently classified as: 
             <span class="requiredField">*</span></label>
           <select class="form-control" name="a2TypeCurrent" id="a2TypeCurrent" aria-label="a2TypeCurrent" 
-            onchange="validateDuplicates(id, 'a2TypeProposed')" required>
+            onchange="validateDuplicates('#a2TypeCurrent', '#a2TypeProposed', '#a2TypeCurrent')" required>
             <option selected value="">Please select</option>
             <option value="WPRF01, WPRF02, WPRF03">WPRF01, WPRF02, WPRF03: Residental in a Residential Zone</option>
             <option value="WPRF04">WPRF04: Farm</option>
@@ -726,7 +736,7 @@
           <label for="a2TypeProposed">The property should be classified as: 
             <span class="requiredField">*</span></label>
           <select class="form-control" name="a2TypeProposed" id="a2TypeProposed" aria-label="a2TypeProposed" 
-            onchange="validateDuplicates(id, 'a2TypeCurrent')" required>
+            onchange="validateDuplicates('#a2TypeProposed', '#a2TypeCurrent', '#a2TypeCurrent')" required>
             <option selected value="">Please select</option>
             <option value="WPRF01, WPRF02, WPRF03">WPRF01, WPRF02, WPRF03: Residental in a Residential Zone</option>
             <option value="WPRF04">WPRF04: Farm</option>
@@ -796,7 +806,7 @@
       </div>
     </div>
 
-    <!-- TODO: Dollar sign appearing weird on aacounty.org - override styles? -->
+    <!-- TODO: Dollar sign looks strange on aacounty.org - override styles? -->
     <div class="row">
       <div class="col-12">
         <div class="form-group">
@@ -852,13 +862,13 @@
           Check all that apply: <span class="requiredField">*</span><br>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a4Category1" name="a4Category" 
-              value="Mathematical error in the calculation of the fee" onchange="validateCheckboxes('#a4Checks', 'a4Category1')">
+              value="Mathematical error in the calculation of the fee" onchange="validateCheckboxes('#a4Checks', '#a4Category1')">
             <label class="form-check-label" for="a4Category1">Mathematical error in the calculation of the fee</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a4Category2" name="a4Category" 
-              value="Incorrect calculation of the impervious surface of the property" onchange="validateCheckboxes('#a4Checks', 'a4Category1')">
+              value="Incorrect calculation of the impervious surface of the property" onchange="validateCheckboxes('#a4Checks', '#a4Category1')">
             <label class="form-check-label" for="a4Category2">Incorrect calculation of the impervious surface of the property</label>
           </div>
 
@@ -905,7 +915,7 @@
 
           <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category1" name="a5Category" 
-              value="The property is not subject to the stormwater fee" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'), toggleDivs(id)">
+              value="The property is not subject to the stormwater fee" onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'), toggleDivs(id)">
             <label class="form-check-label" for="a5Category1">The property is not subject to the stormwater fee</label>
           </div>
 
@@ -913,7 +923,7 @@
 
           <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category2" name="a5Category" 
-              value="The person billed is not the record owner of the property" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'), toggleDivs(id)">
+              value="The person billed is not the record owner of the property" onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'), toggleDivs(id)">
             <label class="form-check-label" for="a5Category2">The person billed is not the record owner of the property</label>
           </div>
 
@@ -921,11 +931,11 @@
 
           <div class="a5Initial form-check">
             <input class="form-check-input" type="checkbox" id="a5Category3" name="a5Category" 
-              value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year" onchange="validateCheckboxes('#a5Checks .a5Initial', 'a5Category1')">
+              value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year" onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1')">
             <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship exemption from the stormwater fee for the current billing year</label>
           </div>
 
-          <!-- TODO: add link for office of finance? https://www.aacounty.org/departments/finance/ -->
+          <!-- TODO: link to office of finance? https://www.aacounty.org/departments/finance/ -->
           <small id="a5CategoryHelpBlock" class="form-text text-muted">
             This form is not used to apply for a financial hardship exemption from the stormwater fee. 
             To apply for this exemption, <a href="https://www.aacounty.org/departments/finance/forms-and-publications/Residential_Stormwater_Hardship.pdf" target="_blank">
@@ -953,37 +963,37 @@
           Because it is (check all that apply): <span class="requiredField">*</span><br>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason1" name="a5Reason" 
-              value="unimproved (contains no impervious surface)" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="unimproved (contains no impervious surface)" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason1">unimproved (contains no impervious surface)</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason2" name="a5Reason" 
-              value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason2">in the City of Annapolis</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason3" name="a5Reason" 
-              value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason3">owned by the State of Maryland</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason4" name="a5Reason" 
-              value="owned by a County" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="owned by a County" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason4">owned by a County</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason5" name="a5Reason" 
-              value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason5">owned by a municipality</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason6" name="a5Reason" 
-              value="owned by a regularly organized volunteer fire department that is used for public purposes" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="owned by a regularly organized volunteer fire department that is used for public purposes" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason6">owned by a regularly organized volunteer fire department that is used for public purposes</label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="a5Reason7" name="a5Reason" 
-              value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code" onchange="validateCheckboxes('#a5ReasonChecks', 'a5Reason1')">
+              value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
             <label class="form-check-label" for="a5Reason7">owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code</label>
           </div>
 
@@ -1373,43 +1383,43 @@
           Documentation Checklist (check all that apply): <span class="requiredField">*</span><br>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="c2Documentation1" name="c2Documentation" 
-              value="MDE's NPDES Permit Acceptance Letter with Registration Number" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+              value="MDE's NPDES Permit Acceptance Letter with Registration Number" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
             <label class="form-check-label" for="c2Documentation1">MDE's NPDES Permit Acceptance Letter with Registration Number</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="c2Documentation2" name="c2Documentation" 
-              value="Stormwater Pollution Prevention Plan" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+              value="Stormwater Pollution Prevention Plan" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
             <label class="form-check-label" for="c2Documentation2">Stormwater Pollution Prevention Plan</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="c2Documentation3" name="c2Documentation" 
-              value="Site Plan Showing Location of BMPs" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+              value="Site Plan Showing Location of BMPs" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
             <label class="form-check-label" for="c2Documentation3">Site Plan Showing Location of BMPs</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="c2Documentation4" name="c2Documentation" 
-              value="Inspection and Maintenance Reports" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+              value="Inspection and Maintenance Reports" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
             <label class="form-check-label" for="c2Documentation4">Inspection and Maintenance Reports</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="c2Documentation5" name="c2Documentation" 
-              value="DNR Certification of Clean Marina Initiative" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+              value="DNR Certification of Clean Marina Initiative" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
             <label class="form-check-label" for="c2Documentation5">DNR Certification of Clean Marina Initiative</label>
           </div>
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="c2Documentation6" name="c2Documentation" 
-              value="Other" onchange="validateCheckboxes('#c2Checks', 'c2Documentation1')">
+              value="Other" onchange="validateCheckboxes('#c2Checks', '#c2Documentation1')">
             <label class="form-check-label" for="c2Documentation6">Other</label>
           </div>
 
           <small id="c2DocumentationHelpBlock" class="form-text text-muted">
             <!-- TODO: add jump link? apply to similar help text blocks? -->
-            Upload the indicated documents in the <em>Supporting Documentation</em> section, as applicable.
+            Upload the indicated documents in the <a href="#supportingDocumentation"><em>Supporting Documentation</em></a> section, as applicable.
           </small> 
         </div>
       </div>

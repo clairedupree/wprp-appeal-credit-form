@@ -1,10 +1,6 @@
 /**
  * @author Claire Dupree
  * @since 04/26/22
- * 
- * @todo ocument tutorials used throughout process with @tutorial?
- * @todo change #credit and #appeal to #creditSelect and #appealSelect?
- * might not work if id is being pushed to selected array
  */
 
 
@@ -18,158 +14,6 @@ const cmObject = { //case manager object
 let fileUploads, attachments = []; //supporting documentation
 //boolean variables for populating credit type 1 json data
 let c1GradingPermitForm, c1InstallerForm, c1TreatmentDescriptionForm, c1FeeAgreementForm = false;
-
-
-/**
- * Appends HTML markup to designated div tags, depending on
- * the value of the calling element.
- * @param {object} element The calling element's id or name attribute
- */
-function toggleDivs(element) {
-  switch(element) {
-    case 'constituentDifferent':
-      if (document.getElementById("constituentDifferentYes").checked) {
-        $("#constituentInfo").html($("#constituentInfoForm").html());
-      }
-      else {
-        $("#constituentInfo").html("");
-      }
-      break;
-
-    case 'mailingDifferent': 
-      if (document.getElementById("mailingDifferentYes").checked) {
-        $("#mailingAddress").html($("#mailingAddressForm").html());
-      }
-      else {
-        $("#mailingAddress").html("");
-      }
-      break;
-
-    case 'a5Category1':
-      if (document.getElementById(element).checked) {
-        $("#a5Category1Toggle").html($("#a5Category1Form").html());
-        validateCheckboxes('#a5ReasonChecks', 'a5Reason1');
-      }
-      else {
-        $("#a5Category1Toggle").html("");
-      }
-      break;
-
-    case 'a5Category2':
-      if (document.getElementById(element).checked) {
-        $("#a5Category2Toggle").html($("#a5Category2Form").html());
-      }
-      else {
-        $("#a5Category2Toggle").html("");
-      }
-      break;
-
-    case 'c1GradingPermit': 
-      if (document.getElementById("c1GradingPermitYes").checked) {
-        $("#c1GradingPermitToggle").html($("#c1GradingPermitForm").html());
-        c1GradingPermitForm = true;
-        $("#c1InstallerToggle").html("");
-        c1InstallerForm = false;
-      }
-      else {
-        $("#c1GradingPermitToggle").html("");
-        c1GradingPermitForm = false;
-        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
-        c1InstallerForm = true;
-      }
-      break;
-
-    case 'c1GPPlans': 
-    case 'c1SWMReport': 
-      if (document.getElementById("c1SWMReportNo").checked ||
-        (document.getElementById("c1GPPlansNo").checked)) {
-        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
-        c1InstallerForm = true;
-      }
-      else {
-        $("#c1InstallerToggle").html("");
-        c1InstallerForm = false;
-      }
-      break;
-
-    case 'c1InstallerPlans': 
-      if (document.getElementById("c1InstallerPlansNo").checked) {
-        $("#c1TreatmentDescriptionToggle").html($("#c1TreatmentDescriptionForm").html());
-        c1TreatmentDescriptionForm = true;
-      }
-      else {
-        $("#c1TreatmentDescriptionToggle").html("");
-        c1TreatmentDescriptionForm = false;
-      }
-      break;
-
-    case 'c1IMAgreement': 
-      if (document.getElementById("c1IMAgreementYes").checked) {
-        $("#c1FeeAgreementToggle").html("");
-        c1FeeAgreementForm = false;
-      }
-      else {
-        $("#c1FeeAgreementToggle").html($("#c1FeeAgreementForm").html());
-        c1FeeAgreementForm = true;
-      }
-      break;
-  }
-}
-
-
-/**
- * Compares the values of two elements and sets a custom validity message
- * in the browser if the values are duplicates. 
- * @param {string} thisElement The calling element's id
- * @param {string} compareElement The element to be compared against
- * @param {string} validityTarget The id of the input element where validation will be set 
- */
-function validateDuplicates(thisElement, compareElement, validityTarget) {
-
-  console.log($(thisElement).val(), $(compareElement).val(), validityTarget);
-    
-  if ($(thisElement).val() == $(compareElement).val()) {
-    console.log('duplicates = true')
-    document.getElementById(validityTarget).setCustomValidity("Property classification cannot be the same.");
-  }
-  else {
-    console.log("duplicates = false")
-    document.getElementById(validityTarget).setCustomValidity("");
-  }
-}
-
-
-// function validateTest(className, validate) {
-//   let compare = document.getElementsByClassName(className);
-//   console.log(compare.val());
-//   if (compare[0].val() == compare[1].val()) {
-//     console.log('duplicates true');
-//   }
-//   else {
-//     console.log('duplicates false');
-//   }
-// }
-
-
-/**
- * Event listener for the #backButton in #navigation.
- * Shows / hides divs depending on what is currently on screen.
- */
-$("#backButton").click(function() {
-  if ($(".typeSelect").is(":visible")) {
-    $("#navigation, #appeal, #credit").hide();
-    $("#applicationSelect").show();      
-  }
-  else if ($("#formContainer").is(":visible")) {
-    $("#" + selected[0]).show();  
-    // $("#typeSelect").show();      
-    $("#formContainer").hide();      
-  }
-  else {
-    console.log("Back button error, refreshing page")
-    window.location.reload(); //default
-  }
-});
 
 
 /**
@@ -190,9 +34,27 @@ function showApplicationTypes(applicationType) {
   $("#" + selected[0]).show();
   $("#navigation").show();
   $("#applicationSelect").hide();
-
-  console.log(JSON.stringify(selected));  //TODO: temporary
 }
+
+
+/**
+ * Event listener for the #backButton in #navigation.
+ * Shows / hides divs depending on what is currently on screen.
+ */
+ $("#backButton").click(function() {
+  if ($(".typeSelect").is(":visible")) {
+    $("#navigation, #appeal, #credit").hide();
+    $("#applicationSelect").show();      
+  }
+  else if ($("#formContainer").is(":visible")) {
+    $("#" + selected[0]).show();  
+    $("#formContainer").hide();      
+  }
+  else {
+    console.log("Back button error, refreshing page.")
+    window.location.reload(); //default
+  }
+});
 
 
 /**
@@ -215,17 +77,14 @@ function showCreditApplication(creditType) {
       break;
     case "creditType2":
       $("#uncommonMiddle").html($("#credit2Form").html());
-      validateCheckboxes('#c2Checks', 'c2Documentation1');
+      validateCheckboxes('#c2Checks', '#c2Documentation1');
       selected.push(creditType);
       break;
     default:
-      console.log("Error appending credit type divs.");
+      console.log("Error appending credit type divs");
   }   
-
   $("#credit").hide(); //hide credit select  
   $("#formContainer").show(); //show form
-
-  console.log(JSON.stringify(selected)); //TODO: temporary
 }
 
 
@@ -234,15 +93,13 @@ function showCreditApplication(creditType) {
  * Replaces HTML markup of uncommon divs and #uncommonMiddle with HTML markup 
  * of selected appeal type(s). Accomodates multiple selections, saves to selected[1-5].
  * 
- * @todo clean up chekcbox validation, does #appeal need to be a form?
- * @todo cleaner way to validate iniital checks in appeal5 - acces by name insyead of class? input[name="a5Category"
+ * @todo cleaner way to validate iniital checks in appeal5 - access by name instead of class? DOM
  */
 function showAppealApplication() {
-  if (validateCheckboxes("#appeal", 'appealType1') == false)
+  if (validateCheckboxes("#appeal", '#appealType1') == false)
     ($("#appeal")[0].reportValidity());
   else {
     ($('#appeal')[0].checkValidity())
-    console.log('validation success');
 
     selected.length = 1; //truncate array
     $(".uncommon").html(""); //reset uncomon divs
@@ -254,7 +111,6 @@ function showAppealApplication() {
     
     //loop thru selected[] and append appeal markup to #uncommonMiddle
     for (var i = 1; i < selected.length; i++) {
-      console.log("Appending matching appeal types");
       switch (selected[i]) {
         case "appealType1":
           $("#uncommonMiddle").append($("#appeal1Form").html());
@@ -271,49 +127,14 @@ function showAppealApplication() {
           break;
         case "appealType5":
           $("#uncommonMiddle").append($("#appeal5Form").html());
-          validateCheckboxes('#a5Checks .a5Initial', 'a5Category1'); //force initial validation of appended divs w/checks
+          validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'); //force initial validation of appended divs w/checks
         break;
         default:
-          console.log("Error appending appeal type divs.");
+          console.log("Error appending appeal type divs");
       }   
     }
-    console.log("Show appeal application"); //TODO temporary
     $("#appeal").hide(); //hide appeal select  
     $("#formContainer").show(); //show form
-
-    console.log(JSON.stringify(selected)); //TODO temporary
-  }
-}
-
-
-/**
- * Validate that checked checkboxes within an element is > 0 and
- * sets a custom validity message on the browser.
- * @param {object} element The element to be validated 
- * @param {string} id The id of the input element where validation will be set
- * @returns true if checked > 0 //TODO eventually unnecessary
- * 
- * @todo can the validity be applied to the div or does it have to be an input element?
- * @todo how to access checkboxes by name and not div id?
- * @todo remove bool return, change logic in {@link showAppealApplication}
- */
-function validateCheckboxes(element, id) {
-  // Reference the checked checkboxes of the element
-  var numChecked = $(element + " input[type=checkbox]:checked").length;
-  var numBoxes = $(element + " input[type=checkbox]").length;
-
-  console.log($(element + " input[type=checkbox]")); //TODO temporary
-  console.log("\t" + numChecked + " checkboxes are checked out of " + numBoxes); //TODO temporary
-
-  if (numChecked > 0) { //is valid
-    console.log('\tpass: ' + id); //TODO temporary
-    document.getElementById(id).setCustomValidity(""); //will pass validation on submit
-    return true; //TODO: eventually unnecessary
-  } 
-  else { //is invalid
-    console.log('\tfail: ' + id); //TODO temporary
-    document.getElementById(id).setCustomValidity("Please select at least one of these options."); //will not pass validation on submit
-    return false; //TODO eventually unnecessary
   }
 }
 
@@ -323,7 +144,8 @@ function validateCheckboxes(element, id) {
  */
 function populateSelectedAppealTypes() {
   //create a local array of appeal ids
-  let appealCheckbox = document.querySelectorAll('input[name="appealType"]'); 
+  let appealCheckbox = document.querySelectorAll('input[name="appealType"]');
+
   let appealOptions = [];
   appealCheckbox.forEach((checkbox) => {
     appealOptions.push(checkbox.id); 
@@ -332,10 +154,143 @@ function populateSelectedAppealTypes() {
   //if checked, add to selected array
   for (var i = 0; i < appealOptions.length; i++) {
     if (document.getElementById(appealOptions[i]).checked) {
-      console.log("\tChecked: " + appealOptions[i]);
       selected.push(appealOptions[i]);
     }
   } 
+}
+
+
+/**
+ * Appends HTML markup to designated div tags, depending on
+ * the value of the calling element.
+ * @param {object} element The calling element's id or name attribute
+ */
+ function toggleDivs(element) {
+  switch(element) {
+    case 'constituentDifferent':
+      if ($('#constituentDifferentYes')[0].checked) {
+        $("#constituentInfo").html($("#constituentInfoForm").html());
+      }
+      else {
+        $("#constituentInfo").html("");
+      }
+      break;
+
+    case 'mailingDifferent': 
+      if ($('#mailingDifferentYes')[0].checked) {
+        $("#mailingAddress").html($("#mailingAddressForm").html());
+      }
+      else {
+        $("#mailingAddress").html("");
+      }
+      break;
+
+    case 'a5Category1':
+      if ($('#a5Category1')[0].checked) {
+        $("#a5Category1Toggle").html($("#a5Category1Form").html());
+        validateCheckboxes('#a5ReasonChecks', '#a5Reason1');
+      }
+      else {
+        $("#a5Category1Toggle").html("");
+      }
+      break;
+
+    case 'a5Category2':
+      if ($('#a5Category2')[0].checked) {
+        $("#a5Category2Toggle").html($("#a5Category2Form").html());
+      }
+      else {
+        $("#a5Category2Toggle").html("");
+      }
+      break;
+
+    case 'c1GradingPermit': 
+      if ($("#c1GradingPermitYes")[0].checked) {
+        $("#c1GradingPermitToggle").html($("#c1GradingPermitForm").html());
+        c1GradingPermitForm = true;
+        $("#c1InstallerToggle").html("");
+        c1InstallerForm = false;
+      }
+      else {
+        $("#c1GradingPermitToggle").html("");
+        c1GradingPermitForm = false;
+        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+        c1InstallerForm = true;
+      }
+      break;
+
+    case 'c1GPPlans': 
+    case 'c1SWMReport': 
+      if ($("#c1SWMReportNo")[0].checked || ($("#c1GPPlansNo")[0].checked)) {
+        $("#c1InstallerToggle").html($("#c1InstallerForm").html());
+        c1InstallerForm = true;
+      }
+      else {
+        $("#c1InstallerToggle").html("");
+        c1InstallerForm = false;
+      }
+      break;
+
+    case 'c1InstallerPlans': 
+      if ($("#c1InstallerPlansNo")[0].checked) {
+        $("#c1TreatmentDescriptionToggle").html($("#c1TreatmentDescriptionForm").html());
+        c1TreatmentDescriptionForm = true;
+      }
+      else {
+        $("#c1TreatmentDescriptionToggle").html("");
+        c1TreatmentDescriptionForm = false;
+      }
+      break;
+
+    case 'c1IMAgreement': 
+      if ($("#c1IMAgreementYes")[0].checked) {
+        $("#c1FeeAgreementToggle").html("");
+        c1FeeAgreementForm = false;
+      }
+      else {
+        $("#c1FeeAgreementToggle").html($("#c1FeeAgreementForm").html());
+        c1FeeAgreementForm = true;
+      }
+      break;
+  }
+}
+
+
+/**
+ * Validate that checked checkboxes within an element is > 0 and
+ * sets a custom validity message on the browser.
+ * @param {string} thisElement The calling element's id (string literal)
+ * @param {string} validityTarget The id of the input element where validation will be set (string literal)
+ * @returns true if checked > 0 
+ */
+ function validateCheckboxes(thisElement, validityTarget) {
+  var numChecked = $(thisElement + " input[type=checkbox]:checked").length;
+
+  if (numChecked > 0) { //is valid
+    $(validityTarget).get(0).setCustomValidity(""); //will pass validation on submit
+    return true;
+  } 
+  else { //is invalid
+    $(validityTarget).get(0).setCustomValidity("Please select at least one of these options."); //will not pass validation on submit
+    return false; 
+  }
+}
+
+
+/**
+ * Compares the values of two elements and sets a custom validity message
+ * in the browser if the values are duplicates. 
+ * @param {string} thisElement The calling element's id (string literal)
+ * @param {string} compareElement The id of the element to be compared against (string literal)
+ * @param {string} validityTarget The id of the input element where validation will be set (string literal)
+ */
+ function validateDuplicates(thisElement, compareElement, validityTarget) {    
+  if ($(thisElement).val() == $(compareElement).val()) {
+    $(validityTarget).get(0).setCustomValidity("Property classification cannot be the same.");
+  }
+  else {
+    $(validityTarget).get(0).setCustomValidity("");
+  }
 }
 
 
@@ -400,13 +355,11 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
   grecaptcha.ready(() => {
-    console.log("execute grecaptcha token");
     grecaptcha
       .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
         action: 'submit',
       })
       .then((token) => {
-        console.log("populate JSON data");
         jsonData.token = token;
         // jsonData.token = "override"; //replace with grecaptcha
         jsonData.ownerFirstName = $('#ownerFirstName').val();
@@ -461,7 +414,6 @@ form.addEventListener('submit', (event) => {
         else if (jsonData.applicationType == 'credit')
           jsonData.statementCredit = $('input[name="statementCredit"]:checked').val();
         
-        //jsonData.signature = ''; 
         jsonData.signaturePrinted = $('#signaturePrinted').val();
         jsonData.signatureTitle = $('#signatureTitle').val();
         jsonData.signatureCompanyName = $('#signatureCompanyName').val();
@@ -505,7 +457,7 @@ function populateUncommonJson(element) {
 
     case 'appealType4':
       jsonData.appealType4 = $('#appealType4').val();
-      // TODO: use array or concatenated string? Depends on CSV need
+      // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a4Category = [];
       document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
         jsonData.a4Category.push(checkbox.value);
@@ -515,8 +467,7 @@ function populateUncommonJson(element) {
       
     case 'appealType5':
       jsonData.appealType5 = $('#appealType5').val();
-      // TODO: use array or concatenated string? Depends on CSV need
-      // TODO: change to a json object instead of an array / adding on a loop? syntax?
+      // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
         jsonData.a5Category.push(checkbox.value);
