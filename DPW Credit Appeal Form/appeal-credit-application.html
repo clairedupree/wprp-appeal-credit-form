@@ -55,6 +55,10 @@
       top: 20px !important;
       margin-bottom: 20px !important;
     }
+
+    #submitMessage {
+      padding: 1rem 1rem !important;
+    }
 	</style>
 </head>
 
@@ -69,6 +73,7 @@
 
   <!-- Back Button -->
   <div id="navigation" style="display: none">
+    <!-- TODO: whitespace to left of button is clickable, justify-content-end class not working -->
     <div id="backButton" class="row justify-content-end">
       <div class="col-4 form-group">
         <button class="btn btn-secondary btn-block">Go Back</button>
@@ -487,7 +492,7 @@
   </div><!-- End form container -->
 
   <div id="submitMessage" style="display: none">
-    <h5 style="text-align: center; padding: 1rem 1rem !important">Thank you, your application was submitted successfully.</h5>
+    <h5>Thank you, your application was submitted successfully.</h5>
   </div>
 
 <!-- UNCOMMON DIVS -->

@@ -123,7 +123,7 @@ function showAppealApplication() {
           break;
         case "appealType4":
           $("#uncommonMiddle").append($("#appeal4Form").html());
-          validateCheckboxes('#a4Checks', 'a4Category1'); //force initial validation of appended divs w/ehecks
+          validateCheckboxes('#a4Checks', '#a4Category1'); //force initial validation of appended divs w/ehecks
           break;
         case "appealType5":
           $("#uncommonMiddle").append($("#appeal5Form").html());
@@ -265,6 +265,7 @@ function populateSelectedAppealTypes() {
  */
  function validateCheckboxes(thisElement, validityTarget) {
   var numChecked = $(thisElement + " input[type=checkbox]:checked").length;
+  console.log(validityTarget);
 
   if (numChecked > 0) { //is valid
     $(validityTarget).get(0).setCustomValidity(""); //will pass validation on submit
@@ -403,6 +404,11 @@ form.addEventListener('submit', (event) => {
             jsonData.constituentZip = $('#constituentZip').val();
           }
         jsonData.applicationType = selected[0];
+        if (jsonData.applicationType == "appeal") {
+          jsonData.appealTypes = [];
+        }
+        else
+          jsonData.creditType = "";
 
         //populate uncommon selections from array
         for (var i = 1; i < selected.length; i++)
@@ -434,7 +440,8 @@ form.addEventListener('submit', (event) => {
 function populateUncommonJson(element) {
   switch (element) {
     case 'appealType1':
-      jsonData.appealType1 = $('#appealType1').val();
+      jsonData.appealTypes.push($('#appealType1').val());
+      // jsonData.appealType1 = $('#appealType1').val();
       jsonData.a1TierCurrent = $('#a1TierCurrent').val();
       jsonData.a1TierProposed = $('#a1TierProposed').val();
       jsonData.a1Reason = $('#a1Reason').val();
@@ -442,21 +449,24 @@ function populateUncommonJson(element) {
       break;
     
     case 'appealType2':
-      jsonData.appealType2 = $('#appealType2').val();
+      jsonData.appealTypes.push($('#appealType2').val());
+      // jsonData.appealType2 = $('#appealType2').val();
       jsonData.a2TypeCurrent = $('#a2TypeCurrent').val();
       jsonData.a2TypeProposed = $('#a2TypeProposed').val();
       jsonData.a2Comments = $('#a2Comments').val();
       break;
 
     case 'appealType3':
-      jsonData.appealType3 = $('#appealType3').val();
+      jsonData.appealTypes.push($('#appealType3').val());
+      // jsonData.appealType3 = $('#appealType3').val();
       jsonData.a3HOAHouses = $('#a3HOAHouses').val();
       jsonData.a3HOAFee = $('#a3HOAFee').val();
       jsonData.a3Comments = $('#a3Comments').val();
       break;
 
     case 'appealType4':
-      jsonData.appealType4 = $('#appealType4').val();
+      jsonData.appealTypes.push($('#appealType4').val());
+      // jsonData.appealType4 = $('#appealType4').val();
       // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a4Category = [];
       document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
@@ -466,7 +476,8 @@ function populateUncommonJson(element) {
       break;
       
     case 'appealType5':
-      jsonData.appealType5 = $('#appealType5').val();
+      jsonData.appealTypes.push($('#appealType5').val());
+      // jsonData.appealType5 = $('#appealType5').val();
       // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a5Category = [];
       document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
@@ -485,7 +496,7 @@ function populateUncommonJson(element) {
       break;
 
     case 'creditType1':
-      jsonData.creditType1 = $('#creditType1').val();
+      jsonData.creditType = $('#creditType1').val();
       jsonData.c1Description = $('#c1Description').val();
       jsonData.c1InstallDate = $('#c1InstallDate').val();
       jsonData.c1Installer = $('#c1Installer').val();
@@ -510,7 +521,7 @@ function populateUncommonJson(element) {
       break;
 
     case 'creditType2':
-      jsonData.creditType2 = $('#creditType2').val();          
+      jsonData.creditType = $('#creditType2').val();          
       jsonData.c2NPDESPermitNumber = $('#c2NPDESPermitNumber').val();
       jsonData.c2RegistrationNumber = $('#c2RegistrationNumber').val();
       jsonData.c2CleanMarina = $('input[name="c2CleanMarina"]:checked').val();
