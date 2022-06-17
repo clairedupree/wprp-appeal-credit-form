@@ -167,7 +167,8 @@
         </div>
       </div>
 
-      <!-- TODO: radio buttons instead of buttons? credit buttons dont wrap in smaller resolutions -->
+      <!-- TODO: radio buttons instead of buttons? (not needed)
+      TODO: credit buttons dont wrap in smaller resolutions -->
       <!-- <div class="row">
         <div class="col-12">
           <div class="form-group">
@@ -218,16 +219,37 @@
         </div>
 
         <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              Is the property owned by an individual or by an organization? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="individualOwner" name="propertyOwner" 
+                  value="yes" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="individualOwner">Individual</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="companyOwner" name="propertyOwner" 
+                  value="no" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="companyOwner">Company / Organization</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="ownerInfo" class="clearAtApplicationSelect"></div>
+
+        <!-- <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="ownerFirstName">Owner First Name: <span class="requiredField">*</span></label>
+              <label for="ownerFirstName">Owner First Name: </label>
               <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="ownerLastName">Owner Last Name: <span class="requiredField">*</span></label>
+              <label for="ownerLastName">Owner Last Name: </label>
               <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
             </div>
           </div>
@@ -240,7 +262,7 @@
               <input type="text" name="ownerCompanyName" id="ownerCompanyName" class="form-control">
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- Tax Account(s) -->
         <div class="row">
@@ -338,7 +360,7 @@
           </div>
         </div>
 
-        <div id="constituentInfo" class="constituentInfo">
+        <div id="constituentInfo" class="clearAtApplicationSelect">
           <!-- append only if "constituentDifferentNo: checked" -->
         </div>
 
@@ -384,7 +406,7 @@
           </div>
         </div>
 
-        <div id="mailingAddress" class="constituentInfo">
+        <div id="mailingAddress" class="clearAtApplicationSelect">
           <!-- append only if "mailingDifferentYes: checked" -->
         </div>
       </div> <!-- End common beginning -->
@@ -449,14 +471,14 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="signaturePrinted">Printed Signature <span class="requiredField">*</span></label>
+              <label for="signaturePrinted">Printed Signature: <span class="requiredField">*</span></label>
               <input type="text" id="signaturePrinted" name="signaturePrinted" class="form-control" required>
             </div>
           </div>
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="signatureTitle">Title (if applicable)</label>
+              <label for="signatureTitle">Title (if applicable): </label>
               <input type="text" name="signatureTitle" id="signatureTitle" class="form-control">
             </div>
           </div>
@@ -465,7 +487,7 @@
         <div class="row">  
           <div class="col-12">
             <div class="form-group">
-              <label for="signatureCompanyName">Company / Organization (if applicable)</label>
+              <label for="signatureCompanyName">Company / Organization (if applicable): </label>
               <input type="text" name="signatureCompanyName" id="signatureCompanyName" class="form-control">
             </div>
           </div>
@@ -476,7 +498,7 @@
         <div class="row">
           <div class="col-12">
             <div class="input-group">
-              <button class="btn btn-primary" type="submit" id="submitButton" >Submit Form</button>
+              <button class="btn btn-primary" type="submit" id="submitButton">Submit Form</button>
               <span style="margin-left: 10px">
                 <small id="requiredHelpBlock" class="form-text text-muted">Fields marked with <span class="requiredField">*</span> are required</small>
               </span>
@@ -503,6 +525,44 @@
 <!-- UNCOMMON DIVS -->
 <!-- To be appended based on selection -->
 <div id="uncommonForms" style="display: none"> <!-- style="display: none" -->
+
+  <div id="individualOwnerForm">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="ownerFirstName">Owner First Name: <span class="requiredField">*</span></label>
+          <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="ownerLastName">Owner Last Name: <span class="requiredField">*</span></label>
+          <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="ownerCompanyName">Owner Company / Organization (if applicable): </label>
+          <input type="text" name="ownerCompanyName" id="ownerCompanyName" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="companyOwnerForm">
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="ownerCompanyName">Owner Company / Organization: <span class="requiredField">*</span></label>
+          <input type="text" name="ownerCompanyName" id="ownerCompanyName" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="constituentInfoForm">
     <div class="row">
@@ -895,9 +955,8 @@
     <div class="row">
       <div class="col-12">
         <div class="form-group">
-          <label for="a4Comments">Explanation: </label>
-          <!-- TODO: required? -->
-          <textarea class="form-control" id="a4Comments" rows="3"></textarea>
+          <label for="a4Comments">Explanation: <span class="requiredField">*</span></label>
+          <textarea class="form-control" id="a4Comments" rows="3" required></textarea>
           <small id="a4CommentsHelpBlock" class="form-text text-muted">
             If appealing on the basis that the impervious surface amount is incorrect, 
             documentation showing the impervious surface on the property should be uploaded 

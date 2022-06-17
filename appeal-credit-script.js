@@ -14,6 +14,8 @@ const cmObject = { //case manager object
 let fileUploads, attachments = []; //supporting documentation
 //boolean variables for populating credit type 1 json data
 let c1GradingPermitForm, c1InstallerForm, c1TreatmentDescriptionForm, c1FeeAgreementForm = false;
+//boolean variable for propertyOwnerType
+let individualOwner = false;
 
 
 /**
@@ -26,7 +28,7 @@ function showApplicationTypes(applicationType) {
   selected.length = 0; //reset selected array
   document.getElementById('appeal').reset(); //reset appeal checkboxes
   document.getElementById('wprfApplication').reset(); //reset form fields
-  $(".constituentInfo").html(""); //reset constituent / mailing divs within form
+  $(".clearAtApplicationSelect").html(""); //reset constituent / mailing divs within form
 
   selected.push(applicationType); 
 
@@ -167,6 +169,17 @@ function populateSelectedAppealTypes() {
  */
  function toggleDivs(element) {
   switch(element) {
+    case 'propertyOwner':
+      if ($('#individualOwner')[0].checked) {
+        console.log('individual owner')
+        $("#ownerInfo").html($("#individualOwnerForm").html());
+      }
+      else {
+        console.log('company owner')
+        $("#ownerInfo").html($("#companyOwnerForm").html());
+      }
+      break;
+
     case 'constituentDifferent':
       if ($('#constituentDifferentYes')[0].checked) {
         $("#constituentInfo").html($("#constituentInfoForm").html());
@@ -363,9 +376,17 @@ form.addEventListener('submit', (event) => {
       .then((token) => {
         jsonData.token = token;
         // jsonData.token = "override"; //replace with grecaptcha
-        jsonData.ownerFirstName = $('#ownerFirstName').val();
-        jsonData.ownerLastName = $('#ownerLastName').val();
-        jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+        jsonData.propertyOwnerType = $('input[name="propertyOwner"').val();
+        if (jsonData.propertyOwnerType == 'individual') {
+          individualOwner = true;
+          jsonData.ownerFirstName = $('#ownerFirstName').val();
+          jsonData.ownerLastName = $('#ownerLastName').val();
+          jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+        }
+        else {
+          individualOwner = false;
+          jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+        }
         jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
         jsonData.locationHouseNumber = $('#locationHouseNumber').val();
         jsonData.locationStreetName = $('#locationStreetName').val();
@@ -374,15 +395,26 @@ form.addEventListener('submit', (event) => {
         jsonData.locationState = $('#locationState').val();
         jsonData.locationZip = $('#locationZip').val();
         jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
+        // TODO: match this logic to the individual / owner logic
         if (jsonData.constituentDifferent == 'no') {
+          if (individualOwner == true) {
             jsonData.constituentFirstName = jsonData.ownerFirstName;
             jsonData.constituentLastName = jsonData.ownerLastName;
             jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
+          }
+          else {
+            jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
+          }
         }
-        else if (jsonData.constituentDifferent == 'yes') {
+        else {
+          if (individualOwner == true) {
             jsonData.constituentFirstName = $('#constituentFirstName').val();
             jsonData.constituentLastName = $('#constituentLastName').val();
             jsonData.companyName = $('#constituentCompanyName').val();
+          }
+          else {
+            jsonData.companyName = $('#constituentCompanyName').val();
+          }
         }
         jsonData.constituentPhone = $('#constituentPhone').val();
         jsonData.email = $('#email').val();
@@ -425,7 +457,7 @@ form.addEventListener('submit', (event) => {
         jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
         console.log('Post object', JSON.stringify(cmObject));
-        postToIssueFlow();
+        //postToIssueFlow();
       });
     });
 });
