@@ -14,8 +14,6 @@ const cmObject = { //case manager object
 let fileUploads, attachments = []; //supporting documentation
 //boolean variables for populating credit type 1 json data
 let c1GradingPermitForm, c1InstallerForm, c1TreatmentDescriptionForm, c1FeeAgreementForm = false;
-//boolean variable for propertyOwnerType
-let individualOwner = false;
 
 
 /**
@@ -370,96 +368,84 @@ form.addEventListener('submit', (event) => {
   console.log(event);
   grecaptcha.ready(() => {
     grecaptcha
-      .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
-        action: 'submit',
-      })
-      .then((token) => {
-        jsonData.token = token;
-        // jsonData.token = "override"; //replace with grecaptcha
-        jsonData.propertyOwnerType = $('input[name="propertyOwner"').val();
-        if (jsonData.propertyOwnerType == 'individual') {
-          individualOwner = true;
-          jsonData.ownerFirstName = $('#ownerFirstName').val();
-          jsonData.ownerLastName = $('#ownerLastName').val();
-          jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+    .execute('6LcZ7_8UAAAAAM3vtVvjvtizev-EFEZfug9jirUa', {
+      action: 'submit',
+    })
+    .then((token) => {
+      jsonData.token = token;
+      // jsonData.token = "override"; //replace with grecaptcha
+      jsonData.propertyOwnerType = $('input[name="propertyOwner"').val();
+      if (jsonData.propertyOwnerType == 'individual') {
+        jsonData.ownerFirstName = $('#ownerFirstName').val();
+        jsonData.ownerLastName = $('#ownerLastName').val();
+        jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+      }
+      else {
+        jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+      }
+      jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
+      jsonData.locationHouseNumber = $('#locationHouseNumber').val();
+      jsonData.locationStreetName = $('#locationStreetName').val();
+      jsonData.locationStreetType = $('#locationStreetType').val();
+      jsonData.locationCity = $('#locationCity').val();
+      jsonData.locationState = $('#locationState').val();
+      jsonData.locationZip = $('#locationZip').val();
+      jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
+      // TODO: #3 match this logic to the individual / owner logic
+      if (jsonData.constituentDifferent == 'no') {
+          jsonData.constituentFirstName = jsonData.ownerFirstName;
+          jsonData.constituentLastName = jsonData.ownerLastName;
+          jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
+      }
+      else if (jsonData.constituentDifferent == 'yes') {
+          jsonData.constituentFirstName = $('#constituentFirstName').val();
+          jsonData.constituentLastName = $('#constituentLastName').val();
+          jsonData.companyName = $('#constituentCompanyName').val();
+      }
+      jsonData.constituentPhone = $('#constituentPhone').val();
+      jsonData.email = $('#email').val();
+      jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
+      if (jsonData.mailingDifferent == 'no') {
+          jsonData.constituentHouseNumber = jsonData.locationHouseNumber;
+          jsonData.constituentStreetName = jsonData.locationStreetName;
+          jsonData.constituentStreetType = jsonData.locationStreetType;
+          jsonData.constituentCity = jsonData.locationCity;
+          jsonData.constituentState = jsonData.locationState;
+          jsonData.constituentZip = jsonData.locationZip;
+        }  
+      else if (jsonData.mailingDifferent == 'yes') {
+          jsonData.constituentHouseNumber = $('#constituentHouseNumber').val();
+          jsonData.constituentStreetName = $('#constituentStreetName').val();
+          jsonData.constituentStreetType = $('#constituentStreetType').val();
+          jsonData.constituentCity = $('#constituentCity').val();
+          jsonData.constituentState = $('#constituentState').val();
+          jsonData.constituentZip = $('#constituentZip').val();
         }
-        else {
-          individualOwner = false;
-          jsonData.ownerCompanyName = $('#ownerCompanyName').val();
-        }
-        jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
-        jsonData.locationHouseNumber = $('#locationHouseNumber').val();
-        jsonData.locationStreetName = $('#locationStreetName').val();
-        jsonData.locationStreetType = $('#locationStreetType').val();
-        jsonData.locationCity = $('#locationCity').val();
-        jsonData.locationState = $('#locationState').val();
-        jsonData.locationZip = $('#locationZip').val();
-        jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
-        // TODO: match this logic to the individual / owner logic
-        if (jsonData.constituentDifferent == 'no') {
-          if (individualOwner == true) {
-            jsonData.constituentFirstName = jsonData.ownerFirstName;
-            jsonData.constituentLastName = jsonData.ownerLastName;
-            jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
-          }
-          else {
-            jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
-          }
-        }
-        else {
-          if (individualOwner == true) {
-            jsonData.constituentFirstName = $('#constituentFirstName').val();
-            jsonData.constituentLastName = $('#constituentLastName').val();
-            jsonData.companyName = $('#constituentCompanyName').val();
-          }
-          else {
-            jsonData.companyName = $('#constituentCompanyName').val();
-          }
-        }
-        jsonData.constituentPhone = $('#constituentPhone').val();
-        jsonData.email = $('#email').val();
-        jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
-        if (jsonData.mailingDifferent == 'no') {
-            jsonData.constituentHouseNumber = jsonData.locationHouseNumber;
-            jsonData.constituentStreetName = jsonData.locationStreetName;
-            jsonData.constituentStreetType = jsonData.locationStreetType;
-            jsonData.constituentCity = jsonData.locationCity;
-            jsonData.constituentState = jsonData.locationState;
-            jsonData.constituentZip = jsonData.locationZip;
-          }  
-        else if (jsonData.mailingDifferent == 'yes') {
-            jsonData.constituentHouseNumber = $('#constituentHouseNumber').val();
-            jsonData.constituentStreetName = $('#constituentStreetName').val();
-            jsonData.constituentStreetType = $('#constituentStreetType').val();
-            jsonData.constituentCity = $('#constituentCity').val();
-            jsonData.constituentState = $('#constituentState').val();
-            jsonData.constituentZip = $('#constituentZip').val();
-          }
-        jsonData.applicationType = selected[0];
-        if (jsonData.applicationType == "appeal") {
-          jsonData.appealTypes = [];
-        }
-        else
-          jsonData.creditType = "";
+      jsonData.applicationType = selected[0];
+      if (jsonData.applicationType == "appeal") {
+        jsonData.appealTypes = [];
+      }
+      else
+        jsonData.creditType = "";
 
-        //populate uncommon selections from array
-        for (var i = 1; i < selected.length; i++)
-          populateUncommonJson(selected[i]);
+      //populate uncommon selections from array
+      for (var i = 1; i < selected.length; i++)
+        populateUncommonJson(selected[i]);
 
-        jsonData.attachments = attachments; // refer to file mgmt function
-        if (jsonData.applicationType == 'appeal')
-          jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
-        else if (jsonData.applicationType == 'credit')
-          jsonData.statementCredit = $('input[name="statementCredit"]:checked').val();
-        
-        jsonData.signaturePrinted = $('#signaturePrinted').val();
-        jsonData.signatureTitle = $('#signatureTitle').val();
-        jsonData.signatureCompanyName = $('#signatureCompanyName').val();
+      jsonData.attachments = attachments; // refer to file mgmt function
+      if (jsonData.applicationType == 'appeal')
+        jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
+      else if (jsonData.applicationType == 'credit')
+        jsonData.statementCredit = $('input[name="statementCredit"]:checked').val();
+      
+      jsonData.signaturePrinted = $('#signaturePrinted').val();
+      jsonData.signatureTitle = $('#signatureTitle').val();
+      jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
-        console.log('Post object', JSON.stringify(cmObject));
-        //postToIssueFlow();
-      });
+      console.log('Post object', JSON.stringify(cmObject));
+      //postToIssueFlow();
     });
+  });
 });
 
 
