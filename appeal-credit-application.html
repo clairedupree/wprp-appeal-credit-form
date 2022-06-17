@@ -73,10 +73,9 @@
 
   <!-- Back Button -->
   <div id="navigation" style="display: none">
-    <!-- TODO: whitespace to left of button is clickable, justify-content-end class not working -->
-    <div id="backButton" class="row justify-content-end">
+    <div class="row justify-content-end">
       <div class="col-4 form-group">
-        <button class="btn btn-secondary btn-block">Go Back</button>
+        <button id="backButton" class="btn btn-secondary btn-block" style="white-space: normal">Go Back</button>
       </div>
     </div>
   </div>  
@@ -161,9 +160,9 @@
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
           <button class="btn btn-dark btn-block" value="Property not under an NPDES permit" name="creditType"
-            id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES permit</button>
+            id="creditType1" style="white-space: normal" onclick="showCreditApplication(id)">Property not under an NPDES permit</button>
           <button class="btn btn-dark btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
-            id="creditType2" onclick="showCreditApplication(id)">Property with an NPDES permit that includes	stormwater management controls</button>
+            id="creditType2" style="white-space: normal" onclick="showCreditApplication(id)">Property with an NPDES permit that includes stormwater management controls</button>
         </div>
       </div>
 
