@@ -423,7 +423,8 @@ form.addEventListener('submit', (event) => {
         }
       jsonData.applicationType = selected[0];
       if (jsonData.applicationType == "appeal") {
-        jsonData.appealTypes = [];
+        // jsonData.appealTypes = [];
+        jsonData.appealTypes = {}; //TEST
       }
       else
         jsonData.creditType = "";
@@ -458,7 +459,8 @@ form.addEventListener('submit', (event) => {
 function populateUncommonJson(element) {
   switch (element) {
     case 'appealType1':
-      jsonData.appealTypes.push($('#appealType1').val());
+      jsonData.appealTypes.appealType1 = $('#appealType1').val();
+      // jsonData.appealTypes.push($('#appealType1').val());
       // jsonData.appealType1 = $('#appealType1').val();
       jsonData.a1TierCurrent = $('#a1TierCurrent').val();
       jsonData.a1TierProposed = $('#a1TierProposed').val();
@@ -467,7 +469,8 @@ function populateUncommonJson(element) {
       break;
     
     case 'appealType2':
-      jsonData.appealTypes.push($('#appealType2').val());
+      jsonData.appealTypes.appealType2 = $('#appealType2').val();
+      // jsonData.appealTypes.push($('#appealType2').val());
       // jsonData.appealType2 = $('#appealType2').val();
       jsonData.a2TypeCurrent = $('#a2TypeCurrent').val();
       jsonData.a2TypeProposed = $('#a2TypeProposed').val();
@@ -475,7 +478,8 @@ function populateUncommonJson(element) {
       break;
 
     case 'appealType3':
-      jsonData.appealTypes.push($('#appealType3').val());
+      jsonData.appealTypes.appealType3 = $('#appealType3').val();
+      // jsonData.appealTypes.push($('#appealType3').val());
       // jsonData.appealType3 = $('#appealType3').val();
       jsonData.a3HOAHouses = $('#a3HOAHouses').val();
       jsonData.a3HOAFee = $('#a3HOAFee').val();
@@ -483,7 +487,8 @@ function populateUncommonJson(element) {
       break;
 
     case 'appealType4':
-      jsonData.appealTypes.push($('#appealType4').val());
+      jsonData.appealTypes.appealType4 = $('#appealType4').val();
+      // jsonData.appealTypes.push($('#appealType4').val());
       // jsonData.appealType4 = $('#appealType4').val();
       // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a4Category = [];
@@ -494,7 +499,8 @@ function populateUncommonJson(element) {
       break;
       
     case 'appealType5':
-      jsonData.appealTypes.push($('#appealType5').val());
+      jsonData.appealTypes.appealType5 = $('#appealType5').val();
+      // jsonData.appealTypes.push($('#appealType5').val());
       // jsonData.appealType5 = $('#appealType5').val();
       // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a5Category = [];
