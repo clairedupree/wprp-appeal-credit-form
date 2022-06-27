@@ -62,6 +62,10 @@
 	</style>
 </head>
 
+
+<!-- TODO: #17 Clean up inline styles, consolidate duplicates, better class names, -->
+<!-- TODO: #16 Move all CSS to an external stylesheet -->
+
 <body>
   <div class="bootstrap-iso"> 
   
@@ -112,32 +116,27 @@
             <h5>Select the appeal basis (check all that apply):</h5>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="appealType1" name="appealType" 
-                value="Property placed in wrong residential tier">
+              <input class="form-check-input" type="checkbox" id="appealType1" name="appealType" value="Property placed in wrong residential tier">
               <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="appealType2" name="appealType" 
-                value="Incorrect classification of property">
+              <input class="form-check-input" type="checkbox" id="appealType2" name="appealType" value="Incorrect classification of property">
               <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="appealType3" name="appealType" value="Homeowner's Association property 
-                where the fee cap is applicable but was not applied">
+              <input class="form-check-input" type="checkbox" id="appealType3" name="appealType" value="Homeowner's Association property where the fee cap is applicable but was not applied">
               <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="appealType4" name="appealType" 
-                value="Mathematical error or incorrect impervious surface calculation">
+              <input class="form-check-input" type="checkbox" id="appealType4" name="appealType" value="Mathematical error or incorrect impervious surface calculation">
               <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface calculation</label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="appealType5" name="appealType" 
-                value="Exempt or incorrect property owner">
+              <input class="form-check-input" type="checkbox" id="appealType5" name="appealType" value="Exempt or incorrect property owner">
               <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
             </div>
           </div> 
@@ -222,14 +221,14 @@
             <div class="form-group">
               Is the property owned by an individual or by an organization? <span class="requiredField">*</span><br>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="individualOwner" name="propertyOwner" 
-                  value="yes" onchange="toggleDivs(name)" required>
+                <input class="form-check-input" type="radio" id="individualOwner" name="propertyOwnerType" 
+                  value="individual" onchange="toggleDivs(name)" required>
                 <label class="form-check-label" for="individualOwner">Individual</label>
               </div>
               
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="companyOwner" name="propertyOwner" 
-                  value="no" onchange="toggleDivs(name)" required>
+                <input class="form-check-input" type="radio" id="companyOwner" name="propertyOwnerType" 
+                  value="company/organization" onchange="toggleDivs(name)" required>
                 <label class="form-check-label" for="companyOwner">Company / Organization</label>
               </div>
             </div>
