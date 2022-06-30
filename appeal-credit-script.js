@@ -444,7 +444,7 @@ form.addEventListener('submit', (event) => {
       jsonData.signatureCompanyName = $('#signatureCompanyName').val();
 
       console.log('Post object', JSON.stringify(cmObject));
-      //postToIssueFlow();
+      postToIssueFlow();
     });
   });
 });
