@@ -76,27 +76,27 @@
           <div class="form-group">
             <h5>Select the appeal basis (check all that apply):</h5>
 
-            <div class="form-check">
+            <div class="form-check" title="Appeal type 1 hover text.">
               <input class="form-check-input" type="checkbox" id="appealType1" name="appealType" value="Property placed in wrong residential tier">
               <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
             </div>
 
-            <div class="form-check">
+            <div class="form-check" title="Appeal type 2 hover text.">
               <input class="form-check-input" type="checkbox" id="appealType2" name="appealType" value="Incorrect classification of property">
               <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
             </div>
 
-            <div class="form-check">
+            <div class="form-check" title="Appeal type 3 hover text.">
               <input class="form-check-input" type="checkbox" id="appealType3" name="appealType" value="Homeowner's Association property where the fee cap is applicable but was not applied">
               <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap is applicable but was not applied</label>
             </div>
 
-            <div class="form-check">
+            <div class="form-check" title="Appeal type 4 hover text.">
               <input class="form-check-input" type="checkbox" id="appealType4" name="appealType" value="Mathematical error or incorrect impervious surface calculation">
               <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface calculation</label>
             </div>
 
-            <div class="form-check">
+            <div class="form-check" title="Appeal type 5 hover text.">
               <input class="form-check-input" type="checkbox" id="appealType5" name="appealType" value="Exempt or incorrect property owner">
               <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
             </div>
@@ -119,10 +119,10 @@
       <div class="row">
         <div class="col-12 form-group">
           <h5>Select the credit type:</h5>
-          <button class="btn btn-dark btn-block" value="Property not under an NPDES permit" name="creditType"
-            id="creditType1" onclick="showCreditApplication(id)">Property not under an NPDES permit</button>
-          <button class="btn btn-dark btn-block" value="Property with an NPDES permit that includes stormwater management controls" name="creditType"
-            id="creditType2" onclick="showCreditApplication(id)">Property with an NPDES permit that includes stormwater management controls</button>
+          <button class="btn btn-dark btn-block" value="Multi-Family, Non-Residential and/or Residential Property" name="creditType"
+            id="creditType1" onclick="showCreditApplication(id)">Multi-Family, Non-Residential and/or Residential Property</button>
+          <button class="btn btn-dark btn-block" value="Non-Residential Property with NPDES permit" name="creditType"
+            id="creditType2" onclick="showCreditApplication(id)">Non-Residential Property with NPDES permit</button>
         </div>
       </div>
 
@@ -133,14 +133,14 @@
             <h5>Select the credit type:</h5>
             <div class="form-check">
               <input class="form-check-input" type="radio" id="TESTcreditType1" name="TESTcreditType" 
-                value="Property not under an NPDES permit" required>
-              <label class="form-check-label" for="TESTcreditType1">Property not under an NPDES permit</label>
+                value="Multi-Family, Non-Residential and/or Residential Property" required>
+              <label class="form-check-label" for="TESTcreditType1">Multi-Family, Non-Residential and/or Residential Property</label>
             </div>
   
             <div class="form-check">
               <input class="form-check-input" type="radio" id="TESTcreditType2" name="TESTcreditType" 
-                value="Property with an NPDES permit that includes stormwater management controls" required>
-              <label class="form-check-label" for="TESTcreditType2">Property with an NPDES permit that includes stormwater management controls</label>
+                value="Non-Residential Property with NPDES permit" required>
+              <label class="form-check-label" for="TESTcreditType2">Non-Residential Property with NPDES permit</label>
             </div>
           </div>
         </div>
@@ -197,33 +197,8 @@
 
         <div id="ownerInfo" class="clearAtApplicationSelect"></div>
 
-        <!-- <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-              <label for="ownerFirstName">Owner First Name: </label>
-              <input type="text"  name="ownerFirstName" id="ownerFirstName" class="form-control" required>
-            </div>
-          </div>
-
-          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group">
-              <label for="ownerLastName">Owner Last Name: </label>
-              <input type="text" name="ownerLastName" id="ownerLastName" class="form-control" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">  
-          <div class="col-12">
-            <div class="form-group">
-              <label for="ownerCompanyName">Owner Company / Organization (if applicable): </label>
-              <input type="text" name="ownerCompanyName" id="ownerCompanyName" class="form-control">
-            </div>
-          </div>
-        </div> -->
-
         <!-- Tax Account(s) -->
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12">
             <h5>Tax Accounts</h5>
           </div>
@@ -237,9 +212,10 @@
                   Look up your tax account number</a></small>
             </div>
           </div>	
-        </div>
+        </div> -->
 
         <!-- Property Address -->
+        <!--
         <div class="row">
           <div class="col-12">
             <h5>Property Address</h5>
@@ -275,7 +251,7 @@
             </div>
           </div>   
 
-          <!-- TODO: select input for state abbreviations? -->
+          <!-- TODO: select input for state abbreviations? --
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="locationState">State: <span class="requiredField">*</span></label>
@@ -283,7 +259,7 @@
             </div>
           </div>   
 
-          <!-- TODO: zip code type input? -->
+          <!-- TODO: zip code type input? --
           <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
             <div class="form-group">
               <label for="locationZip">Zip Code: <span class="requiredField">*</span></label>
@@ -291,6 +267,7 @@
             </div>
           </div>
         </div>
+      -->
 
         <!-- Contact Information -->
         <div class="row">
@@ -485,6 +462,7 @@
 <!-- To be appended based on selection -->
 <div id="uncommonForms" class="hidden">
 
+  <!-- Individual Property Owner -->
   <div id="individualOwnerForm">
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -512,6 +490,7 @@
     </div>
   </div>
 
+  <!-- Company / Organization Property Owner -->
   <div id="companyOwnerForm">
     <div class="row">  
       <div class="col-12">
@@ -521,6 +500,37 @@
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="representativeFirstName">Representative First Name: <span class="requiredField">*</span></label>
+          <input type="text"  name="representativeFirstName" id="representativeFirstName" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="form-group">
+          <label for="representativeLastName">Representative Last Name: <span class="requiredField">*</span></label>
+          <input type="text" name="representativeLastName" id="representativeLastName" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="representativeTitle">Representative Title: <span class="requiredField">*</span></label>
+          <input type="text" name="representativeTitle" id="representativeTitle" class="form-control">
+          <small id="representativeHelpBlock" class="form-text text-muted">
+            Representative should belong to, be employed by, or hold a position in the owner company/organization. 
+            If someone outside of the company/organization is filling out this application, their name and information 
+            should be entered into the <em>Contact Information</em> section.
+          </small> 
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div id="constituentInfoForm">
@@ -596,7 +606,7 @@
     </div>
   </div>
 
-  <!-- Headers -->
+  <!-- Application Headers -->
   <div id="appealHeader">
     <div class="row">
       <div class="col-12">
@@ -1045,12 +1055,12 @@
   </div><!-- End appeal 5 application -->
 
   <!-- CREDIT APPLICATIONS -->
-  <!-- Credit Type 1: Property not under an NPDES permit -->
+  <!-- Credit Type 1: Multi-Family, Non-Residential and/or Residential Property -->
   <div id="credit1Form">
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Credit Type: Property not under an NPDES permit</h5>
+        <h5>Credit Type: Multi-Family, Non-Residential and/or Residential Property</h5>
       </div>
     </div>
 
@@ -1345,12 +1355,12 @@
   </div>
 
 
-  <!-- Credit Type 2: Property with an NPDES permit that includes stormwater management controls -->
+  <!-- Credit Type 2: Non-Residential Property with NPDES permit -->
   <div id="credit2Form">
     <hr>
     <div class="row">
       <div class="col-12">
-        <h5>Credit Type: Property with an NPDES permit that includes stormwater management controls</h5>
+        <h5>Credit Type: Non-Residential Property with NPDES permit</h5>
       </div>
     </div> 
 
