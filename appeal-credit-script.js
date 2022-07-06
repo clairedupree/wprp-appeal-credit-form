@@ -169,32 +169,48 @@ function populateSelectedAppealTypes() {
   switch(element) {
     case 'propertyOwnerType':
       if ($('#individualOwner')[0].checked) {
-        // console.log('individual owner')
         $("#ownerInfo").html($("#individualOwnerForm").html());
       }
       else {
-        // console.log('company owner')
         $("#ownerInfo").html($("#companyOwnerForm").html());
       }
       break;
 
-    case 'constituentDifferent':
-      if ($('#constituentDifferentYes')[0].checked) {
-        $("#constituentInfo").html($("#constituentInfoForm").html());
-      }
-      else {
+    case 'constituentIsOwner':
+      if ($('#constituentIsOwnerYes')[0].checked) {
         $("#constituentInfo").html("");
       }
+      else {
+        $("#constituentInfo").html($("#constituentInfoForm").html());
+      }      
       break;
 
-    case 'mailingDifferent': 
-      if ($('#mailingDifferentYes')[0].checked) {
-        $("#mailingAddress").html($("#mailingAddressForm").html());
-      }
-      else {
-        $("#mailingAddress").html("");
-      }
-      break;
+      // case 'constituentDifferent':
+    //   if ($('#constituentDifferentYes')[0].checked) {
+    //     $("#constituentInfo").html($("#constituentInfoForm").html());
+    //   }
+    //   else {
+    //     $("#constituentInfo").html("");
+    //   }
+    //   break;
+
+    case 'propertyDifferent': 
+    if ($('#propertyDifferentYes')[0].checked) {
+      $("#propertyAddress").html($("#propertyAddressForm").html());
+    }
+    else {
+      $("#propertyAddress").html("");
+    }
+    break;
+
+    // case 'mailingDifferent': 
+    //   if ($('#mailingDifferentYes')[0].checked) {
+    //     $("#mailingAddress").html($("#mailingAddressForm").html());
+    //   }
+    //   else {
+    //     $("#mailingAddress").html("");
+    //   }
+    //   break;
 
     case 'a5Category1':
       if ($('#a5Category1')[0].checked) {
@@ -372,48 +388,74 @@ form.addEventListener('submit', (event) => {
       action: 'submit',
     })
     .then((token) => {
+      // jsonData.token = "override";
       jsonData.token = token;
-      // jsonData.token = "override"; //replace with grecaptcha
+
+      // Property Owner Information
       jsonData.propertyOwnerType = $('input[name="propertyOwnerType"]').val();
       if (jsonData.propertyOwnerType == 'individual') {
         jsonData.ownerFirstName = $('#ownerFirstName').val();
         jsonData.ownerLastName = $('#ownerLastName').val();
         jsonData.ownerCompanyName = $('#ownerCompanyName').val();
       }
-      else {
+      else if (jsonData.propertyOwnerType == 'company/organization') {
         jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+        jsonData.representativeFirstName = $('#representativeFirstName').val();
+        jsonData.representativeLastName = $('#representativeLastName').val();
+        jsonData.representativeTitle = $('#representativeTitle').val();
       }
-      jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
-      jsonData.locationHouseNumber = $('#locationHouseNumber').val();
-      jsonData.locationStreetName = $('#locationStreetName').val();
-      jsonData.locationStreetType = $('#locationStreetType').val();
-      jsonData.locationCity = $('#locationCity').val();
-      jsonData.locationState = $('#locationState').val();
-      jsonData.locationZip = $('#locationZip').val();
-      jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
-      // TODO: #3 match this logic to the individual / owner logic
-      if (jsonData.constituentDifferent == 'no') {
+      else {
+        console.log('Error populating property owner info')
+      }
+      
+      // Constituent (Applicant) Information
+      jsonData.applicantIsOwner = $('input[name="applicantIsOwner"]:checked').val()
+      // jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
+      if (jsonData.applicantIsOwner == 'yes') {
+        if (jsonData.propertyOwnerType == 'individual') {
           jsonData.constituentFirstName = jsonData.ownerFirstName;
           jsonData.constituentLastName = jsonData.ownerLastName;
-          jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
+          jsonData.constituentCompanyName = jsonData.ownerCompanyName; //jsonData.companyName
+        }
+        else { 
+          jsonData.ownerCompanyName = $('#ownerCompanyName').val();
+          jsonData.representativeFirstName = $('#representativeFirstName').val();
+          jsonData.representativeLastName = $('#representativeLastName').val();
+          jsonData.representativeTitle = $('#representativeTitle').val();
+        }
       }
-      else if (jsonData.constituentDifferent == 'yes') {
+      else {
+        if (jsonData.propertyOwnerType == 'individual') {
           jsonData.constituentFirstName = $('#constituentFirstName').val();
           jsonData.constituentLastName = $('#constituentLastName').val();
           jsonData.companyName = $('#constituentCompanyName').val();
+        }
+        else {
+          
+        }
       }
-      jsonData.constituentPhone = $('#constituentPhone').val();
-      jsonData.email = $('#email').val();
-      jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
-      if (jsonData.mailingDifferent == 'no') {
-          jsonData.constituentHouseNumber = jsonData.locationHouseNumber;
+      //   if (jsonData.constituentDifferent == 'no') {
+        //       jsonData.constituentFirstName = jsonData.ownerFirstName;
+        //       jsonData.constituentLastName = jsonData.ownerLastName;
+        //       jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
+        //   }
+        //   else if (jsonData.constituentDifferent == 'yes') {
+          //       jsonData.constituentFirstName = $('#constituentFirstName').val();
+          //       jsonData.constituentLastName = $('#constituentLastName').val();
+          //       jsonData.companyName = $('#constituentCompanyName').val();
+          //   }
+          jsonData.constituentPhone = $('#constituentPhone').val();
+          jsonData.email = $('#email').val();
+          jsonData.mailingDifferent = $('input[name="mailingDifferent"]:checked').val(); //yes or no
+          if (jsonData.mailingDifferent == 'no') {
+            jsonData.constituentHouseNumber = jsonData.locationHouseNumber;
           jsonData.constituentStreetName = jsonData.locationStreetName;
           jsonData.constituentStreetType = jsonData.locationStreetType;
           jsonData.constituentCity = jsonData.locationCity;
           jsonData.constituentState = jsonData.locationState;
           jsonData.constituentZip = jsonData.locationZip;
         }  
-      else if (jsonData.mailingDifferent == 'yes') {
+        else if (jsonData.mailingDifferent == 'yes') {
           jsonData.constituentHouseNumber = $('#constituentHouseNumber').val();
           jsonData.constituentStreetName = $('#constituentStreetName').val();
           jsonData.constituentStreetType = $('#constituentStreetType').val();
@@ -421,6 +463,20 @@ form.addEventListener('submit', (event) => {
           jsonData.constituentState = $('#constituentState').val();
           jsonData.constituentZip = $('#constituentZip').val();
         }
+        
+        // jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
+
+
+      // Property Information
+      // jsonData.locationHouseNumber = $('#locationHouseNumber').val();
+      // jsonData.locationStreetName = $('#locationStreetName').val();
+      // jsonData.locationStreetType = $('#locationStreetType').val();
+      // jsonData.locationCity = $('#locationCity').val();
+      // jsonData.locationState = $('#locationState').val();
+      // jsonData.locationZip = $('#locationZip').val();
+      jsonData.propertyInformation = $('#propertyInformation').val();
+
+      
       jsonData.applicationType = selected[0];
       if (jsonData.applicationType == "appeal") {
         jsonData.appealTypes = [];

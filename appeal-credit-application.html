@@ -279,6 +279,25 @@
         <div class="row">
           <div class="col-12">
             <div class="form-group">
+              Is applicant the property owner? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="constituentIsOwnerYes" name="constituentIsOwner" 
+                  value="yes" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="constituentIsOwnerYes">Yes</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="constituentIsOwnerNo" name="constituentIsOwner" 
+                  value="no" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="constituentIsOwnerNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-12">
+            <div class="form-group">
               Is applicant a person other than the property owner? <span class="requiredField">*</span><br>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="constituentDifferentYes" name="constituentDifferent" 
@@ -293,10 +312,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div id="constituentInfo" class="clearAtApplicationSelect">
-          <!-- append only if "constituentDifferentNo: checked" -->
+          <!-- append only if "constituentIsOwnerNo is checked" -->
         </div>
 
         <div class="row">
@@ -322,7 +341,7 @@
           </div>
         </div>  
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12">
             <div class="form-group">
               Is the mailing address different than the property address? <span class="requiredField">*</span><br>
@@ -342,8 +361,83 @@
         </div>
 
         <div id="mailingAddress" class="clearAtApplicationSelect">
-          <!-- append only if "mailingDifferentYes: checked" -->
+          <!-- append only if "mailingDifferentYes: checked" --
+        </div> -->
+
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="constituentHouseNumber">Street Number: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentHouseNumber" id="constituentHouseNumber" class="form-control" aria-label="Mailing Street Number" required>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="constituentStreetName">Street Name: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentStreetName" id="constituentStreetName" class="form-control" aria-label="Mailing Street Name" required>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="constituentStreetType">Street Type: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentStreetType" id="constituentStreetType" class="form-control" placeholder="Street, Drive, etc." aria-label="Mailing Street Type" required>
+            </div>
+          </div>
         </div>
+    
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="constituentCity">City: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentCity" id="constituentCity" class="form-control" aria-label="Mailing City" required>
+            </div>
+          </div>   
+          
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="constituentState">State: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentState" id="constituentState" class="form-control" aria-label="Mailing State" required>
+            </div>
+          </div>   
+    
+          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="form-group">
+              <label for="constituentZip">Zip Code: <span class="requiredField">*</span></label>
+              <input type="text" name="constituentZip" id="constituentZip" class="form-control" aria-label="Mailing Zip Code" required>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <h5>Property Location</h5>
+          </div>
+        </div>  
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              Is the property address different than the mailing address? <span class="requiredField">*</span><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="propertyDifferentYes" name="propertyDifferent" 
+                  value="yes" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="propertyDifferentYes">Yes</label>
+              </div>
+              
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="propertyDifferentNo" name="propertyDifferent" 
+                  value="no" onchange="toggleDivs(name)" required>
+                <label class="form-check-label" for="propertyDifferentNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="propertyAddress" class="clearAtApplicationSelect">
+          <!-- append only if "propertyDifferentYes: checked" -->
+        </div>
+
       </div> <!-- End common beginning -->
 
       <!-- UNCOMMON MIDDLE -->
@@ -363,41 +457,15 @@
 
         <!-- file upload -->
         <!-- TODO: #20 change to default bootstrap button?, not an invisible button -->
-        <!-- TODO: #21 file submit not working -->
+        <!-- look into input "type" and bootstrap input type button -->
         <div class="col-12">
           <div class="form-group">
-            <input class="hidden" type="file" class="form-control file-upload-input"id="piaAttachments" name="piaAttachments[]" 
-            multiple accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-            <button type="button" class="file-upload-btn btn btn-secondary">Choose Files</button>
-            <span class="indent" class="file-upload-label"></span>
+            <input style="display: none;" type="file" class="form-control file-upload-input" id="supportingDocuments" name="supportingDocuments" 
+              multiple accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            <button type="button" class="file-upload-btn btn btn-secondary">Choose Files</button> 
+            <span class="file-upload-label indent">No files chosen</span>
           </div>
         </div>
-        <!-- file upload -->
-      <!-- file upload
-      <div class="row">
-        <div class="col-12">
-          <div class="form-group">
-            <input
-              type="file" class="form-control-file file-upload-input" 
-              id="supportingDocuments" name="supportingDocuments" multiple
-              accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
-            
-            <button type="button" class="file-upload-btn btn btn-secondary">Choose File(s)</button>
-            <span class="file-upload-label"></span>
-          </div>
-        </div>
-      </div>
-    -->
-        <!-- <div class="row">
-          <div class="col-12">
-            <div class="form-group">
-              <!-- <label for="supportingDoc">Supporting Documentation</label> --
-              <input class="form-control-file" type="file" id="supportingDoc" 
-                name="fileUploadButton" multiple>
-            </div>
-          </div>
-        </div> -->
-        
 
         <div id="statement" class="uncommon">
           <!-- to be appended w/ appeal acknowledgement or credit authorization  -->
@@ -538,7 +606,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="form-group">
           <label for="constituentFirstName">Applicant First Name: <span class="requiredField">*</span></label>
-          <input type="text"  name="constituentFirstName" id="constituentFirstName" class="form-control" required>
+          <input type="text" name="constituentFirstName" id="constituentFirstName" class="form-control" required>
         </div>
       </div>
 
@@ -560,7 +628,20 @@
     </div>
   </div>
 
-  <div id="mailingAddressForm">    
+  <div id="propertyAddressForm">
+    <div class="row">  
+      <div class="col-12">
+        <div class="form-group">
+          <label for="propertyInformation">Property address (or brief description of location if application 
+            includes multiple properties or if property does not have an address with a street number): 
+            <span class="requiredField">*</span></label>
+          <textarea class="form-control" id="propertyInformation" rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div id="mailingAddressForm">    
     <div class="row">
       <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
         <div class="form-group">
@@ -604,7 +685,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Application Headers -->
   <div id="appealHeader">
