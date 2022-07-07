@@ -29,12 +29,20 @@ i {
   margin-bottom: 0;
 }
 
-#submitMessage {
-  padding: 1rem 1rem !important;
-}
-
 .mobile {
   display: none;
+}
+
+/* hr {
+  height: 3px;
+} */
+
+/* #uncommonMiddle {
+  background-color: ;
+} */
+
+#submitMessage {
+  padding: 1rem 1rem !important;
 }
 
 /* override site template styles */
