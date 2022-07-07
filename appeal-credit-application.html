@@ -766,14 +766,11 @@
                 <b><i class="fas fa-info-circle"></i>List of Residential Tiers</b>
                 <ul>
                   <li>WPRF01 / Tier 1: Residential property with a detached single family dwelling in Rural Agricultural
-                    (RA) or
-                    Residential Low Density (RLD) zoning</li>
+                    (RA) or Residential Low Density (RLD) zoning</li>
                   <li>WPRF02 / Tier 2: Residential property with a detached single family dwelling in R1, R2, or R5
-                    residential
-                    zoning</li>
+                    residential zoning</li>
                   <li>WPRF03 / Tier 3: Residential property in R10 or R15 residential zoning or an attached dwelling in
-                    RA,
-                    RLD, R1, R2, or R5 zoning
+                    RA, RLD, R1, R2, or R5 zoning
                   </li>
                 </ul>
               </div>
@@ -819,7 +816,7 @@
               Reason: <span class="requiredField">*</span><br>
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="a1Reason1" name="a1Reason"
-                  value="The property's tier is incorrect based on its zoning" required>
+                  value="The property's tier is incorrect based on its zoning." required>
                 <label class="form-check-label" for="a1Reason1">The property's tier is incorrect based on its
                   zoning</label>
               </div>
@@ -829,18 +826,25 @@
                   value="The property is an attached dwelling in residential zoning but is not categorized as Tier 3"
                   required>
                 <label class="form-check-label" for="a1Reason2">The property is an attached dwelling in residential
-                  zoning but is not
-                  categorized as Tier 3</label>
+                  zoning but is not categorized as Tier 3</label>
               </div>
 
               <div class="form-check">
                 <input class="form-check-input" type="radio" id="a1Reason3" name="a1Reason"
-                  value="The property should be classified as the next lower tier due to the amount of impervious surface on site"
+                  value="The property is Tier 1 but should be classified as Tier 2 as the property has less than 2,900 square feet of impervious surfaces"
                   required>
-                <label class="form-check-label" for="a1Reason3">The property should be classified as the next lower tier
-                  due to the
-                  amount of impervious surface on site (Less than 2,900 sq ft for a Tier 1 property;
-                  Less than 1,200 sq ft for a Tier 2 property)</label>
+                <label class="form-check-label" for="a1Reason3">The property is Tier 1 but should be classified as Tier
+                  2 as the property has less than 2,900 square feet of impervious
+                  surfaces</label>
+              </div>
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="a1Reason4" name="a1Reason"
+                  value="The property is Tier 2 but should be classified as Tier 3 as the property has less than 1,200 square feet of impervious surfaces"
+                  required>
+                <label class="form-check-label" for="a1Reason4">The property is Tier 2 but should be classified as Tier
+                  3 as the property has less than 1,200 square feet of impervious
+                  surfaces</label>
               </div>
             </div>
           </div>
@@ -1124,15 +1128,6 @@
                 <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship
                   exemption from the stormwater fee for the current billing year</label>
               </div>
-
-              <!-- TODO: link to office of finance? https://www.aacounty.org/departments/finance/ -->
-              <small id="a5CategoryHelpBlock" class="form-text text-muted">
-                This form is not used to apply for a financial hardship exemption from the stormwater fee.
-                To apply for this exemption, <a
-                  href="https://www.aacounty.org/departments/finance/forms-and-publications/Residential_Stormwater_Hardship.pdf"
-                  target="_blank">
-                  click here to download the following form and submit it to the Office of Finance.</a>
-              </small>
             </div>
           </div>
         </div>
@@ -1274,15 +1269,14 @@
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="c1InstallDate">Approximate installation date: <span class="requiredField">*</span></label>
-              <input type="date" name="c1InstallDate" id="c1InstallDate" class="form-control" required>
+              <label for="c1Installer">Installer (if known): </label>
+              <input type="text" name="c1Installer" id="c1Installer" class="form-control">
             </div>
           </div>
-
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="c1Installer">Installer: <span class="requiredField">*</span></label>
-              <input type="text" name="c1Installer" id="c1Installer" class="form-control" required>
+              <label for="c1InstallDate">Approximate installation date (if known): </label>
+              <input type="date" name="c1InstallDate" id="c1InstallDate" class="form-control">
             </div>
           </div>
         </div>
