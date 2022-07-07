@@ -16,20 +16,25 @@ i {
 
 .info-box {
   background-color: #f0f0f0;
-  padding: 10px
+  padding: 10px;
 }
 
 .info-box i {
-  color: #0072bc; 
-  margin-right: 5px
+  color: #0072bc;
+  margin-right: 5px;
 }
 
-.info-box ul, .info-box ol {
+.info-box ul,
+.info-box ol {
   margin-bottom: 0;
 }
 
 #submitMessage {
   padding: 1rem 1rem !important;
+}
+
+.mobile {
+  display: none;
 }
 
 /* override site template styles */
@@ -62,4 +67,11 @@ h1 {
   white-space: normal !important;
 }
 
-
+@media (max-width: 1024px) {
+  .mobile {
+    display: inline-block;
+  }
+  .desktop {
+    display: none;
+  }
+}
