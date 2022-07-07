@@ -11,8 +11,8 @@ const cmObject = {
   caseTypeUUID: "6d788088-0501-4db3-82b2-9a72bf61820f",
   jsonData: jsonData,
 };
-let fileUploads,
-  attachments = []; //supporting documentation
+let fileUploads = [];
+let attachments = []; //supporting documentation
 //boolean variables for populating credit type 1 json data
 let c1GradingPermitForm,
   c1InstallerForm,
@@ -27,11 +27,45 @@ let c1GradingPermitForm,
  */
 function showApplicationTypes(applicationType) {
   selected.length = 0; //reset selected array
+  // TODO: #24 reset all of these by class name instead?
   document.getElementById("appeal").reset(); //reset appeal checkboxes
   document.getElementById("wprfApplication").reset(); //reset form fields
   $(".clearAtApplicationSelect").html(""); //reset constituent / mailing divs within form
 
   selected.push(applicationType);
+
+  // TODO: #25 How does document upload work? Why is this so complicated. Wewrite entirely.
+  // document.getElementById("fileUploadInput").value = ""; //reset file input??
+  // fileUploads = [];
+  // attachments = []; //Redundant? cleared before each new upload // clear file uploads
+  // Array.prototype.forEach.call(document.querySelectorAll(".file-upload-btn"), (button) => {
+  //   const hiddenInput = button.parentElement.querySelector(".file-upload-input");
+  //   const label = button.parentElement.querySelector(".file-upload-label");
+  //   const defaultLabelText = "No files chosen";
+  //   label.textContent = defaultLabelText;
+  //   label.title = defaultLabelText;
+
+  //   button.addEventListener("click", () => {
+  //     hiddenInput.click();
+  //   });
+
+  //   hiddenInput.addEventListener("change", () => {
+  //     fileUploads = [];
+  //     let fileNameList = "";
+  //     fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
+  //       fileUploads.push(file);
+  //       return file.name;
+  //     });
+
+  //     console.log(fileUploads, attachments);
+
+  //     base64Ready();
+  //     label.textContent = fileNameList.join(", ") || defaultLabelText;
+  //     label.title = label.textContent;
+  //   });
+  // });
+
+  // console.log(fileUploads, attachments);
 
   //show application
   $("#" + selected[0]).show();
@@ -63,7 +97,10 @@ $("#backButton").click(function () {
  * @param {string} creditType Id of selected button
  */
 function showCreditApplication(creditType) {
+  // console.log(fileUploads, attachments);
+
   selected.length = 1; //truncate array
+  // TODO: change .uncommon to .resetAtTypeSelect
   $(".uncommon").html(""); //reset uncomon divs
   $("#formHeader").html($("#creditHeader").html()); //set credit header
   $("#statement").html($("#creditAuthorization").html()); //set credit acknowledgement
@@ -94,8 +131,9 @@ function showCreditApplication(creditType) {
  * @todo cleaner way to validate iniital checks in appeal5 - access by name instead of class? DOM
  */
 function showAppealApplication() {
-  if (validateCheckboxes("#appeal", "#appealType1") == false)
-    $("#appeal")[0].reportValidity();
+  // console.log(fileUploads, attachments);
+
+  if (validateCheckboxes("#appeal", "#appealType1") == false) $("#appeal")[0].reportValidity();
   else {
     $("#appeal")[0].checkValidity();
 
@@ -188,11 +226,11 @@ function toggleDivs(element) {
     //   }
     //   break;
 
-    case "propertyDifferent":
-      if ($("#propertyDifferentYes")[0].checked) {
-        $("#propertyAddress").html($("#propertyAddressForm").html());
-      } else {
+    case "propertyIsMailing":
+      if ($("#propertyIsMailingYes")[0].checked) {
         $("#propertyAddress").html("");
+      } else {
+        $("#propertyAddress").html($("#propertyAddressForm").html());
       }
       break;
 
@@ -249,9 +287,7 @@ function toggleDivs(element) {
 
     case "c1InstallerPlans":
       if ($("#c1InstallerPlansNo")[0].checked) {
-        $("#c1TreatmentDescriptionToggle").html(
-          $("#c1TreatmentDescriptionForm").html()
-        );
+        $("#c1TreatmentDescriptionToggle").html($("#c1TreatmentDescriptionForm").html());
         c1TreatmentDescriptionForm = true;
       } else {
         $("#c1TreatmentDescriptionToggle").html("");
@@ -288,9 +324,7 @@ function validateCheckboxes(thisElement, validityTarget) {
     return true;
   } else {
     //is invalid
-    $(validityTarget)
-      .get(0)
-      .setCustomValidity("Please select at least one of these options."); //will not pass validation on submit
+    $(validityTarget).get(0).setCustomValidity("Please select at least one of these options."); //will not pass validation on submit
     return false;
   }
 }
@@ -304,9 +338,7 @@ function validateCheckboxes(thisElement, validityTarget) {
  */
 function validateDuplicates(thisElement, compareElement, validityTarget) {
   if ($(thisElement).val() == $(compareElement).val()) {
-    $(validityTarget)
-      .get(0)
-      .setCustomValidity("Property classification cannot be the same.");
+    $(validityTarget).get(0).setCustomValidity("Property classification cannot be the same.");
   } else {
     $(validityTarget).get(0).setCustomValidity("");
   }
@@ -316,33 +348,31 @@ function validateDuplicates(thisElement, compareElement, validityTarget) {
  * Copied from pia form
  * @Desc: Handle file upload
  */
-Array.prototype.forEach.call(
-  document.querySelectorAll(".file-upload-btn"),
-  (button) => {
-    const hiddenInput =
-      button.parentElement.querySelector(".file-upload-input");
-    const label = button.parentElement.querySelector(".file-upload-label");
-    const defaultLabelText = "No files chosen";
-    label.textContent = defaultLabelText;
-    label.title = defaultLabelText;
+Array.prototype.forEach.call(document.querySelectorAll(".file-upload-btn"), (button) => {
+  const hiddenInput = button.parentElement.querySelector(".file-upload-input");
+  const label = button.parentElement.querySelector(".file-upload-label");
+  const defaultLabelText = "No files chosen";
+  label.textContent = defaultLabelText;
+  label.title = defaultLabelText;
 
-    button.addEventListener("click", () => {
-      hiddenInput.click();
+  button.addEventListener("click", () => {
+    hiddenInput.click();
+  });
+  hiddenInput.addEventListener("change", () => {
+    fileUploads = [];
+    let fileNameList = "";
+    fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
+      fileUploads.push(file);
+      return file.name;
     });
-    hiddenInput.addEventListener("change", () => {
-      fileUploads = [];
-      let fileNameList = "";
-      fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
-        fileUploads.push(file);
-        return file.name;
-      });
 
-      base64Ready();
-      label.textContent = fileNameList.join(", ") || defaultLabelText;
-      label.title = label.textContent;
-    });
-  }
-);
+    console.log(fileUploads, attachments);
+
+    base64Ready();
+    label.textContent = fileNameList.join(", ") || defaultLabelText;
+    label.title = label.textContent;
+  });
+});
 
 /**
  * Copied from pia form
@@ -388,91 +418,59 @@ form.addEventListener("submit", (event) => {
         jsonData.token = token;
 
         // Property Owner Information
-        jsonData.propertyOwnerType = $('input[name="propertyOwnerType"]').val();
-        if (jsonData.propertyOwnerType == "individual") {
+        jsonData.propertyOwnerType = $('input[name="propertyOwnerType"]:checked').val();
+        const ownerIsIndividual = jsonData.propertyOwnerType == "individual";
+        console.log(ownerIsIndividual);
+        if (ownerIsIndividual) {
           jsonData.ownerFirstName = $("#ownerFirstName").val();
           jsonData.ownerLastName = $("#ownerLastName").val();
           jsonData.ownerCompanyName = $("#ownerCompanyName").val();
-        } else if (jsonData.propertyOwnerType == "company/organization") {
+        } else {
+          // owner is a company
           jsonData.ownerCompanyName = $("#ownerCompanyName").val();
-          jsonData.representativeFirstName = $(
-            "#representativeFirstName"
-          ).val();
+          jsonData.representativeFirstName = $("#representativeFirstName").val();
           jsonData.representativeLastName = $("#representativeLastName").val();
           jsonData.representativeTitle = $("#representativeTitle").val();
-        } else {
-          console.log("Error populating property owner info");
         }
 
         // Constituent (Applicant) Information
-        jsonData.applicantIsOwner = $(
-          'input[name="applicantIsOwner"]:checked'
-        ).val();
-        // jsonData.constituentDifferent = $('input[name="constituentDifferent"]:checked').val(); //yes or no
-        if (jsonData.applicantIsOwner == "yes") {
-          if (jsonData.propertyOwnerType == "individual") {
+        jsonData.constituentIsOwner = $('input[name="constituentIsOwner"]:checked').val() == "yes";
+        const constituentIsOwner = jsonData.constituentIsOwner == true;
+        if (constituentIsOwner) {
+          if (ownerIsIndividual) {
             jsonData.constituentFirstName = jsonData.ownerFirstName;
             jsonData.constituentLastName = jsonData.ownerLastName;
             jsonData.constituentCompanyName = jsonData.ownerCompanyName; //jsonData.companyName
           } else {
-            jsonData.ownerCompanyName = $("#ownerCompanyName").val();
-            jsonData.representativeFirstName = $(
-              "#representativeFirstName"
-            ).val();
-            jsonData.representativeLastName = $(
-              "#representativeLastName"
-            ).val();
-            jsonData.representativeTitle = $("#representativeTitle").val();
+            // owner is a company
+            jsonData.constituentFirstName = jsonData.representativeFirstName;
+            jsonData.constituentLastName = jsonData.representativeLastName;
+            jsonData.constituentCompanyName = jsonData.ownerCompanyName;
           }
         } else {
-          if (jsonData.propertyOwnerType == "individual") {
-            jsonData.constituentFirstName = $("#constituentFirstName").val();
-            jsonData.constituentLastName = $("#constituentLastName").val();
-            jsonData.companyName = $("#constituentCompanyName").val();
-          } else {
-          }
+          // constituent is not owner
+          jsonData.constituentFirstName = $("#constituentFirstName").val();
+          jsonData.constituentLastName = $("#constituentLastName").val();
+          jsonData.constituentCompanyName = $("#constituentCompanyName").val();
         }
-        //   if (jsonData.constituentDifferent == 'no') {
-        //       jsonData.constituentFirstName = jsonData.ownerFirstName;
-        //       jsonData.constituentLastName = jsonData.ownerLastName;
-        //       jsonData.companyName = jsonData.ownerCompanyName; //jsonData.companyName
-        //   }
-        //   else if (jsonData.constituentDifferent == 'yes') {
-        //       jsonData.constituentFirstName = $('#constituentFirstName').val();
-        //       jsonData.constituentLastName = $('#constituentLastName').val();
-        //       jsonData.companyName = $('#constituentCompanyName').val();
-        //   }
         jsonData.constituentPhone = $("#constituentPhone").val();
         jsonData.email = $("#email").val();
-        jsonData.mailingDifferent = $(
-          'input[name="mailingDifferent"]:checked'
-        ).val(); //yes or no
-        if (jsonData.mailingDifferent == "no") {
-          jsonData.constituentHouseNumber = jsonData.locationHouseNumber;
-          jsonData.constituentStreetName = jsonData.locationStreetName;
-          jsonData.constituentStreetType = jsonData.locationStreetType;
-          jsonData.constituentCity = jsonData.locationCity;
-          jsonData.constituentState = jsonData.locationState;
-          jsonData.constituentZip = jsonData.locationZip;
-        } else if (jsonData.mailingDifferent == "yes") {
-          jsonData.constituentHouseNumber = $("#constituentHouseNumber").val();
-          jsonData.constituentStreetName = $("#constituentStreetName").val();
-          jsonData.constituentStreetType = $("#constituentStreetType").val();
-          jsonData.constituentCity = $("#constituentCity").val();
-          jsonData.constituentState = $("#constituentState").val();
-          jsonData.constituentZip = $("#constituentZip").val();
+        jsonData.constituentStreetNumber = $("#constituentHouseNumber").val();
+        jsonData.constituentStreetName = $("#constituentStreetName").val();
+        jsonData.constituentStreetType = $("#constituentStreetType").val();
+        jsonData.constituentCity = $("#constituentCity").val();
+        jsonData.constituentState = $("#constituentState").val();
+        jsonData.constituentZip = $("#constituentZip").val();
+
+        // Property Information
+        jsonData.propertyIsMailing = $('input[name="propertyIsMailing"]:checked').val() == "yes";
+        const propertyIsMailing = jsonData.propertyIsMailing == true;
+        console.log(propertyIsMailing);
+        if (!propertyIsMailing) {
+          jsonData.propertyInformation = $("#propertyInformation").val();
         }
 
         // jsonData.ownerTaxAccounts = $('#ownerTaxAccounts').val();
-
-        // Property Information
-        // jsonData.locationHouseNumber = $('#locationHouseNumber').val();
-        // jsonData.locationStreetName = $('#locationStreetName').val();
-        // jsonData.locationStreetType = $('#locationStreetType').val();
-        // jsonData.locationCity = $('#locationCity').val();
-        // jsonData.locationState = $('#locationState').val();
-        // jsonData.locationZip = $('#locationZip').val();
-        jsonData.propertyInformation = $("#propertyInformation").val();
 
         jsonData.applicationType = selected[0];
         if (jsonData.applicationType == "appeal") {
@@ -481,18 +479,13 @@ form.addEventListener("submit", (event) => {
         } else jsonData.creditType = "";
 
         //populate uncommon selections from array
-        for (var i = 1; i < selected.length; i++)
-          populateUncommonJson(selected[i]);
+        for (var i = 1; i < selected.length; i++) populateUncommonJson(selected[i]);
 
         jsonData.attachments = attachments; // refer to file mgmt function
         if (jsonData.applicationType == "appeal")
-          jsonData.statementAppeal = $(
-            'input[name="statementAppeal"]:checked'
-          ).val();
+          jsonData.statementAppeal = $('input[name="statementAppeal"]:checked').val();
         else if (jsonData.applicationType == "credit")
-          jsonData.statementCredit = $(
-            'input[name="statementCredit"]:checked'
-          ).val();
+          jsonData.statementCredit = $('input[name="statementCredit"]:checked').val();
 
         jsonData.signaturePrinted = $("#signaturePrinted").val();
         jsonData.signatureTitle = $("#signatureTitle").val();
@@ -546,11 +539,9 @@ function populateUncommonJson(element) {
       jsonData.appealType4 = $("#appealType4").val();
       // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a4Category = [];
-      document
-        .querySelectorAll('input[name="a4Category"]:checked')
-        .forEach((checkbox) => {
-          jsonData.a4Category.push(checkbox.value);
-        });
+      document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
+        jsonData.a4Category.push(checkbox.value);
+      });
       jsonData.a4Comments = $("#a4Comments").val();
       break;
 
@@ -560,18 +551,14 @@ function populateUncommonJson(element) {
       jsonData.appealType5 = $("#appealType5").val();
       // TODO: use array / json object / or concatenated string? Depends on CSV need
       jsonData.a5Category = [];
-      document
-        .querySelectorAll('input[name="a5Category"]:checked')
-        .forEach((checkbox) => {
-          jsonData.a5Category.push(checkbox.value);
-        });
+      document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
+        jsonData.a5Category.push(checkbox.value);
+      });
       if (document.getElementById("a5Category1").checked) {
         jsonData.a5Category1Reasons = [];
-        document
-          .querySelectorAll('input[name="a5Reason"]:checked')
-          .forEach((checkbox) => {
-            jsonData.a5Category1Reasons.push(checkbox.value);
-          });
+        document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
+          jsonData.a5Category1Reasons.push(checkbox.value);
+        });
       }
       if (document.getElementById("a5Category2").checked) {
         jsonData.a5Category2NewOwner = $("#a5Category2NewOwner").val();
@@ -585,27 +572,21 @@ function populateUncommonJson(element) {
       jsonData.c1InstallDate = $("#c1InstallDate").val();
       jsonData.c1Installer = $("#c1Installer").val();
       jsonData.c1InstallerContact = $("#c1InstallerContact").val();
-      jsonData.c1GradingPermit = $(
-        'input[name="c1GradingPermit"]:checked'
-      ).val();
+      jsonData.c1GradingPermit = $('input[name="c1GradingPermit"]:checked').val();
       if (c1GradingPermitForm == true) {
         jsonData.c1GPNumber = $("#c1GPNumber").val();
         jsonData.c1GPPlans = $('input[name="c1GPPlans"]:checked').val();
         jsonData.c1SWMReport = $('input[name="c1SWMReport"]:checked').val();
       }
       if (c1InstallerForm == true) {
-        jsonData.c1InstallerPlans = $(
-          'input[name="c1InstallerPlans"]:checked'
-        ).val();
+        jsonData.c1InstallerPlans = $('input[name="c1InstallerPlans"]:checked').val();
       }
       if (c1TreatmentDescriptionForm == true) {
         jsonData.c1TreatmentDescription = $("#c1TreatmentDescription").val();
       }
       jsonData.c1IMAgreement = $('input[name="c1IMAgreement"]:checked').val();
       if ((c1FeeAgreementForm = true)) {
-        jsonData.c1FeeCrAgreement = $(
-          'input[name="c1FeeCrAgreement"]:checked'
-        ).val();
+        jsonData.c1FeeCrAgreement = $('input[name="c1FeeCrAgreement"]:checked').val();
       }
       jsonData.c1Comments = $("#c1Comments").val();
       break;
@@ -616,11 +597,9 @@ function populateUncommonJson(element) {
       jsonData.c2RegistrationNumber = $("#c2RegistrationNumber").val();
       jsonData.c2CleanMarina = $('input[name="c2CleanMarina"]:checked').val();
       jsonData.c2Documentation = [];
-      document
-        .querySelectorAll('input[name="c2Documentation"]:checked')
-        .forEach((checkbox) => {
-          jsonData.c2Documentation.push(checkbox.value);
-        });
+      document.querySelectorAll('input[name="c2Documentation"]:checked').forEach((checkbox) => {
+        jsonData.c2Documentation.push(checkbox.value);
+      });
       jsonData.c2Comments = $("#c2Comments").val();
       break;
 
