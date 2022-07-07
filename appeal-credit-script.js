@@ -79,8 +79,9 @@ function showApplicationTypes(applicationType) {
  */
 $("#backButton").click(function () {
   if ($(".typeSelect").is(":visible")) {
-    $("#navigation, #appeal, #credit").hide();
-    $("#applicationSelect").show();
+    window.location.reload(); //default
+    // $("#navigation, #appeal, #credit").hide();
+    // $("#applicationSelect").show();
   } else if ($("#formContainer").is(":visible")) {
     $("#" + selected[0]).show();
     $("#formContainer").hide();
@@ -492,7 +493,7 @@ form.addEventListener("submit", (event) => {
         jsonData.signatureCompanyName = $("#signatureCompanyName").val();
 
         console.log("Post object", JSON.stringify(cmObject));
-        //postToIssueFlow();
+        postToIssueFlow();
       });
   });
 });
