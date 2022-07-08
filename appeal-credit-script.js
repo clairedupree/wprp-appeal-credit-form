@@ -451,6 +451,7 @@ function populateUncommonJson(element) {
       // jsonData.appealTypes.appealType1 = $('#appealType1').val();
       jsonData.appealTypes.push($("#appealType1").val());
       jsonData.appealType1 = $("#appealType1").val();
+      jsonData.a1TaxAccounts = $("#a1TaxAccounts").val();
       jsonData.a1TierCurrent = $("#a1TierCurrent").val();
       jsonData.a1TierProposed = $("#a1TierProposed").val();
       jsonData.a1Reason = $("#a1Reason").val();
@@ -461,6 +462,7 @@ function populateUncommonJson(element) {
       // jsonData.appealTypes.appealType2 = $('#appealType2').val();
       jsonData.appealTypes.push($("#appealType2").val());
       jsonData.appealType2 = $("#appealType2").val();
+      jsonData.a2TaxAccounts = $("#a2TaxAccounts").val();
       jsonData.a2TypeCurrent = $("#a2TypeCurrent").val();
       jsonData.a2TypeProposed = $("#a2TypeProposed").val();
       jsonData.a2Comments = $("#a2Comments").val();
@@ -470,6 +472,7 @@ function populateUncommonJson(element) {
       // jsonData.appealTypes.appealType3 = $('#appealType3').val();
       jsonData.appealTypes.push($("#appealType3").val());
       jsonData.appealType3 = $("#appealType3").val();
+      jsonData.a3TaxAccounts = $("#a3TaxAccounts").val();
       jsonData.a3HOAHouses = $("#a3HOAHouses").val();
       jsonData.a3HOAFee = $("#a3HOAFee").val();
       jsonData.a3Comments = $("#a3Comments").val();
@@ -479,7 +482,7 @@ function populateUncommonJson(element) {
       // jsonData.appealTypes.appealType4 = $('#appealType4').val();
       jsonData.appealTypes.push($("#appealType4").val());
       jsonData.appealType4 = $("#appealType4").val();
-      // TODO: use array / json object / or concatenated string? Depends on CSV need
+      jsonData.a4TaxAccounts = $("#a4TaxAccounts").val();
       jsonData.a4Category = [];
       document.querySelectorAll('input[name="a4Category"]:checked').forEach((checkbox) => {
         jsonData.a4Category.push(checkbox.value);
@@ -491,6 +494,7 @@ function populateUncommonJson(element) {
       // jsonData.appealTypes.appealType5 = $('#appealType5').val();
       jsonData.appealTypes.push($("#appealType5").val());
       jsonData.appealType5 = $("#appealType5").val();
+      jsonData.a5TaxAccounts = $("#a5TaxAccounts").val();
       jsonData.a5Reasons = [];
       document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
         jsonData.a5Reasons.push(checkbox.value);
@@ -501,6 +505,7 @@ function populateUncommonJson(element) {
     case "appealType6":
       jsonData.appealTypes.push($("#appealType6").val());
       jsonData.appealType6 = $("#appealType6").val();
+      jsonData.a6TaxAccounts = $("#a6TaxAccounts").val();
       jsonData.a6NewOwner = $("#a6NewOwner").val();
       jsonData.a4Comments = $("#a6Comments").val();
       break;
@@ -508,11 +513,13 @@ function populateUncommonJson(element) {
     case "appealType7":
       jsonData.appealTypes.push($("#appealType7").val());
       jsonData.appealType7 = $("#appealType7").val();
+      jsonData.a7TaxAccounts = $("#a7TaxAccounts").val();
       jsonData.a4Comments = $("#a7Comments").val();
       break;
 
     case "creditType1":
       jsonData.creditType = $("#creditType1").val();
+      jsonData.c1TaxAccounts = $("#c1TaxAccounts").val();
       jsonData.c1Description = $("#c1Description").val();
       jsonData.c1InstallDate = $("#c1InstallDate").val();
       jsonData.c1Installer = $("#c1Installer").val();
@@ -538,6 +545,7 @@ function populateUncommonJson(element) {
 
     case "creditType2":
       jsonData.creditType = $("#creditType2").val();
+      jsonData.c2TaxAccounts = $("#c2TaxAccounts").val();
       jsonData.c2NPDESPermitNumber = $("#c2NPDESPermitNumber").val();
       jsonData.c2RegistrationNumber = $("#c2RegistrationNumber").val();
       jsonData.c2CleanMarina = $('input[name="c2CleanMarina"]:checked').val();

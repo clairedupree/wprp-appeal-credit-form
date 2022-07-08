@@ -216,7 +216,9 @@
             </div>
           </div>
 
-          <div id="ownerInfo" class="clearAtApplicationSelect"></div>
+          <div id="ownerInfo" class="clearAtApplicationSelect">
+            <!-- append based on propertyOwnerType selection -->
+          </div>
 
           <!-- Tax Account(s) -->
           <!-- <div class="row">
@@ -237,7 +239,7 @@
           <!-- Constituent (Applicant) Information -->
           <div class="row">
             <div class="col-12">
-              <h5><strike>Contact</strike> Applicant Information</h5>
+              <h5>Contact Information</h5>
             </div>
           </div>
 
@@ -342,7 +344,7 @@
 
           <div class="row">
             <div class="col-12">
-              <h5>Property Address <strike>Location</strike></h5>
+              <h5>Property Location</h5>
             </div>
           </div>
 
@@ -350,9 +352,7 @@
           <div class="row">
             <div class="col-12">
               <div class="form-group">
-                <strike>Is the property address different than the mailing address?</strike> Is the property address
-                the
-                same as the mailing address? <span class="requiredField">*</span><br>
+                Is the property address the same as the mailing address? <span class="requiredField">*</span><br>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" id="propertyIsMailingYes" name="propertyIsMailing"
                     value="yes" onchange="toggleDivs(name)" required>
@@ -612,6 +612,19 @@
           </div>
         </div>
 
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a1TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a1TaxAccounts" id="a1TaxAccounts" class="form-control" required>
+              <small id="a1TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
+          </div>
+        </div>
+
         <!-- Residental Property Tier info -->
         <div class="row">
           <div class="col-12">
@@ -730,6 +743,19 @@
           </div>
         </div>
 
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a2TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a2TaxAccounts" id="a2TaxAccounts" class="form-control" required>
+              <small id="a2TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
           <div class="row">
             <div class="col-12">
@@ -823,6 +849,19 @@
           </div>
         </div>
 
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a3TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a3TaxAccounts" id="a3TaxAccounts" class="form-control" required>
+              <small id="a3TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12">
             <div class="form-group">
@@ -830,15 +869,8 @@
                 <b><i class="fas fa-info-circle"></i></b>
                 If the total stormwater remediation fee across all Homeowners Association-owned tax accounts
                 is more than the number of property tax accounts for the homes and unimproved lots within the
-                boundaries
-                of
-                the Homeowners Association multiplied by 40% of the base rate, the Homeowners Association may appeal
-                to
-                have
-                the fee capped in accordance with 13-7-103(g).
-                <!-- <br><br>
-            All tax account numbers for HOA-owned property should be entered 
-            into the <em>Tax Account Number(s)</em> field at the beginning of the form. -->
+                boundaries of the Homeowners Association multiplied by 40% of the base rate, the Homeowners Association
+                may appeal to have the fee capped in accordance with 13-7-103(g).
               </div>
               <small id="a3BeginningHelpBlock" class="form-text text-muted">
                 All tax account numbers for HOA-owned property should be entered
@@ -902,6 +934,19 @@
           </div>
         </div>
 
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a4TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a4TaxAccounts" id="a4TaxAccounts" class="form-control" required>
+              <small id="a4TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12">
             <div id="a4Checks" class="form-group">
@@ -957,6 +1002,19 @@
         <div class="row">
           <div class="col-12">
             <h5>Appeal Basis: Property is exempt</h5>
+          </div>
+        </div>
+
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a5TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a5TaxAccounts" id="a5TaxAccounts" class="form-control" required>
+              <small id="a5TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
           </div>
         </div>
 
@@ -1024,80 +1082,25 @@
         </div>
       </div>
 
-      <!-- Appeal Type 5 Uncommon Options -->
-      <div id="a5Category1Form">
-        <div class="row">
-          <div class="col-12">
-            <div id="a5ReasonChecks" class="form-group indent">
-              Because it is (check all that apply): <span class="requiredField">*</span><br>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason1" name="a5Reason"
-                  value="unimproved (contains no impervious surface)"
-                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason1">unimproved (contains no impervious surface)</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason2" name="a5Reason"
-                  value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason2">in the City of Annapolis</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason3" name="a5Reason"
-                  value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason3">owned by the State of Maryland</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason4" name="a5Reason" value="owned by a County"
-                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason4">owned by a County</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason5" name="a5Reason"
-                  value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason5">owned by a municipality</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason6" name="a5Reason"
-                  value="owned by a regularly organized volunteer fire department that is used for public purposes"
-                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason6">owned by a regularly organized volunteer fire
-                  department
-                  that is used for public purposes</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="a5Reason7" name="a5Reason"
-                  value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code"
-                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
-                <label class="form-check-label" for="a5Reason7">owned by a veterans organization that is exempt from
-                  taxation under 501(c)(4) or (19) of the internal revenue code</label>
-              </div>
-
-              <small id="a5ReasonHelpBlock" class="form-text text-muted">
-                Provide proof of location, ownership, or lack of impervious area, as applicable,
-                in the <em>Comments</em> and <em>Supporting Documentation</em> sections.
-              </small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="a5Category2Form">
-        <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-            <div class="form-group indent">
-              <label for="a5Category2NewOwner">The name of the new owner is: <span
-                  class="requiredField">*</span></label>
-              <input type="text" name="a5Category2NewOwner" id="a5Category2NewOwner" class="form-control" required>
-            </div>
-          </div>
-        </div>
-      </div><!-- End appeal 5 application -->
-
       <!-- Appeal Type 6: Person billed is not the record owner of the property -->
       <div id="appeal6Form">
         <hr>
         <div class="row">
           <div class="col-12">
             <h5>Appeal Basis: Person billed is not the record owner of the property</h5>
+          </div>
+        </div>
+
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a6TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a6TaxAccounts" id="a6TaxAccounts" class="form-control" required>
+              <small id="a6TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
           </div>
         </div>
 
@@ -1129,6 +1132,19 @@
           </div>
         </div>
 
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a7TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="a7TaxAccounts" id="a7TaxAccounts" class="form-control" required>
+              <small id="a7TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12">
             <div class="form-group">
@@ -1146,6 +1162,19 @@
         <div class="row">
           <div class="col-12">
             <h5>Credit Type: Multi-Family, Non-Residential and/or Residential Property</h5>
+          </div>
+        </div>
+
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="c1TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="c1TaxAccounts" id="c1TaxAccounts" class="form-control" required>
+              <small id="c1TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
           </div>
         </div>
 
@@ -1453,6 +1482,19 @@
         <div class="row">
           <div class="col-12">
             <h5>Credit Type: Non-Residential Property with NPDES permit</h5>
+          </div>
+        </div>
+
+        <!-- Tax Account(s) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="c2TaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
+              <input type="text" name="c2TaxAccounts" id="c2TaxAccounts" class="form-control" required>
+              <small id="c2TaxAccountsHelpBlock" class="form-text text-muted">
+                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
+                  Look up your tax account number</a></small>
+            </div>
           </div>
         </div>
 
