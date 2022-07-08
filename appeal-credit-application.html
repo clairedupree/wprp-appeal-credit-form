@@ -173,35 +173,8 @@
               NPDES permit</button>
           </div>
         </div>
-
-        <!-- TODO: radio buttons instead of buttons? (not needed)
-      <div class="row">
-        <div class="col-12">
-          <div class="form-group">
-            <h5>Select the credit type:</h5>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" id="TESTcreditType1" name="TESTcreditType" 
-                value="Multi-Family, Non-Residential and/or Residential Property" required>
-              <label class="form-check-label" for="TESTcreditType1">Multi-Family, Non-Residential and/or Residential Property</label>
-            </div>
-  
-            <div class="form-check">
-              <input class="form-check-input" type="radio" id="TESTcreditType2" name="TESTcreditType" 
-                value="Non-Residential Property with NPDES permit" required>
-              <label class="form-check-label" for="TESTcreditType2">Non-Residential Property with NPDES permit</label>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <div class="row">
-        <div class="col-12 text-center form-group">
-          <button type="button" class="btn btn-primary" id="continueButton" onclick="showAppealCreditApplication()">Continue</button>
-        </div>
-      </div> -->
-      </div>
-
-    </div> <!-- end type select -->
+    </div> <!-- End Type Select -->
 
     <!-- FORM CONTAINER -->
     <div id="formContainer" class="hidden">
@@ -259,65 +232,9 @@
                 <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
                   Look up your tax account number</a></small>
             </div>
-          </div>	
-        </div> -->
+          </div>	-->
 
-          <!-- Property Address -->
-          <!--
-        <div class="row">
-          <div class="col-12">
-            <h5>Property Address</h5>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-              <label for="locationHouseNumber">Street Number: <span class="requiredField">*</span></label>
-              <input type="text" name="locationHouseNumber" id="locationHouseNumber" class="form-control" aria-label="Property Street Number" required>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-              <label for="locationStreetName">Street Name: <span class="requiredField">*</span></label>
-              <input type="text" name="locationStreetName" id="locationStreetName" class="form-control" aria-label="Property Street Name" required>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-              <label for="locationStreetType">Street Type: <span class="requiredField">*</span></label>
-              <input type="text" name="locationStreetType" id="locationStreetType" class="form-control" placeholder="Street, Drive, etc."  aria-label="Property Street Type" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-              <label for="locationCity">City: <span class="requiredField">*</span></label>
-              <input type="text" name="locationCity" id="locationCity" class="form-control"  aria-label="Property City" required>
-            </div>
-          </div>   
-
-          <!-- TODO: select input for state abbreviations? --
-          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-              <label for="locationState">State: <span class="requiredField">*</span></label>
-              <input type="text" name="locationState" id="locationState" class="form-control" aria-label="Property State" required>
-            </div>
-          </div>   
-
-          <!-- TODO: zip code type input? --
-          <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <div class="form-group">
-              <label for="locationZip">Zip Code: <span class="requiredField">*</span></label>
-              <input type="text" name="locationZip" id="locationZip" class="form-control" aria-label="Property Zip Code" required>
-            </div>
-          </div>
-        </div>
-      -->
-
-          <!-- Contact Information -->
+          <!-- Constituent (Applicant) Information -->
           <div class="row">
             <div class="col-12">
               <h5><strike>Contact</strike> Applicant Information</h5>
@@ -343,25 +260,6 @@
             </div>
           </div>
 
-          <!-- <div class="row">
-          <div class="col-12">
-            <div class="form-group">
-              Is applicant a person other than the property owner? <span class="requiredField">*</span><br>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="constituentDifferentYes" name="constituentDifferent" 
-                  value="yes" onchange="toggleDivs(name)" required>
-                <label class="form-check-label" for="constituentDifferentYes">Yes</label>
-              </div>
-              
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="constituentDifferentNo" name="constituentDifferent" 
-                  value="no" onchange="toggleDivs(name)" required>
-                <label class="form-check-label" for="constituentDifferentNo">No</label>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
           <div id="constituentInfo" class="clearAtApplicationSelect">
             <!-- append only if "constituentIsOwnerNo is checked" -->
           </div>
@@ -384,35 +282,12 @@
             </div>
           </div>
 
-
+          <!-- Mailing Address -->
           <div class="row">
             <div class="col-12">
               <h5>Mailing Address</h5>
             </div>
           </div>
-
-          <!-- <div class="row">
-          <div class="col-12">
-            <div class="form-group">
-              Is the mailing address different than the property address? <span class="requiredField">*</span><br>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="mailingDifferentYes" name="mailingDifferent" 
-                  value="yes" onchange="toggleDivs(name)" required>
-                <label class="form-check-label" for="mailingDifferentYes">Yes</label>
-              </div>
-              
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="mailingDifferentNo" name="mailingDifferent" 
-                  value="no" onchange="toggleDivs(name)" required>
-                <label class="form-check-label" for="mailingDifferentNo">No</label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="mailingAddress" class="clearAtApplicationSelect">
-          <!-- append only if "mailingDifferentYes: checked" --
-        </div> -->
 
           <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -471,6 +346,7 @@
             </div>
           </div>
 
+          <!-- Property Information -->
           <div class="row">
             <div class="col-12">
               <div class="form-group">
@@ -495,7 +371,6 @@
           <div id="propertyAddress" class="clearAtApplicationSelect">
             <!-- append only if "propertyDifferentYes: checked" -->
           </div>
-
         </div> <!-- End common beginning -->
 
         <!-- UNCOMMON MIDDLE -->
@@ -524,15 +399,9 @@
             </div>
           </div>
 
-          <!-- <div id="supportingDocumentation">
-            <!-- to be appended w/ file upload button --
-          </div> -->
-
-
           <div id="statement" class="uncommon">
             <!-- to be appended w/ appeal acknowledgement or credit authorization  -->
           </div>
-
 
           <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -559,8 +428,7 @@
             </div>
           </div>
 
-
-          <!-- Submit -->
+          <!-- Submit Button -->
           <div class="row">
             <div class="col-12">
               <div class="form-group">
@@ -575,9 +443,8 @@
             </div>
           </div>
         </div> <!-- End common ending -->
-
-      </form>
-    </div><!-- End form container -->
+      </form> <!-- End form -->
+    </div> <!-- End form container -->
 
     <div class="row">
       <div class="col-12">
@@ -717,67 +584,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div id="mailingAddressForm">    
-    <div class="row">
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <div class="form-group">
-          <label for="constituentHouseNumber">Street Number: <span class="requiredField">*</span></label>
-          <input type="text" name="constituentHouseNumber" id="constituentHouseNumber" class="form-control" aria-label="Mailing Street Number" required>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <div class="form-group">
-          <label for="constituentStreetName">Street Name: <span class="requiredField">*</span></label>
-          <input type="text" name="constituentStreetName" id="constituentStreetName" class="form-control" aria-label="Mailing Street Name" required>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <div class="form-group">
-          <label for="constituentStreetType">Street Type: <span class="requiredField">*</span></label>
-          <input type="text" name="constituentStreetType" id="constituentStreetType" class="form-control" placeholder="Street, Drive, etc." aria-label="Mailing Street Type" required>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <div class="form-group">
-          <label for="constituentCity">City: <span class="requiredField">*</span></label>
-          <input type="text" name="constituentCity" id="constituentCity" class="form-control" aria-label="Mailing City" required>
-        </div>
-      </div>   
-      
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <div class="form-group">
-          <label for="constituentState">State: <span class="requiredField">*</span></label>
-          <input type="text" name="constituentState" id="constituentState" class="form-control" aria-label="Mailing State" required>
-        </div>
-      </div>   
-
-      <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <div class="form-group">
-          <label for="constituentZip">Zip Code: <span class="requiredField">*</span></label>
-          <input type="text" name="constituentZip" id="constituentZip" class="form-control" aria-label="Mailing Zip Code" required>
-        </div>
-      </div>
-    </div>
-    </div> -->
-
-      <!-- File Upload Button -->
-      <!-- TODO: #20 change to default bootstrap button?, not an invisible button -->
-      <!-- look into input "type" and bootstrap input type button
-      <div id="supportingDocumentationForm">
-        <div class="col-12">
-          <div class="form-group">
-            <input style="display: none;" type="file" class="form-control file-upload-input" id="fileUploadInput"
-              name="fileUploadInput" multiple
-              accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-            <button type="button" class="file-upload-btn btn btn-secondary">Choose Files</button>
-            <span class="file-upload-label indent">No files chosen</span>
-          </div>
-        </div>
-      </div> -->
 
       <!-- Application Headers -->
       <div id="appealHeader">
@@ -1153,42 +959,6 @@
             <h5>Appeal Basis: Property is exempt</h5>
           </div>
         </div>
-
-        <!-- <div class="row">
-          <div class="col-12">
-            <div id="a5Checks" class="form-group">
-              Check all that apply: <span class="requiredField">*</span><br>
-
-              <div class="a5Initial form-check">
-                <input class="form-check-input" type="checkbox" id="a5Category1" name="a5Category"
-                  value="The property is not subject to the stormwater fee"
-                  onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'), toggleDivs(id)">
-                <label class="form-check-label" for="a5Category1">The property is not subject to the stormwater
-                  fee</label>
-              </div>
-
-              <div id="a5Category1Toggle" class="uncommon"></div>
-
-              <div class="a5Initial form-check">
-                <input class="form-check-input" type="checkbox" id="a5Category2" name="a5Category"
-                  value="The person billed is not the record owner of the property"
-                  onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1'), toggleDivs(id)">
-                <label class="form-check-label" for="a5Category2">The person billed is not the record owner of the
-                  property</label>
-              </div>
-
-              <div id="a5Category2Toggle" class="uncommon"></div>
-
-              <div class="a5Initial form-check">
-                <input class="form-check-input" type="checkbox" id="a5Category3" name="a5Category"
-                  value="The property owner received a substantial hardship exemption from the stormwater fee for the current billing year"
-                  onchange="validateCheckboxes('#a5Checks .a5Initial', '#a5Category1')">
-                <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship
-                  exemption from the stormwater fee for the current billing year</label>
-              </div>
-            </div>
-          </div>
-        </div> -->
 
         <div class="row">
           <div class="col-12">
