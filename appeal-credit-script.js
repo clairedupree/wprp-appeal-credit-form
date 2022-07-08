@@ -35,39 +35,6 @@ function showApplicationTypes(applicationType) {
 
   selected.push(applicationType);
 
-  // TODO: #25 How does document upload work? Why is this so complicated. Wewrite entirely.
-  // document.getElementById("fileUploadInput").value = ""; //reset file input??
-  // fileUploads = [];
-  // attachments = []; //Redundant? cleared before each new upload // clear file uploads
-  // Array.prototype.forEach.call(document.querySelectorAll(".file-upload-btn"), (button) => {
-  //   const hiddenInput = button.parentElement.querySelector(".file-upload-input");
-  //   const label = button.parentElement.querySelector(".file-upload-label");
-  //   const defaultLabelText = "No files chosen";
-  //   label.textContent = defaultLabelText;
-  //   label.title = defaultLabelText;
-
-  //   button.addEventListener("click", () => {
-  //     hiddenInput.click();
-  //   });
-
-  //   hiddenInput.addEventListener("change", () => {
-  //     fileUploads = [];
-  //     let fileNameList = "";
-  //     fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
-  //       fileUploads.push(file);
-  //       return file.name;
-  //     });
-
-  //     console.log(fileUploads, attachments);
-
-  //     base64Ready();
-  //     label.textContent = fileNameList.join(", ") || defaultLabelText;
-  //     label.title = label.textContent;
-  //   });
-  // });
-
-  // console.log(fileUploads, attachments);
-
   //show application
   $("#" + selected[0]).show();
   $("#navigation").show();
@@ -227,15 +194,6 @@ function toggleDivs(element) {
       }
       break;
 
-    // case 'constituentDifferent':
-    //   if ($('#constituentDifferentYes')[0].checked) {
-    //     $("#constituentInfo").html($("#constituentInfoForm").html());
-    //   }
-    //   else {
-    //     $("#constituentInfo").html("");
-    //   }
-    //   break;
-
     case "propertyIsMailing":
       if ($("#propertyIsMailingYes")[0].checked) {
         $("#propertyAddress").html("");
@@ -243,32 +201,6 @@ function toggleDivs(element) {
         $("#propertyAddress").html($("#propertyAddressForm").html());
       }
       break;
-
-    // case 'mailingDifferent':
-    //   if ($('#mailingDifferentYes')[0].checked) {
-    //     $("#mailingAddress").html($("#mailingAddressForm").html());
-    //   }
-    //   else {
-    //     $("#mailingAddress").html("");
-    //   }
-    //   break;
-
-    // case "a5Category1":
-    //   if ($("#a5Category1")[0].checked) {
-    //     $("#a5Category1Toggle").html($("#a5Category1Form").html());
-    //     validateCheckboxes("#a5ReasonChecks", "#a5Reason1");
-    //   } else {
-    //     $("#a5Category1Toggle").html("");
-    //   }
-    //   break;
-
-    // case "a5Category2":
-    //   if ($("#a5Category2")[0].checked) {
-    //     $("#a5Category2Toggle").html($("#a5Category2Form").html());
-    //   } else {
-    //     $("#a5Category2Toggle").html("");
-    //   }
-    //   break;
 
     case "c1GradingPermit":
       if ($("#c1GradingPermitYes")[0].checked) {
@@ -563,20 +495,6 @@ function populateUncommonJson(element) {
       document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
         jsonData.a5Reasons.push(checkbox.value);
       });
-      // // TODO: use array / json object / or concatenated string? Depends on CSV need
-      // jsonData.a5Category = [];
-      // document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
-      //   jsonData.a5Category.push(checkbox.value);
-      // });
-      // if (document.getElementById("a5Category1").checked) {
-      //   jsonData.a5Category1Reasons = [];
-      //   document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
-      //     jsonData.a5Category1Reasons.push(checkbox.value);
-      //   });
-      // }
-      // if (document.getElementById("a5Category2").checked) {
-      //   jsonData.a5Category2NewOwner = $("#a5Category2NewOwner").val();
-      // }
       jsonData.a5Comments = $("#a5Comments").val();
       break;
 
