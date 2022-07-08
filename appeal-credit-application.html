@@ -116,8 +116,7 @@
                 <input class="form-check-input" type="checkbox" id="appealType3" name="appealType"
                   value="Homeowner's Association property where the fee cap is applicable but was not applied">
                 <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap
-                  is
-                  applicable but was not applied</label>
+                  is applicable but was not applied</label>
               </div>
 
               <div class="form-check" title="Appeal type 4 hover text.">
@@ -129,8 +128,22 @@
 
               <div class="form-check" title="Appeal type 5 hover text.">
                 <input class="form-check-input" type="checkbox" id="appealType5" name="appealType"
-                  value="Exempt or incorrect property owner">
-                <label class="form-check-label" for="appealType5">Exempt or incorrect property owner</label>
+                  value="Property is exempt">
+                <label class="form-check-label" for="appealType5">Property is exempt</label>
+              </div>
+
+              <div class="form-check" title="Appeal type 6 hover text.">
+                <input class="form-check-input" type="checkbox" id="appealType6" name="appealType"
+                  value="Person billed is not the record owner of the property">
+                <label class="form-check-label" for="appealType6">Person billed is not the record owner of the
+                  property</label>
+              </div>
+
+              <div class="form-check" title="Appeal type 7 hover text.">
+                <input class="form-check-input" type="checkbox" id="appealType7" name="appealType"
+                  value="Financial hardship exemption previously approved but not applied">
+                <label class="form-check-label" for="appealType7">Financial hardship exemption previously approved but
+                  not applied</label>
               </div>
             </div>
           </div>
@@ -576,8 +589,9 @@
       <div class="col-12">
         <p>If you have questions regarding your property&#39;s WPRF or the use of this web form, contact us at <span
             class="desktop">410-222-7536</span><a class="mobile" href="tel:410-222-7536">410-222-7536</a> or <a
-            href="mailto:wprf@aacounty.org">wprf@aacounty.org</a>. Please see our <a href="" target="_blank">website</a>
-          for more information on the WPRF program.</p>
+            href="mailto:wprf@aacounty.org">wprf@aacounty.org</a>. Please see our <a
+            href="https://www.aacounty.org/departments/public-works/wprp/watershed-protection-restoration-fee/"
+            target="_blank">website</a> for more information on the WPRF program.</p>
       </div>
     </div>
 
@@ -1136,11 +1150,11 @@
         <hr>
         <div class="row">
           <div class="col-12">
-            <h5>Appeal Basis: Exempt or incorrect property owner</h5>
+            <h5>Appeal Basis: Property is exempt</h5>
           </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-12">
             <div id="a5Checks" class="form-group">
               Check all that apply: <span class="requiredField">*</span><br>
@@ -1172,6 +1186,60 @@
                 <label class="form-check-label" for="a5Category3">The property owner received a substantial hardship
                   exemption from the stormwater fee for the current billing year</label>
               </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="row">
+          <div class="col-12">
+            <div id="a5ReasonChecks" class="form-group">
+              The property is not subject to the stormwater fee because it is (check all that apply): <span
+                class="requiredField">*</span><br>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason1" name="a5Reason"
+                  value="unimproved (contains no impervious surface)"
+                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason1">unimproved (contains no impervious surface)</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason2" name="a5Reason"
+                  value="in the City of Annapolis" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason2">in the City of Annapolis</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason3" name="a5Reason"
+                  value="owned by the State of Maryland" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason3">owned by the State of Maryland</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason4" name="a5Reason" value="owned by a County"
+                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason4">owned by a County</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason5" name="a5Reason"
+                  value="owned by a municipality" onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason5">owned by a municipality</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason6" name="a5Reason"
+                  value="owned by a regularly organized volunteer fire department that is used for public purposes"
+                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason6">owned by a regularly organized volunteer fire
+                  department that is used for public purposes</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="a5Reason7" name="a5Reason"
+                  value="owned by a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code"
+                  onchange="validateCheckboxes('#a5ReasonChecks', '#a5Reason1')">
+                <label class="form-check-label" for="a5Reason7">owned by a veterans organization that is exempt from
+                  taxation under 501(c)(4) or (19) of the internal revenue code</label>
+              </div>
+
+              <small id="a5ReasonHelpBlock" class="form-text text-muted">
+                Provide proof of location, ownership, or lack of impervious area, as applicable,
+                in the <em>Comments</em> and <em>Supporting Documentation</em> sections.
+              </small>
             </div>
           </div>
         </div>
@@ -1253,6 +1321,53 @@
           </div>
         </div>
       </div><!-- End appeal 5 application -->
+
+      <!-- Appeal Type 6: Person billed is not the record owner of the property -->
+      <div id="appeal6Form">
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <h5>Appeal Basis: Person billed is not the record owner of the property</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <label for="a6NewOwner">The name of the new owner is: <span class="requiredField">*</span></label>
+              <input type="text" name="a6NewOwner" id="a6NewOwner" class="form-control" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a6Comments">Comments: </label>
+              <textarea class="form-control" id="a6Comments" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div><!-- End appeal 6 application -->
+
+      <!-- Appeal Type 7: Financial hardship exemption previously approved but not applied -->
+      <div id="appeal7Form">
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <h5>Appeal Basis: Financial hardship exemption previously approved but not applied</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="a7Comments">Comments: </label>
+              <textarea class="form-control" id="a7Comments" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+      </div><!-- End appeal 7 application -->
 
       <!-- CREDIT APPLICATIONS -->
       <!-- Credit Type 1: Multi-Family, Non-Residential and/or Residential Property -->

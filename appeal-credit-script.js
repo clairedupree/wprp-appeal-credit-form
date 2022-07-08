@@ -4,16 +4,17 @@
  */
 
 const form = document.getElementById("wprfApplication");
-let selected = []; //user selection array
 const jsonData = {}; //json submit object
 const cmObject = {
   //case manager object
   caseTypeUUID: "6d788088-0501-4db3-82b2-9a72bf61820f",
   jsonData: jsonData,
 };
-let fileUploads = [];
+let selected = []; //user selection array
+let fileUploads = []; //supporting documentation
 let attachments = []; //supporting documentation
 //boolean variables for populating credit type 1 json data
+//move other booleans up here also?
 let c1GradingPermitForm,
   c1InstallerForm,
   c1TreatmentDescriptionForm,
@@ -79,6 +80,7 @@ function showApplicationTypes(applicationType) {
  */
 $("#backButton").click(function () {
   if ($(".typeSelect").is(":visible")) {
+    // TODO: #26 TEMPORARY SOLUTION
     window.location.reload(); //default
     // $("#navigation, #appeal, #credit").hide();
     // $("#applicationSelect").show();
@@ -134,8 +136,9 @@ function showCreditApplication(creditType) {
 function showAppealApplication() {
   // console.log(fileUploads, attachments);
 
-  if (validateCheckboxes("#appeal", "#appealType1") == false) $("#appeal")[0].reportValidity();
-  else {
+  if (validateCheckboxes("#appeal", "#appealType1") == false) {
+    $("#appeal")[0].reportValidity();
+  } else {
     $("#appeal")[0].checkValidity();
 
     selected.length = 1; //truncate array
@@ -164,7 +167,13 @@ function showAppealApplication() {
           break;
         case "appealType5":
           $("#uncommonMiddle").append($("#appeal5Form").html());
-          validateCheckboxes("#a5Checks .a5Initial", "#a5Category1"); //force initial validation of appended divs w/checks
+          validateCheckboxes("#a5Checks", "#a5Reason1"); //force initial validation of appended divs w/checks
+          break;
+        case "appealType6":
+          $("#uncommonMiddle").append($("#appeal6Form").html());
+          break;
+        case "appealType7":
+          $("#uncommonMiddle").append($("#appeal7Form").html());
           break;
         default:
           console.log("Error appending appeal type divs");
@@ -244,22 +253,22 @@ function toggleDivs(element) {
     //   }
     //   break;
 
-    case "a5Category1":
-      if ($("#a5Category1")[0].checked) {
-        $("#a5Category1Toggle").html($("#a5Category1Form").html());
-        validateCheckboxes("#a5ReasonChecks", "#a5Reason1");
-      } else {
-        $("#a5Category1Toggle").html("");
-      }
-      break;
+    // case "a5Category1":
+    //   if ($("#a5Category1")[0].checked) {
+    //     $("#a5Category1Toggle").html($("#a5Category1Form").html());
+    //     validateCheckboxes("#a5ReasonChecks", "#a5Reason1");
+    //   } else {
+    //     $("#a5Category1Toggle").html("");
+    //   }
+    //   break;
 
-    case "a5Category2":
-      if ($("#a5Category2")[0].checked) {
-        $("#a5Category2Toggle").html($("#a5Category2Form").html());
-      } else {
-        $("#a5Category2Toggle").html("");
-      }
-      break;
+    // case "a5Category2":
+    //   if ($("#a5Category2")[0].checked) {
+    //     $("#a5Category2Toggle").html($("#a5Category2Form").html());
+    //   } else {
+    //     $("#a5Category2Toggle").html("");
+    //   }
+    //   break;
 
     case "c1GradingPermit":
       if ($("#c1GradingPermitYes")[0].checked) {
