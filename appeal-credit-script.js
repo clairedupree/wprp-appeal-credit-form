@@ -559,21 +559,38 @@ function populateUncommonJson(element) {
       // jsonData.appealTypes.appealType5 = $('#appealType5').val();
       jsonData.appealTypes.push($("#appealType5").val());
       jsonData.appealType5 = $("#appealType5").val();
-      // TODO: use array / json object / or concatenated string? Depends on CSV need
-      jsonData.a5Category = [];
-      document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
-        jsonData.a5Category.push(checkbox.value);
+      jsonData.a5Reasons = [];
+      document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
+        jsonData.a5Reasons.push(checkbox.value);
       });
-      if (document.getElementById("a5Category1").checked) {
-        jsonData.a5Category1Reasons = [];
-        document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
-          jsonData.a5Category1Reasons.push(checkbox.value);
-        });
-      }
-      if (document.getElementById("a5Category2").checked) {
-        jsonData.a5Category2NewOwner = $("#a5Category2NewOwner").val();
-      }
+      // // TODO: use array / json object / or concatenated string? Depends on CSV need
+      // jsonData.a5Category = [];
+      // document.querySelectorAll('input[name="a5Category"]:checked').forEach((checkbox) => {
+      //   jsonData.a5Category.push(checkbox.value);
+      // });
+      // if (document.getElementById("a5Category1").checked) {
+      //   jsonData.a5Category1Reasons = [];
+      //   document.querySelectorAll('input[name="a5Reason"]:checked').forEach((checkbox) => {
+      //     jsonData.a5Category1Reasons.push(checkbox.value);
+      //   });
+      // }
+      // if (document.getElementById("a5Category2").checked) {
+      //   jsonData.a5Category2NewOwner = $("#a5Category2NewOwner").val();
+      // }
       jsonData.a5Comments = $("#a5Comments").val();
+      break;
+
+    case "appealType6":
+      jsonData.appealTypes.push($("#appealType6").val());
+      jsonData.appealType6 = $("#appealType6").val();
+      jsonData.a6NewOwner = $("#a6NewOwner").val();
+      jsonData.a4Comments = $("#a6Comments").val();
+      break;
+
+    case "appealType7":
+      jsonData.appealTypes.push($("#appealType7").val());
+      jsonData.appealType7 = $("#appealType7").val();
+      jsonData.a4Comments = $("#a7Comments").val();
       break;
 
     case "creditType1":
