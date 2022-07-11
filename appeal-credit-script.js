@@ -10,6 +10,9 @@ const cmObject = {
   caseTypeUUID: "6d788088-0501-4db3-82b2-9a72bf61820f",
   jsonData: jsonData,
 };
+const fileInput = document.getElementById("fileInput");
+const fileInputElement = $("input[name=supporting-documentation-upload]");
+
 let selected = []; //user selection array
 let fileUploads = []; //supporting documentation
 let attachments = []; //supporting documentation
@@ -39,6 +42,7 @@ function showApplicationTypes(applicationType) {
   $("#" + selected[0]).show();
   $("#navigation").show();
   $("#applicationSelect").hide();
+  resetFileInput();
 }
 
 /**
@@ -48,9 +52,9 @@ function showApplicationTypes(applicationType) {
 $("#backButton").click(function () {
   if ($(".typeSelect").is(":visible")) {
     // TODO: #26 TEMPORARY SOLUTION
-    window.location.reload(); //default
-    // $("#navigation, #appeal, #credit").hide();
-    // $("#applicationSelect").show();
+    //window.location.reload(); //default
+    $("#navigation, #appeal, #credit").hide();
+    $("#applicationSelect").show();
   } else if ($("#formContainer").is(":visible")) {
     $("#" + selected[0]).show();
     $("#formContainer").hide();
@@ -67,13 +71,12 @@ $("#backButton").click(function () {
  * @param {string} creditType Id of selected button
  */
 function showCreditApplication(creditType) {
-  // console.log(fileUploads, attachments);
-
   selected.length = 1; //truncate array
   // TODO: change .uncommon to .resetAtTypeSelect
   $(".uncommon").html(""); //reset uncomon divs
   $("#formHeader").html($("#creditHeader").html()); //set credit header
   $("#statement").html($("#creditAuthorization").html()); //set credit acknowledgement
+  resetFileInput();
 
   //replace #uncommonMiddle with corresponding credit div
   switch (creditType) {
@@ -101,8 +104,6 @@ function showCreditApplication(creditType) {
  * @todo cleaner way to validate iniital checks in appeal5 - access by name instead of class? DOM
  */
 function showAppealApplication() {
-  // console.log(fileUploads, attachments);
-
   if (validateCheckboxes("#appeal", "#appealType1") == false) {
     $("#appeal")[0].reportValidity();
   } else {
@@ -258,8 +259,6 @@ function toggleDivs(element) {
  */
 function validateCheckboxes(thisElement, validityTarget) {
   var numChecked = $(thisElement + " input[type=checkbox]:checked").length;
-  console.log(validityTarget);
-
   if (numChecked > 0) {
     //is valid
     $(validityTarget).get(0).setCustomValidity(""); //will pass validation on submit
@@ -287,33 +286,27 @@ function validateDuplicates(thisElement, compareElement, validityTarget) {
 }
 
 /**
+ * Resets the file input element and both arrays containing file uploads.
+ */
+function resetFileInput() {
+  fileInputElement.val("");
+  fileUploads = [];
+  attachments = [];
+}
+
+/**
  * Copied from pia form
+ * MODIFIED 7/11/22
  * @Desc: Handle file upload
  */
-Array.prototype.forEach.call(document.querySelectorAll(".file-upload-btn"), (button) => {
-  const hiddenInput = button.parentElement.querySelector(".file-upload-input");
-  const label = button.parentElement.querySelector(".file-upload-label");
-  const defaultLabelText = "No files chosen";
-  label.textContent = defaultLabelText;
-  label.title = defaultLabelText;
-
-  button.addEventListener("click", () => {
-    hiddenInput.click();
+fileInput.addEventListener("change", () => {
+  fileUploads = [];
+  attachments = [];
+  fileNameList = Array.prototype.map.call(fileInput.files, (file) => {
+    fileUploads.push(file);
+    return file.name;
   });
-  hiddenInput.addEventListener("change", () => {
-    fileUploads = [];
-    let fileNameList = "";
-    fileNameList = Array.prototype.map.call(hiddenInput.files, (file) => {
-      fileUploads.push(file);
-      return file.name;
-    });
-
-    console.log(fileUploads, attachments);
-
-    base64Ready();
-    label.textContent = fileNameList.join(", ") || defaultLabelText;
-    label.title = label.textContent;
-  });
+  base64Ready();
 });
 
 /**
@@ -362,7 +355,6 @@ form.addEventListener("submit", (event) => {
         // Property Owner Information
         jsonData.propertyOwnerType = $('input[name="propertyOwnerType"]:checked').val();
         const ownerIsIndividual = jsonData.propertyOwnerType == "individual";
-        console.log(ownerIsIndividual);
         if (ownerIsIndividual) {
           jsonData.ownerFirstName = $("#ownerFirstName").val();
           jsonData.ownerLastName = $("#ownerLastName").val();
@@ -407,7 +399,6 @@ form.addEventListener("submit", (event) => {
         // Property Information
         jsonData.propertyIsMailing = $('input[name="propertyIsMailing"]:checked').val() == "yes";
         const propertyIsMailing = jsonData.propertyIsMailing == true;
-        console.log(propertyIsMailing);
         if (!propertyIsMailing) {
           jsonData.propertyInformation = $("#propertyInformation").val();
         }
@@ -434,7 +425,7 @@ form.addEventListener("submit", (event) => {
         jsonData.signatureCompanyName = $("#signatureCompanyName").val();
 
         console.log("Post object", JSON.stringify(cmObject));
-        postToIssueFlow();
+        //postToIssueFlow();
       });
   });
 });
