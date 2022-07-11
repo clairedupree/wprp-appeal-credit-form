@@ -30,14 +30,6 @@
 <body>
   <div class="bootstrap-iso">
 
-    <!-- <div class="row">
-      <div class="col-12">
-        <p>This web form can be used to appeal the Watershed Protection and Restoration Fee (WPRF) that was billed to
-          your property or to apply for a credit towards your property&#39;s WPRF.</p>
-        <hr>
-      </div>
-    </div> -->
-
     <!-- Back Button -->
     <div id="navigation" class="hidden">
       <div class="row justify-content-end">
@@ -184,13 +176,12 @@
         <!-- to be apended -->
       </div>
 
-      <!-- Form -->
+      <!-- Main Form -->
       <form id="wprfApplication" class="form">
 
         <!-- COMMON BEGINNING -->
         <div id="commonBeginning">
-          <!-- <hr> -->
-          <!-- Owner Information -->
+          <!-- Property Owner Information -->
           <div class="row">
             <div class="col-12">
               <h5>Property Owner Information</h5>
@@ -220,23 +211,7 @@
             <!-- append based on propertyOwnerType selection -->
           </div>
 
-          <!-- Tax Account(s) -->
-          <!-- <div class="row">
-          <div class="col-12">
-            <h5>Tax Accounts</h5>
-          </div>
-
-          <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="form-group">
-              <label for="ownerTaxAccounts">Tax account number(s): <span class="requiredField">*</span></label>
-              <input type="text" name="ownerTaxAccounts" id="ownerTaxAccounts" class="form-control" required>
-              <small id="ownerTaxAccountsHelpBlock" class="form-text text-muted">
-                <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
-                  Look up your tax account number</a></small>
-            </div>
-          </div>	-->
-
-          <!-- Constituent (Applicant) Information -->
+          <!-- Constituent (Applicant) Contact Information -->
           <div class="row">
             <div class="col-12">
               <h5>Contact Information</h5>
@@ -396,16 +371,6 @@
             </div>
           </div>
 
-          <!-- <div class="col-12">
-            <div class="form-group" id="fileUploadContainer">
-              <input style="display: none;" type="file" class="form-control file-upload-input" id="fileUploadInput"
-                name="fileUploadInput" multiple
-                accept="image/*,.pdf,.xml,.xlsx,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-              <button type="button" class="file-upload-btn btn btn-secondary">Choose Files</button>
-              <span class="file-upload-label indent">No file chosen</span>
-            </div>
-          </div> -->
-
           <div id="statement" class="uncommon">
             <!-- to be appended w/ appeal acknowledgement or credit authorization  -->
           </div>
@@ -459,6 +424,10 @@
       </div>
     </div>
 
+    <div id="submitMessage" class="hidden">
+      <strong>Thank you, your application was submitted successfully.</strong>
+    </div>
+
     <div class="row">
       <div class="col-12">
         <p>If you have questions regarding your property&#39;s WPRF or the use of this web form, contact us at <span
@@ -469,15 +438,12 @@
       </div>
     </div>
 
-    <div id="submitMessage" class="hidden">
-      <h5>Thank you, your application was submitted successfully.</h5>
-    </div>
 
     <!-- UNCOMMON DIVS -->
     <!-- To be appended based on selection -->
     <div id="uncommonForms" class="hidden">
 
-      <!-- Individual Property Owner -->
+      <!-- Individual Property Owner Form -->
       <div id="individualOwnerForm">
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -505,7 +471,7 @@
         </div>
       </div>
 
-      <!-- Company / Organization Property Owner -->
+      <!-- Company / Organization Property Owner Form -->
       <div id="companyOwnerForm">
         <div class="row">
           <div class="col-12">
@@ -552,6 +518,7 @@
 
       </div>
 
+      <!-- Constituent (Applicant) Contact Information Form -->
       <div id="constituentInfoForm">
         <div class="row">
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -579,6 +546,7 @@
         </div>
       </div>
 
+      <!-- Property Address Form -->
       <div id="propertyAddressForm">
         <div class="row">
           <div class="col-12">
@@ -600,7 +568,6 @@
           </div>
         </div>
       </div>
-
       <div id="creditHeader">
         <div class="row">
           <div class="col-12">
@@ -610,7 +577,7 @@
       </div>
 
       <!-- APPEAL APPLICATIONS -->
-      <!-- Appeal Type 1: Property places in wrong residential tier -->
+      <!-- Appeal Type 1 Form: Property places in wrong residential tier -->
       <div id="appeal1Form">
         <hr>
         <div class="row">
@@ -741,7 +708,7 @@
         </div>
       </div> <!-- End appeal 1 application -->
 
-      <!-- Appeal Type 1: Incorrect classification of	property -->
+      <!-- Appeal Type 2 Form: Incorrect classification of	property -->
       <div id="appeal2Form">
         <hr>
         <div class="row">
@@ -846,7 +813,7 @@
         </div>
       </div> <!-- End appeal 2 application -->
 
-      <!-- Appeal Type 3: Homeowner's Association property where the fee cap is applicable but was not applied -->
+      <!-- Appeal Type 3 Form: Homeowner's Association property where the fee cap is applicable but was not applied -->
       <div id="appeal3Form">
         <hr>
         <div class="row">
@@ -932,7 +899,7 @@
         </div>
       </div> <!-- End appeal 3 application -->
 
-      <!-- Appeal Type 4: Mathematical error or incorrect	impervious surface calculation -->
+      <!-- Appeal Type 4 Form: Mathematical error or incorrect	impervious surface calculation -->
       <div id="appeal4Form">
         <hr>
         <div class="row">
@@ -1001,9 +968,7 @@
         </div>
       </div> <!-- End appeal 4 application -->
 
-      <!-- Appeal Type 5: Exempt or incorrect property owner -->
-      <!-- TODO: #22 Add aria-label for sub-options for a5cat1 for better accessibility -->
-      <!-- TODO: #23 find a simpler way to reference only the parent a5 checkboxes, input=name? -->
+      <!-- Appeal Type 5 Form: Exempt or incorrect property owner -->
       <div id="appeal5Form">
         <hr>
         <div class="row">
@@ -1089,7 +1054,7 @@
         </div>
       </div>
 
-      <!-- Appeal Type 6: Person billed is not the record owner of the property -->
+      <!-- Appeal Type 6 Form: Person billed is not the record owner of the property -->
       <div id="appeal6Form">
         <hr>
         <div class="row">
@@ -1130,7 +1095,7 @@
         </div>
       </div><!-- End appeal 6 application -->
 
-      <!-- Appeal Type 7: Financial hardship exemption previously approved but not applied -->
+      <!-- Appeal Type 7 Form: Financial hardship exemption previously approved but not applied -->
       <div id="appeal7Form">
         <hr>
         <div class="row">
@@ -1163,7 +1128,7 @@
       </div><!-- End appeal 7 application -->
 
       <!-- CREDIT APPLICATIONS -->
-      <!-- Credit Type 1: Multi-Family, Non-Residential and/or Residential Property -->
+      <!-- Credit Type 1 Form: Multi-Family, Non-Residential and/or Residential Property -->
       <div id="credit1Form">
         <hr>
         <div class="row">
@@ -1402,7 +1367,6 @@
           </div>
         </div>
       </div>
-
       <div id="c1InstallerForm">
         <div class="row">
           <div class="col-12">
@@ -1426,7 +1390,6 @@
           </div>
         </div>
       </div>
-
       <div id="c1TreatmentDescriptionForm">
         <div class="row">
           <div class="col-12">
@@ -1440,7 +1403,6 @@
           </div>
         </div>
       </div>
-
       <div id="c1FeeAgreementForm">
         <div class="row">
           <div class="col-12">
@@ -1483,7 +1445,7 @@
       </div>
 
 
-      <!-- Credit Type 2: Non-Residential Property with NPDES permit -->
+      <!-- Credit Type 2 Form: Non-Residential Property with NPDES permit -->
       <div id="credit2Form">
         <hr>
         <div class="row">
@@ -1531,8 +1493,8 @@
 
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <label for="c2RegistrationNumber">State Number: <span class="requiredField">*</span></label>
-              <input type="text" id="c2RegistrationNumber" class="form-control" required>
+              <label for="c2StateNumber">State Number: <span class="requiredField">*</span></label>
+              <input type="text" id="c2StateNumber" class="form-control" required>
             </div>
           </div>
         </div>
