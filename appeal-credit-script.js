@@ -498,22 +498,22 @@ function populateUncommonJson(element) {
       jsonData.appealType6 = $("#appealType6").val();
       jsonData.a6TaxAccounts = $("#a6TaxAccounts").val();
       jsonData.a6NewOwner = $("#a6NewOwner").val();
-      jsonData.a4Comments = $("#a6Comments").val();
+      jsonData.a6Comments = $("#a6Comments").val();
       break;
 
     case "appealType7":
       jsonData.appealTypes.push($("#appealType7").val());
       jsonData.appealType7 = $("#appealType7").val();
       jsonData.a7TaxAccounts = $("#a7TaxAccounts").val();
-      jsonData.a4Comments = $("#a7Comments").val();
+      jsonData.a7Comments = $("#a7Comments").val();
       break;
 
     case "creditType1":
       jsonData.creditType = $("#creditType1").val();
       jsonData.c1TaxAccounts = $("#c1TaxAccounts").val();
       jsonData.c1Description = $("#c1Description").val();
-      jsonData.c1InstallDate = $("#c1InstallDate").val();
       jsonData.c1Installer = $("#c1Installer").val();
+      jsonData.c1InstallDate = $("#c1InstallDate").val();
       jsonData.c1InstallerContact = $("#c1InstallerContact").val();
       jsonData.c1GradingPermit = $('input[name="c1GradingPermit"]:checked').val();
       if (c1GradingPermitForm == true) {
@@ -538,7 +538,7 @@ function populateUncommonJson(element) {
       jsonData.creditType = $("#creditType2").val();
       jsonData.c2TaxAccounts = $("#c2TaxAccounts").val();
       jsonData.c2NPDESPermitNumber = $("#c2NPDESPermitNumber").val();
-      jsonData.c2RegistrationNumber = $("#c2RegistrationNumber").val();
+      jsonData.c2StateNumber = $("#c2StateNumber").val();
       jsonData.c2CleanMarina = $('input[name="c2CleanMarina"]:checked').val();
       jsonData.c2Documentation = [];
       document.querySelectorAll('input[name="c2Documentation"]:checked').forEach((checkbox) => {
