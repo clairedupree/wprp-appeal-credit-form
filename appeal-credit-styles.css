@@ -33,9 +33,11 @@ i {
   display: none;
 }
 
-/* hr {
-  height: 3px;
-} */
+hr {
+  border-top: 3px solid rgba(0, 0, 0, 0.2) !important;
+  margin-top: 3rem !important;
+  /* margin-bottom: 2rem !important; */
+}
 
 /* #uncommonMiddle {
   background-color: ;
