@@ -92,46 +92,52 @@
             <div class="form-group">
               <h5>Select the appeal basis (check all that apply):</h5>
 
-              <div class="form-check" title="Appeal type 1 hover text.">
+              <div class="form-check"
+                title="Residential tiers are WPRF01, WPRF02, and WPRF03. These are for residential properties located in residential zoning districts (RA, RLD, R1, R2, R5, R10, and R15). The tier a property falls under is based on the property's zoning, whether the house is attached or detached, and the amount of impervious surface on the site. Details on each tier will be shown on the next screen if this appeal type is selected.">
                 <input class="form-check-input" type="checkbox" id="appealType1" name="appealType"
                   value="Property placed in wrong residential tier">
                 <label class="form-check-label" for="appealType1">Property placed in wrong residential tier</label>
               </div>
 
-              <div class="form-check" title="Appeal type 2 hover text.">
+              <div class="form-check"
+                title="For stormwater fee billing purposes, properties are classified under different codes based on their type. The code shows up as a line item on the property tax bill and it begins with WPRF.  A list of the code types will be shown on the next screen if this appeal type is selected.">
                 <input class="form-check-input" type="checkbox" id="appealType2" name="appealType"
                   value="Incorrect classification of property">
                 <label class="form-check-label" for="appealType2">Incorrect classification of property</label>
               </div>
 
-              <div class="form-check" title="Appeal type 3 hover text.">
+              <div class="form-check"
+                title="If the total stormwater remediation fee across all HOA-owned tax accounts is more than the number of property tax accounts for the homes and unimproved lots within the boundaries of the HOA multiplied by 40% of the base rate, the Homeowners Association may appeal to have the fee capped in accordance with 13-7-103(g).">
                 <input class="form-check-input" type="checkbox" id="appealType3" name="appealType"
                   value="Homeowner's Association property where the fee cap is applicable but was not applied">
                 <label class="form-check-label" for="appealType3">Homeowner's Association property where the fee cap
                   is applicable but was not applied</label>
               </div>
 
-              <div class="form-check" title="Appeal type 4 hover text.">
+              <div class="form-check"
+                title="If you believe the fee was calculated incorrectly, select this appeal type. This can include mathematical errors in the fee calculation or the use of an incorrect impervious surface amount for property types where the fee is based on the actual impervious surface amount on the property (WPRF11, WPRF12, WPRF15 - WPRF21). Information on where to find the formulas and impervious amounts used for fee calculation will be shown on the next screen if this appeal type is selected.">
                 <input class="form-check-input" type="checkbox" id="appealType4" name="appealType"
                   value="Mathematical error or incorrect impervious surface calculation">
                 <label class="form-check-label" for="appealType4">Mathematical error or incorrect impervious surface
                   calculation</label>
               </div>
 
-              <div class="form-check" title="Appeal type 5 hover text.">
+              <div class="form-check"
+                title="To be exempt from the stormwater fee, the property must be either unimproved, located in the City of Annapolis, or owned by federal, state or local government, a volunteer fire department (and used for public purpose) or a veterans organization that is exempt from taxation under 501(c)(4) or (19) of the internal revenue code.">
                 <input class="form-check-input" type="checkbox" id="appealType5" name="appealType"
                   value="Property is exempt">
                 <label class="form-check-label" for="appealType5">Property is exempt</label>
               </div>
 
-              <div class="form-check" title="Appeal type 6 hover text.">
+              <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="appealType6" name="appealType"
                   value="Person billed is not the record owner of the property">
                 <label class="form-check-label" for="appealType6">Person billed is not the record owner of the
                   property</label>
               </div>
 
-              <div class="form-check" title="Appeal type 7 hover text.">
+              <div class="form-check"
+                title="Financial hardship exemption applications must be submitted annually to the Office of Finance. The exemption does not carry over from year to year. This appeal type should be selected if your exemption was already approved for the current fiscal year but was not applied.">
                 <input class="form-check-input" type="checkbox" id="appealType7" name="appealType"
                   value="Financial hardship exemption previously approved but not applied">
                 <label class="form-check-label" for="appealType7">Financial hardship exemption previously approved but
@@ -1087,6 +1093,10 @@
             <div class="form-group">
               <label for="a6NewOwner">The name of the new owner is: <span class="requiredField">*</span></label>
               <input type="text" name="a6NewOwner" id="a6NewOwner" class="form-control" required>
+              <small id="a6NewOwnerHelpBlock" class="form-text text-muted">
+                Provide information on ownership in the <em>Comments</em> and <em>Supporting Documentation</em>
+                sections.
+              </small>
             </div>
           </div>
         </div>
@@ -1119,6 +1129,11 @@
               <small id="a7TaxAccountsHelpBlock" class="form-text text-muted">
                 <a href="https://sdat.dat.maryland.gov/RealProperty/Pages/default.aspx" target="_blank">
                   Look up your tax account number</a></small>
+              <!-- TODO: #27 come up with a better way to visually separate "action items" i.e. upload this, enter this, etc. -->
+              <small id="a7ExemptionHelpBlock" class="form-text text-muted">
+                Provide information on the previously approved exemption in the <em>Comments</em> and <em>Supporting
+                  Documentation</em> sections.
+              </small>
             </div>
           </div>
         </div>
